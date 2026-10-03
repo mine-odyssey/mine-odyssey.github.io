@@ -49,7 +49,7 @@
     if(e.target.closest('#reset-worlds')){state.query='';state.filter='all';$('#world-search').value='';renderWorlds();return;}
     const button=e.target.closest('[data-world]');if(!button)return;
     const m=data.maps.find(m=>m.id===button.dataset.world);
-    openImage(m.image,m.name,`${m.location} · ${m.environment} · ${m.task_count} tasks · ${m.waypoint_count} catalogued waypoints. 6-second excerpt from a recorded navigation run · Original speed. Cover photograph is a separate presentation view.`,m.id);
+    openImage(m.image,m.name,`${m.location} · ${m.environment} · ${m.task_count} tasks · ${m.waypoint_count} catalogued waypoints. 6-second excerpt from a recorded run · Original speed. Cover photograph is a separate presentation view.`,m.id);
   });
   $$('[data-scene]').forEach(b=>b.addEventListener('click',()=>{
     const m=data.maps.find(m=>m.id===b.dataset.scene);
@@ -236,7 +236,7 @@
     document.querySelectorAll('[data-recovery-case]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.recoveryCase===caseId)));
     paint();
   }
-  function active(){return state.wantsPlay&&state.inView&&!document.hidden;}
+  function active(){return state.wantsPlay&&state.inView&&!document.hidden&&!$('#route-case-panel').hidden;}
   function tick(now){
     state.frame=0;if(!active())return;
     const delta=state.last===null?0:Math.min(now-state.last,100);state.last=now;
@@ -275,6 +275,7 @@
     status(`${replay.cases.find(c=>c.id===state.caseId).label} route comparison selected.`);
   }));
   document.addEventListener('visibilitychange',sync);
+  document.addEventListener('case-selected',sync);
   motion.addEventListener('change',e=>{
     if(e.matches){state.wantsPlay=false;state.progress=1;paint();sync();}
   });
@@ -350,45 +351,76 @@
   mount();
 })();
 
-// Appendix replays: chronological observations and the exact adopted stair path.
+// Programming cases share the case selector and retain source-bound geometry.
 (() => {
   const data=window.MINE_ODYSSEY?.appendixReplay;if(!data)return;
-  const $=s=>document.querySelector(s), stage=$('#appendix-stage');
+  const $=s=>document.querySelector(s),stage=$('#appendix-stage');
   const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
   const state={selected:null,progress:0,index:-1,wantsPlay:!motion.matches,raf:0,last:null,hold:0,segments:[],stops:[]};
-  $('#appendix-menu').innerHTML=data.cases.map((c,i)=>`<button type="button" data-appendix-case="${c.id}" aria-pressed="false"><span>${String(i+1).padStart(2,'0')}</span><strong>${escapeHTML(c.title)}</strong><small>${escapeHTML(c.place.split(' · ')[0])}</small></button>`).join('');
   const command=v=>escapeHTML(v.replace(/ && /g,' &&\n').replace(/; /g,';\n'));
-  function renderFrame(index){
-    const c=state.selected;
-    stage.innerHTML=`<div class="appendix-frames ${c.tracks.length===2?'paired':''}">${c.tracks.map(t=>{
-      const f=t.frames[Math.min(index,t.frames.length-1)];
-      return `<figure><div class="appendix-frame-heading"><strong>${escapeHTML(t.model)}</strong><span>${escapeHTML(f.label)}</span></div><div class="appendix-photo"><img src="${data.images[f.image]}" alt="${escapeHTML(f.caption)}" width="800" height="600">${f.overlay?'<svg class="pixel-diagram" viewBox="0 0 800 600" aria-label="Logged pixel offsets to an estimated goal, not a travelled path"><path id="pixel-offset-path" fill="none" stroke="#ffe19a" stroke-width="4" stroke-dasharray="8 5"/><circle cx="401.67" cy="305.21" r="11" fill="#187d65" stroke="white" stroke-width="2"/><circle cx="462.5" cy="439" r="11" fill="#b5680a" stroke="white" stroke-width="2"/><text x="401.67" y="310" text-anchor="middle" fill="white" font-size="14">S</text><text x="462.5" y="444" text-anchor="middle" fill="white" font-size="14">G</text></svg>':''}</div><figcaption>${escapeHTML(f.caption)}</figcaption>${f.command?`<details class="appendix-command"><summary>Original command</summary><pre>${command(f.command)}</pre></details>`:''}</figure>`;
-    }).join('')}</div>`;
+  const loopCommand=v=>{
+    let level=0;
+    return escapeHTML(v.split('; ').map(part=>{
+      if(part.startsWith('done'))level=Math.max(0,level-1);
+      const line='  '.repeat(level)+part;
+      if(/^(?:do )?for /.test(part))level++;
+      return line;
+    }).join(';\n').replace(/;\n$/, ''));
+  };
+  const number=v=>Number(v).toFixed(2).replace('-', '−');
+  function mountStairs(c){
+    const profile=c.samples.map(s=>`${16+s.progress*348},${94-(s.position[1]-40)*2.25}`).join(' ');
+    stage.innerHTML=`<div class="program-layout stair-layout"><figure class="program-scene"><div class="program-card-heading"><strong>Recorded ascent</strong><span>Native-world cutaway</span></div><div class="appendix-route-scene">${c.svg}</div><figcaption><span class="step-key">Step 35 · one circuit</span><span class="step-key repeated">Step 36 · three circuits</span></figcaption></figure><div class="program-inspector"><div class="ascent-status"><div><span id="stair-step">Step 35</span><strong id="stair-circuit">Circuit 1 / 4</strong></div><div><span>Last sampled height</span><strong id="stair-height">Y40</strong></div></div><div class="ascent-profile"><svg viewBox="0 0 380 120" role="img" aria-label="Recorded height across the displayed path"><path d="M16 22H364 M16 40H364 M16 58H364 M16 76H364 M16 94H364" stroke="#dce3d5" fill="none"/><polyline points="${profile}" fill="none" stroke="#c0cbbc" stroke-width="2"/><polyline id="stair-height-trace" points="${profile}" fill="none" stroke="#247c71" stroke-width="3"/><path id="stair-profile-cursor" d="M16 15V100" stroke="#a06f1c" stroke-width="1.5"/><circle id="stair-profile-dot" cx="16" cy="94" r="4" fill="#247c71"/><text x="16" y="115">Y40</text><text x="334" y="115">Y72</text></svg><span>Recorded samples · Displayed route progress</span></div><div class="stair-landings">${c.landings.map((l,i)=>`<span data-landing="${i}"><i></i>Y${l.height}</span>`).join('')}</div><div class="program-command-cards">${c.commands.map((cmd,i)=>`<article data-stair-command="${i}"><div class="program-card-heading"><strong>Step ${cmd.step}</strong><span>${i?'Reuse the sequence':'Compose the sequence'}</span></div><p>${escapeHTML(cmd.caption)}</p>${i?`<pre class="loop-code">${loopCommand(cmd.text)}</pre>`:`<div class="heading-sequence" aria-label="Four movement headings"><span>90°</span><b>→</b><span>180°</span><b>→</b><span>−90°</span><b>→</b><span>0°</span></div><p class="command-context">Four forward movements · 1.3 seconds each</p><details><summary>Original command</summary><pre>${command(cmd.text)}</pre></details>`}<div class="loop-iterations" ${i?'':'hidden'}>${[1,2,3].map(n=>`<span data-loop="${n}">Loop ${n}</span>`).join('')}</div></article>`).join('')}</div></div></div>`;
+    stage.querySelectorAll('[data-appendix-background]').forEach(img=>img.setAttributeNS('http://www.w3.org/1999/xlink','href',data.images[img.dataset.appendixBackground]));
+    state.segments=[...stage.querySelectorAll('[data-layer="line"]')].map(line=>({line,length:line.getTotalLength(),layers:[...stage.querySelectorAll(`[data-appendix-segment="${line.dataset.appendixSegment}"]`)]}));
+    state.stops=c.landings.slice(0,-1).map(l=>l.progress);
+  }
+  function mountGrounding(c){
+    const calc=c.calculation,t=calc.targets.find(t=>t.target==='U20'),s=calc.arrow_center,g=t.input_pixel_tip,frames=c.tracks[0].frames;
+    const dx=g[0]-s[0],dy=g[1]-s[1];
+    stage.innerHTML=`<div class="program-layout grounding-layout"><figure class="program-scene"><div class="program-card-heading"><strong>Ueno Park · U20</strong><span>Contextual map</span></div><div class="appendix-photo grounding-map"><img src="${data.images[frames[0].image]}" alt="Original contextual map of Ueno Park" width="800" height="600"><svg class="pixel-diagram" viewBox="0 0 800 600" role="img" aria-label="Logged pixel positions and offsets; not an executed route"><path id="pixel-offset-path" d="" fill="none" stroke="#ffe19a" stroke-width="4" stroke-dasharray="8 5"/><g class="pixel-marker" data-pixel-marker="start"><circle cx="${s[0]}" cy="${s[1]}" r="18" fill="none" stroke="#fff" stroke-width="2"/><circle cx="${s[0]}" cy="${s[1]}" r="11" fill="#187d65" stroke="white" stroke-width="2"/><text x="${s[0]}" y="${s[1]+5}" text-anchor="middle">S</text></g><g class="pixel-marker" data-pixel-marker="goal"><circle cx="${g[0]}" cy="${g[1]}" r="18" fill="none" stroke="#ffe19a" stroke-width="2"/><circle cx="${g[0]}" cy="${g[1]}" r="11" fill="#a06f1c" stroke="white" stroke-width="2"/><text x="${g[0]}" y="${g[1]+5}" text-anchor="middle">G</text></g><g id="pixel-x-label"><rect x="${s[0]-46}" y="${s[1]-49}" width="148" height="26" rx="4"/><text x="${s[0]+28}" y="${s[1]-31}" text-anchor="middle">Δu = ${number(dx)} px</text></g><g id="pixel-y-label"><rect x="${g[0]+25}" y="${s[1]+52}" width="151" height="26" rx="4"/><text x="${g[0]+100}" y="${s[1]+70}" text-anchor="middle">Δv = ${number(dy)} px</text></g></svg></div><figcaption><span>S · Player</span><span>G · Estimated U20 goal</span><small>The measured PNG is unavailable; this original map provides context.</small></figcaption></figure><div class="program-inspector grounding-inspector"><div class="grounding-phase"><span id="grounding-step">Step 176</span><h4 id="grounding-phase-title">Capture the map</h4></div><div class="grounding-observe" data-grounding-phase="0"><p>Logged pixel positions</p><dl class="coordinate-list"><div><dt>Player S</dt><dd>(${number(s[0])}, ${number(s[1])})</dd></div><div><dt>Goal G</dt><dd>(${number(g[0])}, ${number(g[1])})</dd></div></dl><p class="command-context">Map capture command · Step 176<br>Pixel values returned at Step 177</p><pre>${command(c.code.capture)}</pre></div><div data-grounding-phase="1" hidden><p>Subtract the player position</p><div class="equation-row"><span>Δu</span><strong>${number(g[0])} − ${number(s[0])}</strong><b>${number(dx)} px</b></div><div class="equation-row"><span>Δv</span><strong>${number(g[1])} − ${number(s[1])}</strong><b>${number(dy)} px</b></div><p class="command-context">Dashed guides show the logged pixel offsets.</p></div><div data-grounding-phase="2" hidden><p>Convert using the adopted scale</p><div class="scale-value"><strong>${calc.scale}</strong><span>pixels / block · uncalibrated</span></div><div class="equation-row"><span>Δx</span><strong>${number(dx)} ÷ ${calc.scale}</strong><b>${number(t.delta[0])}</b></div><div class="equation-row"><span>Δz</span><strong>${number(dy)} ÷ ${calc.scale}</strong><b>${number(t.delta[1])}</b></div><pre>${escapeHTML(c.code.formula)}</pre></div><div data-grounding-phase="3" hidden><figure class="execution-observation"><img src="${data.images[frames[2].image]}" alt="Original observation following Step 181" width="800" height="600"><figcaption>Original observation · Step 181</figcaption></figure><pre>${escapeHTML(c.code.orientation)}</pre><p class="command-context">Step 179 orients toward the estimate; Step 181 moves toward the rounded goal (${t.world[0].toFixed(1).replace('-', '−')}, ${t.world[1].toFixed(1)}).</p></div><div class="estimated-target" id="estimated-target"><span>Estimated world target · (x, z)</span><strong>(${number(t.world[0])}, ${number(t.world[1])})</strong><small>Origin (${number(calc.world_origin[0])}, ${number(calc.world_origin[1])}) + calculated offsets</small></div></div></div>`;
+    state.stops=[0,.25,.5,.75];
   }
   function paint(){
-    const c=state.selected;
-    let index=0;
+    const c=state.selected;let index=0;
     if(c.kind==='route'){
       const total=state.segments.reduce((n,s)=>n+s.length,0),distance=state.progress*total;
-      let consumed=0,active=state.segments[0],local=0;
-      state.segments.forEach((s,i)=>{
+      let consumed=0,active=state.segments[0],local=0,commandIndex=0;
+      for(const [i,s] of state.segments.entries()){
         const part=Math.max(0,Math.min(s.length,distance-consumed));
         s.layers.forEach(p=>{p.style.strokeDasharray=`${s.length} ${s.length}`;p.style.strokeDashoffset=String(s.length-part);p.style.visibility=part>0?'visible':'hidden';});
-        if(distance>=consumed){active=s;local=part;index=i;}consumed+=s.length;
-      });
+        if(distance>=consumed){active=s;local=part;commandIndex=i;}consumed+=s.length;
+      }
       const point=active.line.getPointAtLength(local),dot=stage.querySelector('[data-appendix-dot]');
       dot.setAttribute('cx',point.x);dot.setAttribute('cy',point.y);
-      stage.querySelectorAll('[data-stair-command]').forEach((e,i)=>e.classList.toggle('current',i===index));
+      index=Math.min(3,state.stops.filter(p=>state.progress>=p).length-1);
+      const sample=c.samples.filter(s=>s.progress<=state.progress+1e-6).at(-1)||c.samples[0];
+      $('#stair-height').textContent=`Y${Number(sample.position[1].toFixed(1))}`;
+      $('#stair-step').textContent=`Step ${commandIndex?36:35}`;$('#stair-circuit').textContent=`Circuit ${index+1} / 4`;
+      stage.querySelectorAll('[data-stair-command]').forEach((e,i)=>e.classList.toggle('current',i===commandIndex));
+      stage.querySelectorAll('[data-loop]').forEach(e=>{e.classList.toggle('current',Number(e.dataset.loop)===index);e.classList.toggle('complete',Number(e.dataset.loop)<index||state.progress===1);});
+      stage.querySelectorAll('[data-landing],[data-stair-landing]').forEach(e=>{const i=Number(e.dataset.landing??e.dataset.stairLanding);e.classList.toggle('reached',state.progress+1e-6>=c.landings[i].progress);});
+      const trace=$('#stair-height-trace');
+      // Clip by horizontal progress, rather than by chart path length.
+      trace.style.clipPath=`inset(0 ${Math.max(0,100-(16+348*state.progress)/380*100)}% 0 0)`;
+      const x=16+state.progress*348;
+      $('#stair-profile-cursor').setAttribute('d',`M${x} 15V100`);
+      $('#stair-profile-dot').setAttribute('cx',16+sample.progress*348);$('#stair-profile-dot').setAttribute('cy',94-(sample.position[1]-40)*2.25);
     }else{
-      const count=c.tracks[0].frames.length;
-      index=Math.min(count-1,Math.floor(state.progress*count));
-      if(index!==state.index)renderFrame(index);
-      const offset=$('#pixel-offset-path');
-      if(offset){
-        const amount=Math.min(1,(state.progress*count-index)*1.4),x=401.67+Math.min(1,amount*2)*60.83,y=305.21+Math.max(0,amount*2-1)*133.79;
-        offset.setAttribute('d',`M401.67 305.21 L${x} 305.21${amount>.5?` L462.5 ${y}`:''}`);
-      }
+      index=Math.min(3,Math.floor(state.progress*4));
+      const names=['Capture the map','Measure pixel offsets','Compute a world target','Use the estimate'];
+      $('#grounding-step').textContent=['Step 176 → 177','Step 177','Step 177','Steps 179 / 181'][index];
+      $('#grounding-phase-title').textContent=names[index];
+      stage.querySelectorAll('[data-grounding-phase]').forEach(e=>e.hidden=Number(e.dataset.groundingPhase)!==index);
+      const calc=c.calculation,s=calc.arrow_center,g=calc.targets.find(t=>t.target==='U20').input_pixel_tip;
+      const amount=index===0?0:index===1?Math.min(1,(state.progress*4-1)*1.4):1;
+      const x=s[0]+Math.min(1,amount*2)*(g[0]-s[0]),y=s[1]+Math.max(0,amount*2-1)*(g[1]-s[1]);
+      $('#pixel-offset-path').setAttribute('d',`M${s[0]} ${s[1]} L${x} ${s[1]}${amount>.5?` L${g[0]} ${y}`:''}`);
+      $('#pixel-x-label').style.opacity=amount>.15?'1':'0';$('#pixel-y-label').style.opacity=amount>.65?'1':'0';
+      $('#estimated-target').hidden=index<2;
+      stage.querySelector('.grounding-map').classList.toggle('is-detail',index===1||index===2);
+      stage.querySelectorAll('.pixel-marker').forEach(e=>e.classList.toggle('highlight',index<2));
     }
     state.index=index;
     document.querySelectorAll('[data-appendix-stop]').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
@@ -397,30 +429,20 @@
     $('#appendix-percent').value=`${Math.round(state.progress*100)}%`;
   }
   function mount(id){
-    const c=data.cases.find(x=>x.id===id);state.selected=c;state.index=-1;state.hold=0;state.progress=motion.matches&&c.kind==='route'?1:0;
+    const c=data.cases.find(x=>x.id===id);state.selected=c;state.index=-1;state.hold=0;state.progress=motion.matches?1:0;
     $('#appendix-place').textContent=c.place;$('#appendix-title').textContent=c.title;$('#appendix-description').textContent=c.description;$('#appendix-note').textContent=c.note;
-    $('#appendix-kind').textContent=c.kind==='route'?'Recorded route · Progressive replay':'Original observations · Step sequence';
-    stage.dataset.case=c.id;
-    if(c.kind==='route'){
-      stage.innerHTML=`<div class="appendix-route"><div class="appendix-route-scene">${c.svg}</div><div class="appendix-route-commands">${c.commands.map((cmd,i)=>`<article data-stair-command="${i}"><p class="eyebrow">Step ${cmd.step}</p><h4>${escapeHTML(cmd.caption)}</h4><pre>${command(cmd.text)}</pre></article>`).join('')}</div></div>`;
-      stage.querySelectorAll('[data-appendix-background]').forEach(img=>img.setAttributeNS('http://www.w3.org/1999/xlink','href',data.images[img.dataset.appendixBackground]));
-      state.segments=[...stage.querySelectorAll('[data-layer="line"]')].map(line=>({line,length:line.getTotalLength(),layers:[...stage.querySelectorAll(`[data-appendix-segment="${line.dataset.appendixSegment}"]`)]}));
-      const total=state.segments.reduce((n,s)=>n+s.length,0);
-      state.stops=[0,state.segments[0].length/total];
-    }else{
-      state.stops=c.tracks[0].frames.map((_,i,a)=>i/a.length);
-      c.tracks.flatMap(t=>t.frames).forEach(f=>{const img=new Image();img.src=data.images[f.image];});
-    }
-    $('#appendix-timeline').innerHTML=state.stops.map((_,i)=>`<button type="button" data-appendix-stop="${i}" aria-pressed="false">${c.kind==='route'?`Step ${c.commands[i].step}`:`${String(i+1).padStart(2,'0')} / ${c.tracks[0].frames[i].label}`}</button>`).join('');
-    document.querySelectorAll('[data-appendix-case]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.appendixCase===id)));
+    $('#appendix-kind').textContent=c.kind==='route'?'Recorded route · Agent program':'Map observation · Agent calculation';stage.dataset.case=c.id;
+    if(c.kind==='route')mountStairs(c);else mountGrounding(c);
+    const labels=c.kind==='route'?['Step 35 · Y40 → Y48','Step 36 / Loop 1 · Y48 → Y56','Step 36 / Loop 2 · Y56 → Y64','Step 36 / Loop 3 · Y64 → Y72']:['01 / Map capture','02 / Pixel offsets','03 / World coordinates','04 / Execution'];
+    $('#appendix-timeline').innerHTML=state.stops.map((_,i)=>`<button type="button" data-appendix-stop="${i}" aria-pressed="false">${labels[i]}</button>`).join('');
     paint();sync();
   }
-  function active(){const r=$('.appendix-main').getBoundingClientRect();return state.wantsPlay&&!document.hidden&&r.bottom>80&&r.top<innerHeight;}
+  function active(){const r=$('.appendix-main').getBoundingClientRect();return state.wantsPlay&&!$('#appendix-cases').hidden&&!document.hidden&&r.bottom>80&&r.top<innerHeight;}
   function tick(now){
     state.raf=0;if(!active()){sync();return;}
     const dt=state.last===null?0:Math.min(100,now-state.last);state.last=now;
-    const duration=state.selected.kind==='route'?data.route_seconds:data.frame_seconds*state.stops.length;
-    if(state.progress>=1){state.hold+=dt;if(state.hold>1600){state.progress=0;state.hold=0;}}
+    const duration=state.selected.kind==='route'?data.route_seconds:data.frame_seconds*4;
+    if(state.progress>=1){state.hold+=dt;if(state.hold>2200){state.progress=0;state.hold=0;}}
     else state.progress=Math.min(1,state.progress+dt/(duration*1000)*Number($('#appendix-speed').value));
     paint();state.raf=requestAnimationFrame(tick);
   }
@@ -429,14 +451,35 @@
     const playing=active();$('#appendix-play').textContent=playing?'Pause':'Play';$('#appendix-play').setAttribute('aria-pressed',String(playing));
     if(playing)state.raf=requestAnimationFrame(tick);
   }
-  $('#appendix-menu').addEventListener('click',e=>{const b=e.target.closest('[data-appendix-case]');if(b){mount(b.dataset.appendixCase);$('#appendix-status').textContent=`${state.selected.title} selected.`;}});
+  $('#case-menu').addEventListener('click',e=>{const b=e.target.closest('[data-appendix-case]');if(b){mount(b.dataset.appendixCase);$('#appendix-status').textContent=`${state.selected.title} selected.`;}});
   $('#appendix-timeline').addEventListener('click',e=>{const b=e.target.closest('[data-appendix-stop]');if(b){state.wantsPlay=false;state.hold=0;state.progress=state.stops[Number(b.dataset.appendixStop)]+.00001;paint();sync();}});
   $('#appendix-play').addEventListener('click',()=>{state.wantsPlay=!active();if(state.wantsPlay&&state.progress>=1){state.progress=0;state.hold=0;paint();}sync();});
   $('#appendix-restart').addEventListener('click',()=>{state.progress=0;state.hold=0;state.wantsPlay=true;paint();sync();});
   $('#appendix-progress').addEventListener('input',e=>{state.progress=Number(e.target.value)/1000;state.wantsPlay=false;state.hold=0;paint();sync();});
   $('#appendix-speed').addEventListener('change',()=>{state.last=null;});
-  document.addEventListener('visibilitychange',sync);
-  motion.addEventListener('change',e=>{if(e.matches){state.wantsPlay=false;sync();}});
+  document.addEventListener('visibilitychange',sync);document.addEventListener('case-selected',sync);
+  motion.addEventListener('change',e=>{if(e.matches){state.wantsPlay=false;state.progress=1;paint();sync();}});
   mount(data.cases[0].id);
   if('IntersectionObserver' in window)new IntersectionObserver(sync,{threshold:[0,.15]}).observe($('.appendix-main'));
+})();
+
+// Four cases, one accessible selector. Hidden panels cannot keep animating.
+(() => {
+  const menu=document.querySelector('#case-menu'),buttons=[...menu.querySelectorAll('[data-case]')];
+  function select(button){
+    const programming=Boolean(button.dataset.appendixCase);
+    document.querySelector('#route-case-panel').hidden=programming;
+    document.querySelector('#appendix-cases').hidden=!programming;
+    document.querySelector(programming?'#appendix-cases':'#route-case-panel').setAttribute('aria-labelledby',button.id);
+    buttons.forEach(b=>{const selected=b===button;b.setAttribute('aria-selected',String(selected));b.setAttribute('aria-pressed',String(selected));b.tabIndex=selected?0:-1;});
+    document.dispatchEvent(new Event('case-selected'));
+  }
+  menu.addEventListener('click',e=>{const b=e.target.closest('[data-case]');if(b)select(b);});
+  menu.addEventListener('keydown',e=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+    const i=buttons.indexOf(e.target);if(i<0)return;e.preventDefault();
+    const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+    buttons[next].focus();buttons[next].click();
+  });
+  select(buttons[0]);
 })();
