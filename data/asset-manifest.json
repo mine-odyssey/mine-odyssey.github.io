@@ -1,0 +1,719 @@
+[
+  {
+    "file": "assets/buckingham-palace.webp",
+    "sha256": "87ad8c9c79a75b44a45fe37fc1d97d8317b28df3aa0cf5b03a64a6497c5dd6aa",
+    "source_sha256": "a9d444c461e73da88a1f5df57529ab5f4205a705eaf2db2ec981423f99d816f1",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/cape-town.webp",
+    "sha256": "3a4d53b82f9bf35a1e8963a4c0e7a2d66edbae752c6fde4590732241e94e2cde",
+    "source_sha256": "96751c692a45b7a2c194b65a2c0a500f9e07d07aac0b05c33a63b99cf74632e4",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/chain-bridge.webp",
+    "sha256": "0daaa038f6d2d64e595d6400c613bc16fc677625d271d81b0be78f2c38c06ddc",
+    "source_sha256": "24c94c45e39986d64a38361bbbd97b64ca4317dba02253fe7b175f64da6b3298",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/copacabana-waterfront.webp",
+    "sha256": "4abe3bafb268ec633a0f8ee17095659892b8a60c56cea75de9d13328a2431dad",
+    "source_sha256": "758301be54ad08e61db5cf46cf7f0ab227be1387caad53ee7fc278c04cd51d9c",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/dublin-departments-district.webp",
+    "sha256": "539eb55612609effc26e992dd8e1f00c9af5ee3c759c73c203e91029d55ab3dd",
+    "source_sha256": "fae882672bea8ddd14f91a626f8802b3b01aa8c6c431af003d38c562d75b71b1",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/entrup.webp",
+    "sha256": "a57f62d70667d65d351b33431ddc7858b735f418efd576aeb5ae5d9e2335d561",
+    "source_sha256": "8551e8d6e3f39a7bae183b24a1d64817d29b1543e6044c6c70b3e916d00d2146",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/hagia-sophia.webp",
+    "sha256": "b5c9226c40da2cabcccb1b0424a960bdd8c1c6eabbc64444de93eb4e8a12fda0",
+    "source_sha256": "0db3577da0a339cbc4a0bd4e0f70b35aa97a976e67cca7279530c60da367cf5e",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/hofburg.webp",
+    "sha256": "fdd2f0081743fc431bdfe6ab1ac60f8308dd3abd1dc424313a8082b86cca41a8",
+    "source_sha256": "b58bb6c8ac7fde28735b6cc900f0931f7aa4c547f910af980149fe43ba13b40e",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/innopolis.webp",
+    "sha256": "ce2f326a07213cc17fff1a07189208a2867abe177c7092ce62222c097109add6",
+    "source_sha256": "d0f6228639d599e59706b25c938fc458c5762c0a255b608c734bdff0b2b4cc07",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/memorial-hall-park.webp",
+    "sha256": "dee1f7533b4316af97b8108fb5cdb5b23d7c0d75511c5b679b3d1b89b5202bfa",
+    "source_sha256": "24bbac3f9931ba5a2b31470c2f065759c61641eb097c0ed3557541351f4214dd",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/miljacka-riverside.webp",
+    "sha256": "0a2aa4230f779af111492d621c523b9e81bcdfecb08aa195b9db683ee00d2bc0",
+    "source_sha256": "9cb0ee9825815505c67e4f31ae602c0168954155258539df8564d40dc7756af8",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/mr-beast-1000-harbor-city.webp",
+    "sha256": "ac601f50e5992e5d322b2d8d5ba0b3358e05299faa55e5be2c9f7fad3c3959fd",
+    "source_sha256": "7cca3d5ca86266086c55c2da4a0399b97e82bc7d506859bde78bf561e50f9350",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/notre-dame.webp",
+    "sha256": "d8c8f3ecdd50170790dcef7f56f73560c566eadf2aafc120e402e5ef5579fd53",
+    "source_sha256": "15f86daa3992d0409228335ce984ccb9fcd293b55dc8d70b15d7efe5dad8e9c7",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/nyc-911-memorials.webp",
+    "sha256": "1e8690868101af8733ad6e9c9d8971940ae71a06835d59743dcb53b81bb51866",
+    "source_sha256": "0658507c47c0950bd410144f95f1ce4cee489b9b78efaabd5bff2ff650df22bb",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/ohrid.webp",
+    "sha256": "4eefe75f130b7874816efd206f43206a732bb5b6eafe9daf1d72584999d2df03",
+    "source_sha256": "6f4d0ed0d53dd9908bc00ccda4518a2902b222f68a207d1dd5fb4ab540ce726e",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/plaza-de-mayo.webp",
+    "sha256": "0879c8a1fc6446169844e5d44897ce43df2d98bb32d57fc922c4b1ab57ddd22a",
+    "source_sha256": "360e85a96d38ed91ea2fa035e46fc3dfa06ed25560c6001b376f1ab4576a911f",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/plaza-hotel.webp",
+    "sha256": "46f94f82d1487dd2055b8070bfc301a9eefdad909907a2a3102a8020709bf442",
+    "source_sha256": "637069dc4d13ef82908add9151ddd5be400bc0b2cb451da50057ba23641a182d",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/reichstag.webp",
+    "sha256": "72959d7e7d9b6316de46650b7aed4e60ea6d272ac6ac72cdef97c23ba8293180",
+    "source_sha256": "b66554034d20571078edd85747d8f1e84c0135d8b84958f4e46da0ac1c8661ed",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/rms-queen-mary.webp",
+    "sha256": "3feb012a6ad58d7094dc70335abf0b0a9463870b88b8a6f9c5d6219ee1fb746e",
+    "source_sha256": "ba60d886a575d3c6bdb76d7144f6d19ad62888bfc5b3e4bda7c151f97d491cfd",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/rms-titanic.webp",
+    "sha256": "7c079e64cb0b041643d5b488df9548df89f270f3faa9e05fe5f48434d8073d40",
+    "source_sha256": "8926b3d099c6e2b9cbf36073bcc26c7c26f6bd5b4ee2762bb7de54c41caaf1c3",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/santa-lucia-hill.webp",
+    "sha256": "2b77aa85f39fe2fd36513043499112ae83d7cb9f8607748a7926c0505c0bc610",
+    "source_sha256": "3838c1fc725d499b1fd48512eecd7a42a3d38a3d3ab038cfc9b371f9b69ffa4b",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/shun-lee.webp",
+    "sha256": "f947b3aeabff0528a73427b5466e2a675129247596285604734a9920d1c8f248",
+    "source_sha256": "93dba24495659249a8aa049e206eec80247fe0eb5a2f10582d19f8e822827bdb",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/sofi-stadium.webp",
+    "sha256": "91b13d6613aa84eaec61c0a722156043c3580ceb13d039723b2335e8584b0f31",
+    "source_sha256": "4e89303aa5c3a8debfc324524464440f3cf71374091f87411ad897476574d6ba",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/sviyazhsk.webp",
+    "sha256": "771f49e0e1fc579d9c4194f7a03ab4ac565a4258f7fffdaee1ae6de411b918b1",
+    "source_sha256": "fd66d98286abbb14242842ef50ca36a98a8331e8fcac72ce00d03ce1842cefa6",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/torrey-mall.webp",
+    "sha256": "76bcda932fd3c0f30edaa4aa980cb2929936d08bc9765b112f0c4436f8251666",
+    "source_sha256": "af6468efa0f9e048462b9a92e3f23b2309cd60f35878220a89d7c891961c24c8",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/ueno-park.webp",
+    "sha256": "03a8dfaf96579455ff4fb67094b0ca3a4d0fbe5cd8e327aec4cf62deb342fd9f",
+    "source_sha256": "42abb06654fbfd9de0be19751ea11d1630f11533cc705aba6ee73c80a4ea30f6",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/versailles.webp",
+    "sha256": "ab5c277545fdeb8cd9a20819cb688693685107bfe7e484273f709ab3bf8bb15f",
+    "source_sha256": "5bc6ab452bbbe5b776f20bcb5dae2b413706ef50f3f66218567e9f1c8c0616f6",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/white-house.webp",
+    "sha256": "a490f8663f5c8ce2d58ca93872f104fe9807cc8f2e5e8c51fa9e7b4c23d2ffa4",
+    "source_sha256": "bff9228856366fa43cdd3c10dd55fe7478f79cb47187dce6667063a846b35ecd",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/wurzburg.webp",
+    "sha256": "d3bdad595f039d1f61b5b9b1aad34cd01dd48e9c990b3908f9b0d29484fadd42",
+    "source_sha256": "6eb1e51b800d9075e57c29657b83cf63a311e7e5455e5a1bf40d40d96b8a6855",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/zurich.webp",
+    "sha256": "e60623c0fe611f003b40e7b8f31afd314d01d43a2e072e75c6c73c3d931440ee",
+    "source_sha256": "e32e40ab2855bed0166b764831ea0ef09ec787d9ace3c99ce7168da6b5cc9611",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/hero-versailles.webp",
+    "sha256": "1daa15421f5a5c49973027e183521644750ea3bdcca82d7b0ac277f5ede05138",
+    "source_sha256": "5bc6ab452bbbe5b776f20bcb5dae2b413706ef50f3f66218567e9f1c8c0616f6",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/world-preview-buckingham-palace.mp4",
+    "sha256": "bff203342b2f8098217ceee760f8cc393353581ee88dbe9c90cf4e622a094d42",
+    "source_sha256": "fb9b617511c1de653262363c9e591260cfb4869a23bb916612486c68fda127ce",
+    "kind": "world_preview_excerpt",
+    "map_id": "buckingham-palace",
+    "task_id": "buckingham-palace-004",
+    "start_seconds": 951.07,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-cape-town.mp4",
+    "sha256": "3ff3a96bc2520d63065a7d77ce595d7e0cdfeaf7215211bd3f3ed75f649d2e08",
+    "source_sha256": "0f6e53509ea6a111333950c3dcd5ed7004bed9c8f70ca3ab1a5a824c19e926c5",
+    "kind": "world_preview_excerpt",
+    "map_id": "cape-town",
+    "task_id": "cape-town-003",
+    "start_seconds": 1862.35,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": true,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-chain-bridge.mp4",
+    "sha256": "51e19660242398aaf07979172ac70ed98f319d1a8ec3be99cf4a4c756347b659",
+    "source_sha256": "3534ae88fc21a4c21cbfe3629779cac60572b53d30d145e5cd928914f6fbffdd",
+    "kind": "world_preview_excerpt",
+    "map_id": "chain-bridge",
+    "task_id": "chain-bridge-001",
+    "start_seconds": 2796.22,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-copacabana-waterfront.mp4",
+    "sha256": "1e222135612d626fd931e6c766bbf3526d07d977908ba971bd6d6b0ee08a371d",
+    "source_sha256": "f2b695d32307fed684c26e38faaed6a65664992799299a671e430ca7de1b66f4",
+    "kind": "world_preview_excerpt",
+    "map_id": "copacabana-waterfront",
+    "task_id": "copacabana-waterfront-001",
+    "start_seconds": 1054.1,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-dublin-departments-district.mp4",
+    "sha256": "3962707dfb5c59a06ac5604d4be384f02cb0588df3741d07bba7101edec67c0e",
+    "source_sha256": "48894009e70a0ed543a8bc16a5a9e3fe95ba3c8d5469e42c8e03da6b30d9f8cc",
+    "kind": "world_preview_excerpt",
+    "map_id": "dublin-departments-district",
+    "task_id": "dublin-departments-district-004",
+    "start_seconds": 1114.12,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-entrup.mp4",
+    "sha256": "7e528c4132f3d48f78c3d8d5e1e071006d21742f2336c19d418a26e06aee06a3",
+    "source_sha256": "044f74c9a483133a2f87f2fd65027b6a1ae7f3d9a0d1f5391e24af3b057ff6c3",
+    "kind": "world_preview_excerpt",
+    "map_id": "entrup",
+    "task_id": "entrup-001",
+    "start_seconds": 4650.4,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-hagia-sophia.mp4",
+    "sha256": "084c1be15860669b3f510c68ad4e8080f925a41f6da4fcde5ee4063adae46dfc",
+    "source_sha256": "2dffb0d1ae0ee4c2eba3a744a7ddbe351ab99510dac105ef86639b4aa7dc6888",
+    "kind": "world_preview_excerpt",
+    "map_id": "hagia-sophia",
+    "task_id": "hagia-sophia-001",
+    "start_seconds": 574.05,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-hofburg.mp4",
+    "sha256": "232caba3a646a53bcd5fa5f8c3290255dd31a5d69ef903720eecc3786d032f34",
+    "source_sha256": "9500062848125210eafd79a34f88ce2108136e685de0c52a09ee9bf1cd94af55",
+    "kind": "world_preview_excerpt",
+    "map_id": "hofburg",
+    "task_id": "hofburg-005",
+    "start_seconds": 3994.38,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-innopolis.mp4",
+    "sha256": "841eeb933573c7cdc70c0a084ef642f1f6afe86434feeb9fbd1c16a98e478729",
+    "source_sha256": "0bb89201a32a59892ddc18902fe0f55ddd30d8f01bc9d2d9af8aefc5008448f9",
+    "kind": "world_preview_excerpt",
+    "map_id": "innopolis",
+    "task_id": "innopolis-009",
+    "start_seconds": 13107.09,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-memorial-hall-park.mp4",
+    "sha256": "6345a7add9d7bfd51ed1eec73403a33a0f2c8fdec2c34e1b0c2e212b4402e86d",
+    "source_sha256": "e20fef85a5638db79489437b94d4900f1b4e7cd6012e1d8c84a787ba0f9d5c94",
+    "kind": "world_preview_excerpt",
+    "map_id": "memorial-hall-park",
+    "task_id": "memorial-hall-park-001",
+    "start_seconds": 5656.48,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-miljacka-riverside.mp4",
+    "sha256": "17547abfe91a20265fd04189d30e7834aef27d4f89e18ed5fec79f1d91d9dd83",
+    "source_sha256": "0146b27642bf83fbf80c1670765865a8433be760ea4c580fb354070af1799249",
+    "kind": "world_preview_excerpt",
+    "map_id": "miljacka-riverside",
+    "task_id": "miljacka-riverside-001",
+    "start_seconds": 8980.74,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-mr-beast-1000-harbor-city.mp4",
+    "sha256": "8b4d4c9e764e19b857757aafa3f6777229be25ddd9ac7ac911eec6a629810e8b",
+    "source_sha256": "d0c53715a1c8bc4d7e77b7c0501bcf5445b6c6e7e89d2ee335db767fb7442f39",
+    "kind": "world_preview_excerpt",
+    "map_id": "mr-beast-1000-harbor-city",
+    "task_id": "mr-beast-1000-harbor-city-010",
+    "start_seconds": 9610.89,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-notre-dame.mp4",
+    "sha256": "17bd9ce452f7fd7d2471bdda288fd0d8ae3437a4c600b03870c14d2762e16f52",
+    "source_sha256": "505dcac28c6b6911a3e17553200c2b0e51e064cd9d535af08b2a13abda1bc869",
+    "kind": "world_preview_excerpt",
+    "map_id": "notre-dame",
+    "task_id": "notre-dame-005",
+    "start_seconds": 2248.28,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": true,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-nyc-911-memorials.mp4",
+    "sha256": "732f3009459882a949ba5de265b2820902cc9379859a40fcd866e523b94f65dc",
+    "source_sha256": "735908dec312ca9931e7fcdb844cbe3154056f4471490e8830a38522f778caf7",
+    "kind": "world_preview_excerpt",
+    "map_id": "nyc-911-memorials",
+    "task_id": "nyc-911-memorials-004",
+    "start_seconds": 740.06,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-ohrid.mp4",
+    "sha256": "99214a0a71258ff5f4f4a249691a384171dd4ef10e0d86b63042fc3bbb4fc611",
+    "source_sha256": "3000ebe0dada2972f37753a38e5c8a1396dc8e22a4801ca4c86b8c5363a42aca",
+    "kind": "world_preview_excerpt",
+    "map_id": "ohrid",
+    "task_id": "ohrid-003",
+    "start_seconds": 1598.13,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-plaza-de-mayo.mp4",
+    "sha256": "cb93735e9ec158ce2b93ad49a3dbafa4dfcb74313bc2cebbaa16229d5853a33d",
+    "source_sha256": "372bd9837e1215ea242330e58970611991aa2a1a2040a13a466d9f7dd2d623d2",
+    "kind": "world_preview_excerpt",
+    "map_id": "plaza-de-mayo",
+    "task_id": "plaza-de-mayo-001",
+    "start_seconds": 498.04,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-plaza-hotel.mp4",
+    "sha256": "162a944cf22c96e5b62e6004b5b6c1e612099e4ded2e7b1dcda522fbe40280b8",
+    "source_sha256": "eb04857788f797c2120c01dd9618bcc083535fc877bd5435ffa4a851628fdd74",
+    "kind": "world_preview_excerpt",
+    "map_id": "plaza-hotel",
+    "task_id": "plaza-hotel-003",
+    "start_seconds": 11655.01,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-reichstag.mp4",
+    "sha256": "bea5e06d06c7e0523cf9c3358872d4e7e5b1c2e902a5c4781744eacfcfb4f0bc",
+    "source_sha256": "14d3859f9eb9e2595d5b0ef362bca7921f3cad543c33ff3cf3cc005bcc649f8e",
+    "kind": "world_preview_excerpt",
+    "map_id": "reichstag",
+    "task_id": "reichstag-004",
+    "start_seconds": 9684.8,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-rms-queen-mary.mp4",
+    "sha256": "0f31c393f7266eff8e0b11c4a465e4e2ae3be401428c161f908432648f4e43e8",
+    "source_sha256": "1e97d36a9b62bff02def5ecca903989d5fce4e93ab1696ea1dbb7726421f1ffc",
+    "kind": "world_preview_excerpt",
+    "map_id": "rms-queen-mary",
+    "task_id": "rms-queen-mary-008",
+    "start_seconds": 3623.89,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-rms-titanic.mp4",
+    "sha256": "8ac3844e22eb4b08b8cccdadadec70e926cd59a034f642d7879f2f5925c61d37",
+    "source_sha256": "9b94ddd627447baf70f690537d95e4b5130ee2475366ebac6ab2970a7e430686",
+    "kind": "world_preview_excerpt",
+    "map_id": "rms-titanic",
+    "task_id": "rms-titanic-005",
+    "start_seconds": 4064.31,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-santa-lucia-hill.mp4",
+    "sha256": "ed5d28bfba18432ed7d15d03dcfa61d70e3cea01c87e38e752f56db43b67b04c",
+    "source_sha256": "e2dc537f6eb904b436986bdf07962807a30e1217a6309423e86c48b5131aa401",
+    "kind": "world_preview_excerpt",
+    "map_id": "santa-lucia-hill",
+    "task_id": "santa-lucia-hill-002",
+    "start_seconds": 10042.84,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-shun-lee.mp4",
+    "sha256": "3703034dd7050ebf4d49ff70f0f7ebc62c2f107b0954fbd46a65b149265ddde6",
+    "source_sha256": "8322421e935217403c435cef58ef79fa504331406b7f10c03b95f246d735abe0",
+    "kind": "world_preview_excerpt",
+    "map_id": "shun-lee",
+    "task_id": "shun-lee-002",
+    "start_seconds": 6428.51,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-sofi-stadium.mp4",
+    "sha256": "dfd0202121981cb07ef2a22249b09b9144cf62ffe4755a13a59b3f2e0493814b",
+    "source_sha256": "3b5b72d22e0bbd080687081c7f5a397d09b78da2b92efc111e3c6178e9475d58",
+    "kind": "world_preview_excerpt",
+    "map_id": "sofi-stadium",
+    "task_id": "sofi-stadium-006",
+    "start_seconds": 1908.15,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-sviyazhsk.mp4",
+    "sha256": "397a423f99adf85a7fce600bcd0808ba86db98b4da1f90283502a5c3453020ee",
+    "source_sha256": "4fed88b2bab859aa60db8c748013fd529d4e3a88512de659977fddf2da1ec8fe",
+    "kind": "world_preview_excerpt",
+    "map_id": "sviyazhsk",
+    "task_id": "sviyazhsk-004",
+    "start_seconds": 4210.42,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-torrey-mall.mp4",
+    "sha256": "d2205524d14b933375cf91087e9baffc7a89a364d37237bfcaaa64cede4d511a",
+    "source_sha256": "80c39705ff15fc40ed6d6136827a2d20df934c3be4caa3b3b4e93fd5ee3d8ebf",
+    "kind": "world_preview_excerpt",
+    "map_id": "torrey-mall",
+    "task_id": "torrey-mall-004",
+    "start_seconds": 2586.23,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-ueno-park.mp4",
+    "sha256": "4c2e6626e778683efb1a51d6fe4e9c5def035abbcffc4cba4fa92f0d47be7d56",
+    "source_sha256": "5d27c06a2ac72a9434611121dbaae3384ce697d12e3b876e0243b92498c03f22",
+    "kind": "world_preview_excerpt",
+    "map_id": "ueno-park",
+    "task_id": "ueno-park-005",
+    "start_seconds": 1464.14,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-versailles.mp4",
+    "sha256": "a035b081c69cffdb0c3c3b9ac6ac308a415b2dc1feb180edba9c59d57d922568",
+    "source_sha256": "24df8c07127d40f6b82ea56b96702800c66c11b24251de451d43ecb74da74d2f",
+    "kind": "world_preview_excerpt",
+    "map_id": "versailles",
+    "task_id": "versailles-001",
+    "start_seconds": 817.68,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": true,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-white-house.mp4",
+    "sha256": "b9c45d8ff5b1c4bf65f59600c7bab81d71aa2a933402d8e581f6d27ba3e09fbd",
+    "source_sha256": "8a926a248ae934f74c369c42b7da9fe761779ea84b5c65165a71c2bbf11241f5",
+    "kind": "world_preview_excerpt",
+    "map_id": "white-house",
+    "task_id": "white-house-009",
+    "start_seconds": 3492.31,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-wurzburg.mp4",
+    "sha256": "b641fdeb4e48e66fa7811d59263bb8c29df3896c436773c712afd571972a7afb",
+    "source_sha256": "f29528b592388e7e5a00c4cf910f33dd1efd385a32f8ddf35f3e474b517f5657",
+    "kind": "world_preview_excerpt",
+    "map_id": "wurzburg",
+    "task_id": "wurzburg-006",
+    "start_seconds": 2200.17,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": false,
+    "crop_xywh": null,
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/world-preview-zurich.mp4",
+    "sha256": "d041b75155635b8d66b69640f64fb66b07f90c4afccef6b8506d78afec3065e1",
+    "source_sha256": "8ed53b026b3017b05bfe3bd3411378dcbe5153bb7d6f1e4974b5a062d41f8d81",
+    "kind": "world_preview_excerpt",
+    "map_id": "zurich",
+    "task_id": "zurich-002",
+    "start_seconds": 1064.66,
+    "length_seconds": 6,
+    "playback_rate": 1,
+    "hud_enabled": true,
+    "crop_xywh": [
+      400,
+      90,
+      400,
+      300
+    ],
+    "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
+  },
+  {
+    "file": "assets/scene-slopes.webp",
+    "sha256": "02fe564bafab2b5b6c4244ecd1bde486ac9c1f593b85a311326ecfb1bea65d89",
+    "source_sha256": "eb216ae4938c619e2320d6447215b8e941407f65f146e317f388884d3f0c44fe",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/scene-water.webp",
+    "sha256": "1d4d14dc24babc258cebdb3622428f373c145d098b027b799f45a1597f0ca4d4",
+    "source_sha256": "00d89dddb1cc24248f46f9ddd12a4052054d5d9070756279831232f636d1e122",
+    "kind": "agent_observation"
+  },
+  {
+    "file": "assets/scene-levels.webp",
+    "sha256": "8395954446d22cf7670d074abeeb712760e0ba2c9f13f6c0a6988386ee08b434",
+    "source_sha256": "e6a3e877f51c03c1b93fe47dadccffd57a290f0480f148252dbabf482268903d",
+    "kind": "agent_observation"
+  },
+  {
+    "file": "assets/scene-corridors.webp",
+    "sha256": "8a1d7b05573435cda323bfc0921e31dd5d173b6456e78019abc972b0f2d33210",
+    "source_sha256": "1ab96ee9845e3e0916fa7550f822b1ddcd8bfc5839a2477daa8f2f83a41071b4",
+    "kind": "agent_observation"
+  },
+  {
+    "file": "assets/scene-stairs.webp",
+    "sha256": "6fbcb0de0d9ed6b2590751edcd94922fb1450fd44fba8e1ad30d2f24c211d6a3",
+    "source_sha256": "4fb35e3836b9d87b251545667e596573775ffc5666eb3a817f52c8b802a28dde",
+    "kind": "agent_observation"
+  },
+  {
+    "file": "assets/scene-ladder.webp",
+    "sha256": "c54e28c3e004391c96f8cc4e76418ad49d3eccce96feca92f59272c0df91cb56",
+    "source_sha256": "77f1293d0a804927f24f7581c534c1acb2a71bd1481fce602c30841f082adf27",
+    "kind": "agent_observation"
+  },
+  {
+    "file": "assets/scene-gate.webp",
+    "sha256": "e8de2d052e172fb7a77e3d4f5f4dd662374f1b85ee58f30f24f3eb5e4a88233b",
+    "source_sha256": "e5468af355968af52b004c880325a46c1a984c59bdc914b3a8c739a346f4970a",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/scene-button.webp",
+    "sha256": "51dba7549740d1d8c76e205bf03ae84eec1270d4a84333683d592da4828ff67b",
+    "source_sha256": "8ba7b758a34bc5e7ea157c19c724fe25d4f8403054e1ecf7b9e167f7bd04204c",
+    "kind": "presentation_camera"
+  },
+  {
+    "file": "assets/showcase-20261003.mp4",
+    "sha256": "3f4a1af8f791fb253ba214c11f25fbb89de5b57332cd71b62f7b885a7fcbde53",
+    "source_sha256": "5a2acac2ba8e4b1716d8248a6b0062ba98b64c44e7f9ed1ba7f5fd47a90aef5d",
+    "kind": "edited_project_film",
+    "length_seconds": 61.504,
+    "maps": 14,
+    "playback_rate": 1,
+    "processing": "720p H.264/AAC web encode; complete 61.5-second edit, original timing and music retained."
+  },
+  {
+    "file": "assets/showcase-poster.webp",
+    "sha256": "930a57cf2b03d08c5bf2981fcf9a4038c25f2381623e6167a6c61ab749b25b66",
+    "source_sha256": "4d4a32ba9a80ddfd752d60f3896afc5242efa1486b005e2fd8c5b1ce0ca77817",
+    "kind": "film_poster"
+  },
+  {
+    "file": "assets/behavior-door-755-800.mp4",
+    "sha256": "2768a914b8300b2f2b760b3effc5402bdf2346ef0319ef6a4654ed0f4ec71e7c",
+    "source_sha256": "d610bda0dfa3a5dc9d7cf384ff76287b411d84877349374f4cce959d36d6a107",
+    "kind": "original_speed_recording_excerpt",
+    "start_seconds": 755,
+    "length_seconds": 45
+  },
+  {
+    "file": "assets/behavior-door-755-800.webp",
+    "sha256": "403ac199f1c6c2c25084c1512c6fcef197068e08ac978b141febb29326a4c883",
+    "source_sha256": "405858742f277d1d402ba3ed69348cdca7f95de83a7287feb5b2944edefe9747",
+    "kind": "recording_frame"
+  },
+  {
+    "file": "assets/behavior-ladder-1350-1450.mp4",
+    "sha256": "bd21db1843c1ceb29f8a93ea7cb7092a6a3fcba3be7c0c23cd13b77bc38a98ab",
+    "source_sha256": "505dcac28c6b6911a3e17553200c2b0e51e064cd9d535af08b2a13abda1bc869",
+    "kind": "original_speed_recording_excerpt",
+    "start_seconds": 1350,
+    "length_seconds": 100
+  },
+  {
+    "file": "assets/behavior-ladder-1350-1450.webp",
+    "sha256": "81b5425e07ceb05f93d5e02b4f0b18733368e9043ccc035817fdaadfeda6d54f",
+    "source_sha256": "932e9a63e87ced3ad433a475a01bb0ba62d1946fb2f17f7f43fdd81a505e69af",
+    "kind": "recording_frame"
+  },
+  {
+    "file": "assets/behavior-stairs-7625-7705.mp4",
+    "sha256": "664b5ebd60afc468d915a282d134b5c4bbc4f3990c849a3aae4eb98ef035c7c3",
+    "source_sha256": "d610bda0dfa3a5dc9d7cf384ff76287b411d84877349374f4cce959d36d6a107",
+    "kind": "original_speed_recording_excerpt",
+    "start_seconds": 7625,
+    "length_seconds": 80
+  },
+  {
+    "file": "assets/behavior-stairs-7625-7705.webp",
+    "sha256": "c2546be8ff1846d0cca3b7b1c148a27925a56590c7a532ab94884121a81426e8",
+    "source_sha256": "9cd5780b3ad5907570bc77773b94b62f6d2e08527d820a874a9f7e6004b7ee77",
+    "kind": "recording_frame"
+  }
+]

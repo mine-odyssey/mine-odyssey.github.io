@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mine-odyssey.github.io/sitemap.xml
