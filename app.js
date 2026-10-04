@@ -71,12 +71,12 @@
     $('#task-language').hidden=isEnglish;
     $('#task-language').setAttribute('aria-pressed',String(originalInstruction));
   }
-  function setTaskView(view) {
+  function setTaskView(view,explicitPlay=false) {
     taskView=view;const task=tasks[taskIndex],m=data.maps.find(m=>m.id===task.map);
     $('#task-map').hidden=view!=='map';$('#task-scene').hidden=view!=='scene';
     pressed('[data-task-view]','taskView',view);
     text('#task-photo-caption',view==='scene'?'':'Native map · Dashed lines show visit order, not a walkable route.');
-    document.dispatchEvent(new CustomEvent('task-view-changed',{detail:{taskIndex,view}}));
+    document.dispatchEvent(new CustomEvent('task-view-changed',{detail:{taskIndex,taskStop,view,explicitPlay}}));
   }
   function setTaskStop(index) {
     taskStop=Math.max(0,Math.min(tasks[taskIndex].stops.length-1,index));
@@ -93,7 +93,7 @@
     text('#task-meta',task.id);text('#task-title',task.title);text('#task-setting',task.setting);
     setInstruction();
     $('#task-map-image').src=task.map_image;$('#task-map-image').alt=`Native top-down map of ${m.name}; numbered task destinations are listed alongside`;
-    $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li><button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
+    $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li>${i?`<button type="button" class="task-watch-leg" data-watch-leg="${i-1}" aria-label="Watch ${escapeHTML(task.stops[i-1].name)} to ${escapeHTML(s.name)}"><span aria-hidden="true">▶</span> Watch ${i===1?'S':i-1} → ${i}<span class="leg-watch-duration">Full leg</span></button>`:''}<button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
     $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
     $('#task-map-lines').innerHTML=task.stops.map((s,i)=>`${i?`<path class="task-leg" data-leg="${i}" d="M ${task.stops[i-1].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`:''}<path class="task-marker-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="task-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="4"/>`).join('');
     $('#task-challenges').innerHTML=task.challenges.map(([title,body],i)=>`<article><span>0${i+1}</span><h4>${escapeHTML(title)}</h4><p>${escapeHTML(body)}</p></article>`).join('');
@@ -104,10 +104,12 @@
   }
   $$('[data-task]').forEach(b=>b.addEventListener('click',()=>setTask(Number(b.dataset.task))));
   $('.journey-explorer').addEventListener('click',e=>{const b=e.target.closest('[data-task-stop]');if(b){setTaskView('map');setTaskStop(Number(b.dataset.taskStop));}});
+  $('#task-stops').addEventListener('click',e=>{const b=e.target.closest('[data-watch-leg]');if(b){setTaskStop(Number(b.dataset.watchLeg)+1);setTaskView('scene',true);}});
+  document.addEventListener('task-scene-leg-selected',e=>setTaskStop(e.detail.index+1));
   $$('[data-task-view]').forEach(b=>b.addEventListener('click',()=>setTaskView(b.dataset.taskView)));
   $('#task-language').addEventListener('click',()=>{originalInstruction=!originalInstruction;setInstruction();});
-  $('#task-prev').addEventListener('click',()=>setTaskStop(taskStop-1));
-  $('#task-next').addEventListener('click',()=>setTaskStop(taskStop+1));
+  $('#task-prev').addEventListener('click',()=>{setTaskStop(taskStop-1);if(taskView==='scene')setTaskView('scene',true);});
+  $('#task-next').addEventListener('click',()=>{setTaskStop(taskStop+1);if(taskView==='scene')setTaskView('scene',true);});
   const video=$('#demo-video');
   const stamp=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
   function setClip(index) {
@@ -490,30 +492,30 @@
   const tasks=window.MINE_ODYSSEY.journeys.examples,motion=matchMedia('(prefers-reduced-motion: reduce)');
   const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let taskIndex=0,clipIndex=0,generation=0;
-  const stamp=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  const stamp=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
   const current=()=>tasks[taskIndex].scene.clips[clipIndex];
   function caption(){
     if(panel.hidden)return;
     const c=current();
-    $('#task-photo-caption').textContent=`${c.model} · ${c.hud_enabled?'HUD-enabled recording':'First-person recording'} · Source ${stamp(c.start_seconds)}–${stamp(c.start_seconds+c.length_seconds)} · Original speed`;
+    $('#task-photo-caption').textContent=`${c.model} · ${c.hud_enabled?'HUD-enabled recording':'First-person recording'} · Source ${stamp(c.start_seconds)}–${stamp(c.start_seconds+c.length_seconds)} · ${video.playbackRate}×`;
   }
   function controls(){
     $('#task-scene-start').hidden=!video.paused;
-    $('#task-scene-start').innerHTML=`<span aria-hidden="true">▶</span> ${video.currentTime>0?'Resume scene':'Play scene'}`;
+    $('#task-scene-start').innerHTML=`<span aria-hidden="true">▶</span> ${video.ended?'Replay leg':video.currentTime>0?'Resume leg':'Play leg'}`;
   }
   async function play(){
     if(panel.hidden)return;
     video.scrollIntoView({behavior:'instant',block:'nearest'});
     const ticket=++generation;
     if(!video.getAttribute('src'))video.src=current().video;
-    video.playbackRate=1;
-    $('#task-scene-status').textContent='Loading recorded scene…';
+    video.playbackRate=Number($('#task-scene-speed').value);
+    $('#task-scene-status').textContent='Loading full leg…';
     try{
       await video.play();
       if(ticket!==generation||panel.hidden)return;
       $('#task-scene-status').textContent='';controls();
     }catch(error){
-      if(ticket===generation&&!panel.hidden&&error.name!=='AbortError')$('#task-scene-status').textContent='Press Play to start this scene.';
+      if(ticket===generation&&!panel.hidden&&error.name!=='AbortError')$('#task-scene-status').textContent='Press Play to start this leg.';
       controls();
     }
   }
@@ -521,20 +523,23 @@
     ++generation;video.pause();video.removeAttribute('src');video.load();clipIndex=index;
     const c=current();video.poster=c.poster;video.setAttribute('aria-label',`${c.title} · ${tasks[taskIndex].title} · ${c.model}`);
     $('#task-scene-title').textContent=c.title;$('#task-scene-description').textContent=c.description;
-    $('#task-scene-duration').textContent=`${c.length_seconds}s · Loop`;
+    $('#task-scene-duration').textContent=`${stamp(c.length_seconds)} · Full leg`;
     $('#task-scene-status').textContent='';
     document.querySelectorAll('[data-task-scene]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.taskScene)===index)));
+    if(!panel.hidden)document.dispatchEvent(new CustomEvent('task-scene-leg-selected',{detail:{index}}));
+    document.querySelectorAll('[data-watch-leg]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.watchLeg)===index)));
     caption();controls();if(autoplay)play();
   }
   function mount(index){
     taskIndex=index;
-    $('#task-scene-clips').innerHTML=tasks[index].scene.clips.map((c,i)=>`<button type="button" data-task-scene="${i}" aria-pressed="false" aria-label="Play ${escapeHTML(c.title)}"><span class="task-scene-thumbnail"><img src="${escapeHTML(c.poster)}" alt="" width="800" height="600" loading="lazy"><span aria-hidden="true">▶</span></span><strong>${escapeHTML(c.title)}</strong><small>${c.length_seconds} seconds · ${stamp(c.start_seconds)}</small></button>`).join('');
+    $('#task-scene-clips').innerHTML=tasks[index].scene.clips.map((c,i)=>`<button type="button" data-task-scene="${i}" aria-pressed="false" aria-label="Play ${escapeHTML(c.title)}"><span class="task-scene-thumbnail"><img src="${escapeHTML(c.poster)}" alt="" width="800" height="600" loading="lazy"><span aria-hidden="true">▶</span></span><span class="task-leg-number">${i===0?'S':i} → ${i+1}</span><strong>${escapeHTML(c.title)}</strong><small>${stamp(c.length_seconds)} · Full recording</small></button>`).join('');
     $('#task-scene-note').textContent=tasks[index].scene.note;
     selectClip(0);
   }
   document.addEventListener('task-view-changed',e=>{
+    const index=Math.max(0,e.detail.taskStop-1);
     if(taskIndex!==e.detail.taskIndex)mount(e.detail.taskIndex);
-    if(e.detail.view==='scene'){caption();if(!motion.matches)play();}
+    if(e.detail.view==='scene'){if(index!==clipIndex)selectClip(index);document.dispatchEvent(new CustomEvent('task-scene-leg-selected',{detail:{index}}));caption();if(e.detail.explicitPlay||!motion.matches)play();}
     else{++generation;video.pause();$('#task-scene-status').textContent='';}
   });
   $('#task-scene-clips').addEventListener('click',e=>{const b=e.target.closest('[data-task-scene]');if(b)selectClip(Number(b.dataset.taskScene),true);});
@@ -542,7 +547,10 @@
   video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();});controls();});
   video.addEventListener('playing',()=>{$('#task-scene-status').textContent='';controls();});
   video.addEventListener('pause',controls);
-  video.addEventListener('error',()=>{$('#task-scene-status').textContent='This scene could not load. Select a moment below to retry.';controls();});
+  video.addEventListener('ratechange',()=>{$('#task-scene-tag').textContent=`Full recording · ${video.playbackRate}×`;caption();});
+  $('#task-scene-speed').addEventListener('change',e=>{video.playbackRate=Number(e.target.value);});
+  video.addEventListener('ended',()=>{if(!panel.hidden&&$('#task-scene-autonext').checked&&clipIndex<tasks[taskIndex].scene.clips.length-1)selectClip(clipIndex+1,true);else{controls();$('#task-scene-status').textContent=clipIndex===3?'Final destination reached.':'Leg complete.';}});
+  video.addEventListener('error',()=>{$('#task-scene-status').textContent='This scene could not load. Select a leg below to retry.';controls();});
   document.addEventListener('play',e=>{if(e.target instanceof HTMLVideoElement&&e.target!==video){++generation;video.pause();}},true);
   document.addEventListener('visibilitychange',()=>{if(document.hidden){++generation;video.pause();}});
   motion.addEventListener('change',()=>{if(motion.matches){++generation;video.pause();}});

@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=scenes-20261004">
-  <script src="data/benchmark.js?v=scenes-20261004" defer></script>
-  <script src="app.js?v=scenes-20261004" defer></script>
+  <link rel="stylesheet" href="styles.css?v=legs-20261004">
+  <script src="data/benchmark.js?v=legs-20261004" defer></script>
+  <script src="app.js?v=legs-20261004" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -39,15 +39,16 @@
             <div class="journey-map-toolbar"><p class="eyebrow">Locate the destinations</p><div role="group" aria-label="Task scene view"><button type="button" data-task-view="map" aria-pressed="true">Map</button><button type="button" data-task-view="scene" aria-pressed="false">Scene <span aria-hidden="true">▶</span></button></div></div>
             <div id="task-map" class="task-map-stage" role="group" aria-label="Select a destination on the map"><img id="task-map-image" alt="" fetchpriority="high" width="1200" height="800"><svg id="task-map-lines" viewBox="0 0 1000 667" aria-hidden="true"></svg><div id="task-markers"></div><span class="map-north" aria-hidden="true">↑ N</span></div>
             <div id="task-scene" class="task-scene" hidden>
-              <div class="task-scene-player"><video id="task-scene-video" controls muted loop playsinline preload="none" aria-label="Recorded scene from the selected task"></video><button type="button" class="video-start task-scene-start" id="task-scene-start"><span aria-hidden="true">▶</span> Play scene</button><span class="scene-recording-tag">Recorded task · 1×</span></div>
+              <div class="task-scene-player"><video id="task-scene-video" controls muted playsinline preload="none" aria-label="Recorded leg from the selected task"></video><button type="button" class="video-start task-scene-start" id="task-scene-start"><span aria-hidden="true">▶</span> Play leg</button><span class="scene-recording-tag" id="task-scene-tag">Full recording · 1×</span></div>
               <div class="task-scene-heading"><div><h4 id="task-scene-title"></h4><p id="task-scene-description"></p></div><span id="task-scene-duration"></span></div>
-              <div id="task-scene-clips" class="task-scene-clips" role="group" aria-label="Choose a recorded moment from this task"></div>
+              <div class="task-scene-controls"><label>Speed <select id="task-scene-speed" aria-label="Task recording speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><label><input type="checkbox" id="task-scene-autonext" checked> Continue to next leg</label></div>
+              <div id="task-scene-clips" class="task-scene-clips" role="group" aria-label="Choose a recording between consecutive destinations"></div>
               <p id="task-scene-note" class="task-scene-note"></p><p id="task-scene-status" role="status"></p>
             </div>
             <figcaption id="task-photo-caption"></figcaption>
             <div class="task-selected" aria-live="polite"><div><span id="task-stop-role"></span><h4 id="task-stop-title"></h4><p id="task-stop-purpose"></p><small id="task-stop-height"></small></div><div class="task-step-controls"><button type="button" id="task-prev" aria-label="Select previous destination">←</button><button type="button" id="task-next" aria-label="Select next destination">→</button></div></div>
           </figure>
-          <div class="journey-itinerary"><div class="itinerary-heading"><p class="eyebrow">The ordered journey</p><p>Choose a stop to locate it on the map.</p></div><ol class="task-stops" id="task-stops" aria-label="Starting point and required visit sequence"></ol><div class="task-completion"><strong>What counts as completion?</strong><p data-paper="task-completion">After visiting all required destinations, the agent must submit an accepted claim_done to complete the task successfully.</p><details><summary>Arrival criteria</summary><p id="task-arrival"></p></details></div></div>
+          <div class="journey-itinerary"><div class="itinerary-heading"><p class="eyebrow">The ordered journey</p><p>Locate each stop, or play the full recording between two stops.</p></div><ol class="task-stops" id="task-stops" aria-label="Starting point and required visit sequence"></ol><div class="task-completion"><strong>What counts as completion?</strong><p data-paper="task-completion">After visiting all required destinations, the agent must submit an accepted claim_done to complete the task successfully.</p><details><summary>Arrival criteria</summary><p id="task-arrival"></p></details></div></div>
         </div>
         <div class="journey-challenges"><p class="eyebrow">Task definition and verification</p><div id="task-challenges"></div></div>
         <p class="small-note journey-footnote" id="task-note">Instructions from the benchmark task records; English translations are provided alongside the Portuguese and Russian originals. Map markers show visit order, not an executed route.</p>
