@@ -960,7 +960,63 @@
         "run_sha256": "ff63721098076fef5df58cb3fc076ecf2bc9357e0619031a1e784ee71c4b928c",
         "waypoint_sha256": "1a8676e2900d6061914c6946c076e9524e515d7ebfb968b5c7913d652ff3c6d7",
         "background_sha256": "2a70e08de6f794687c0cec197302f75af13102a0bea1b0dcb027a1c0b7dbf61d",
-        "image_sha256": "398c7e0d6f34ecf4d8b35e33280196ebf6c5f927cdbd29d0095755bf35d741be"
+        "image_sha256": "398c7e0d6f34ecf4d8b35e33280196ebf6c5f927cdbd29d0095755bf35d741be",
+        "scene": {
+          "clips": [
+            {
+              "id": "task-scene-copacabana-waterfront-001-1054",
+              "title": "Street-level view",
+              "description": "Trees, street edges and surrounding buildings.",
+              "video": "assets/task-scene-copacabana-waterfront-001-1054.mp4",
+              "poster": "assets/task-scene-copacabana-waterfront-001-1054.webp",
+              "task_id": "copacabana-waterfront-001",
+              "map_id": "copacabana-waterfront",
+              "source_sha256": "f2b695d32307fed684c26e38faaed6a65664992799299a671e430ca7de1b66f4",
+              "run_sha256": "b5349b9ef249835de55c428b49c3d0c8cc3f88b9085301fd204d3c4a5d3cd37d",
+              "start_seconds": 1054,
+              "length_seconds": 8,
+              "model": "GLM 5.3 Flash",
+              "model_id": "glm-5.3-flash",
+              "hud_enabled": false,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-copacabana-waterfront-001-779",
+              "title": "On the beachfront",
+              "description": "Open sand and visible waypoint markers.",
+              "video": "assets/task-scene-copacabana-waterfront-001-779.mp4",
+              "poster": "assets/task-scene-copacabana-waterfront-001-779.webp",
+              "task_id": "copacabana-waterfront-001",
+              "map_id": "copacabana-waterfront",
+              "source_sha256": "f2b695d32307fed684c26e38faaed6a65664992799299a671e430ca7de1b66f4",
+              "run_sha256": "b5349b9ef249835de55c428b49c3d0c8cc3f88b9085301fd204d3c4a5d3cd37d",
+              "start_seconds": 779,
+              "length_seconds": 6,
+              "model": "GLM 5.3 Flash",
+              "model_id": "glm-5.3-flash",
+              "hud_enabled": false,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-copacabana-waterfront-001-4515",
+              "title": "Along the frontage",
+              "description": "Building entrances and the paved waterfront.",
+              "video": "assets/task-scene-copacabana-waterfront-001-4515.mp4",
+              "poster": "assets/task-scene-copacabana-waterfront-001-4515.webp",
+              "task_id": "copacabana-waterfront-001",
+              "map_id": "copacabana-waterfront",
+              "source_sha256": "f2b695d32307fed684c26e38faaed6a65664992799299a671e430ca7de1b66f4",
+              "run_sha256": "b5349b9ef249835de55c428b49c3d0c8cc3f88b9085301fd204d3c4a5d3cd37d",
+              "start_seconds": 4515,
+              "length_seconds": 8,
+              "model": "GLM 5.3 Flash",
+              "model_id": "glm-5.3-flash",
+              "hud_enabled": false,
+              "playback_rate": 1
+            }
+          ],
+          "note": "Short excerpts from this task. Clips are selected from different points in the recording; they do not replay the full itinerary."
+        }
       },
       {
         "id": "innopolis-006",
@@ -1102,7 +1158,63 @@
         "run_sha256": "f902ab8cb11d8185bca9951eda4b79bd12e98b2873187a8e43a01477a5949c1c",
         "waypoint_sha256": "87b1446313539fb43a1dc5577d922c0257d00fa8e02ab8f01922607852997f24",
         "background_sha256": "3e3ff227ad56ab57052d735de22c267f528fcac3d0e2c97f8d0fa2dd0d46ef30",
-        "image_sha256": "c1c5b795283ea2d110e445836bf1b0cce9eb8a53a41b8845318e9a4799ce4466"
+        "image_sha256": "c1c5b795283ea2d110e445836bf1b0cce9eb8a53a41b8845318e9a4799ce4466",
+        "scene": {
+          "clips": [
+            {
+              "id": "task-scene-innopolis-006-775",
+              "title": "Between buildings",
+              "description": "Paths, planted areas and separate campus buildings.",
+              "video": "assets/task-scene-innopolis-006-775.mp4",
+              "poster": "assets/task-scene-innopolis-006-775.webp",
+              "task_id": "innopolis-006",
+              "map_id": "innopolis",
+              "source_sha256": "f32e07a522c9eeb422110161488c011aa206e6f259f2231d4477c10ea7870eed",
+              "run_sha256": "f902ab8cb11d8185bca9951eda4b79bd12e98b2873187a8e43a01477a5949c1c",
+              "start_seconds": 775,
+              "length_seconds": 8,
+              "model": "DeepSeek V4.1 Flash",
+              "model_id": "deepseek-v4.1-flash-expires-on-0910",
+              "hud_enabled": true,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-innopolis-006-4585",
+              "title": "At a building entrance",
+              "description": "Approaching a glazed building frontage.",
+              "video": "assets/task-scene-innopolis-006-4585.mp4",
+              "poster": "assets/task-scene-innopolis-006-4585.webp",
+              "task_id": "innopolis-006",
+              "map_id": "innopolis",
+              "source_sha256": "f32e07a522c9eeb422110161488c011aa206e6f259f2231d4477c10ea7870eed",
+              "run_sha256": "f902ab8cb11d8185bca9951eda4b79bd12e98b2873187a8e43a01477a5949c1c",
+              "start_seconds": 4585,
+              "length_seconds": 8,
+              "model": "DeepSeek V4.1 Flash",
+              "model_id": "deepseek-v4.1-flash-expires-on-0910",
+              "hud_enabled": true,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-innopolis-006-6805",
+              "title": "Across the street",
+              "description": "Looking across the campus street from the planted edge.",
+              "video": "assets/task-scene-innopolis-006-6805.mp4",
+              "poster": "assets/task-scene-innopolis-006-6805.webp",
+              "task_id": "innopolis-006",
+              "map_id": "innopolis",
+              "source_sha256": "f32e07a522c9eeb422110161488c011aa206e6f259f2231d4477c10ea7870eed",
+              "run_sha256": "f902ab8cb11d8185bca9951eda4b79bd12e98b2873187a8e43a01477a5949c1c",
+              "start_seconds": 6805,
+              "length_seconds": 8,
+              "model": "DeepSeek V4.1 Flash",
+              "model_id": "deepseek-v4.1-flash-expires-on-0910",
+              "hud_enabled": true,
+              "playback_rate": 1
+            }
+          ],
+          "note": "Short excerpts from this task. Clips are selected from different points in the recording; they do not replay the full itinerary."
+        }
       },
       {
         "id": "white-house-009",
@@ -1244,7 +1356,63 @@
         "run_sha256": "1d08bf4aff1542217ab747b145734d6732f2f56c6259ffe0d4f385a7f7e01fa5",
         "waypoint_sha256": "b49508de7c453108ca519e80b8fa7c1d44c1f7d112a0caf047de6547154d2b63",
         "background_sha256": "bd0f95543e0195ed2072fb1190b3d945d30d94f15bead0e26e2816da522796cc",
-        "image_sha256": "1f1ba0dbc44af3eeb911b3cca04d399216a4129bb9477d540efd2e04b8b010ae"
+        "image_sha256": "1f1ba0dbc44af3eeb911b3cca04d399216a4129bb9477d540efd2e04b8b010ae",
+        "scene": {
+          "clips": [
+            {
+              "id": "task-scene-white-house-009-3492",
+              "title": "Along the corridor",
+              "description": "A corridor with columns, doors and branching passages.",
+              "video": "assets/task-scene-white-house-009-3492.mp4",
+              "poster": "assets/task-scene-white-house-009-3492.webp",
+              "task_id": "white-house-009",
+              "map_id": "white-house",
+              "source_sha256": "8a926a248ae934f74c369c42b7da9fe761779ea84b5c65165a71c2bbf11241f5",
+              "run_sha256": "41c18c56e8ea6496e15426e24b09862ad24a2e95cf57049311d97b1247527616",
+              "start_seconds": 3492,
+              "length_seconds": 8,
+              "model": "GLM 5.3 Flash",
+              "model_id": "glm-5.3-flash",
+              "hud_enabled": false,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-white-house-009-11500",
+              "title": "Around a corner",
+              "description": "Turning at an interior corridor junction.",
+              "video": "assets/task-scene-white-house-009-11500.mp4",
+              "poster": "assets/task-scene-white-house-009-11500.webp",
+              "task_id": "white-house-009",
+              "map_id": "white-house",
+              "source_sha256": "8a926a248ae934f74c369c42b7da9fe761779ea84b5c65165a71c2bbf11241f5",
+              "run_sha256": "41c18c56e8ea6496e15426e24b09862ad24a2e95cf57049311d97b1247527616",
+              "start_seconds": 11500,
+              "length_seconds": 8,
+              "model": "GLM 5.3 Flash",
+              "model_id": "glm-5.3-flash",
+              "hud_enabled": false,
+              "playback_rate": 1
+            },
+            {
+              "id": "task-scene-white-house-009-5070",
+              "title": "Through a doorway",
+              "description": "A doorway and the adjoining interior space.",
+              "video": "assets/task-scene-white-house-009-5070.mp4",
+              "poster": "assets/task-scene-white-house-009-5070.webp",
+              "task_id": "white-house-009",
+              "map_id": "white-house",
+              "source_sha256": "b6dd057bb60e82f47677e8c76a64e8791850a3915ae860458c114690b8ae66f6",
+              "run_sha256": "1d08bf4aff1542217ab747b145734d6732f2f56c6259ffe0d4f385a7f7e01fa5",
+              "start_seconds": 5070,
+              "length_seconds": 8,
+              "model": "DeepSeek V4.1 Flash",
+              "model_id": "deepseek-v4.1-flash-expires-on-0910",
+              "hud_enabled": true,
+              "playback_rate": 1
+            }
+          ],
+          "note": "Short excerpts from this task. Clips are selected from different points in the recording; they do not replay the full itinerary."
+        }
       }
     ],
     "task_source_sha256": "863177331e7b65e54f45dbe0326cc717cd8f3f419d548f897738ce732a82d0ca",

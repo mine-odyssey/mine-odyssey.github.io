@@ -75,7 +75,8 @@
     taskView=view;const task=tasks[taskIndex],m=data.maps.find(m=>m.id===task.map);
     $('#task-map').hidden=view!=='map';$('#task-scene').hidden=view!=='scene';
     pressed('[data-task-view]','taskView',view);
-    text('#task-photo-caption',view==='scene'?`${m.name} · In-game presentation capture`:'Native map · Dashed lines show visit order, not a walkable route.');
+    text('#task-photo-caption',view==='scene'?'':'Native map · Dashed lines show visit order, not a walkable route.');
+    document.dispatchEvent(new CustomEvent('task-view-changed',{detail:{taskIndex,view}}));
   }
   function setTaskStop(index) {
     taskStop=Math.max(0,Math.min(tasks[taskIndex].stops.length-1,index));
@@ -91,7 +92,6 @@
     const task=tasks[index],m=data.maps.find(m=>m.id===task.map);
     text('#task-meta',task.id);text('#task-title',task.title);text('#task-setting',task.setting);
     setInstruction();
-    $('#task-image').src=m.image;$('#task-image').alt=`Minecraft reconstruction of ${m.name}`;
     $('#task-map-image').src=task.map_image;$('#task-map-image').alt=`Native top-down map of ${m.name}; numbered task destinations are listed alongside`;
     $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li><button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
     $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
@@ -482,4 +482,70 @@
     buttons[next].focus();buttons[next].click();
   });
   select(buttons[0]);
+})();
+
+// Task-specific scene clips: load only on Scene or Play, stop when hidden.
+(() => {
+  const $=s=>document.querySelector(s),video=$('#task-scene-video'),panel=$('#task-scene');
+  const tasks=window.MINE_ODYSSEY.journeys.examples,motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let taskIndex=0,clipIndex=0,generation=0;
+  const stamp=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  const current=()=>tasks[taskIndex].scene.clips[clipIndex];
+  function caption(){
+    if(panel.hidden)return;
+    const c=current();
+    $('#task-photo-caption').textContent=`${c.model} · ${c.hud_enabled?'HUD-enabled recording':'First-person recording'} · Source ${stamp(c.start_seconds)}–${stamp(c.start_seconds+c.length_seconds)} · Original speed`;
+  }
+  function controls(){
+    $('#task-scene-start').hidden=!video.paused;
+    $('#task-scene-start').innerHTML=`<span aria-hidden="true">▶</span> ${video.currentTime>0?'Resume scene':'Play scene'}`;
+  }
+  async function play(){
+    if(panel.hidden)return;
+    video.scrollIntoView({behavior:'instant',block:'nearest'});
+    const ticket=++generation;
+    if(!video.getAttribute('src'))video.src=current().video;
+    video.playbackRate=1;
+    $('#task-scene-status').textContent='Loading recorded scene…';
+    try{
+      await video.play();
+      if(ticket!==generation||panel.hidden)return;
+      $('#task-scene-status').textContent='';controls();
+    }catch(error){
+      if(ticket===generation&&!panel.hidden&&error.name!=='AbortError')$('#task-scene-status').textContent='Press Play to start this scene.';
+      controls();
+    }
+  }
+  function selectClip(index,autoplay=false){
+    ++generation;video.pause();video.removeAttribute('src');video.load();clipIndex=index;
+    const c=current();video.poster=c.poster;video.setAttribute('aria-label',`${c.title} · ${tasks[taskIndex].title} · ${c.model}`);
+    $('#task-scene-title').textContent=c.title;$('#task-scene-description').textContent=c.description;
+    $('#task-scene-duration').textContent=`${c.length_seconds}s · Loop`;
+    $('#task-scene-status').textContent='';
+    document.querySelectorAll('[data-task-scene]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.taskScene)===index)));
+    caption();controls();if(autoplay)play();
+  }
+  function mount(index){
+    taskIndex=index;
+    $('#task-scene-clips').innerHTML=tasks[index].scene.clips.map((c,i)=>`<button type="button" data-task-scene="${i}" aria-pressed="false" aria-label="Play ${escapeHTML(c.title)}"><span class="task-scene-thumbnail"><img src="${escapeHTML(c.poster)}" alt="" width="800" height="600" loading="lazy"><span aria-hidden="true">▶</span></span><strong>${escapeHTML(c.title)}</strong><small>${c.length_seconds} seconds · ${stamp(c.start_seconds)}</small></button>`).join('');
+    $('#task-scene-note').textContent=tasks[index].scene.note;
+    selectClip(0);
+  }
+  document.addEventListener('task-view-changed',e=>{
+    if(taskIndex!==e.detail.taskIndex)mount(e.detail.taskIndex);
+    if(e.detail.view==='scene'){caption();if(!motion.matches)play();}
+    else{++generation;video.pause();$('#task-scene-status').textContent='';}
+  });
+  $('#task-scene-clips').addEventListener('click',e=>{const b=e.target.closest('[data-task-scene]');if(b)selectClip(Number(b.dataset.taskScene),true);});
+  $('#task-scene-start').addEventListener('click',play);
+  video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();});controls();});
+  video.addEventListener('playing',()=>{$('#task-scene-status').textContent='';controls();});
+  video.addEventListener('pause',controls);
+  video.addEventListener('error',()=>{$('#task-scene-status').textContent='This scene could not load. Select a moment below to retry.';controls();});
+  document.addEventListener('play',e=>{if(e.target instanceof HTMLVideoElement&&e.target!==video){++generation;video.pause();}},true);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){++generation;video.pause();}});
+  motion.addEventListener('change',()=>{if(motion.matches){++generation;video.pause();}});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(!entries[0].isIntersecting){++generation;video.pause();}},{threshold:0}).observe(video);
+  mount(0);
 })();
