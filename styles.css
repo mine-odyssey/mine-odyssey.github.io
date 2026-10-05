@@ -540,15 +540,16 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .task-first .task-tabs span{font-size:11px}.task-first .task-tabs small{font-size:13px}
 .task-first .journey-heading{padding:0 0 23px;margin-bottom:24px;border-bottom:1px solid #d4dccb}
 .task-first .journey-heading h3{font-size:34px}
-.journey-explorer{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);grid-template-areas:"feedback feedback" "map instruction" "map itinerary";gap:24px 32px;padding:0;align-items:start}
-.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map instruction" "map itinerary"}
+.journey-explorer{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);grid-template-areas:"feedback feedback" "context itinerary";gap:24px 32px;padding:0;align-items:start}
+.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"context itinerary"}
 .task-rule-feedback{grid-area:feedback;margin:0}
-.journey-map-panel{grid-area:map;position:sticky;top:104px;min-width:0;background:#e8edde;border:1px solid #c9d6b9;padding:18px;border-radius:5px}
+.journey-context{grid-area:context;display:flex;flex-direction:column;gap:22px;min-width:0}
+.journey-map-panel{min-width:0;background:#e8edde;border:1px solid #c9d6b9;padding:18px;border-radius:5px}
 .journey-map-toolbar{padding:0 0 15px;gap:14px;align-items:center}
 .task-map-stage{border:0;border-radius:3px;overflow:hidden}
-.task-first .task-instruction{grid-area:instruction;margin:0;padding:22px 24px;background:#fdfdf7;border:1px solid #d7dfcb;border-left:3px solid #a6bd89;border-radius:3px}
+.task-first .task-instruction{margin:0;padding:22px 24px;background:#fdfdf7;border:1px solid #d7dfcb;border-left:3px solid #a6bd89;border-radius:3px}
 .task-first .task-instruction blockquote{font-size:18px;line-height:1.7;max-width:var(--reading-width)}
-.task-first .instruction-toolbar{display:block;margin-bottom:13px}
+.task-first .instruction-toolbar{display:flex;flex-wrap:wrap;align-items:center;margin-bottom:13px}
 .task-first .instruction-toolbar .eyebrow span{display:block;margin:7px 0 0;font-size:11px;font-weight:400;color:#7b886d}
 .task-first .instruction-toolbar button{font-size:13px;margin-top:10px;min-height:30px}
 .journey-itinerary{grid-area:itinerary;min-width:0;padding-top:0}
@@ -710,9 +711,9 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .task-first .task-tabs small{font-size:12px}
  .task-first .journey-heading{padding:0 0 20px;margin-bottom:22px}
  .task-first .journey-heading h3{font-size:31px}
- .journey-explorer,.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-columns:minmax(0,1fr);grid-template-areas:"feedback" "map" "instruction" "itinerary";gap:25px;padding:0}
- .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map" "instruction" "itinerary"}
- .journey-map-panel{position:static;padding:13px}
+ .journey-explorer,.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-columns:minmax(0,1fr);grid-template-areas:"feedback" "context" "itinerary";gap:25px;padding:0}
+ .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"context" "itinerary"}
+ .journey-map-panel{padding:13px}
  .journey-map-toolbar{gap:10px}.journey-map-toolbar button{font-size:13px}
  .journey-map-toolbar .eyebrow{font-size:10px}
  .task-first .task-instruction{padding:22px 20px;margin:0}
