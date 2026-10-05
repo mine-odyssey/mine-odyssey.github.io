@@ -51,14 +51,6 @@
     const m=data.maps.find(m=>m.id===button.dataset.world);
     openImage(m.image,m.name,`${m.location} · ${m.environment} · ${m.task_count} tasks · ${m.waypoint_count} catalogued waypoints. 6-second excerpt from a recorded run · Original speed. Cover photograph is a separate presentation view.`,m.id);
   });
-  $$('[data-scene]').forEach(b=>b.addEventListener('click',()=>{
-    const m=data.maps.find(m=>m.id===b.dataset.scene);
-    const img=$('.hero-panorama > img');
-    img.src=m.id==='versailles'?'assets/hero-versailles.webp':m.image;
-    img.alt=`Minecraft reconstruction of ${m.name}`;
-    $('.scene-caption').innerHTML=`<span>${String(data.maps.findIndex(x=>x.id===m.id)+1).padStart(2,'0')} / 30</span><span>${escapeHTML(m.name)} <small>${escapeHTML(m.location.split(' · ').at(-1))} · ${m.environment==='indoor'?'Indoor':'Outdoor'} world</small></span><span class="capture-tag">In-game presentation capture</span>`;
-    pressed('[data-scene]','scene',m.id);
-  }));
   const tasks=data.journeys.examples;
   let taskIndex=0,taskStop=0,originalInstruction=true,taskView='map',taskRule='';
   const stopLabel=(s,i)=>i===0?'Starting point':s.role==='finish'?'04 / Final destination':`${String(i).padStart(2,'0')} / Checkpoint`;
@@ -109,6 +101,7 @@
     $('#task-prev').disabled=taskStop===0;$('#task-next').disabled=taskStop===task.stops.length-1;
     $$('#task-map-lines [data-leg]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.leg)===taskStop));
     $$('#task-map-lines [data-map-stop]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.mapStop)===taskStop));
+    $$('#contract-map-overlay [data-contract-marker]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.contractMarker)===taskStop));
     renderTaskRule();
   }
   function setTask(index) {
@@ -120,7 +113,11 @@
     $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li>${i?`<button type="button" class="task-watch-leg" data-watch-leg="${i-1}" aria-label="Watch ${escapeHTML(task.stops[i-1].name)} to ${escapeHTML(s.name)}"><span aria-hidden="true">▶</span> Watch ${i===1?'S':i-1} → ${i}<span class="leg-watch-duration">Full leg</span></button>`:''}<button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
     $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%;--visit-index:${i}" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
     $('#task-map-lines').innerHTML=task.stops.map((s,i)=>`${i?`<path class="task-leg" data-leg="${i}" style="--visit-index:${i}" d="M ${task.stops[i-1].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`:''}<path class="task-marker-leader" data-map-stop="${i}" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="task-anchor" data-map-stop="${i}" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="4"/>`).join('');
-    $$('[data-contract-stop]').forEach(b=>{const i=Number(b.dataset.contractStop);b.setAttribute('aria-label',`Highlight ${i===0?'S':i}: ${task.stops[i].name}`);});
+    text('#contract-place',m.name);
+    $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
+    $('#contract-destinations').lang=task.locale;
+    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>`<li><button type="button" class="contract-stop" data-contract-stop="${i}" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight ${i===0?'S':i}: ${escapeHTML(s.original_name)}"><span class="contract-number" aria-hidden="true">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span><span class="contract-stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
+    $('#contract-map-overlay').innerHTML=task.stops.slice(1).map((s,i)=>`<path class="contract-map-leg" d="M ${task.stops[i].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`).join('')+task.stops.map((s,i)=>`<g data-contract-marker="${i}"><path class="contract-map-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="contract-map-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="5"/><circle class="contract-map-pin" cx="${s.marker[0]}" cy="${s.marker[1]}" r="26"/><text x="${s.marker[0]}" y="${s.marker[1]}" dy=".35em">${i===0?'S':i}</text></g>`).join('');
     $('#task-challenges').innerHTML=task.challenges.map(([title,body],i)=>`<article><span>0${i+1}</span><h4>${escapeHTML(title)}</h4><p>${escapeHTML(body)}</p></article>`).join('');
     text('#task-arrival',`Position samples are checked every ${task.arrival.sample_interval_sec} second. Arrival requires both a 3D distance of less than ${task.arrival.radius_3d} blocks and a height difference of at most ${task.arrival.radius_y} blocks from the target.`);
     $('.task-completion details').open=false;
@@ -743,4 +740,40 @@
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.12}).observe(figure);
   else visible=true;
   setPhase(0);draw(0);sync();
+})();
+
+// A concrete introduction to spatial adaptation, reusing the audited case geometry.
+(() => {
+  const replay=window.MINE_ODYSSEY.recoveryReplay,host=document.querySelector('#spatial-route');
+  const route=replay.cases.find(c=>c.id==='white-house').routes.find(r=>r.model==='GPT-6 Astra');
+  const button=document.querySelector('#spatial-play'),motion=matchMedia('(prefers-reduced-motion: reduce)');
+  // Prefix every local SVG reference so the full case study can coexist on the page.
+  host.innerHTML=route.svg.replaceAll(route.id,`overview-${route.id}`);
+  host.querySelectorAll('[data-background]').forEach(img=>img.setAttributeNS('http://www.w3.org/1999/xlink','href',replay.images[img.dataset.background]));
+  const segments=[...host.querySelectorAll('[data-replay-layer="line"]')].map(line=>({line,length:line.getTotalLength(),layers:[...host.querySelectorAll(`[data-replay-segment="${line.dataset.replaySegment}"]`)]}));
+  const total=segments.reduce((sum,s)=>sum+s.length,0),dot=host.querySelector('[data-replay-dot]');
+  let progress=1,wantsPlay=!motion.matches,frame=0,last=null,hold=0;
+  function paint(){
+    let consumed=0,active=segments[0],distance=0;
+    for(const segment of segments){
+      const part=Math.max(0,Math.min(segment.length,progress*total-consumed));
+      for(const path of segment.layers){path.style.strokeDasharray=`${segment.length} ${segment.length}`;path.style.strokeDashoffset=String(segment.length-part);path.style.visibility=part>0?'visible':'hidden';}
+      if(progress*total>=consumed){active=segment;distance=part;}consumed+=segment.length;
+    }
+    const point=active.line.getPointAtLength(distance);dot.setAttribute('cx',point.x);dot.setAttribute('cy',point.y);
+    host.dataset.progress=String(progress);
+  }
+  function active(){const r=host.getBoundingClientRect();return wantsPlay&&!document.hidden&&r.top<innerHeight&&r.bottom>0;}
+  function tick(now){
+    frame=0;if(!active()){sync();return;}
+    const delta=last===null?0:Math.min(now-last,100);last=now;
+    if(progress>=1){hold+=delta;if(hold>=2200){progress=0;hold=0;}}else progress=Math.min(1,progress+delta/12000);
+    paint();frame=requestAnimationFrame(tick);
+  }
+  function sync(){cancelAnimationFrame(frame);last=null;const playing=active();button.textContent=playing?'Pause route':'Play route';button.setAttribute('aria-pressed',String(playing));if(playing)frame=requestAnimationFrame(tick);}
+  button.addEventListener('click',()=>{wantsPlay=!active();if(wantsPlay&&progress>=1){progress=0;hold=0;paint();}sync();});
+  document.addEventListener('visibilitychange',sync);
+  motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;progress=1;paint();sync();}});
+  document.querySelector('#spatial-case-link').addEventListener('click',()=>document.querySelector('[data-case="white-house"]').click());
+  paint();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(host);
 })();

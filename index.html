@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=task-format-20261005">
-  <script src="data/benchmark.js?v=task-format-20261005" defer></script>
-  <script src="app.js?v=task-format-20261005" defer></script>
+  <link rel="stylesheet" href="styles.css?v=real-task-20261005">
+  <script src="data/benchmark.js?v=real-task-20261005" defer></script>
+  <script src="app.js?v=real-task-20261005" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,40 +31,15 @@
         </div>
         <aside class="opening-task" aria-labelledby="task-format-title"><div class="journey-contract"><div class="contract-heading"><p class="eyebrow">The task</p><h2 id="task-format-title">Task format</h2></div>
           <div class="task-contract-flow" role="group" aria-label="Explore task rules on the map">
-            <button type="button" class="contract-stage contract-waypoint" data-task-rule="waypoint" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback">
-              <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#e7eddc"/><path d="M20 31s-9-10-9-17a9 9 0 0 1 18 0c0 7-9 17-9 17Z" fill="#315a40"/><circle cx="20" cy="14" r="3.5" fill="#f8faf0"/></svg>
-              <span class="contract-label"><strong>Named waypoint</strong><small>Place name + position</small></span><span class="contract-open" aria-hidden="true">↗</span>
-            </button>
-            <div class="contract-stage contract-order">
-              <div class="contract-world" role="group" aria-label="Task schematic: select the start or an ordered destination">
-                <svg viewBox="0 0 480 280" aria-hidden="true">
-                  <defs><pattern id="contract-ground-grid" width="62" height="31" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .5 -1 .5 235 20)"><path d="M62 0H0V31" fill="none" stroke="#f8faec" stroke-width="1.5"/></pattern></defs>
-                  <ellipse cx="246" cy="250" rx="184" ry="19" fill="#dce2d0" opacity=".5"/>
-                  <path d="m22 149 189 98v21L22 170Z" fill="#a8b28b"/><path d="m211 247 257-121v22L211 268Z" fill="#869b74"/>
-                  <path d="m22 149 250-121 196 98-257 121Z" fill="#dbe4c0"/><path d="m22 149 250-121 196 98-257 121Z" fill="url(#contract-ground-grid)"/>
-                  <path d="m243 197 48-24 41 21-50 24Z" fill="#a2c9c0"/><path d="m247 199 44-21 34 17-43 21Z" fill="#b7d9d1"/>
-                  <path d="m55 158 107-52 76 44 87-54 92 31" fill="none" stroke="#eef0db" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path class="contract-visit-line" d="m70 158 95-44 71 42 85-53 89 31" fill="none" stroke="#fffef4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path class="contract-visit-dashes" d="m70 158 95-44 71 42 85-53 89 31" fill="none" stroke="#719369" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round"/>
-                  <g class="contract-building"><path d="m200 63 31 17v32l-31-17Z" fill="#d2ba8a"/><path d="m231 80 31-17v32l-31 17Z" fill="#b19c72"/><path d="m200 63 31-16 31 16-31 17Z" fill="#f3e6c6"/><path d="m204 60 27-14 27 14-27 14Z" fill="#d4a567"/><path d="m208 78 9 5v12l-9-5Zm32 5 9-5v12l-9 5Z" fill="#6c8270"/></g>
-                  <g><path d="m283 64 18 10v21l-18-10Z" fill="#c8c3aa"/><path d="m301 74 20-10v21l-20 10Z" fill="#a3ad91"/><path d="m283 64 20-10 18 10-20 10Z" fill="#f1eedb"/></g>
-                  <g><path d="m143 199 7 4v16l-7-4Z" fill="#9c8059"/><path d="m150 203 6-3v16l-6 3Z" fill="#796c49"/><path d="m129 176 21-10 21 10-21 11Z" fill="#9db57f"/><path d="m129 176 21 11v20l-21-11Z" fill="#7e9c69"/><path d="m150 187 21-11v20l-21 11Z" fill="#527850"/></g>
-                  <g><path d="m364 162 6 3v13l-6-3Z" fill="#8b7954"/><path d="m350 145 17-8 18 8-18 9Z" fill="#a0b984"/><path d="m350 145 17 9v17l-17-9Z" fill="#77976a"/><path d="m367 154 18-9v17l-18 9Z" fill="#527952"/></g>
-                  <g class="contract-explorer" transform="translate(87 113)"><ellipse cx="8" cy="28" rx="12" ry="5" fill="#839775" opacity=".25"/><path d="M2 14h6v15H2Zm8 0h6v15h-6" fill="#405a61"/><path d="M0 0h17v17H0Z" fill="#499384"/><path d="M-4 2H0v13h-4Zm21 0h4v13h-4" fill="#c5a176"/><path d="M1-13h14V1H1Z" fill="#d2b287"/><path d="M1-13h14v5H1Z" fill="#5e5a46"/><path d="M4-5h2v2H4Zm7 0h2v2h-2Z" fill="#405146"/></g>
-                  <path d="M414 76v38" stroke="#677951" stroke-width="3"/><path d="m416 77 26 8-26 11Z" fill="#d7ad55"/>
-                </svg>
-                <button type="button" class="contract-stop" data-contract-stop="0" style="left:14.58%;top:56.43%" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight starting point">S</button>
-                <button type="button" class="contract-stop" data-contract-stop="1" style="left:34.38%;top:40.71%" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 1">1</button>
-                <button type="button" class="contract-stop" data-contract-stop="2" style="left:49.17%;top:55.71%" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 2">2</button>
-                <button type="button" class="contract-stop" data-contract-stop="3" style="left:66.88%;top:36.79%" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 3">3</button>
-                <button type="button" class="contract-stop" data-contract-stop="4" style="left:85.42%;top:47.86%" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 4">4</button>
-              </div>
-              <button type="button" class="contract-rule-label" data-task-rule="order" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback">Visit in order <span aria-hidden="true">→</span></button>
+            <div class="contract-stage contract-waypoint">
+              <button type="button" class="contract-map-heading" data-task-rule="waypoint" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback"><strong id="contract-place">Copacabana</strong><span>Locate the destinations ↗</span></button>
+              <div class="contract-native-map"><img id="contract-map-image" alt="" width="1200" height="800"><svg id="contract-map-overlay" viewBox="0 0 1000 667" aria-hidden="true"></svg></div>
             </div>
-            <button type="button" class="contract-stage contract-claim" data-task-rule="completion" aria-pressed="false" aria-controls="task-map task-completion task-rule-feedback">
-              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#e0e9ca"/><path d="m12 20 6 6 11-13" fill="none" stroke="#315a40" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span class="contract-label"><strong>Claim completion</strong><code>claim_done</code></span><span class="contract-open" aria-hidden="true">↗</span>
-            </button>
+            <div class="contract-stage contract-order">
+              <button type="button" class="contract-rule-label" data-task-rule="order" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback">Visit in order <span aria-hidden="true">↓</span></button>
+              <ol class="contract-destinations" id="contract-destinations" aria-label="Starting point and ordered destinations"></ol>
+            </div>
+            <button type="button" class="contract-stage contract-claim" data-task-rule="completion" aria-pressed="false" aria-controls="task-map task-completion task-rule-feedback"><span class="contract-check" aria-hidden="true">✓</span><strong>Claim completion</strong><code>claim_done ↗</code></button>
           </div>
           <details class="contract-details"><summary>Rules &amp; source</summary><div id="task-challenges"></div><p class="small-note" id="task-note">Instructions from the benchmark task records; English translations are provided alongside the Portuguese and Russian originals. Map markers show visit order, not an executed route.</p></details>
         </div></aside>
@@ -106,13 +81,10 @@
       <div class="section-heading"><div><p class="eyebrow">02 / Introduction</p><h2 id="overview-title">Agentic spatial intelligence</h2></div></div>
       <div class="overview-grid">
       <div class="intro-copy"><p class="large-copy" data-paper="overview-definition">Acquire and update spatial information through interaction, adapting actions as new evidence emerges.</p><p data-paper="overview-task">Find routes and entrances, open doors, and move between levels.</p><a class="text-link" href="#system">See how the benchmark works <span aria-hidden="true">↗</span></a></div>
-        <figure class="featured-world" aria-label="Minecraft reconstructions of real-world locations">
-      <div class="hero-panorama">
-        <div class="scene-selector" role="group" aria-label="Choose a featured world"><button type="button" data-scene="versailles" aria-pressed="true">Versailles</button><button type="button" data-scene="zurich" aria-pressed="false">Zurich</button><button type="button" data-scene="cape-town" aria-pressed="false">Cape Town</button></div>
-        <img src="assets/hero-versailles.webp" alt="Minecraft reconstruction of the Palace of Versailles, with a long gallery, golden chandeliers and tall windows" width="1280" height="800" loading="lazy">
-        <div class="scene-caption"><span>27 / 30</span><span>Palace of Versailles <small>France · Indoor world</small></span><span class="capture-tag">In-game presentation capture</span></div>
-      </div>
-
+        <figure class="spatial-example" aria-labelledby="spatial-example-title">
+          <header><p class="eyebrow">An example · White House</p><h3 id="spatial-example-title">Find a way around the wall.</h3></header>
+          <div class="spatial-route" id="spatial-route" aria-label="Recorded Astra detour to Queen’s Bedroom"></div>
+          <figcaption><p>Astra follows the hallway around the wall to Queen’s Bedroom.</p><div class="spatial-example-footer"><span>GPT-6 Astra · Steps 30–45</span><button type="button" id="spatial-play" aria-pressed="false">Play route</button></div><details><summary>About this replay</summary><p>Recorded positions on a rendered cutaway of the saved world. S / E mark the segment endpoints; the star marks the destination. Playback follows the recorded path with pauses omitted.</p></details><a class="text-link" id="spatial-case-link" href="#recovery">Explore the full case <span aria-hidden="true">↗</span></a></figcaption>
         </figure>
       </div>
     </section>
