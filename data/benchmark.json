@@ -752,71 +752,71 @@
     }
   ],
   "film": {
-    "video": "assets/showcase-20261003.mp4",
-    "poster": "assets/showcase-poster.webp",
-    "duration_seconds": 61.504,
-    "maps": 14,
+    "video": "assets/showcase-20261004.mp4",
+    "poster": "assets/showcase-poster-20261004.webp",
+    "duration_seconds": 137.003,
+    "maps": 17,
     "chapters": [
       {
-        "title": "Mine Odyssey",
+        "title": "Observe. Act. Adapt.",
         "start": 0,
-        "description": "A benchmark for spatial intelligence."
+        "description": "Mine Odyssey: agentic spatial intelligence."
+      },
+      {
+        "title": "What is the task?",
+        "start": 3.5,
+        "description": "Locate a start and four ordered destinations on the native Copacabana map."
       },
       {
         "title": "Read the map",
-        "start": 3.5,
-        "description": "Open the map, zoom out, close it and resume walking."
+        "start": 9.5,
+        "description": "Open, zoom, close, and move."
       },
       {
         "title": "Across worlds",
-        "start": 9.5,
-        "description": "Three large moving pairs flow through cities, rural paths, plazas, galleries, decks and monumental interiors."
+        "start": 15.5,
+        "description": "Six environments in motion."
       },
       {
-        "title": "Find a way through",
-        "start": 20.5,
-        "description": "Move along the water-level bank, then ascend onto grass."
+        "title": "Test. Compose. Verify.",
+        "start": 26.5,
+        "description": "Real model commands, execution, feedback and verified arrivals."
       },
       {
-        "title": "Read the ground",
-        "start": 25.0,
-        "description": "Climb uneven ground and rejoin the path."
+        "title": "One task. Different outcomes.",
+        "start": 64.5,
+        "description": "Astra and Opus 5 seek the upper gallery."
       },
       {
-        "title": "Reach another level",
-        "start": 32.0,
-        "description": "Follow a staircase upward."
+        "title": "Terrain and interaction",
+        "start": 84.5,
+        "description": "Water, hills, stairs, ladders, passages and a button-controlled door."
       },
       {
-        "title": "Go vertical",
-        "start": 37.0,
-        "description": "Ascend within a ladder shaft."
+        "title": "Ablation settings",
+        "start": 105.0,
+        "description": "HUD overlays and the rear third-person camera."
       },
       {
-        "title": "Move through tight spaces",
-        "start": 39.5,
-        "description": "Traverse a narrow ship interior.",
-        "source_title": "Navigate tight spaces"
+        "title": "Multi-view observations",
+        "start": 112.0,
+        "description": "An actual six-view observation beside later movement from the same run."
       },
       {
-        "title": "Open the way",
-        "start": 42.5,
-        "description": "Open a wooden door and pass through."
+        "title": "Route guidance",
+        "start": 119.0,
+        "description": "A visible planned route; the agent controls movement."
       },
       {
-        "title": "Interact to move forward",
-        "start": 46.5,
-        "description": "Activate a button-controlled door and pass through."
-      },
-      {
-        "title": "As conditions change",
-        "start": 51.0,
-        "description": "Daylight, rain and night on the same bridge."
+        "title": "Lighting and weather",
+        "start": 126.0,
+        "description": "Clear noon, midnight and rain."
       }
     ],
-    "edition": "Soft opening · 3 October 2026",
-    "source_sha256": "5a2acac2ba8e4b1716d8248a6b0062ba98b64c44e7f9ed1ba7f5fd47a90aef5d",
-    "chapters_sha256": "795d40d60e77c29658fd73755e2cea68653528d90d0f514818349c30e091c51d"
+    "edition": "Map markers · 4 October 2026",
+    "source_sha256": "60f0e25d7ab0d703de574909e86dcc448d583a1d5e22f8f8859cf19c0f5cb417",
+    "delivery_sha256": "0cd1cc1659379d8bd2335d7cbb7248d9454c493a8603ea443b43f1b62088ae7f",
+    "chapters_sha256": "ab38028fde0a45170128c74a14c5077b010989461893363668145806e0579ccf"
   },
   "journeys": {
     "examples": [

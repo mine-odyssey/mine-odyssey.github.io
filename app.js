@@ -164,7 +164,7 @@
 (() => {
   const film=window.MINE_ODYSSEY.film,$=s=>document.querySelector(s),video=$('#showcase-video');
   const stamp=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-  const indices=[0,1,2,3,5,8,10];let pendingSeek=null;
+  const indices=film.chapters.map((_,i)=>i);let pendingSeek=null;
   video.poster=film.poster;
   $('#film-chapters').innerHTML=indices.map(i=>`<button type="button" data-film-chapter="${i}" aria-pressed="${i===0}"><span>${stamp(film.chapters[i].start)}</span><strong>${film.chapters[i].title}</strong><span aria-hidden="true">↗</span></button>`).join('');
   async function play(time=null){

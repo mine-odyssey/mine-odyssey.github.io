@@ -659,22 +659,6 @@
     "kind": "presentation_camera"
   },
   {
-    "file": "assets/showcase-20261003.mp4",
-    "sha256": "3f4a1af8f791fb253ba214c11f25fbb89de5b57332cd71b62f7b885a7fcbde53",
-    "source_sha256": "5a2acac2ba8e4b1716d8248a6b0062ba98b64c44e7f9ed1ba7f5fd47a90aef5d",
-    "kind": "edited_project_film",
-    "length_seconds": 61.504,
-    "maps": 14,
-    "playback_rate": 1,
-    "processing": "720p H.264/AAC web encode; complete 61.5-second edit, original timing and music retained."
-  },
-  {
-    "file": "assets/showcase-poster.webp",
-    "sha256": "930a57cf2b03d08c5bf2981fcf9a4038c25f2381623e6167a6c61ab749b25b66",
-    "source_sha256": "4d4a32ba9a80ddfd752d60f3896afc5242efa1486b005e2fd8c5b1ce0ca77817",
-    "kind": "film_poster"
-  },
-  {
     "file": "assets/behavior-door-755-800.mp4",
     "sha256": "2768a914b8300b2f2b760b3effc5402bdf2346ef0319ef6a4654ed0f4ec71e7c",
     "source_sha256": "d610bda0dfa3a5dc9d7cf384ff76287b411d84877349374f4cce959d36d6a107",
@@ -1339,5 +1323,21 @@
     "playback_rate": 1,
     "continuous": true,
     "encoding": "source video stream copied without re-encoding"
+  },
+  {
+    "file": "assets/showcase-20261004.mp4",
+    "sha256": "dd4ca3f949225f156cc462f488344ad35da6969e240f4ac8945457c19a7c11d4",
+    "source_sha256": "60f0e25d7ab0d703de574909e86dcc448d583a1d5e22f8f8859cf19c0f5cb417",
+    "kind": "edited_project_film",
+    "length_seconds": 137.003,
+    "maps": 17,
+    "playback_rate": 1,
+    "processing": "720p H.264/AAC web encode; complete 137-second edit, original timing and music retained."
+  },
+  {
+    "file": "assets/showcase-poster-20261004.webp",
+    "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
+    "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
+    "kind": "film_poster"
   }
 ]
