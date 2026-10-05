@@ -2438,14 +2438,16 @@
         "section": "Abstract"
       },
       "overview-definition": {
-        "text": "the ability to proactively acquire and continually update spatial information through interaction, use it to guide observation and action, and adapt those actions as new evidence emerges",
-        "section": "Introduction"
+        "text": "Acquire and update spatial information through interaction, adapting actions as new evidence emerges.",
+        "section": "Introduction",
+        "source_text": "the ability to proactively acquire and continually update spatial information through interaction, use it to guide observation and action, and adapt those actions as new evidence emerges",
+        "adaptation": "Author-requested concise introduction; retains the manuscript meaning and omits the repeated task definition and detailed examples."
       },
       "overview-task": {
-        "text": "Each task provides a natural-language instruction specifying which waypoints to visit and in what order. Completing these tasks requires agents to find accessible routes and entrances, open doors, and move between levels using stairs and ladders, while monitoring their progress.",
+        "text": "Find routes and entrances, open doors, and move between levels.",
         "section": "Abstract",
         "source_text": "Each task provides a natural-language instruction specifying which waypoints to visit and in what order. Completing these tasks requires agents to find accessible routes and entrances, open doors, and move between levels using stairs and ladders, while monitoring their progress",
-        "adaptation": "Sentence case and terminal period for excerpt."
+        "adaptation": "Author-requested concise introduction; retains the manuscript meaning and omits the repeated task definition and detailed examples."
       },
       "worlds": {
         "text": "It comprises 180 tasks covering 30 such locations across 20 countries and regions on five continents, including 20 outdoor and 10 indoor settings.",
