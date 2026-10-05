@@ -877,5 +877,41 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .research-layout .case-layout .recovery-case-heading h3{font-size:26px}
  .research-layout .case-layout .recovery-case-description{font-size:16px}
  .research-layout .case-layout .recovery-viewport{padding:18px 10px 8px}
- .research-layout .case-layout .route-card h4{font-size:17px}
+.research-layout .case-layout .route-card h4{font-size:17px}
+}
+
+/* Stair replay shares the other cases' scene/detail composition. */
+.stair-layout{align-items:stretch}
+.stair-layout .program-scene{display:flex;flex-direction:column}
+.stair-layout .program-scene>.program-card-heading{padding:14px 18px}
+.stair-layout .appendix-route-scene{display:flex;align-items:center;justify-content:center;flex:1;padding:12px 18px}
+.stair-layout .program-scene .appendix-route-scene svg{height:420px;max-height:420px;width:100%;object-fit:contain}
+.stair-layout .program-scene figcaption{padding:12px 18px;gap:10px 20px}
+.stair-layout .ascent-status{padding:14px 18px}
+.stair-layout .ascent-status>div{gap:4px}
+.stair-layout .ascent-profile{padding:8px 14px}
+.stair-layout .ascent-profile svg{height:100px;max-height:100px}
+.stair-layout .stair-landings{padding:10px 6px}
+.stair-layout .program-inspector{display:flex;flex-direction:column}
+.stair-layout .program-command-cards{min-height:248px;display:grid;flex:1}
+.stair-layout .program-command-cards article{margin:0;min-height:248px}
+.stair-layout .program-command-cards article[hidden]{display:none}
+.stair-layout .program-command-cards .program-card-heading{padding:13px 16px}
+.stair-layout .program-command-cards article>p{margin:10px 16px}
+.stair-layout .heading-sequence{gap:7px;margin:12px 16px;flex-wrap:wrap}
+.stair-layout .heading-sequence .repeat-count{font:600 13px var(--sans);color:#8c661f;padding:5px 7px}
+.stair-layout .program-command-cards details{margin:10px 16px 12px}
+.stair-layout .program-command-cards summary{min-height:32px;display:list-item;align-content:center}
+.stair-layout .loop-iterations{margin:0 16px 8px}
+@media(max-width:760px){
+ .stair-layout{gap:14px}
+ .stair-layout .program-scene .appendix-route-scene svg{height:290px;max-height:290px}
+ .stair-layout .program-scene>.program-card-heading{padding:12px 14px}
+ .stair-layout .appendix-route-scene{padding:10px 14px}
+ .stair-layout .program-scene figcaption{padding:10px 14px;font-size:10px;gap:6px 14px}
+ .stair-layout .ascent-status{padding:12px 16px}
+ .stair-layout .ascent-profile svg{height:80px;max-height:80px}
+ .stair-layout .program-command-cards,.stair-layout .program-command-cards article{min-height:252px}
+ .stair-layout .heading-sequence{gap:5px}
+ .stair-layout .heading-sequence span{padding:7px}
 }

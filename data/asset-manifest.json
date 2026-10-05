@@ -1500,9 +1500,9 @@
     "map_id": "rms-titanic"
   },
   {
-    "file": "assets/showcase-fullscreen-20261005-f56b82996442.mp4",
-    "sha256": "dbfe8504f3d442060de6a21d4a9e59246d5eca567a644a5f53bb8ed197691115",
-    "source_sha256": "f56b829964426f7c1e6e023e5e929f90333caa954f4b0151c03638b8edba4bfe",
+    "file": "assets/showcase-six-view-motion-20261005-764e73dd048d.mp4",
+    "sha256": "ac71922d4bf85729fc57981c7a677a20fd21c6d89ff5ce71dab1dff39be5e359",
+    "source_sha256": "764e73dd048de9e45dc64c445f0c58b425e69bd6cfcc86b3001c7c24873501ab",
     "kind": "edited_project_film",
     "length_seconds": 123.008,
     "maps": 17,
@@ -1510,7 +1510,7 @@
     "processing": "720p H.264/AAC web encode; complete 123-second edit, original timing and music retained."
   },
   {
-    "file": "assets/showcase-fullscreen-20261005-b9faeb46c212-poster.webp",
+    "file": "assets/showcase-six-view-motion-20261005-b9faeb46c212-poster.webp",
     "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
     "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
     "kind": "film_poster"

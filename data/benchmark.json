@@ -818,8 +818,8 @@
     }
   ],
   "film": {
-    "video": "assets/showcase-fullscreen-20261005-f56b82996442.mp4",
-    "poster": "assets/showcase-fullscreen-20261005-b9faeb46c212-poster.webp",
+    "video": "assets/showcase-six-view-motion-20261005-764e73dd048d.mp4",
+    "poster": "assets/showcase-six-view-motion-20261005-b9faeb46c212-poster.webp",
     "duration_seconds": 123.008,
     "maps": 17,
     "chapters": [
@@ -856,7 +856,7 @@
       {
         "title": "Multi-view observations",
         "start": 58,
-        "description": "The original six-view observation, followed by later agent movement."
+        "description": "Eight successive real six-view observations, with time compressed."
       },
       {
         "title": "Route guidance",
@@ -879,12 +879,12 @@
         "description": "Two model episodes on the same task."
       }
     ],
-    "edition": "Fullscreen",
-    "source_id": "showcase-fullscreen-20261005",
-    "completed_at_utc": "2026-10-05T08:36:25.932801+00:00",
-    "source_sha256": "f56b829964426f7c1e6e023e5e929f90333caa954f4b0151c03638b8edba4bfe",
-    "delivery_sha256": "32295f1192eef3cc0587f1aaf1309edbbb2ca81c1878d911fbb2c1caaa8ca80a",
-    "chapters_sha256": "61766b791e77cff365a4e91cf88f3abf3fe18e3fe91dbb0a6b8bc9e7bf4b2f50"
+    "edition": "Six View Motion",
+    "source_id": "showcase-six-view-motion-20261005",
+    "completed_at_utc": "2026-10-05T09:17:38.563485+00:00",
+    "source_sha256": "764e73dd048de9e45dc64c445f0c58b425e69bd6cfcc86b3001c7c24873501ab",
+    "delivery_sha256": "3004125dd196a3577b2df1290436c54a00810f88edb726420b61f59f6eaec7bc",
+    "chapters_sha256": "171be6b428c7f0a4bccce5c749ad636fe4274c1774ece820b1996a2b95ac562b"
   },
   "journeys": {
     "examples": [
