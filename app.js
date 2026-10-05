@@ -539,6 +539,9 @@
 // Four cases, one accessible selector. Hidden panels cannot keep animating.
 (() => {
   const menu=document.querySelector('#case-menu'),buttons=[...menu.querySelectorAll('[data-case]')];
+  const sidebar=matchMedia('(min-width: 1001px)');
+  const syncOrientation=()=>menu.setAttribute('aria-orientation',sidebar.matches?'vertical':'horizontal');
+  sidebar.addEventListener('change',syncOrientation);syncOrientation();
   function select(button){
     const programming=Boolean(button.dataset.appendixCase);
     document.querySelector('#route-case-panel').hidden=programming;
@@ -549,9 +552,9 @@
   }
   menu.addEventListener('click',e=>{const b=e.target.closest('[data-case]');if(b)select(b);});
   menu.addEventListener('keydown',e=>{
-    if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key))return;
     const i=buttons.indexOf(e.target);if(i<0)return;e.preventDefault();
-    const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+    const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+buttons.length)%buttons.length;
     buttons[next].focus();buttons[next].click();
   });
   select(buttons[0]);
