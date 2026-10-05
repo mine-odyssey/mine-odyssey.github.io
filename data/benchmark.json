@@ -752,8 +752,8 @@
     }
   ],
   "film": {
-    "video": "assets/showcase-diversity-first-20261005.mp4",
-    "poster": "assets/showcase-diversity-first-poster-20261005.webp",
+    "video": "assets/showcase-single-column-20261005-51690c7de908.mp4",
+    "poster": "assets/showcase-single-column-20261005-b9faeb46c212-poster.webp",
     "duration_seconds": 123.008,
     "maps": 17,
     "chapters": [
@@ -765,7 +765,7 @@
       {
         "title": "What is the task?",
         "start": 3.5,
-        "description": "Locate a start and four ordered destinations on the native Copacabana map."
+        "description": "A start and four ordered destinations on the native Copacabana map."
       },
       {
         "title": "Read the map",
@@ -773,50 +773,52 @@
         "description": "Open, zoom, close, and move."
       },
       {
-        "title": "Across worlds",
+        "title": "Diverse worlds",
         "start": 15.5,
-        "description": "Six environments in motion."
+        "description": "Six places, each with a different spatial setting."
       },
       {
-        "title": "Terrain and interaction",
-        "start": 26.5,
-        "description": "Water, hills, stairs, ladders, passages and a button-controlled door."
+        "title": "Movement and interaction",
+        "start": 30.5,
+        "description": "Water, slopes, stairs, ladders, passages and a button-controlled door."
       },
       {
         "title": "Ablation settings",
-        "start": 47.0,
-        "description": "HUD overlays and the rear third-person camera."
+        "start": 51,
+        "description": "HUD information and a third-person camera."
       },
       {
         "title": "Multi-view observations",
-        "start": 54.0,
-        "description": "An actual six-view observation beside later movement from the same run."
+        "start": 58,
+        "description": "The original six-view observation, followed by later agent movement."
       },
       {
         "title": "Route guidance",
-        "start": 61.0,
-        "description": "A visible planned route; the agent controls movement."
+        "start": 63,
+        "description": "A visible route; the agent controls movement."
       },
       {
         "title": "Lighting and weather",
-        "start": 68.0,
-        "description": "Clear noon, midnight and rain."
+        "start": 68,
+        "description": "Daylight, midnight and rain in separate episodes."
       },
       {
         "title": "Test. Compose. Verify.",
-        "start": 74.0,
-        "description": "Real model commands, execution, feedback and verified arrivals."
+        "start": 74,
+        "description": "Real commands, execution, feedback and verified arrivals."
       },
       {
         "title": "Find the way upstairs",
-        "start": 98.0,
-        "description": "Find the stairs, reach the gallery, and compare the recorded run outcomes."
+        "start": 98,
+        "description": "Two model episodes on the same task."
       }
     ],
-    "edition": "Diversity first · 5 October 2026",
-    "source_sha256": "365e002ad18b40ec24c3dfc623f8f0f6de3fa10a0d33812167a90628c7e71cd7",
-    "delivery_sha256": "367cf954998894494e2e3000e750150b524bb93642ae5646f9ec659d709067d4",
-    "chapters_sha256": "a3a01d0f4262c7a439001bf5436555a599c888a44afdf1f7099d824a0dbe12fc"
+    "edition": "Single Column",
+    "source_id": "showcase-single-column-20261005",
+    "completed_at_utc": "2026-10-05T08:12:51.159416+00:00",
+    "source_sha256": "51690c7de9086d1bf9a80c7b8faf34834960689cfb3b1a05184e7b689b38b567",
+    "delivery_sha256": "f9f1e9a3b19e78db95ee39c48d61c881fe5d88a1c77eb709be95ed06f73ac754",
+    "chapters_sha256": "61766b791e77cff365a4e91cf88f3abf3fe18e3fe91dbb0a6b8bc9e7bf4b2f50"
   },
   "journeys": {
     "examples": [

@@ -1325,9 +1325,9 @@
     "encoding": "source video stream copied without re-encoding"
   },
   {
-    "file": "assets/showcase-diversity-first-20261005.mp4",
-    "sha256": "6203483dbf2453c70c226cb8c3bee57edb5960f0e4aaf2548a1439d933f371fa",
-    "source_sha256": "365e002ad18b40ec24c3dfc623f8f0f6de3fa10a0d33812167a90628c7e71cd7",
+    "file": "assets/showcase-single-column-20261005-51690c7de908.mp4",
+    "sha256": "b99b48996d80b638825640881539e36da33ab40467670c95f0ca82cecf0a1a87",
+    "source_sha256": "51690c7de9086d1bf9a80c7b8faf34834960689cfb3b1a05184e7b689b38b567",
     "kind": "edited_project_film",
     "length_seconds": 123.008,
     "maps": 17,
@@ -1335,7 +1335,7 @@
     "processing": "720p H.264/AAC web encode; complete 123-second edit, original timing and music retained."
   },
   {
-    "file": "assets/showcase-diversity-first-poster-20261005.webp",
+    "file": "assets/showcase-single-column-20261005-b9faeb46c212-poster.webp",
     "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
     "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
     "kind": "film_poster"
