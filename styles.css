@@ -168,3 +168,18 @@
  .program-card-heading strong{font-size:14px}
  .program-command-cards pre,.grounding-inspector pre{font-size:11px}
 }
+
+/* A full game observation with a selectable native map replaces the monitor icon. */
+.client-window{filter:drop-shadow(0 4px 7px #294e3a12)}
+.framework-node .client-observation{opacity:1}
+.client-view-tab{cursor:pointer;color:#687b5b}
+.client-view-tab rect{fill:transparent;stroke:transparent}
+.client-view-tab:hover rect{fill:#e9eedf}
+.client-view-tab[aria-pressed=true]{color:#f6f7ee}
+.client-view-tab[aria-pressed=true] rect{fill:#294e3a}
+.client-view-tab:focus-visible{outline:none}
+.client-view-tab:focus-visible rect{stroke:#b7852a;stroke-width:2.5}
+.interaction-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0 18px}
+.interaction-heading h3{font:28px var(--serif);color:#edf1e6;margin:0}
+.interaction-heading>span{font-size:13px;color:#bac7b5}
+@media(max-width:760px){.interaction-heading{display:block;padding:24px 0 14px}.interaction-heading h3{font-size:25px;margin-bottom:10px}.interaction-heading>span{font-size:12px}}

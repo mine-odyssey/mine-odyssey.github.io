@@ -132,7 +132,6 @@
   $('#video-start').addEventListener('click',playClip);
   video.addEventListener('play',()=>{$('#video-start').hidden=true;});
   video.addEventListener('error',()=>text('#video-status','The recording could not be loaded. Keep the assets folder alongside the page.'));
-  $('#interaction-recordings').addEventListener('toggle',e=>{if(!e.target.open)video.pause();});
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)video.pause();}).observe(video);
   $('#playback-speed').addEventListener('change',e=>{video.playbackRate=Number(e.target.value);});
   $$('[data-clip]').forEach(b=>b.addEventListener('click',()=>setClip(Number(b.dataset.clip))));
@@ -567,7 +566,8 @@
 // Responsive diagram of the manuscript's agent loop and independent verifier.
 (() => {
   const host=document.querySelector('#framework-diagram');
-  const image=window.MINE_ODYSSEY.maps.find(m=>m.id==='versailles').image;
+  const example=window.MINE_ODYSSEY.journeys.examples.find(t=>t.id==='copacabana-waterfront-001');
+  const views={game:example.scene.clips[1].poster,map:example.map_image};
   const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
   const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
   function avatar(){
@@ -608,8 +608,14 @@
       text(55,184,'mcapi → AgentBridge',13)+
       '<g transform="translate(20 195)" stroke="#7c9368" fill="none"><rect width="23" height="12" rx="2"/><path d="M4 4h2m3 0h2m3 0h2m3 0h1M4 8h15"/></g>'+
       text(55,206,'xdo → keyboard &amp; mouse',12);
-    if(type==='world')content=text(15,30,'Minecraft client',23)+
-      `<rect x="6" y="44" width="${w-12}" height="146" rx="8" fill="#34493b"/><rect x="13" y="51" width="${w-26}" height="125" rx="3" fill="#16291f"/><image href="${image}" x="16" y="54" width="${w-32}" height="119" preserveAspectRatio="xMidYMid slice"/><circle cx="${w/2}" cy="183" r="2.5" fill="#adbe91"/><path d="M${w/2-11} 190v14h-26v6h74v-6h-26v-14" fill="#6f8566"/>`;
+    if(type==='world'){
+      const imageHeight=(w-16)*.75,tabWidth=(w-16)/2;
+      const tab=(view,label,i)=>`<g class="client-view-tab" data-client-view="${view}" role="button" tabindex="0" aria-pressed="${i===0}" aria-label="Show ${label.toLowerCase()}" transform="translate(${8+i*tabWidth} 48)"><rect width="${tabWidth}" height="30" rx="4"/>${text(tabWidth/2,20,label,13,'currentColor','text-anchor="middle"')}</g>`;
+      content=text(0,28,'Minecraft client',25)+
+        `<rect class="client-window" x="0" y="42" width="${w}" height="${imageHeight+46}" rx="8" fill="#fcfcf6" stroke="#aaba9b" stroke-width="1.5"/>`+
+        tab('game','Game view',0)+tab('map','World map',1)+
+        `<rect x="8" y="82" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="82" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Recorded first-person view in Copacabana"/>`;
+    }
     if(type==='verifier'){
       const compact=w<300;
       content=box(0,0,w,h,'#f0ecd8','#b0a56c')+
@@ -621,26 +627,35 @@
     return `<g class="framework-node" data-framework-node="${type}" transform="translate(${x} ${y})">${content}</g>`;
   }
   function render(mobile){
-    const id=mobile?'mobile':'desktop',w=mobile?360:1120,h=mobile?1110:600;
+    const id=mobile?'mobile':'desktop',w=mobile?360:1180,h=mobile?1150:680;
     const arrow=(d,color='#789165',twoWay=false)=>`<path d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${twoWay?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
     const paths=mobile?
       arrow('M180 264V320')+arrow('M180 540V600')+
-      arrow('M315 704H343V135H315')+arrow('M315 425H343')+
+      arrow('M315 745H343V135H315')+arrow('M315 425H343')+
       text(198,300,'exec',13)+text(198,576,'controls',13)+
       text(351,518,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 518)"')+
-      arrow('M180 820V956','#a79758')+text(196,877,'Position',12,'#82723e')+text(196,895,'samples · 1 Hz',12,'#82723e')+
-      arrow('M45 173H18V1006H45','#a79758',true)+text(11,590,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 590)"'):
-      arrow('M250 238H365')+arrow('M680 238H800')+
-      text(295,223,'exec',13)+text(708,223,'controls',13)+
-      arrow('M945 130V65H140V130')+arrow('M520 130V65')+
+      arrow('M180 890V1000','#a79758')+text(196,940,'Position',12,'#82723e')+text(196,958,'samples · 1 Hz',12,'#82723e')+
+      arrow('M45 173H18V1055H45','#a79758',true)+text(11,610,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 610)"'):
+      arrow('M245 255H340')+arrow('M655 255H775')+
+      text(275,240,'exec',13)+text(680,240,'controls',13)+
+      arrow('M960 100V65H135V145')+arrow('M500 145V65')+
       text(560,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
-      arrow('M945 350V503H875','#a79758')+
-      text(965,413,'Position samples',13,'#82723e')+text(965,436,'1 Hz',13,'#82723e')+
-      arrow('M140 350V503H475','#a79758',true)+text(280,487,'claim_done',15,'#82723e','font-family="monospace"')+
-      text(280,527,'Verifier feedback',13,'#82723e');
-    const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,220)+node('verifier',45,956,270,116):
-      node('agent',30,130,220,220)+node('bash',365,130,315,220)+node('world',800,130,290,220)+node('verifier',475,450,400,112);
-    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">An illustrated agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
+      arrow('M960 450V586H900','#a79758')+
+      text(980,502,'Position samples',13,'#82723e')+text(980,525,'1 Hz',13,'#82723e')+
+      arrow('M135 365V586H450','#a79758',true)+text(245,565,'claim_done',15,'#82723e','font-family="monospace"')+
+      text(245,612,'Verifier feedback',13,'#82723e');
+    const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,290)+node('verifier',45,1000,270,116):
+      node('agent',25,145,220,220)+node('bash',340,145,315,220)+node('world',775,100,370,350)+node('verifier',450,530,450,112);
+    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">An illustrated agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. The client illustration switches between a recorded game view and a native map of Copacabana. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
   }
   host.innerHTML=render(false)+render(true);
+  function selectView(view){
+    host.querySelectorAll('[data-client-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.clientView===view)));
+    host.querySelectorAll('.client-observation').forEach(img=>{
+      img.setAttribute('href',views[view]);
+      img.setAttribute('aria-label',view==='game'?'Recorded first-person view in Copacabana':'Native map of Copacabana');
+    });
+  }
+  host.addEventListener('click',e=>{const b=e.target.closest('[data-client-view]');if(b)selectView(b.dataset.clientView);});
+  host.addEventListener('keydown',e=>{const b=e.target.closest('[data-client-view]');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();selectView(b.dataset.clientView);}});
 })();
