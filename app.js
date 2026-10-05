@@ -494,9 +494,7 @@
 // Four cases, one accessible selector. Hidden panels cannot keep animating.
 (() => {
   const menu=document.querySelector('#case-menu'),buttons=[...menu.querySelectorAll('[data-case]')];
-  const sidebar=matchMedia('(min-width: 1001px)');
-  const syncOrientation=()=>menu.setAttribute('aria-orientation',sidebar.matches?'vertical':'horizontal');
-  sidebar.addEventListener('change',syncOrientation);syncOrientation();
+  menu.setAttribute('aria-orientation','horizontal');
   function select(button){
     const programming=Boolean(button.dataset.appendixCase);
     document.querySelector('#route-case-panel').hidden=programming;
