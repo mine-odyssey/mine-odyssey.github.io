@@ -60,7 +60,7 @@
     pressed('[data-scene]','scene',m.id);
   }));
   const tasks=data.journeys.examples;
-  let taskIndex=0,taskStop=0,originalInstruction=false,taskView='map',taskRule='';
+  let taskIndex=0,taskStop=0,originalInstruction=true,taskView='map',taskRule='';
   const stopLabel=(s,i)=>i===0?'Starting point':s.role==='finish'?'04 / Final destination':`${String(i).padStart(2,'0')} / Checkpoint`;
   function renderTaskRule(){
     const task=tasks[taskIndex],stop=task.stops[taskStop];
@@ -85,8 +85,8 @@
     const task=tasks[taskIndex],isEnglish=task.locale.startsWith('en');
     text('#task-prompt',originalInstruction?task.original_prompt:task.prompt);
     $('#task-prompt').lang=originalInstruction?task.locale:'en';
-    text('#task-language-label',isEnglish?'Original · English':originalInstruction?`Original · ${task.language}`:`English rendering · Original in ${task.language}`);
-    text('#task-language',originalInstruction?'Read in English':`Read ${task.language} original`);
+    text('#task-language-label',isEnglish?'Original · English':originalInstruction?`Original · ${task.language}`:`English translation · Original in ${task.language}`);
+    text('#task-language',originalInstruction?'Read English translation':`Read ${task.language} original`);
     $('#task-language').hidden=isEnglish;
     $('#task-language').setAttribute('aria-pressed',String(originalInstruction));
   }
@@ -112,7 +112,7 @@
     renderTaskRule();
   }
   function setTask(index) {
-    taskIndex=index;originalInstruction=false;taskRule='';
+    taskIndex=index;originalInstruction=true;taskRule='';
     const task=tasks[index],m=data.maps.find(m=>m.id===task.map);
     text('#task-meta',task.id);text('#task-title',task.title);text('#task-setting',task.setting);
     setInstruction();

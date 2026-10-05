@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=layout-20261005b">
-  <script src="data/benchmark.js?v=layout-20261005b" defer></script>
-  <script src="app.js?v=layout-20261005b" defer></script>
+  <link rel="stylesheet" href="styles.css?v=local-language-20261005">
+  <script src="data/benchmark.js?v=local-language-20261005" defer></script>
+  <script src="app.js?v=local-language-20261005" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -53,7 +53,7 @@
         <div class="journey-heading"><div><p class="eyebrow" id="task-meta"></p><h3 id="task-title"></h3></div><div class="journey-facts"><span>1 starting point</span><span><strong>4</strong> ordered destinations</span><span id="task-setting"></span></div></div>
         <div class="journey-explorer" id="task-explorer">
           <div class="task-rule-feedback" id="task-rule-feedback" hidden><p id="task-rule-caption" role="status"></p><button type="button" id="task-rule-clear" aria-label="Clear the rule highlight">Clear highlight <span aria-hidden="true">×</span></button></div>
-          <div class="task-instruction"><div class="instruction-toolbar"><p class="eyebrow">The instruction <span id="task-language-label"></span></p><button type="button" id="task-language" aria-pressed="false">Read original</button></div><blockquote id="task-prompt"></blockquote></div>
+          <div class="task-instruction"><div class="instruction-toolbar"><p class="eyebrow">The instruction <span id="task-language-label"></span></p><button type="button" id="task-language" aria-pressed="true">Read English translation</button></div><blockquote id="task-prompt"></blockquote></div>
           <figure class="journey-map-panel">
             <div class="journey-map-toolbar"><p class="eyebrow">Explore the task</p><div role="group" aria-label="Task view"><button type="button" data-task-view="map" aria-pressed="true">Map</button><button type="button" data-task-view="scene" aria-pressed="false">Recording <span aria-hidden="true">▶</span></button></div></div>
             <div id="task-map" class="task-map-stage" role="group" aria-label="Select a destination on the map"><img id="task-map-image" alt="" fetchpriority="high" width="1200" height="800"><svg id="task-map-lines" viewBox="0 0 1000 667" aria-hidden="true"></svg><div id="task-markers"></div><span class="map-north" aria-hidden="true">↑ N</span></div>
