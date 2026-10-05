@@ -690,70 +690,136 @@
       "id": "slopes",
       "title": "Uneven terrain",
       "place": "Santa Lucía Hill",
-      "description": "Rocky slopes and paths",
-      "kind": "Presentation capture",
-      "image": "assets/scene-slopes.webp"
+      "description": "Rocky slopes and hillside paths",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-slopes-a11b210211c7.webp",
+      "preview": {
+        "video": "assets/terrain-slopes-a11b210211c7.mp4",
+        "seconds": 5,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "5-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "water",
       "title": "Water boundaries",
-      "place": "Ohrid",
-      "description": "Land–water boundaries",
-      "kind": "Agent observation",
-      "image": "assets/scene-water.webp"
+      "place": "Entrup",
+      "description": "Movement along a water boundary",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-water-559ac6c1da6e.webp",
+      "preview": {
+        "video": "assets/terrain-water-559ac6c1da6e.mp4",
+        "seconds": 4,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "4-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "levels",
       "title": "Multilevel spaces",
       "place": "SoFi Stadium",
-      "description": "Connections across levels",
-      "kind": "Agent observation",
-      "image": "assets/scene-levels.webp"
+      "description": "Views across multiple stadium levels",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-levels-e59bb76ed91d.webp",
+      "preview": {
+        "video": "assets/terrain-levels-e59bb76ed91d.mp4",
+        "seconds": 4,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "4-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "corridors",
       "title": "Narrow corridors",
       "place": "RMS Queen Mary",
-      "description": "Restricted clearance",
-      "kind": "Agent observation",
-      "image": "assets/scene-corridors.webp"
+      "description": "Moving through a narrow passage",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-corridors-f9c865f1dc4e.webp",
+      "preview": {
+        "video": "assets/terrain-corridors-f9c865f1dc4e.mp4",
+        "seconds": 5,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "5-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "stairs",
       "title": "Stairways",
       "place": "SoFi Stadium",
-      "description": "Stepped level connections",
-      "kind": "Agent observation",
-      "image": "assets/scene-stairs.webp"
+      "description": "Moving up a stairway",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-stairs-77be0f0b3edb.webp",
+      "preview": {
+        "video": "assets/terrain-stairs-77be0f0b3edb.mp4",
+        "seconds": 5,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "5-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "ladder",
       "title": "Ladder climbing",
       "place": "Notre Dame",
-      "description": "Climb within a vertical shaft",
-      "kind": "Agent observation",
-      "image": "assets/scene-ladder.webp"
+      "description": "Climbing a ladder",
+      "kind": "Recorded clip",
+      "image": "assets/terrain-ladder-f071201163b2.webp",
+      "preview": {
+        "video": "assets/terrain-ladder-f071201163b2.mp4",
+        "seconds": 4,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "4-second excerpt from a recorded run. Original speed."
+      }
     },
     {
       "id": "gate",
       "title": "Fence-gate opening",
       "place": "RMS Titanic",
-      "description": "Closed gate → open gate",
-      "kind": "Presentation capture",
-      "image": "assets/scene-gate.webp"
+      "description": "Closed gate followed by the opened gate",
+      "kind": "Recorded observations",
+      "image": "assets/terrain-gate-c87037a68b6f.webp",
+      "preview": {
+        "video": "assets/terrain-gate-c87037a68b6f.mp4",
+        "seconds": 4,
+        "kind": "observation_pair",
+        "playback_rate": null,
+        "phases": [
+          {
+            "start": 0,
+            "label": "Closed"
+          },
+          {
+            "start": 2,
+            "label": "Open"
+          }
+        ],
+        "description": "Two original observations: closed gate, then open gate. Each is held for two seconds."
+      }
     },
     {
       "id": "button",
       "title": "Button-gated passage",
       "place": "White House",
-      "description": "Activate control, then pass",
-      "kind": "Presentation capture",
-      "image": "assets/scene-button.webp"
+      "description": "Activating a button-controlled door",
+      "kind": "Edited recorded clip",
+      "image": "assets/terrain-button-60e3ae902f34.webp",
+      "preview": {
+        "video": "assets/terrain-button-60e3ae902f34.mp4",
+        "seconds": 4,
+        "kind": "recording",
+        "playback_rate": 1,
+        "description": "Two excerpts from the same recording: closed doorway, then button activation and passage. Original speed; the intervening pause is omitted."
+      }
     }
   ],
   "film": {
-    "video": "assets/showcase-single-column-20261005-51690c7de908.mp4",
-    "poster": "assets/showcase-single-column-20261005-b9faeb46c212-poster.webp",
+    "video": "assets/showcase-fullscreen-20261005-f56b82996442.mp4",
+    "poster": "assets/showcase-fullscreen-20261005-b9faeb46c212-poster.webp",
     "duration_seconds": 123.008,
     "maps": 17,
     "chapters": [
@@ -813,11 +879,11 @@
         "description": "Two model episodes on the same task."
       }
     ],
-    "edition": "Single Column",
-    "source_id": "showcase-single-column-20261005",
-    "completed_at_utc": "2026-10-05T08:12:51.159416+00:00",
-    "source_sha256": "51690c7de9086d1bf9a80c7b8faf34834960689cfb3b1a05184e7b689b38b567",
-    "delivery_sha256": "f9f1e9a3b19e78db95ee39c48d61c881fe5d88a1c77eb709be95ed06f73ac754",
+    "edition": "Fullscreen",
+    "source_id": "showcase-fullscreen-20261005",
+    "completed_at_utc": "2026-10-05T08:36:25.932801+00:00",
+    "source_sha256": "f56b829964426f7c1e6e023e5e929f90333caa954f4b0151c03638b8edba4bfe",
+    "delivery_sha256": "32295f1192eef3cc0587f1aaf1309edbbb2ca81c1878d911fbb2c1caaa8ca80a",
     "chapters_sha256": "61766b791e77cff365a4e91cf88f3abf3fe18e3fe91dbb0a6b8bc9e7bf4b2f50"
   },
   "journeys": {

@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=task-format-motion-20261005">
-  <script src="data/benchmark.js?v=task-format-motion-20261005" defer></script>
-  <script src="app.js?v=task-format-motion-20261005" defer></script>
+  <link rel="stylesheet" href="styles.css?v=terrain-motion-20261005">
+  <script src="data/benchmark.js?v=terrain-motion-20261005" defer></script>
+  <script src="app.js?v=terrain-motion-20261005" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -90,7 +90,7 @@
     </section>
     <section class="section shell film-section" id="film" aria-labelledby="film-title">
       <div class="section-heading"><div><p class="eyebrow">The project film</p><h2 id="film-title">Project video</h2></div><p id="film-summary">2 min 03 sec · 17 worlds. Tasks, terrain, ablation settings,<br>agent programs and model comparisons.</p></div>
-      <div class="film-layout"><div class="film-player"><video id="showcase-video" controls playsinline preload="none" poster="assets/showcase-single-column-20261005-b9faeb46c212-poster.webp" aria-label="Mine Odyssey project film"></video><button class="video-start" id="film-start" type="button"><span aria-hidden="true">▶</span> Watch the film</button><p id="film-status" role="status"></p></div><details class="film-chapter-panel"><summary>Jump to a scene in the film</summary><div id="film-chapters" role="group" aria-label="Film chapters"></div></details></div>
+      <div class="film-layout"><div class="film-player"><video id="showcase-video" controls playsinline preload="none" poster="assets/showcase-fullscreen-20261005-b9faeb46c212-poster.webp" aria-label="Mine Odyssey project film"></video><button class="video-start" id="film-start" type="button"><span aria-hidden="true">▶</span> Watch the film</button><p id="film-status" role="status"></p></div><details class="film-chapter-panel"><summary>Jump to a scene in the film</summary><div id="film-chapters" role="group" aria-label="Film chapters"></div></details></div>
       <p class="small-note film-note">Recorded gameplay across multiple models and settings. Music included.</p>
     </section>
     <section class="worlds-section" id="worlds" aria-labelledby="worlds-title"><div class="shell section">
@@ -101,7 +101,7 @@
     </div></section>
     <section class="action-section terrain-unified" id="demonstrations" aria-labelledby="demo-title"><div class="shell section">
       <div class="section-heading"><div><p class="eyebrow">04 / Agent in action</p><h2 id="demo-title">Terrain and interactions</h2></div><p data-paper="terrain">These environments present diverse terrain and spatial constraints, including uneven ground, water boundaries, narrow corridors, and multilevel spaces.</p></div>
-      <div class="terrain-scenes" id="terrain-scenes"></div>
+      <div class="terrain-motion-bar"><p>Short clips &amp; before–after observations</p><button type="button" id="terrain-motion" aria-pressed="true">Pause previews</button></div><div class="terrain-scenes" id="terrain-scenes"></div>
       <div class="interaction-recordings" id="interaction-recordings"><div class="interaction-heading"><h3>Interaction examples</h3><span>Door · Ladder · Stairs</span></div><p data-paper="interactions">Ascending stairs, climbing ladders, opening fence gates, or activating buttons to pass through doors.</p><div class="action-layout"><div class="video-panel"><video id="demo-video" controls playsinline preload="none" poster="assets/behavior-door-755-800.webp" aria-label="Recorded agent interaction"></video><button class="video-start" id="video-start" type="button"><span aria-hidden="true">▶</span> Play recorded clip</button><p id="video-status" role="status"></p><div class="video-footer"><span>GLM 5.3 Flash · HUD enabled</span><label>Playback <select id="playback-speed" aria-label="Playback speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></label></div></div><div class="action-copy"><div class="clip-tabs" role="group" aria-label="Choose a recorded interaction"><button data-clip="0" type="button" aria-pressed="true"><span>01</span> Open a door <span aria-hidden="true">↗</span></button><button data-clip="1" type="button" aria-pressed="false"><span>02</span> Descend a ladder <span aria-hidden="true">↗</span></button><button data-clip="2" type="button" aria-pressed="false"><span>03</span> Change floors <span aria-hidden="true">↗</span></button></div><p class="eyebrow" id="clip-place"></p><h3 id="clip-title"></h3><p id="clip-description"></p><ol class="clip-phases" id="clip-phases"></ol><p class="small-note" id="clip-source"></p></div></div>
       <p class="action-note">Original-speed excerpts from HUD-enabled runs. These clips show local interactions, not full-task success or the default observation setting. Sequence labels summarize each clip.</p></div>
     </div></section>

@@ -611,54 +611,6 @@
     "processing": "Accurate seek; silent H.264, 640x480 at 15 fps; original speed; no interpolated frames."
   },
   {
-    "file": "assets/scene-slopes.webp",
-    "sha256": "02fe564bafab2b5b6c4244ecd1bde486ac9c1f593b85a311326ecfb1bea65d89",
-    "source_sha256": "eb216ae4938c619e2320d6447215b8e941407f65f146e317f388884d3f0c44fe",
-    "kind": "presentation_camera"
-  },
-  {
-    "file": "assets/scene-water.webp",
-    "sha256": "1d4d14dc24babc258cebdb3622428f373c145d098b027b799f45a1597f0ca4d4",
-    "source_sha256": "00d89dddb1cc24248f46f9ddd12a4052054d5d9070756279831232f636d1e122",
-    "kind": "agent_observation"
-  },
-  {
-    "file": "assets/scene-levels.webp",
-    "sha256": "8395954446d22cf7670d074abeeb712760e0ba2c9f13f6c0a6988386ee08b434",
-    "source_sha256": "e6a3e877f51c03c1b93fe47dadccffd57a290f0480f148252dbabf482268903d",
-    "kind": "agent_observation"
-  },
-  {
-    "file": "assets/scene-corridors.webp",
-    "sha256": "8a1d7b05573435cda323bfc0921e31dd5d173b6456e78019abc972b0f2d33210",
-    "source_sha256": "1ab96ee9845e3e0916fa7550f822b1ddcd8bfc5839a2477daa8f2f83a41071b4",
-    "kind": "agent_observation"
-  },
-  {
-    "file": "assets/scene-stairs.webp",
-    "sha256": "6fbcb0de0d9ed6b2590751edcd94922fb1450fd44fba8e1ad30d2f24c211d6a3",
-    "source_sha256": "4fb35e3836b9d87b251545667e596573775ffc5666eb3a817f52c8b802a28dde",
-    "kind": "agent_observation"
-  },
-  {
-    "file": "assets/scene-ladder.webp",
-    "sha256": "c54e28c3e004391c96f8cc4e76418ad49d3eccce96feca92f59272c0df91cb56",
-    "source_sha256": "77f1293d0a804927f24f7581c534c1acb2a71bd1481fce602c30841f082adf27",
-    "kind": "agent_observation"
-  },
-  {
-    "file": "assets/scene-gate.webp",
-    "sha256": "e8de2d052e172fb7a77e3d4f5f4dd662374f1b85ee58f30f24f3eb5e4a88233b",
-    "source_sha256": "e5468af355968af52b004c880325a46c1a984c59bdc914b3a8c739a346f4970a",
-    "kind": "presentation_camera"
-  },
-  {
-    "file": "assets/scene-button.webp",
-    "sha256": "51dba7549740d1d8c76e205bf03ae84eec1270d4a84333683d592da4828ff67b",
-    "source_sha256": "8ba7b758a34bc5e7ea157c19c724fe25d4f8403054e1ecf7b9e167f7bd04204c",
-    "kind": "presentation_camera"
-  },
-  {
     "file": "assets/behavior-door-755-800.mp4",
     "sha256": "2768a914b8300b2f2b760b3effc5402bdf2346ef0319ef6a4654ed0f4ec71e7c",
     "source_sha256": "d610bda0dfa3a5dc9d7cf384ff76287b411d84877349374f4cce959d36d6a107",
@@ -1325,9 +1277,232 @@
     "encoding": "source video stream copied without re-encoding"
   },
   {
-    "file": "assets/showcase-single-column-20261005-51690c7de908.mp4",
-    "sha256": "b99b48996d80b638825640881539e36da33ab40467670c95f0ca82cecf0a1a87",
-    "source_sha256": "51690c7de9086d1bf9a80c7b8faf34834960689cfb3b1a05184e7b689b38b567",
+    "file": "assets/terrain-slopes-a11b210211c7.mp4",
+    "sha256": "99b6ff621283d4b8fd726929a33c69c0e4de48acc8fae169e2cc3123b29062c7",
+    "kind": "terrain_preview",
+    "length_seconds": 5,
+    "preview_kind": "recording",
+    "selection_sha256": "a11b210211c79a4d813efb649192b4d3d02d42946cd85fdb2ef5b06756961863",
+    "source_sha256": "800750491dd42d2e080ea14bc6d85e2f5d3bd593e9c57fd7873ca995d40101cb",
+    "scene_id": "slopes",
+    "task_id": "santa-lucia-hill-002",
+    "map_id": "santa-lucia-hill",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1; no interpolated frames.",
+    "windows": [
+      {
+        "start": 6700.5,
+        "length": 5
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-slopes-a11b210211c7.webp",
+    "sha256": "b8ac5fca0f518306129cc99c2e5b5b007c3244fb7527295033cf239efbdf3dde",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "800750491dd42d2e080ea14bc6d85e2f5d3bd593e9c57fd7873ca995d40101cb",
+    "scene_id": "slopes",
+    "task_id": "santa-lucia-hill-002",
+    "map_id": "santa-lucia-hill"
+  },
+  {
+    "file": "assets/terrain-water-559ac6c1da6e.mp4",
+    "sha256": "a351b2b0b2d6a0acd8283cc463ed54c8fd2d2bead5d759da6bae72ce4d84a7a2",
+    "kind": "terrain_preview",
+    "length_seconds": 4,
+    "preview_kind": "recording",
+    "selection_sha256": "559ac6c1da6e666665341cd25901847e82a1d4ae3f89e163191d633c5c63e283",
+    "source_sha256": "f01cfc36ac90877f90d26c12fa70a8dba709d826663e4d894242fd0ef68d62d2",
+    "scene_id": "water",
+    "task_id": "entrup-006",
+    "map_id": "entrup",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1.15; no interpolated frames.",
+    "windows": [
+      {
+        "start": 722,
+        "length": 4
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-water-559ac6c1da6e.webp",
+    "sha256": "82ca48bed6e85f9a9f5fd9a381cc35922de8ce206741e5881c2985f3fdc2156a",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "f01cfc36ac90877f90d26c12fa70a8dba709d826663e4d894242fd0ef68d62d2",
+    "scene_id": "water",
+    "task_id": "entrup-006",
+    "map_id": "entrup"
+  },
+  {
+    "file": "assets/terrain-stairs-77be0f0b3edb.mp4",
+    "sha256": "8757ddb31b6f744a0fbd00bba69e5b66e4e48894e0c6829e533e67621ca1f45c",
+    "kind": "terrain_preview",
+    "length_seconds": 5,
+    "preview_kind": "recording",
+    "selection_sha256": "77be0f0b3edb652bac409f1a9e2e891c5d3ebcabf7c852b13bdbec7f7744e5c7",
+    "source_sha256": "cac997b2f71073ac02d2d5e81d0baa63b40bbd994bfc6d86bbc5b6e5324f9bae",
+    "scene_id": "stairs",
+    "task_id": "sofi-stadium-006",
+    "map_id": "sofi-stadium",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1; no interpolated frames.",
+    "windows": [
+      {
+        "start": 3155.5,
+        "length": 5
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-stairs-77be0f0b3edb.webp",
+    "sha256": "043e6daa40eeed94006da07fed55168cd89b5d6aa2506455f5f468d5e1881dc5",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "cac997b2f71073ac02d2d5e81d0baa63b40bbd994bfc6d86bbc5b6e5324f9bae",
+    "scene_id": "stairs",
+    "task_id": "sofi-stadium-006",
+    "map_id": "sofi-stadium"
+  },
+  {
+    "file": "assets/terrain-ladder-f071201163b2.mp4",
+    "sha256": "1cb364208eefe8d8f2d6030904f16628844233333a397616706968d14dcca168",
+    "kind": "terrain_preview",
+    "length_seconds": 4,
+    "preview_kind": "recording",
+    "selection_sha256": "f071201163b2c863964858148bec8e72d79d709b3ae7cc7cbe4eaaf4718f8ddd",
+    "source_sha256": "5ebd588886a5a8f52e1809cde758877bb77faf638599af6f04242a63b228e309",
+    "scene_id": "ladder",
+    "task_id": "notre-dame-006",
+    "map_id": "notre-dame",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1.55; no interpolated frames.",
+    "windows": [
+      {
+        "start": 915.7,
+        "length": 4
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-ladder-f071201163b2.webp",
+    "sha256": "99deb593f1039175678985cab005c0d06d21e7df4e11238c727fd05cde59a2cc",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "5ebd588886a5a8f52e1809cde758877bb77faf638599af6f04242a63b228e309",
+    "scene_id": "ladder",
+    "task_id": "notre-dame-006",
+    "map_id": "notre-dame"
+  },
+  {
+    "file": "assets/terrain-corridors-f9c865f1dc4e.mp4",
+    "sha256": "7fac33d4f20e794f0491235fa89658240897a7afc1de50bbb057f7eb08b8a4f5",
+    "kind": "terrain_preview",
+    "length_seconds": 5,
+    "preview_kind": "recording",
+    "selection_sha256": "f9c865f1dc4e827ddf4a18e84fba03e7e9f92c6a1748ea3c5334e31f010c326d",
+    "source_sha256": "58f8dfde031baa58965c53627d4f22781477f8d79a04254ad27403d7c996d318",
+    "scene_id": "corridors",
+    "task_id": "rms-queen-mary-008",
+    "map_id": "rms-queen-mary",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1.16; no interpolated frames.",
+    "windows": [
+      {
+        "start": 717,
+        "length": 5
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-corridors-f9c865f1dc4e.webp",
+    "sha256": "a0f8bba4260a48f3ea4f892aa46c1ceea9ab7556aae86684e16157e2b2adab8c",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "58f8dfde031baa58965c53627d4f22781477f8d79a04254ad27403d7c996d318",
+    "scene_id": "corridors",
+    "task_id": "rms-queen-mary-008",
+    "map_id": "rms-queen-mary"
+  },
+  {
+    "file": "assets/terrain-button-60e3ae902f34.mp4",
+    "sha256": "e9a0feff4f51d6889901147fa7fc0dfb6b13c660ab46fc6e1d85d23fe2f8085c",
+    "kind": "terrain_preview",
+    "length_seconds": 4,
+    "preview_kind": "recording",
+    "selection_sha256": "60e3ae902f34255b843494678ef929e7fdf98a3437f23db126edab55a75358de",
+    "source_sha256": "1bc3dff0d82842415bf51a4af532ced85c87e68d669abd0ce9fe9778416bdc94",
+    "scene_id": "button",
+    "task_id": "white-house-005",
+    "map_id": "white-house",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1.55; no interpolated frames.",
+    "windows": [
+      {
+        "start": 269.4,
+        "length": 1.5
+      },
+      {
+        "start": 286.4,
+        "length": 2.5
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-button-60e3ae902f34.webp",
+    "sha256": "6601876c863cea09413b78c7e27cc6690bff52a8ffd96833194a6e1acf9f4b4c",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "1bc3dff0d82842415bf51a4af532ced85c87e68d669abd0ce9fe9778416bdc94",
+    "scene_id": "button",
+    "task_id": "white-house-005",
+    "map_id": "white-house"
+  },
+  {
+    "file": "assets/terrain-levels-e59bb76ed91d.mp4",
+    "sha256": "ec3bcda889f034823759d60e87d83802f7468dc89a2952ef1e844417bdbf274f",
+    "kind": "terrain_preview",
+    "length_seconds": 4,
+    "preview_kind": "recording",
+    "selection_sha256": "e59bb76ed91d8f5f3aeb3a3024aa38232bf177bfdc5996de68f56c57740ed90d",
+    "source_sha256": "3b5b72d22e0bbd080687081c7f5a397d09b78da2b92efc111e3c6178e9475d58",
+    "scene_id": "levels",
+    "task_id": "sofi-stadium-006",
+    "map_id": "sofi-stadium",
+    "processing": "Silent 640x480 H.264 at 15 fps; original framing/speed; gamma 1; no interpolated frames.",
+    "windows": [
+      {
+        "start": 1908.15,
+        "length": 4
+      }
+    ]
+  },
+  {
+    "file": "assets/terrain-levels-e59bb76ed91d.webp",
+    "sha256": "710cd6b423ef4457a80539c7bb7a4c24ce53c3ed889b6ed8c99243889c6e0189",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "3b5b72d22e0bbd080687081c7f5a397d09b78da2b92efc111e3c6178e9475d58",
+    "scene_id": "levels",
+    "task_id": "sofi-stadium-006",
+    "map_id": "sofi-stadium"
+  },
+  {
+    "file": "assets/terrain-gate-c87037a68b6f.mp4",
+    "sha256": "64a51186637aaf7f3d854bc71f55a44824fe339c1711c2bb3fc5285471c4741c",
+    "kind": "terrain_preview",
+    "length_seconds": 4,
+    "preview_kind": "observation_pair",
+    "selection_sha256": "c87037a68b6f3840f1236d9773073fcbfa74e548d35700f3287b12fd0febd4a0",
+    "source_sha256": "b23e3a74a4da2945324f51d3ff22dfeda3a8a5ae97d14c5b98c963c6c8cb07b3",
+    "scene_id": "gate",
+    "task_id": "rms-titanic-006",
+    "map_id": "rms-titanic",
+    "processing": "Two source observations held for two seconds each; no interpolated motion.",
+    "windows": []
+  },
+  {
+    "file": "assets/terrain-gate-c87037a68b6f.webp",
+    "sha256": "b2a4af2c1e016513aafdbfd99b2fcd8332dbbe72aa7af78cbd4a53b47fa8e0da",
+    "kind": "terrain_preview_poster",
+    "source_sha256": "b23e3a74a4da2945324f51d3ff22dfeda3a8a5ae97d14c5b98c963c6c8cb07b3",
+    "scene_id": "gate",
+    "task_id": "rms-titanic-006",
+    "map_id": "rms-titanic"
+  },
+  {
+    "file": "assets/showcase-fullscreen-20261005-f56b82996442.mp4",
+    "sha256": "dbfe8504f3d442060de6a21d4a9e59246d5eca567a644a5f53bb8ed197691115",
+    "source_sha256": "f56b829964426f7c1e6e023e5e929f90333caa954f4b0151c03638b8edba4bfe",
     "kind": "edited_project_film",
     "length_seconds": 123.008,
     "maps": 17,
@@ -1335,7 +1510,7 @@
     "processing": "720p H.264/AAC web encode; complete 123-second edit, original timing and music retained."
   },
   {
-    "file": "assets/showcase-single-column-20261005-b9faeb46c212-poster.webp",
+    "file": "assets/showcase-fullscreen-20261005-b9faeb46c212-poster.webp",
     "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
     "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
     "kind": "film_poster"

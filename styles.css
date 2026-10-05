@@ -750,3 +750,13 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .contract-map-pin{transition:fill .18s,stroke .18s}
 .contract-source-note{margin:15px 0 0;font-size:12px;line-height:1.5;color:#78846c;text-align:center}
 @media(prefers-reduced-motion:reduce){.opening .contract-stop,.opening .contract-claim,.opening .contract-claim strong,.opening .contract-claim code,.opening .contract-claim .contract-check,.contract-map-pin{transition:none}}
+
+/* Lightweight terrain loops, retaining the original 4:3 gameplay view. */
+.terrain-motion-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 24px}
+.terrain-motion-bar p{font-size:14px;color:#bdcdb7}.terrain-motion-bar button{min-height:44px;padding:9px 15px;border:1px solid #819476;border-radius:5px;background:transparent;color:#eef3e4;font-size:14px}
+.terrain-visual{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;background:#14261d;border-radius:4px}
+.terrain-visual>img,.terrain-visual>video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.terrain-visual>video{opacity:0;pointer-events:none}.terrain-visual.is-playing>video{opacity:1}
+.terrain-loop-label,.terrain-pair-phase{position:absolute;bottom:8px;background:#102419d9;color:#edf4e7;border:1px solid #c4d5bb3b;border-radius:3px;padding:4px 7px;font-size:11px;line-height:1.3}
+.terrain-loop-label{left:8px}.terrain-pair-phase{right:8px;background:#f1f4e9ed;color:#294e3a;min-width:46px;text-align:center}
+@media(max-width:760px){.terrain-motion-bar{gap:12px;align-items:center;margin-bottom:20px}.terrain-motion-bar p{font-size:12px;max-width:180px}.terrain-motion-bar button{font-size:12px;white-space:nowrap;padding:8px 10px}.terrain-loop-label,.terrain-pair-phase{font-size:9px;bottom:5px;padding:3px 5px}.terrain-loop-label{left:5px}.terrain-pair-phase{right:5px;min-width:36px}}

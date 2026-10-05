@@ -32,8 +32,8 @@
     if (!state.expanded) $('#worlds').scrollIntoView({behavior:'instant'});
   });
   const dialog=$('#image-dialog');
-  function openImage(src,title,description,world=false) {
-    dialog.dataset.world=String(world);
+  function openImage(src,title,description,world=false,scene=null) {
+    dialog.dataset.world=String(world);dialog.dataset.scene=scene||'';
     text('#dialog-title',title);text('#dialog-description',description);
     $('#dialog-image').src=src;$('#dialog-image').alt=title;
     dialog.showModal(); document.body.style.overflow='hidden';
@@ -167,8 +167,8 @@
     state.direction=state.sort===key?-state.direction:(['mean_steps','mean_path_3d_blocks'].includes(key)?1:-1);state.sort=key;renderResults();
   }));
   $$('[data-cohort]').forEach(b=>b.addEventListener('click',()=>{state.cohort=b.dataset.cohort;renderResults();}));
-  $('#terrain-scenes').innerHTML=data.scenes.map(s=>`<button class="terrain-card" data-scene-detail="${escapeHTML(s.id)}" type="button"><img src="${escapeHTML(s.image)}" alt="${escapeHTML(`${s.title} in ${s.place}`)}" width="800" height="600" loading="lazy"><span class="terrain-card-copy"><strong>${escapeHTML(s.title)}</strong><span>${escapeHTML(s.place)}</span><small>${escapeHTML(s.kind)}</small></span><span class="terrain-open" aria-hidden="true">↗</span></button>`).join('');
-  $('#terrain-scenes').addEventListener('click',e=>{const b=e.target.closest('[data-scene-detail]');if(!b)return;const s=data.scenes.find(s=>s.id===b.dataset.sceneDetail);openImage(s.image,s.title,`${s.place} · ${s.description} · ${s.kind}`);});
+  $('#terrain-scenes').innerHTML=data.scenes.map(s=>`<button class="terrain-card" data-scene-detail="${escapeHTML(s.id)}" type="button" aria-label="Enlarge ${escapeHTML(s.title)}"><span class="terrain-visual"><img src="${escapeHTML(s.image)}" alt="${escapeHTML(`${s.title} in ${s.place}`)}" width="640" height="480" loading="lazy"><video class="terrain-loop" data-src="${escapeHTML(s.preview.video)}" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="terrain-loop-label">${s.preview.kind==='observation_pair'?'Before / after':`${s.preview.seconds}s loop`}</span>${s.preview.kind==='observation_pair'?'<span class="terrain-pair-phase" aria-hidden="true">Closed</span>':''}</span><span class="terrain-card-copy"><strong>${escapeHTML(s.title)}</strong><span>${escapeHTML(s.place)}</span><small>${escapeHTML(s.kind)}</small></span><span class="terrain-open" aria-hidden="true">↗</span></button>`).join('');
+  $('#terrain-scenes').addEventListener('click',e=>{const b=e.target.closest('[data-scene-detail]');if(!b)return;const s=data.scenes.find(s=>s.id===b.dataset.sceneDetail);openImage(s.image,s.title,`${s.place} · ${s.description}. ${s.preview.description}`,false,s.id);});
   const menu=$('.menu-toggle'),nav=$('#navigation');
   function closeMenu(){menu.setAttribute('aria-expanded','false');nav.classList.remove('is-open');}
   menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);});
@@ -360,11 +360,13 @@
     const ticket=++dialogGeneration;
     stop();reset(large);large.removeAttribute('src');large.load();
     const world=window.MINE_ODYSSEY.maps.find(m=>m.id===dialog.dataset.world);
-    large.hidden=!world;$('#dialog-image').hidden=Boolean(world);
+    const scene=window.MINE_ODYSSEY.scenes.find(s=>s.id===dialog.dataset.scene),item=scene||world;
+    large.hidden=!item;$('#dialog-image').hidden=Boolean(item);
     $('#dialog-video-status').textContent='';
-    dialog.classList.toggle('world-preview-dialog',Boolean(world));
-    if(!world)return;
-    large.poster=world.image;large.src=world.preview.video;large.muted=true;
+    dialog.classList.toggle('world-preview-dialog',Boolean(item));
+    if(!item)return;
+    large.setAttribute('aria-label',scene?`${scene.title} — ${scene.kind}`:'Recorded world preview');
+    large.poster=item.image;large.src=item.preview.video;large.muted=true;
     try{await large.play();if(!dialog.open&&ticket===dialogGeneration)large.pause();}
     catch{if(dialog.open&&ticket===dialogGeneration)$('#dialog-video-status').textContent='Press Play to start the recorded preview.';}
   });
@@ -802,4 +804,40 @@
   motion.addEventListener('change',reset);
   new IntersectionObserver(sync,{threshold:[0,.1]}).observe(card);
   reset();
+})();
+
+// Terrain cards loop while visible; the enlarged player remains explicitly controlled.
+(() => {
+  const cards=[...document.querySelectorAll('.terrain-card')],button=document.querySelector('#terrain-motion');
+  const dialog=document.querySelector('#image-dialog'),motion=matchMedia('(prefers-reduced-motion: reduce)');
+  let enabled=!motion.matches;
+  const states=cards.map(card=>({card,video:card.querySelector('video'),visual:card.querySelector('.terrain-visual'),visible:false,ticket:0,pending:false}));
+  function shouldPlay(s){return enabled&&s.visible&&!document.hidden&&!dialog.open;}
+  function pause(s){s.ticket++;s.pending=false;s.video.pause();}
+  async function play(s){
+    if(s.pending||!s.video.paused)return;
+    s.pending=true;const ticket=++s.ticket;
+    s.video.muted=true;if(!s.video.getAttribute('src'))s.video.src=s.video.dataset.src;
+    try{await s.video.play();if(ticket!==s.ticket){if(!shouldPlay(s))s.video.pause();return;}if(!shouldPlay(s)){s.video.pause();return;}s.visual.classList.add('is-playing');}
+    catch{if(ticket===s.ticket)s.visual.classList.remove('is-playing');}
+    finally{if(ticket===s.ticket)s.pending=false;}
+  }
+  function sync(){
+    button.textContent=enabled?'Pause previews':'Play previews';button.setAttribute('aria-pressed',String(enabled));
+    for(const s of states){if(shouldPlay(s))play(s);else pause(s);}
+  }
+  const observer=new IntersectionObserver(entries=>{
+    for(const e of entries){const s=states.find(s=>s.visual===e.target);s.visible=e.isIntersecting&&e.intersectionRatio>=.12;}
+    sync();
+  },{threshold:[0,.12]});
+  for(const s of states){
+    observer.observe(s.visual);
+    s.video.addEventListener('playing',()=>{if(!shouldPlay(s))pause(s);else s.visual.classList.add('is-playing');});
+    const phase=s.card.querySelector('.terrain-pair-phase');
+    if(phase)s.video.addEventListener('timeupdate',()=>{phase.textContent=s.video.currentTime>=2?'Open':'Closed';});
+  }
+  button.addEventListener('click',()=>{enabled=!enabled;sync();});
+  document.addEventListener('visibilitychange',sync);document.addEventListener('preview-dialog-open',sync);dialog.addEventListener('close',sync);
+  motion.addEventListener('change',()=>{if(motion.matches)enabled=false;sync();});
+  sync();
 })();
