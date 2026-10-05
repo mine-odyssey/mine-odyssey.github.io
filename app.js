@@ -74,6 +74,7 @@
   function setTaskView(view,explicitPlay=false) {
     taskView=view;const task=tasks[taskIndex],m=data.maps.find(m=>m.id===task.map);
     $('#task-map').hidden=view!=='map';$('#task-scene').hidden=view!=='scene';
+    $('.task-selected').hidden=view==='scene';$('#task-photo-caption').hidden=view==='scene';
     pressed('[data-task-view]','taskView',view);
     text('#task-photo-caption',view==='scene'?'':'Native map · Dashed lines show visit order, not a walkable route.');
     document.dispatchEvent(new CustomEvent('task-view-changed',{detail:{taskIndex,taskStop,view,explicitPlay}}));
@@ -99,7 +100,7 @@
     $('#task-challenges').innerHTML=task.challenges.map(([title,body],i)=>`<article><span>0${i+1}</span><h4>${escapeHTML(title)}</h4><p>${escapeHTML(body)}</p></article>`).join('');
     text('#task-arrival',`Position samples are checked every ${task.arrival.sample_interval_sec} second. Arrival requires both a 3D distance of less than ${task.arrival.radius_3d} blocks and a height difference of at most ${task.arrival.radius_y} blocks from the target.`);
     $('.task-completion details').open=false;
-    setTaskStop(0);setTaskView(taskView);
+    setTaskStop(0);setTaskView('map');
     pressed('[data-task]','task',index);
   }
   $$('[data-task]').forEach(b=>b.addEventListener('click',()=>setTask(Number(b.dataset.task))));
@@ -131,6 +132,8 @@
   $('#video-start').addEventListener('click',playClip);
   video.addEventListener('play',()=>{$('#video-start').hidden=true;});
   video.addEventListener('error',()=>text('#video-status','The recording could not be loaded. Keep the assets folder alongside the page.'));
+  $('#interaction-recordings').addEventListener('toggle',e=>{if(!e.target.open)video.pause();});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)video.pause();}).observe(video);
   $('#playback-speed').addEventListener('change',e=>{video.playbackRate=Number(e.target.value);});
   $$('[data-clip]').forEach(b=>b.addEventListener('click',()=>setClip(Number(b.dataset.clip))));
   document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
@@ -490,14 +493,13 @@
 (() => {
   const $=s=>document.querySelector(s),video=$('#task-scene-video'),panel=$('#task-scene');
   const tasks=window.MINE_ODYSSEY.journeys.examples,motion=matchMedia('(prefers-reduced-motion: reduce)');
-  const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let taskIndex=0,clipIndex=0,generation=0;
   const stamp=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
   const current=()=>tasks[taskIndex].scene.clips[clipIndex];
   function caption(){
     if(panel.hidden)return;
     const c=current();
-    $('#task-photo-caption').textContent=`${c.model} · ${c.hud_enabled?'HUD-enabled recording':'First-person recording'} · Source ${stamp(c.start_seconds)}–${stamp(c.start_seconds+c.length_seconds)} · ${video.playbackRate}×`;
+    $('#task-scene-source').textContent=`${c.model} · ${c.hud_enabled?'HUD-enabled recording':'First-person recording'} · Source ${stamp(c.start_seconds)}–${stamp(c.start_seconds+c.length_seconds)} · ${video.playbackRate}×`;
   }
   function controls(){
     $('#task-scene-start').hidden=!video.paused;
@@ -525,15 +527,16 @@
     $('#task-scene-title').textContent=c.title;$('#task-scene-description').textContent=c.description;
     $('#task-scene-duration').textContent=`${stamp(c.length_seconds)} · Full leg`;
     $('#task-scene-status').textContent='';
-    document.querySelectorAll('[data-task-scene]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.taskScene)===index)));
+    $('#task-leg-counter').textContent=`${index===0?'S':index} → ${index+1} · ${index+1} / 4`;
+    $('#task-leg-prev').disabled=index===0;$('#task-leg-next').disabled=index===3;
     if(!panel.hidden)document.dispatchEvent(new CustomEvent('task-scene-leg-selected',{detail:{index}}));
     document.querySelectorAll('[data-watch-leg]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.watchLeg)===index)));
     caption();controls();if(autoplay)play();
   }
   function mount(index){
     taskIndex=index;
-    $('#task-scene-clips').innerHTML=tasks[index].scene.clips.map((c,i)=>`<button type="button" data-task-scene="${i}" aria-pressed="false" aria-label="Play ${escapeHTML(c.title)}"><span class="task-scene-thumbnail"><img src="${escapeHTML(c.poster)}" alt="" width="800" height="600" loading="lazy"><span aria-hidden="true">▶</span></span><span class="task-leg-number">${i===0?'S':i} → ${i+1}</span><strong>${escapeHTML(c.title)}</strong><small>${stamp(c.length_seconds)} · Full recording</small></button>`).join('');
     $('#task-scene-note').textContent=tasks[index].scene.note;
+    $('#task-recording-options').open=false;
     selectClip(0);
   }
   document.addEventListener('task-view-changed',e=>{
@@ -542,7 +545,8 @@
     if(e.detail.view==='scene'){if(index!==clipIndex)selectClip(index);document.dispatchEvent(new CustomEvent('task-scene-leg-selected',{detail:{index}}));caption();if(e.detail.explicitPlay||!motion.matches)play();}
     else{++generation;video.pause();$('#task-scene-status').textContent='';}
   });
-  $('#task-scene-clips').addEventListener('click',e=>{const b=e.target.closest('[data-task-scene]');if(b)selectClip(Number(b.dataset.taskScene),true);});
+  $('#task-leg-prev').addEventListener('click',()=>selectClip(Math.max(0,clipIndex-1),true));
+  $('#task-leg-next').addEventListener('click',()=>selectClip(Math.min(3,clipIndex+1),true));
   $('#task-scene-start').addEventListener('click',play);
   video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();});controls();});
   video.addEventListener('playing',()=>{$('#task-scene-status').textContent='';controls();});
