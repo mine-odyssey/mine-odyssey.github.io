@@ -561,3 +561,54 @@
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(!entries[0].isIntersecting){++generation;video.pause();}},{threshold:0}).observe(video);
   mount(0);
 })();
+
+// Responsive diagram of the manuscript's agent loop and independent verifier.
+(() => {
+  const host=document.querySelector('#framework-diagram');
+  const image=window.MINE_ODYSSEY.maps.find(m=>m.id==='versailles').image;
+  const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
+  const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
+  function node(type,x,y,w,h){
+    let content='';
+    if(type==='agent')content=box(0,0,w,h,'#294e3a','#294e3a')+
+      text(22,35,'Agent',25,'#f5f5ec')+
+      '<g transform="translate(24 62)" stroke="#c7db9f" stroke-width="1.8" fill="none"><rect width="28" height="34" rx="3"/><path d="M7 10h14M7 17h14M7 24h9"/></g>'+
+      text(65,78,'Instruction',15,'#f1f3e7')+text(65,100,'+ interaction history',12,'#c8d8bb')+
+      text(22,h-18,'exec · skip · stop_execute',12,'#d8e8c8');
+    if(type==='bash')content=box(0,0,w,h,'#fcfcf6','#b8c6ac')+
+      text(22,34,'Bash',23)+text(w-65,34,'&gt;_',22,'#7b9168','font-family="monospace"')+
+      text(22,64,'mcapi look --yaw -90 &amp;&amp;',12,'#527345','font-family="monospace"')+
+      text(22,86,'mcapi press MOVE_FORWARD 2.0',12,'#527345','font-family="monospace"')+
+      `<path d="M22 ${h-55}H${w-22}" stroke="#dce4d3"/>`+
+      text(22,h-34,'mcapi → AgentBridge',13)+text(22,h-14,'xdo → keyboard &amp; mouse',13);
+    if(type==='world')content=box(0,0,w,h,'#fcfcf6','#b8c6ac')+text(19,33,'Minecraft client',23)+
+      `<image href="${image}" x="14" y="47" width="${w-28}" height="${h-60}" preserveAspectRatio="xMidYMid slice"/>`;
+    if(type==='verifier')content=box(0,0,w,h,'#f0ecd8','#b0a56c')+text(20,32,'Independent verifier',22)+
+      text(20,59,'Ordered arrivals + completion claim',w<300?12:14,'#756c40')+
+      text(20,82,'Accepted claim_done → success',w<300?12:14,'#527345');
+    return `<g class="framework-node" data-framework-node="${type}" transform="translate(${x} ${y})">${content}</g>`;
+  }
+  function render(mobile){
+    const id=mobile?'mobile':'desktop',w=mobile?360:1120,h=mobile?870:530;
+    const arrow=(d,color='#789165',twoWay=false)=>`<path d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${twoWay?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
+    const paths=mobile?
+      arrow('M180 190V260')+arrow('M180 450V510')+
+      arrow('M315 580H343V120H315')+arrow('M315 350H343')+
+      text(198,230,'exec',13)+text(198,486,'controls',13)+
+      text(351,443,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 443)"')+
+      arrow('M180 660V745','#a79758')+text(196,701,'Position',12,'#82723e')+text(196,719,'samples · 1 Hz',12,'#82723e')+
+      arrow('M45 148H18V795H45','#a79758',true)+text(11,477,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 477)"'):
+      arrow('M250 218H365')+arrow('M680 218H800')+
+      text(295,203,'exec',13)+text(708,203,'controls',13)+
+      arrow('M945 138V65H140V138')+arrow('M520 138V65')+
+      text(560,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
+      arrow('M945 298V446H875','#a79758')+
+      text(965,359,'Position samples',13,'#82723e')+text(965,382,'1 Hz',13,'#82723e')+
+      arrow('M140 298V446H475','#a79758',true)+text(280,430,'claim_done',15,'#82723e','font-family="monospace"')+
+      text(280,470,'Verifier feedback',13,'#82723e');
+    const nodes=mobile?node('agent',45,50,270,140)+node('bash',45,260,270,190)+node('world',45,510,270,150)+node('verifier',45,745,270,100):
+      node('agent',30,138,220,160)+node('bash',365,138,315,160)+node('world',800,138,290,160)+node('verifier',475,394,400,104);
+    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
+  }
+  host.innerHTML=render(false)+render(true);
+})();
