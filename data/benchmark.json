@@ -752,9 +752,9 @@
     }
   ],
   "film": {
-    "video": "assets/showcase-20261004.mp4",
-    "poster": "assets/showcase-poster-20261004.webp",
-    "duration_seconds": 137.003,
+    "video": "assets/showcase-program-tight-20261005.mp4",
+    "poster": "assets/showcase-program-tight-poster-20261005.webp",
+    "duration_seconds": 123.008,
     "maps": 17,
     "chapters": [
       {
@@ -783,40 +783,40 @@
         "description": "Real model commands, execution, feedback and verified arrivals."
       },
       {
-        "title": "One task. Different outcomes.",
-        "start": 64.5,
-        "description": "Astra and Opus 5 seek the upper gallery."
+        "title": "Find the way upstairs",
+        "start": 50.5,
+        "description": "Find the stairs, reach the gallery, and compare the recorded run outcomes."
       },
       {
         "title": "Terrain and interaction",
-        "start": 84.5,
+        "start": 70.5,
         "description": "Water, hills, stairs, ladders, passages and a button-controlled door."
       },
       {
         "title": "Ablation settings",
-        "start": 105.0,
+        "start": 91.0,
         "description": "HUD overlays and the rear third-person camera."
       },
       {
         "title": "Multi-view observations",
-        "start": 112.0,
+        "start": 98.0,
         "description": "An actual six-view observation beside later movement from the same run."
       },
       {
         "title": "Route guidance",
-        "start": 119.0,
+        "start": 105.0,
         "description": "A visible planned route; the agent controls movement."
       },
       {
         "title": "Lighting and weather",
-        "start": 126.0,
+        "start": 112.0,
         "description": "Clear noon, midnight and rain."
       }
     ],
-    "edition": "Map markers · 4 October 2026",
-    "source_sha256": "60f0e25d7ab0d703de574909e86dcc448d583a1d5e22f8f8859cf19c0f5cb417",
-    "delivery_sha256": "0cd1cc1659379d8bd2335d7cbb7248d9454c493a8603ea443b43f1b62088ae7f",
-    "chapters_sha256": "ab38028fde0a45170128c74a14c5077b010989461893363668145806e0579ccf"
+    "edition": "Program tight · 5 October 2026",
+    "source_sha256": "41b401f69e75620199dfda47b565489376b336a57b25fd5fdef77373df3960d1",
+    "delivery_sha256": "ad1758629b1b80ca061bc16b59afadbfebe1bc35c186228db0762a3023ed30f6",
+    "chapters_sha256": "75331bf881184ec53c937acaf68d76a1deae7ceabf1bf53b205b418a44b9b092"
   },
   "journeys": {
     "examples": [
@@ -2502,25 +2502,34 @@
         "section": "Main results"
       },
       "metric-sr": {
-        "text": "We evaluate each model on 180 tasks and report Success Rate (SR), the fraction of tasks where the agent visits all required stops in order and submits an accepted claim_done.",
-        "section": "Setup / Tasks and metrics"
+        "text": "Fraction of tasks completed by visiting all required stops in order and submitting an accepted claim_done.",
+        "section": "Setup / Tasks and metrics",
+        "source_text": "We evaluate each model on 180 tasks and report Success Rate (SR), the fraction of tasks where the agent visits all required stops in order and submits an accepted claim_done.",
+        "adaptation": "Direct website definition, preserving the manuscript metric and scope."
       },
       "metric-cc": {
-        "text": "We also report Checkpoint Coverage (CC), the average fraction of ordered intermediate stops to measure partial progress.",
-        "section": "Setup / Tasks and metrics"
+        "text": "Average fraction of ordered intermediate stops reached, measuring partial progress.",
+        "section": "Setup / Tasks and metrics",
+        "source_text": "We also report Checkpoint Coverage (CC), the average fraction of ordered intermediate stops to measure partial progress.",
+        "adaptation": "Direct website definition, preserving the manuscript metric and scope."
       },
       "metric-spl": {
-        "text": "SPL measures efficiency by rewarding successful completion along shorter routes.",
-        "section": "Setup / Tasks and metrics"
+        "text": "Successful completion weighted by route efficiency; shorter successful routes receive higher scores.",
+        "section": "Setup / Tasks and metrics",
+        "source_text": "SPL measures efficiency by rewarding successful completion along shorter routes.",
+        "adaptation": "Direct website definition, preserving the manuscript metric and scope."
       },
       "metric-pl": {
-        "text": "PL averages the full-episode 3D distance, computed from consecutive position samples at approximately 1 Hz, over all 180 tasks including failures.",
-        "section": "Setup / Tasks and metrics"
+        "text": "Average full-episode 3D distance across all 180 tasks, including failures, sampled at approximately 1 Hz.",
+        "section": "Setup / Tasks and metrics",
+        "source_text": "PL averages the full-episode 3D distance, computed from consecutive position samples at approximately 1 Hz, over all 180 tasks including failures.",
+        "adaptation": "Direct website definition, preserving the manuscript metric and scope."
       },
       "metric-turns": {
-        "text": "Average turns is the average number of agent turns following the agent loop in the Agent Framework section and exclude automatic history-summary responses.",
+        "text": "Average number of agent turns per task, excluding automatic history-summary responses.",
         "section": "Setup / Tasks and metrics",
-        "source_text": "Average turns is the average number of agent turns following the agent loop in Section and exclude automatic history-summary responses."
+        "source_text": "Average turns is the average number of agent turns following the agent loop in Section and exclude automatic history-summary responses.",
+        "adaptation": "Direct website definition, preserving the manuscript metric and scope."
       },
       "results-caption": {
         "text": "Main results on 180 tasks, with success rates broken down by 125 outdoor and 55 indoor tasks. SR, CC, and SPL are percentages; PL is the mean sampled 3D distance over all tasks.",

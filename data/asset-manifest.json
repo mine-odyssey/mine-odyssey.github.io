@@ -1325,17 +1325,17 @@
     "encoding": "source video stream copied without re-encoding"
   },
   {
-    "file": "assets/showcase-20261004.mp4",
-    "sha256": "dd4ca3f949225f156cc462f488344ad35da6969e240f4ac8945457c19a7c11d4",
-    "source_sha256": "60f0e25d7ab0d703de574909e86dcc448d583a1d5e22f8f8859cf19c0f5cb417",
+    "file": "assets/showcase-program-tight-20261005.mp4",
+    "sha256": "23e86b879ad5a82d7f4115513ac038fdb36ee134f9abfb5faea35d1398bcc447",
+    "source_sha256": "41b401f69e75620199dfda47b565489376b336a57b25fd5fdef77373df3960d1",
     "kind": "edited_project_film",
-    "length_seconds": 137.003,
+    "length_seconds": 123.008,
     "maps": 17,
     "playback_rate": 1,
-    "processing": "720p H.264/AAC web encode; complete 137-second edit, original timing and music retained."
+    "processing": "720p H.264/AAC web encode; complete 123-second edit, original timing and music retained."
   },
   {
-    "file": "assets/showcase-poster-20261004.webp",
+    "file": "assets/showcase-program-tight-poster-20261005.webp",
     "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
     "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
     "kind": "film_poster"

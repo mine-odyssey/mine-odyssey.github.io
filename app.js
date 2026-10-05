@@ -7,7 +7,7 @@
   const pressed = (selector, attr, value) => $$(selector).forEach(b => b.setAttribute('aria-pressed', String(b.dataset[attr] === String(value))));
   const text = (selector, value) => { $(selector).textContent = value; };
   if (!data?.maps?.length) { text('#world-count', 'The world inventory could not be loaded. Keep the data folder alongside this page.'); return; }
-  const state = { filter:'all', query:'', expanded:false, cohort:'main', sort:'sr', direction:-1, clip:0 };
+  const state = { filter:'all', query:'', expanded:false, cohort:'main', sort:'sr', direction:-1, clip:0, chartMode:'overall' };
   const featured = ['cape-town','versailles','ueno-park','hagia-sophia','zurich','rms-titanic'];
   const worlds = [...data.maps].sort((a,b) => {
     const ai=featured.indexOf(a.id), bi=featured.indexOf(b.id);
@@ -164,6 +164,43 @@
   $('#playback-speed').addEventListener('change',e=>{video.playbackRate=Number(e.target.value);});
   $$('[data-clip]').forEach(b=>b.addEventListener('click',()=>setClip(Number(b.dataset.clip))));
   document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
+  function renderResultChart() {
+    const effortOrder=['low','medium','high','max'];
+    const rows=data.results.filter(r=>state.cohort==='main'?r.cohort==='main':r.model==='Claude Opus 5')
+      .sort((a,b)=>state.cohort==='main'?b.sr-a.sr:effortOrder.indexOf(a.effort)-effortOrder.indexOf(b.effort));
+    const series=state.chartMode==='overall'?
+      [{key:'sr',label:'Success rate',short:'SR',color:'#315b43'}, {key:'cc',label:'Checkpoint coverage',short:'CC',color:'#ba7740'}, {key:'spl',label:'Path efficiency',short:'SPL',color:'#5978a3'}]:
+      [{key:'sr',label:'All tasks',short:'All',color:'#315b43'}, {key:'outdoor_sr',label:'Outdoor',short:'Outdoor',color:'#ba7740'}, {key:'indoor_sr',label:'Indoor',short:'Indoor',color:'#5978a3'}];
+    const w=1100,h=460,left=58,right=65,top=36,bottom=335;
+    const x=i=>left+34+i*(w-left-right-68)/(rows.length-1),y=v=>bottom-v*(bottom-top)/100;
+    const labelLines=r=>state.cohort==='effort'?[r.effort[0].toUpperCase()+r.effort.slice(1),'Claude Opus 5']:
+      r.model.startsWith('Claude')?['Claude',r.model.slice(7)]:r.model.startsWith('DeepSeek')?['DeepSeek','V4.1 Flash']:
+      r.model.startsWith('Gemini')?['Gemini','3.8 Flash']:r.model.startsWith('GLM')?['GLM','5.3 Flash']:[r.model];
+    text('#results-chart-title',state.chartMode==='overall'?'Completion, coverage & efficiency':'Success across environments');
+    text('#results-chart-order',state.cohort==='main'?'Models ordered by success rate':'Claude Opus 5 · Low → medium → high → max effort');
+    $('#results-chart-legend').innerHTML=series.map(s=>`<span><i style="--series-color:${s.color}"></i>${s.label} <small>${state.chartMode==='overall'?s.short:''}</small></span>`).join('');
+    const grid=[0,20,40,60,80,100].map(v=>`<g><path d="M${left} ${y(v)}H${w-right}" stroke="#dce2d5" stroke-dasharray="${v?'3 6':'0'}"/><text x="${left-14}" y="${y(v)+5}" text-anchor="end" class="chart-tick">${v}</text></g>`).join('');
+    const curves=series.map((s,j)=>`<path class="result-line" data-series="${s.key}" d="${rows.map((r,i)=>`${i?'L':'M'}${x(i)} ${y(r[s.key])}`).join(' ')}" fill="none" stroke="${s.color}" stroke-width="3" ${j===2?'stroke-dasharray="7 5"':''}/>`).join('');
+    const columns=rows.map((r,i)=>`<g data-result-index="${i}" role="button" tabindex="${i===0?'0':'-1'}" aria-label="${escapeHTML(r.model)}, ${r.effort} effort: ${series.map(s=>`${s.short} ${r[s.key].toFixed(2)} percent`).join(', ')}" aria-pressed="${i===0}">
+      <rect class="chart-column" x="${x(i)-48}" y="${top-16}" width="96" height="${bottom-top+100}" rx="10" fill="transparent"/>
+      <path class="chart-guide" d="M${x(i)} ${top}V${bottom}" stroke="#849c77" stroke-dasharray="3 5"/>
+      ${series.map(s=>`<circle class="chart-point" data-series="${s.key}" data-value="${r[s.key]}" cx="${x(i)}" cy="${y(r[s.key])}" r="5" fill="${s.color}" stroke="#fcfcf6" stroke-width="2"><title>${s.short}: ${r[s.key].toFixed(2)}%</title></circle>`).join('')}
+      ${labelLines(r).map((l,j)=>`<text x="${x(i)}" y="${bottom+30+j*19}" text-anchor="middle" class="chart-model">${escapeHTML(l)}</text>`).join('')}
+      <text x="${x(i)}" y="${bottom+77}" text-anchor="middle" class="chart-effort">${state.cohort==='main'?escapeHTML(r.effort)+' effort':'180 tasks'}</text>
+    </g>`).join('');
+    $('#results-chart').innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="results-plot-title results-plot-desc"><title id="results-plot-title">${$('#results-chart-title').textContent}</title><desc id="results-plot-desc">Percentage scores on a zero to one hundred scale. ${$('#results-chart-order').textContent}. Select a model for exact values; use left and right arrow keys to move between models.</desc><text x="${left-14}" y="17" text-anchor="end" class="chart-tick">%</text>${grid}${curves}${columns}</svg>`;
+    function select(index){
+      const r=rows[index];
+      $$('#results-chart [data-result-index]').forEach(el=>{const active=Number(el.dataset.resultIndex)===index;el.setAttribute('aria-pressed',String(active));el.setAttribute('tabindex',active?'0':'-1');});
+      $('#results-chart-readout').innerHTML=`<div><strong>${escapeHTML(r.model)}</strong><span>${escapeHTML(r.effort)} effort · 180 tasks</span></div>${series.map(s=>`<div style="--series-color:${s.color}"><span>${s.label}</span><strong>${r[s.key].toFixed(2)}<small>%</small></strong></div>`).join('')}`;
+    }
+    $$('#results-chart [data-result-index]').forEach(el=>{
+      const index=Number(el.dataset.resultIndex);
+      el.addEventListener('pointerenter',()=>select(index));el.addEventListener('focus',()=>select(index));el.addEventListener('click',()=>select(index));
+      el.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?rows.length-1:(index+(e.key==='ArrowRight'?1:-1)+rows.length)%rows.length;$(`#results-chart [data-result-index="${next}"]`).focus();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();select(index);}});
+    });
+    select(0);pressed('[data-chart-mode]','chartMode',state.chartMode);
+  }
   function renderResults() {
     const rows=data.results.filter(r=>state.cohort==='main'?r.cohort==='main':r.model==='Claude Opus 5').sort((a,b)=>state.direction*(a[state.sort]-b[state.sort]));
     $('#results-body').innerHTML=rows.map(r=>`<tr class="${r.sr===Math.max(...rows.map(x=>x.sr))?'leading':''}"><th scope="row"><span class="model-name">${escapeHTML(r.model)}</span><span class="model-effort">${escapeHTML(r.effort)} effort · 180 tasks</span></th><td><div class="score-wrap"><span>${r.sr.toFixed(2)}%</span><span class="score-bar" aria-hidden="true"><i style="width:${r.sr}%"></i></span></div></td><td>${r.outdoor_sr.toFixed(2)}%</td><td>${r.indoor_sr.toFixed(2)}%</td><td>${r.cc.toFixed(2)}%</td><td>${r.spl.toFixed(2)}%</td><td>${r.mean_steps.toFixed(1)}</td><td>${r.mean_path_3d_blocks.toFixed(1)}</td></tr>`).join('');
@@ -171,12 +208,14 @@
     const label=$(`[data-sort="${state.sort}"]`).textContent.replace(/[↑↓]/g,'').trim();
     text('#results-status',`${rows.length} configurations · Sorted by ${label.toLowerCase()}, ${state.direction===-1?'highest':'lowest'} first`);
     pressed('[data-cohort]','cohort',state.cohort);
+    renderResultChart();
   }
   $$('[data-sort]').forEach(b=>b.addEventListener('click',()=>{
     const key=b.dataset.sort;
     state.direction=state.sort===key?-state.direction:(['mean_steps','mean_path_3d_blocks'].includes(key)?1:-1);state.sort=key;renderResults();
   }));
   $$('[data-cohort]').forEach(b=>b.addEventListener('click',()=>{state.cohort=b.dataset.cohort;renderResults();}));
+  $$('[data-chart-mode]').forEach(b=>b.addEventListener('click',()=>{state.chartMode=b.dataset.chartMode;renderResultChart();}));
   $('#terrain-scenes').innerHTML=data.scenes.map(s=>`<button class="terrain-card" data-scene-detail="${escapeHTML(s.id)}" type="button"><img src="${escapeHTML(s.image)}" alt="${escapeHTML(`${s.title} in ${s.place}`)}" width="800" height="600" loading="lazy"><span class="terrain-card-copy"><strong>${escapeHTML(s.title)}</strong><span>${escapeHTML(s.place)}</span><small>${escapeHTML(s.kind)}</small></span><span class="terrain-open" aria-hidden="true">↗</span></button>`).join('');
   $('#terrain-scenes').addEventListener('click',e=>{const b=e.target.closest('[data-scene-detail]');if(!b)return;const s=data.scenes.find(s=>s.id===b.dataset.sceneDetail);openImage(s.image,s.title,`${s.place} · ${s.description} · ${s.kind}`);});
   const menu=$('.menu-toggle'),nav=$('#navigation');
@@ -595,7 +634,7 @@
 (() => {
   const host=document.querySelector('#framework-diagram');
   const example=window.MINE_ODYSSEY.journeys.examples.find(t=>t.id==='copacabana-waterfront-001');
-  const views={game:example.scene.clips[1].poster,map:example.map_image};
+  const views={game:window.MINE_ODYSSEY.maps.find(m=>m.id===example.map).image,map:example.map_image};
   const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
   const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
   function avatar(){
@@ -637,12 +676,12 @@
       '<g transform="translate(20 195)" stroke="#7c9368" fill="none"><rect width="23" height="12" rx="2"/><path d="M4 4h2m3 0h2m3 0h2m3 0h1M4 8h15"/></g>'+
       text(55,206,'xdo → keyboard &amp; mouse',12);
     if(type==='world'){
-      const imageHeight=(w-16)*.75,tabWidth=(w-16)/2;
+      const imageHeight=(w-16)*.625,tabWidth=(w-16)/2;
       const tab=(view,label,i)=>`<g class="client-view-tab" data-client-view="${view}" role="button" tabindex="0" aria-pressed="${i===0}" aria-label="Show ${label.toLowerCase()}" transform="translate(${8+i*tabWidth} 48)"><rect width="${tabWidth}" height="30" rx="4"/>${text(tabWidth/2,20,label,13,'currentColor','text-anchor="middle"')}</g>`;
       content=text(0,28,'Minecraft client',25)+
         `<rect class="client-window" x="0" y="42" width="${w}" height="${imageHeight+46}" rx="8" fill="#fcfcf6" stroke="#aaba9b" stroke-width="1.5"/>`+
         tab('game','Game view',0)+tab('map','World map',1)+
-        `<rect x="8" y="82" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="82" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Recorded first-person view in Copacabana"/>`;
+        `<rect x="8" y="82" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="82" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="In-game presentation view of Copacabana"/><rect class="client-capture-outline" x="8" y="82" width="${w-16}" height="${imageHeight}" fill="none" stroke="#e3bd6a" stroke-width="4" pointer-events="none"/>${text(8,imageHeight+112,'Copacabana Waterfront',13,'#687b5b')}`;
     }
     if(type==='verifier'){
       const compact=w<300;
@@ -655,35 +694,89 @@
     return `<g class="framework-node" data-framework-node="${type}" transform="translate(${x} ${y})">${content}</g>`;
   }
   function render(mobile){
-    const id=mobile?'mobile':'desktop',w=mobile?360:1180,h=mobile?1150:680;
-    const arrow=(d,color='#789165',twoWay=false)=>`<path d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${twoWay?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
+    const id=mobile?'mobile':'desktop',w=mobile?360:1180,h=mobile?1115:650;
+    const arrow=(d,channel,color='#789165',reverse=false)=>`<path class="flow-edge" data-flow="${channel}" d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${reverse?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
     const paths=mobile?
-      arrow('M180 264V320')+arrow('M180 540V600')+
-      arrow('M315 745H343V135H315')+arrow('M315 425H343')+
+      arrow('M180 264V320','exec')+arrow('M180 540V600','controls')+
+      arrow('M315 745H343V135H315','observe')+arrow('M315 425H343','feedback')+
       text(198,300,'exec',13)+text(198,576,'controls',13)+
       text(351,518,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 518)"')+
-      arrow('M180 890V1000','#a79758')+text(196,940,'Position',12,'#82723e')+text(196,958,'samples · 1 Hz',12,'#82723e')+
-      arrow('M45 173H18V1055H45','#a79758',true)+text(11,610,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 610)"'):
-      arrow('M245 255H340')+arrow('M655 255H775')+
-      text(275,240,'exec',13)+text(680,240,'controls',13)+
-      arrow('M960 100V65H135V145')+arrow('M500 145V65')+
-      text(560,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
-      arrow('M960 450V586H900','#a79758')+
-      text(980,502,'Position samples',13,'#82723e')+text(980,525,'1 Hz',13,'#82723e')+
-      arrow('M135 365V586H450','#a79758',true)+text(245,565,'claim_done',15,'#82723e','font-family="monospace"')+
-      text(245,612,'Verifier feedback',13,'#82723e');
-    const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,290)+node('verifier',45,1000,270,116):
-      node('agent',25,145,220,220)+node('bash',340,145,315,220)+node('world',775,100,370,350)+node('verifier',450,530,450,112);
-    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">An illustrated agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. The client illustration switches between a recorded game view and a native map of Copacabana. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
+      arrow('M180 890V975','position','#a79758')+text(196,930,'Position · 1 Hz',12,'#82723e')+
+      arrow('M45 173H18V1030H45','claim','#a79758',true)+text(11,610,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 610)"'):
+      arrow('M245 255H320','exec')+arrow('M635 255H720','controls')+
+      text(264,240,'exec',13)+text(648,240,'controls',13)+
+      arrow('M935 100V65H135V145','observe')+arrow('M477 145V65','feedback')+
+      text(535,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
+      arrow('M935 480V566H900','position','#a79758')+
+      text(957,509,'Position samples',13,'#82723e')+text(957,532,'1 Hz',13,'#82723e')+
+      arrow('M135 365V566H450','claim','#a79758',true)+text(245,545,'claim_done',15,'#82723e','font-family="monospace"')+
+      text(245,592,'Verifier feedback',13,'#82723e');
+    const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,290)+node('verifier',45,975,270,116):
+      node('agent',25,145,220,220)+node('bash',320,145,315,220)+node('world',720,100,430,380)+node('verifier',450,510,450,112);
+    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Copacabana. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="#496d42" stroke="#fcfcf4" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="#ae9148" pointer-events="none"/></svg>`;
   }
   host.innerHTML=render(false)+render(true);
   function selectView(view){
     host.querySelectorAll('[data-client-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.clientView===view)));
     host.querySelectorAll('.client-observation').forEach(img=>{
       img.setAttribute('href',views[view]);
-      img.setAttribute('aria-label',view==='game'?'Recorded first-person view in Copacabana':'Native map of Copacabana');
+      img.setAttribute('aria-label',view==='game'?'In-game presentation view of Copacabana':'Native map of Copacabana');
     });
   }
   host.addEventListener('click',e=>{const b=e.target.closest('[data-client-view]');if(b)selectView(b.dataset.clientView);});
   host.addEventListener('keydown',e=>{const b=e.target.closest('[data-client-view]');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();selectView(b.dataset.clientView);}});
+
+  const figure=host.closest('figure'),play=document.querySelector('#framework-play');
+  const steps=[...document.querySelectorAll('[data-framework-step]')];
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const phases=[
+    {channel:'observe',nodes:['agent','world'],copy:'The agent receives screenshots and execution feedback.'},
+    {channel:'exec',nodes:['agent','bash'],copy:'The agent composes tool calls, shell commands or Python scripts in Bash.'},
+    {channel:'controls',nodes:['bash','world'],copy:'API calls and keyboard or mouse input control the Minecraft client.'},
+    {channel:'claim',nodes:['verifier'],copy:'The verifier checks ordered arrivals and the agent’s completion claim.'}
+  ];
+  let phase=0,elapsed=0,last=0,raf=0,visible=false,wantsPlay=!motion.matches;
+  const duration=2600;
+  function setPhase(next){
+    phase=next;figure.dataset.phase=String(next);
+    steps.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===next)));
+    host.querySelectorAll('[data-framework-node]').forEach(n=>n.classList.toggle('is-active',phases[next].nodes.includes(n.dataset.frameworkNode)));
+    host.querySelectorAll('[data-flow]').forEach(p=>p.classList.toggle('is-active',p.dataset.flow===phases[next].channel));
+    document.querySelector('#framework-phase-number').textContent=String(next+1).padStart(2,'0');
+    document.querySelector('#framework-phase-copy').textContent=phases[next].copy;
+  }
+  const tracks=[...host.querySelectorAll('svg.framework-desktop,svg.framework-mobile')].map(svg=>({svg,
+    packet:svg.querySelector('.flow-packet'),position:svg.querySelector('.position-packet'),
+    paths:Object.fromEntries([...svg.querySelectorAll('[data-flow]')].map(p=>[p.dataset.flow,{path:p,length:p.getTotalLength()}]))}));
+  function draw(progress){
+    for(const track of tracks){
+      const flow=track.paths[phases[phase].channel];
+      const p=flow.path.getPointAtLength(flow.length*progress);
+      track.packet.setAttribute('cx',p.x);track.packet.setAttribute('cy',p.y);
+      const sample=track.paths.position,sp=sample.path.getPointAtLength(sample.length*(elapsed%1000)/1000);
+      track.position.setAttribute('cx',sp.x);track.position.setAttribute('cy',sp.y);
+    }
+  }
+  function frame(now){
+    if(last)elapsed+=Math.min(100,now-last);last=now;
+    const next=Math.floor(elapsed/duration)%phases.length;if(next!==phase)setPhase(next);
+    draw((elapsed%duration)/duration);raf=requestAnimationFrame(frame);
+  }
+  function sync(){
+    cancelAnimationFrame(raf);last=0;
+    const running=wantsPlay&&visible&&!document.hidden&&!motion.matches;
+    figure.classList.toggle('is-playing',running);
+    play.setAttribute('aria-pressed',String(wantsPlay&&!motion.matches));
+    play.setAttribute('aria-label',wantsPlay&&!motion.matches?'Pause framework animation':'Play framework animation');
+    play.innerHTML=wantsPlay&&!motion.matches?'Ⅱ <span>Pause</span>':'▶ <span>Play</span>';
+    play.disabled=motion.matches;play.title=motion.matches?'Reduced motion is enabled; select a stage to explore.':'';
+    if(running)raf=requestAnimationFrame(frame);
+  }
+  steps.forEach((button,i)=>button.addEventListener('click',()=>{wantsPlay=false;elapsed=i*duration;setPhase(i);draw(.5);sync();}));
+  play.addEventListener('click',()=>{wantsPlay=!wantsPlay;sync();});
+  document.addEventListener('visibilitychange',sync);
+  motion.addEventListener('change',()=>{wantsPlay=!motion.matches;sync();});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.12}).observe(figure);
+  else visible=true;
+  setPhase(0);draw(0);sync();
 })();
