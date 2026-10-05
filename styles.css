@@ -704,3 +704,41 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 #recovery>.section-heading>p{font-size:18px;line-height:1.7}
 .case-layout .route-card header>span{font-size:11px;line-height:1.5}
 @media(max-width:760px){#recovery>.section-heading>p{font-size:17px}}
+
+/* One Minecraft-style task illustration, linked to the source-backed explorer. */
+.opening .journey-contract{background:#fafbf4;border:1px solid #ccd7bd;border-radius:16px;padding:22px;box-shadow:0 14px 36px #294e3a08}
+.opening .contract-heading{padding-bottom:12px}.opening .contract-heading h2{font-size:31px}
+.opening .contract-heading .eyebrow{display:none}
+.opening .task-contract-flow{gap:4px}
+.opening .contract-stage{display:flex;align-items:center;gap:13px;min-height:0;padding:10px 12px;background:transparent;border:1px solid transparent;border-radius:10px}
+.opening .contract-stage:hover,.opening .contract-stage:focus-within{background:#f0f4e7;border-color:#d8e0ca}
+.opening .contract-stage.is-rule-active{background:#fff5dc;border-color:#c8ac65}
+.opening .contract-waypoint>svg,.opening .contract-claim>svg{width:40px;height:40px;flex:0 0 40px;margin:0}
+.opening .contract-label{display:block;flex:1;min-width:0}
+.opening .contract-label strong{display:block;font-size:17px;font-weight:600;line-height:1.4}
+.opening .contract-label small{display:block;margin-top:4px;font-size:13px;line-height:1.5;color:#78846c}
+.opening .contract-stage>.contract-open{font-size:19px;color:#829475}
+.opening .contract-order{display:block;padding:0;border:0}
+.opening .contract-order:hover,.opening .contract-order:focus-within{background:transparent}
+.contract-world{position:relative;aspect-ratio:480/280;width:100%;isolation:isolate}
+.opening .contract-world>svg{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0}
+.opening .contract-world .contract-stop{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:transparent;color:#31563b;font:600 15px var(--sans);box-shadow:none;z-index:1}
+.contract-world .contract-stop:before{content:'';position:absolute;inset:4px;z-index:-1;background:#fffef5;border:2px solid #739063;border-radius:50%;box-shadow:0 3px 0 #54734925;transition:background .15s,box-shadow .15s,transform .15s}
+.contract-world .contract-stop:last-child:before{background:#f4e4b8;border-color:#b39a58}
+.opening .contract-world .contract-stop[aria-pressed=true]{color:#fff}
+.contract-world .contract-stop[aria-pressed=true]:before{background:#2d573d;border-color:#2d573d;box-shadow:0 0 0 4px #66825026,0 3px 0 #2d573d22}
+.contract-world .contract-stop:hover:before,.contract-world .contract-stop:focus-visible:before{transform:translateY(-2px);border-color:#a1853b;box-shadow:0 0 0 4px #d7b66c40}
+.contract-world .contract-stop:focus-visible{outline:2px solid #a1853b;outline-offset:1px}
+.opening .contract-rule-label{display:flex;align-items:center;justify-content:center;gap:18px;width:100%;min-height:38px;margin:-4px 0 10px;padding:0;font-size:16px;color:#42613c}
+.opening .contract-rule-label>span{font-size:19px;color:#879b72}
+.opening .contract-claim{background:#2d513b;color:#f8faef;padding:13px 14px;border-color:#2d513b}
+.opening .contract-claim:hover,.opening .contract-claim:focus-within{background:#3d6347;border-color:#3d6347}
+.opening .contract-claim.is-rule-active{background:#3d6347;border-color:#d1b15f;box-shadow:0 0 0 3px #dbc58e44}
+.opening .contract-claim .contract-label strong{color:#f8faef}
+.opening .contract-claim .contract-label code{display:block;margin-top:4px;color:#d9e6ba;font:13px/1.5 monospace}
+.opening .contract-claim>.contract-open{color:#c7d5b8}
+.opening .contract-details{margin-top:14px;padding-top:7px;border-top-color:#e0e5d6}
+.opening .contract-details summary{font-size:13px;color:#78846c}
+@media(max-width:1000px){.opening .journey-contract{padding:18px}.opening .contract-label strong{font-size:16px}.opening .contract-stage{padding-inline:8px}.opening .contract-claim{padding:12px}}
+@media(max-width:760px){.opening .journey-contract{padding:22px 18px}.opening .contract-label strong{font-size:17px}.opening .contract-order{padding:0}.opening .contract-rule-label{font-size:16px}.opening .contract-world>svg{width:100%;height:100%}}
+@media(prefers-reduced-motion:reduce){.contract-world .contract-stop:before{transition:none}}
