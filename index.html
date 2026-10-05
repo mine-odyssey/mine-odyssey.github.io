@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=single-column-film-20261005">
-  <script src="data/benchmark.js?v=single-column-film-20261005" defer></script>
-  <script src="app.js?v=single-column-film-20261005" defer></script>
+  <link rel="stylesheet" href="styles.css?v=task-format-motion-20261005">
+  <script src="data/benchmark.js?v=task-format-motion-20261005" defer></script>
+  <script src="app.js?v=task-format-motion-20261005" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,18 +30,18 @@
           <div class="opening-actions"><a class="button opening-primary" href="#tasks">Explore a task <span aria-hidden="true">↓</span></a><a class="opening-film-link" href="#film"><span aria-hidden="true">▶</span> Watch the project video</a></div>
         </div>
         <aside class="opening-task" aria-labelledby="task-format-title"><div class="journey-contract"><div class="contract-heading"><p class="eyebrow">The task</p><h2 id="task-format-title">Task format</h2></div>
-          <div class="task-contract-flow" role="group" aria-label="Explore task rules on the map">
+          <div class="task-contract-flow" role="group" aria-label="Animated task format: start, visit four destinations in order, then claim completion">
             <div class="contract-stage contract-waypoint">
-              <button type="button" class="contract-map-heading" data-task-rule="waypoint" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback"><strong id="contract-place">Copacabana</strong><span>Locate the destinations ↗</span></button>
+              <div class="contract-map-heading"><strong id="contract-place">Copacabana</strong><span>Example task</span></div>
               <div class="contract-native-map"><img id="contract-map-image" alt="" width="1200" height="800"><svg id="contract-map-overlay" viewBox="0 0 1000 667" aria-hidden="true"></svg></div>
             </div>
             <div class="contract-stage contract-order">
-              <button type="button" class="contract-rule-label" data-task-rule="order" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback">Visit in order <span aria-hidden="true">↓</span></button>
+              <p class="contract-rule-label">Visit in order <span aria-hidden="true">↓</span></p>
               <ol class="contract-destinations" id="contract-destinations" aria-label="Starting point and ordered destinations"></ol>
             </div>
-            <button type="button" class="contract-stage contract-claim" data-task-rule="completion" aria-pressed="false" aria-controls="task-map task-completion task-rule-feedback"><span class="contract-check" aria-hidden="true">✓</span><strong>Claim completion</strong><code>claim_done ↗</code></button>
+            <div class="contract-stage contract-claim"><span class="contract-check" aria-hidden="true">✓</span><strong>Claim completion</strong><code>claim_done</code></div>
           </div>
-          <details class="contract-details"><summary>Rules &amp; source</summary><div id="task-challenges"></div><p class="small-note" id="task-note">Instructions from the benchmark task records; English translations are provided alongside the Portuguese and Russian originals. Map markers show visit order, not an executed route.</p></details>
+          <p class="contract-source-note" id="task-note">Visit order, not a recorded route.</p>
         </div></aside>
       </div>
       <div class="opening-stats" aria-label="Benchmark at a glance"><div><strong>180</strong><span>Spatial tasks</span></div><div><strong>30</strong><span>Real-world locations</span></div><div><strong>20</strong><span>Countries and regions</span></div><a href="#worlds">Explore the environments <span aria-hidden="true">↗</span></a></div>

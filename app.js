@@ -57,8 +57,6 @@
   function renderTaskRule(){
     const task=tasks[taskIndex],stop=task.stops[taskStop];
     $('#task-explorer').dataset.rule=taskRule;
-    pressed('[data-task-rule]','taskRule',taskRule);
-    $$('[data-task-rule]').forEach(b=>b.closest('.contract-stage').classList.toggle('is-rule-active',b.dataset.taskRule===taskRule));
     $('#task-rule-feedback').hidden=!taskRule;
     text('#task-rule-caption',taskRule==='waypoint'?`${taskStop===0?'S':taskStop} · ${stop.name} · (x, y, z) = (${stop.position.join(', ')})`:
       taskRule==='order'?'Required visit order: S → 1 → 2 → 3 → 4':
@@ -95,13 +93,11 @@
     taskStop=Math.max(0,Math.min(tasks[taskIndex].stops.length-1,index));
     const task=tasks[taskIndex],s=task.stops[taskStop],dy=s.position[1]-task.stops[0].position[1];
     pressed('[data-task-stop]','taskStop',taskStop);
-    pressed('[data-contract-stop]','contractStop',taskStop);
     text('#task-stop-role',stopLabel(s,taskStop));text('#task-stop-title',s.name);text('#task-stop-purpose',s.purpose);
     text('#task-stop-height',`${s.original_name} · ${dy===0?'Same target height as start':`${Math.abs(dy)} ${Math.abs(dy)===1?'block':'blocks'} ${dy>0?'above':'below'} the start`}`);
     $('#task-prev').disabled=taskStop===0;$('#task-next').disabled=taskStop===task.stops.length-1;
     $$('#task-map-lines [data-leg]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.leg)===taskStop));
     $$('#task-map-lines [data-map-stop]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.mapStop)===taskStop));
-    $$('#contract-map-overlay [data-contract-marker]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.contractMarker)===taskStop));
     renderTaskRule();
   }
   function setTask(index) {
@@ -116,19 +112,16 @@
     text('#contract-place',m.name);
     $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
     $('#contract-destinations').lang=task.locale;
-    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>`<li><button type="button" class="contract-stop" data-contract-stop="${i}" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight ${i===0?'S':i}: ${escapeHTML(s.original_name)}"><span class="contract-number" aria-hidden="true">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span><span class="contract-stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
+    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>`<li class="contract-stop" data-contract-stop="${i}"><span class="contract-number">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span></li>`).join('');
     $('#contract-map-overlay').innerHTML=task.stops.slice(1).map((s,i)=>`<path class="contract-map-leg" d="M ${task.stops[i].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`).join('')+task.stops.map((s,i)=>`<g data-contract-marker="${i}"><path class="contract-map-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="contract-map-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="5"/><circle class="contract-map-pin" cx="${s.marker[0]}" cy="${s.marker[1]}" r="26"/><text x="${s.marker[0]}" y="${s.marker[1]}" dy=".35em">${i===0?'S':i}</text></g>`).join('');
-    $('#task-challenges').innerHTML=task.challenges.map(([title,body],i)=>`<article><span>0${i+1}</span><h4>${escapeHTML(title)}</h4><p>${escapeHTML(body)}</p></article>`).join('');
     text('#task-arrival',`Position samples are checked every ${task.arrival.sample_interval_sec} second. Arrival requires both a 3D distance of less than ${task.arrival.radius_3d} blocks and a height difference of at most ${task.arrival.radius_y} blocks from the target.`);
     $('.task-completion details').open=false;
     setTaskStop(0);setTaskView('map');
     pressed('[data-task]','task',index);
+    document.dispatchEvent(new Event('contract-task-changed'));
   }
   $$('[data-task]').forEach(b=>b.addEventListener('click',()=>setTask(Number(b.dataset.task))));
   $('.journey-explorer').addEventListener('click',e=>{const b=e.target.closest('[data-task-stop]');if(b)showTaskRule('waypoint',Number(b.dataset.taskStop),false);});
-  $$('[data-task-rule]').forEach(b=>b.addEventListener('click',()=>showTaskRule(b.dataset.taskRule,b.dataset.taskRule==='waypoint'?(taskStop||1):taskStop)));
-  $('.task-contract-flow').addEventListener('click',e=>{const b=e.target.closest('[data-contract-stop]');if(b)showTaskRule('waypoint',Number(b.dataset.contractStop));});
-  $('.task-contract-flow').addEventListener('keydown',e=>{const b=e.target.closest('[data-contract-stop]');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showTaskRule('waypoint',Number(b.dataset.contractStop));}});
   $('#task-rule-clear').addEventListener('click',()=>{taskRule='';renderTaskRule();$('[data-task-view="map"]').focus({preventScroll:true});});
   $('#task-stops').addEventListener('click',e=>{const b=e.target.closest('[data-watch-leg]');if(b){setTaskStop(Number(b.dataset.watchLeg)+1);setTaskView('scene',true);}});
   document.addEventListener('task-scene-leg-selected',e=>setTaskStop(e.detail.index+1));
@@ -778,4 +771,35 @@
   motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;progress=1;paint();sync();}});
   document.querySelector('#spatial-case-link').addEventListener('click',()=>document.querySelector('[data-case="white-house"]').click());
   paint();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(host);
+})();
+
+// An automatic task-order illustration, independent from the interactive explorer.
+(() => {
+  const card=document.querySelector('.journey-contract'),motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const phaseMs=1400,phaseCount=6;
+  let elapsed=0,last=null,frame=0,phase=-1,inView=false;
+  function paint(next){
+    if(next===phase)return;phase=next;card.dataset.phase=String(next);
+    card.querySelectorAll('[data-contract-stop]').forEach(row=>row.classList.toggle('is-current',Number(row.dataset.contractStop)===next));
+    card.querySelectorAll('[data-contract-marker]').forEach(pin=>pin.classList.toggle('is-selected',Number(pin.dataset.contractMarker)===next));
+    card.querySelector('.contract-claim').classList.toggle('is-complete',next===5);
+  }
+  function active(){return inView&&!document.hidden&&!motion.matches;}
+  function tick(now){
+    frame=0;if(!active())return;
+    if(last!==null)elapsed=(elapsed+Math.min(now-last,100))%(phaseMs*phaseCount);
+    last=now;paint(Math.floor(elapsed/phaseMs));frame=requestAnimationFrame(tick);
+  }
+  function sync(){
+    cancelAnimationFrame(frame);frame=0;last=null;
+    const r=card.getBoundingClientRect();inView=r.top<innerHeight&&r.bottom>0;
+    if(motion.matches)paint(-1);
+    else if(active())frame=requestAnimationFrame(tick);
+  }
+  function reset(){elapsed=0;phase=-2;paint(motion.matches?-1:0);sync();}
+  document.addEventListener('contract-task-changed',reset);
+  document.addEventListener('visibilitychange',sync);
+  motion.addEventListener('change',reset);
+  new IntersectionObserver(sync,{threshold:[0,.1]}).observe(card);
+  reset();
 })();
