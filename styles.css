@@ -479,3 +479,280 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 }
 
 .task-first-header .hero-kicker>span{display:block}
+
+/* Page composition: project + task, map + brief, image + explanation. */
+:root{--reading-width:680px}
+.site-header{height:76px}
+.site-header .nav-film{border:1px solid #b5c6a8;padding:9px 14px;border-radius:3px}
+.section{padding-block:96px}
+.section-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:64px;margin-bottom:42px}
+.section-heading h2{font-size:clamp(40px,4vw,58px);line-height:1.12;max-width:650px}
+.section-heading>p{max-width:var(--reading-width);font-size:19px;line-height:1.7;margin-top:4px}
+.section-heading .eyebrow{font-size:12px;letter-spacing:1.5px;margin-bottom:14px}
+.opening{padding-top:58px}
+.opening-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);align-items:center;gap:64px}
+.opening .hero-heading{display:block;margin:0;min-width:0}
+.opening .hero-heading>.eyebrow{font-size:12px;line-height:1.7;letter-spacing:1.8px;margin-bottom:26px}
+.opening h1{font-size:clamp(74px,7.4vw,104px);line-height:1.05;letter-spacing:-4.5px;margin:0 0 27px;white-space:nowrap}
+.opening-description{font-size:26px;line-height:1.55;max-width:565px;color:#546452}
+.opening-description:first-letter{text-transform:uppercase}
+.opening-actions{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:32px}
+.opening-primary{background:var(--green);color:#fff;padding:16px 22px;border:1px solid var(--green);min-height:52px;font-size:16px;border-radius:3px}
+.opening-primary:hover{background:#376849}
+.opening-film-link{display:inline-flex;align-items:center;gap:11px;font-size:15px;color:var(--green);min-height:46px}
+.opening-film-link>span{display:grid;place-items:center;width:30px;height:30px;border:1px solid #b5c5a6;border-radius:50%;font-size:10px;padding-left:2px}
+.opening-task{min-width:0}
+.opening .journey-contract{background:#e9eedf;border:1px solid #cbd7bc;padding:26px 26px 16px;border-radius:4px;box-shadow:12px 12px 0 #e8eadf80}
+.contract-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:20px}
+.contract-heading h2{font:32px var(--serif);letter-spacing:-.8px}
+.contract-heading .eyebrow{font-size:10px;letter-spacing:1.5px;margin:0;order:2}
+.opening .task-contract-flow{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.opening .contract-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:center;padding:10px 12px;border:1px solid #d0dbc1;background:#f7f9f0;min-height:84px;border-radius:3px;text-align:left}
+.opening .contract-stage svg{width:100%;height:64px;max-width:200px;overflow:visible;margin:0}
+.opening .contract-stage>span,.opening .contract-rule-label{font-size:17px;line-height:1.45;margin:0;text-align:left}
+.opening .contract-order{grid-template-columns:1fr;gap:0;padding:10px 16px}
+.opening .contract-order svg{height:60px;max-width:100%;width:260px;margin:auto}
+.opening .contract-rule-label{text-align:center;justify-self:center;min-height:28px}
+.opening .contract-arrow{display:none}
+.opening .contract-details{margin-top:16px;padding-top:5px;border-top-color:#cbd7bc}
+.opening .contract-details summary{font-size:13px;min-height:32px;padding:6px 0}
+.opening .contract-details #task-challenges{display:block}
+.opening .contract-details #task-challenges article+article{margin-top:16px}
+.opening .contract-details p{font-size:14px;line-height:1.7}
+.opening-stats{display:grid;grid-template-columns:repeat(3,1fr) 1.15fr;gap:0;align-items:center;margin-top:56px;padding:27px 0;border-block:1px solid #d4dccb}
+.opening-stats>div{display:flex;align-items:center;gap:15px;padding-right:24px}
+.opening-stats>div+div{padding-left:28px;border-left:1px solid #d4dccb}
+.opening-stats strong{font:43px var(--serif);line-height:1;color:#375940}
+.opening-stats span{font-size:14px;line-height:1.5;color:#738068;max-width:125px}
+.opening-stats>a{display:flex;justify-content:flex-end;align-items:center;gap:20px;font-size:14px;color:var(--green)}
+.opening-stats>a>span{font-size:22px;color:var(--green)}
+
+.task-first{padding-top:76px;padding-bottom:92px}
+.task-first>.section-heading{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:60px;margin-bottom:32px;align-items:start}
+.task-first>.section-heading h2{font-size:52px;line-height:1.12;white-space:normal;letter-spacing:-1.5px}
+.task-first>.section-heading>p{max-width:720px;font-size:20px;line-height:1.65;margin:0}
+.journey-browser{border:0;background:transparent}
+.task-first .task-tabs{gap:12px;border:0;margin-bottom:30px}
+.task-first .task-tabs button{border:1px solid #cbd7c0;background:#eeefe6;padding:20px 24px;border-radius:4px}
+.task-first .task-tabs button[aria-pressed=true]{background:#294e3a;color:#fff;border-color:#294e3a}
+.task-first .task-tabs button[aria-pressed=true] span,.task-first .task-tabs button[aria-pressed=true] small{color:#d5e4c7}
+.task-first .task-tabs strong{font-size:28px;line-height:1.2;margin:8px 0}
+.task-first .task-tabs span{font-size:11px}.task-first .task-tabs small{font-size:13px}
+.task-first .journey-heading{padding:0 0 23px;margin-bottom:24px;border-bottom:1px solid #d4dccb}
+.task-first .journey-heading h3{font-size:34px}
+.journey-explorer{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);grid-template-areas:"feedback feedback" "map instruction" "map itinerary";gap:24px 32px;padding:0;align-items:start}
+.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map instruction" "map itinerary"}
+.task-rule-feedback{grid-area:feedback;margin:0}
+.journey-map-panel{grid-area:map;position:sticky;top:104px;min-width:0;background:#e8edde;border:1px solid #c9d6b9;padding:18px;border-radius:5px}
+.journey-map-toolbar{padding:0 0 15px;gap:14px;align-items:center}
+.task-map-stage{border:0;border-radius:3px;overflow:hidden}
+.task-first .task-instruction{grid-area:instruction;margin:0;padding:22px 24px;background:#fdfdf7;border:1px solid #d7dfcb;border-left:3px solid #a6bd89;border-radius:3px}
+.task-first .task-instruction blockquote{font-size:18px;line-height:1.7;max-width:var(--reading-width)}
+.task-first .instruction-toolbar{display:block;margin-bottom:13px}
+.task-first .instruction-toolbar .eyebrow span{display:block;margin:7px 0 0;font-size:11px;font-weight:400;color:#7b886d}
+.task-first .instruction-toolbar button{font-size:13px;margin-top:10px;min-height:30px}
+.journey-itinerary{grid-area:itinerary;min-width:0;padding-top:0}
+.itinerary-heading{padding:0 0 12px;border-bottom:1px solid #d4dccb;margin-bottom:8px}
+.itinerary-heading>p:last-child{font-size:14px;line-height:1.6;max-width:340px}
+.task-stops strong{font-size:17px}.task-stops button{padding:13px 10px}
+.task-selected{padding:18px 0 0;border:0;min-height:0;gap:18px}
+.task-selected h4{font-size:27px;line-height:1.2}
+.task-selected p,.task-selected small{font-size:13px}
+.journey-map-panel figcaption{font-size:12px;line-height:1.6;margin-top:12px}
+.task-completion{margin-top:16px;padding-top:18px}
+.task-completion p{font-size:14px}
+
+.overview-section{display:block;border-top:1px solid #d4dccb}
+.overview-section>.section-heading{display:block}
+.overview-section h2 br{display:none}
+.overview-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:58px}
+.overview-grid .intro-copy>p.large-copy{font-size:26px;line-height:1.6;margin:0 0 22px}
+.overview-grid .intro-copy>p.large-copy:first-letter{text-transform:uppercase}
+.overview-grid .intro-copy>p{font-size:18px;line-height:1.8}
+.overview-grid .intro-copy .text-link{display:inline-flex;margin-top:25px;font-size:15px}
+.overview-grid .featured-world{padding:0;min-width:0}
+.overview-grid .hero-panorama{min-height:0;aspect-ratio:1.18;overflow:hidden;border-radius:5px;background:#283c2c}
+.overview-grid .hero-panorama>img{width:100%;height:100%;object-fit:cover;object-position:center}
+.overview-grid .hero-panorama:after{background:linear-gradient(0deg,#112818ce,transparent 30%,transparent 82%,#11281866)}
+.overview-grid .scene-selector{top:20px;left:20px;right:auto;gap:7px;flex-wrap:wrap}
+.overview-grid .scene-selector button{font-size:12px;padding:7px 11px}
+.overview-grid .scene-caption{display:block;padding:22px;color:#fff}
+.overview-grid .scene-caption>span:first-child{border:0;padding:0;display:block;font:11px monospace;color:#d0debd;margin-bottom:8px}
+.overview-grid .scene-caption>span:nth-child(2){display:block;font-size:21px}
+.overview-grid .scene-caption small{font-size:12px;display:block;margin:6px 0 0}
+.overview-grid .capture-tag{display:none}
+
+.film-section{display:grid;grid-template-columns:minmax(230px,.63fr) minmax(0,1.7fr);gap:22px 52px;align-items:start;border-top:1px solid #d4dccb}
+.film-section>.section-heading{grid-column:1;grid-row:1;display:block;margin:0}
+.film-section .section-heading h2{max-width:280px;font-size:52px}
+.film-section .section-heading>p{font-size:17px;line-height:1.7;margin-top:23px}
+.film-section .section-heading>p br{display:none}
+.film-section .film-layout{grid-column:2;grid-row:1/3;margin:0;max-width:none;min-width:0;width:100%}
+.film-section .film-player{border-radius:5px;overflow:hidden}
+.film-section .film-note{grid-column:1;grid-row:2;max-width:270px;margin:0;font-size:13px;line-height:1.7}
+.film-section #film-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+.worlds-section{border-block:1px solid #d4dccb}
+.world-summary{min-width:0;grid-template-columns:repeat(4,1fr);gap:24px}
+.world-summary strong{font-size:40px}.world-summary span{font-size:14px}
+.world-grid{gap:38px 26px}
+.world-card{padding-bottom:20px;border-bottom:1px solid #d1dac6}
+.world-photo{border-radius:4px;overflow:hidden}
+.terrain-unified .section-heading{grid-template-columns:1fr 1fr;gap:70px}
+.terrain-unified .terrain-scenes{gap:34px 24px;margin-bottom:58px}
+.terrain-unified .interaction-recordings{padding-top:26px;border-bottom:0}
+.interaction-heading{margin-bottom:18px}
+.framework-figure{max-width:1140px;margin-inline:auto;box-shadow:0 18px 50px #5366410a}
+.framework-details{max-width:1140px;margin-inline:auto}
+.results-toolbar{display:flex;justify-content:space-between;align-items:center;margin:0 0 26px;gap:20px}
+.results-chart-card{border-radius:5px}
+.metric-notes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:26px 36px;margin-top:34px}
+.metric-notes article{grid-column:span 2;border-top:1px solid #ccd7bf;padding-top:19px}
+.metric-notes article:nth-last-child(-n+2){grid-column:span 3}
+.metric-notes article p{max-width:540px;font-size:15px;line-height:1.75}
+.case-layout{display:grid;grid-template-columns:238px minmax(0,1fr);gap:32px;align-items:start}
+.case-layout .case-menu{display:flex;flex-direction:column;gap:0;grid-column:1;grid-row:1;position:sticky;top:104px;margin:0}
+.case-layout .case-menu button{border:0;border-top:1px solid #c8d2bd;min-height:0;padding:22px 20px;gap:9px;border-radius:0}
+.case-layout .case-menu button:last-child{border-bottom:1px solid #c8d2bd}
+.case-layout .case-menu strong{font-size:18px;line-height:1.45;max-width:none}
+.case-layout .case-menu button>span,.case-layout .case-menu small{font-size:11px;line-height:1.5}
+.case-layout>[role=tabpanel]{grid-column:2;grid-row:1;min-width:0}
+.case-layout .case-context{font-size:17px;line-height:1.75;max-width:800px;margin:0 0 22px}
+.case-layout .recovery-player,.case-layout .appendix-player{border-radius:5px;overflow:hidden}
+.case-layout .recovery-case-heading h3{font-size:29px}
+.case-layout .recovery-case-description{font-size:16px;max-width:800px}
+.case-layout .route-card h4{font-size:17px}
+.case-layout .recovery-viewport{padding:22px 12px 10px}
+.case-layout .route-span{font-size:12px;padding-inline:14px}
+.case-layout .replay-explanation{font-size:13px}
+
+@media(max-width:1100px){
+ .section{padding-block:76px}
+ .section-heading{gap:38px}
+ .opening{padding-top:45px}
+ .opening-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:30px}
+ .opening h1{font-size:76px;letter-spacing:-3.5px;white-space:normal}
+ .opening-description{font-size:23px}
+ .opening .journey-contract{padding:22px 20px 12px}
+ .opening-actions{gap:14px}
+ .opening-stats{grid-template-columns:repeat(3,1fr);margin-top:42px}
+ .opening-stats>a{display:none}.opening-stats strong{font-size:39px}
+ .task-first>.section-heading{gap:36px}
+ .task-first>.section-heading h2{font-size:45px}
+ .task-first>.section-heading>p{max-width:none;font-size:19px}
+ .journey-explorer{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px}
+ .task-first .task-instruction{padding:20px}.task-first .task-instruction blockquote{font-size:17px}
+ .journey-map-panel{padding:14px}
+ .overview-grid{gap:32px;grid-template-columns:1fr 1fr}
+ .overview-grid .intro-copy>p.large-copy{font-size:23px}
+ .overview-grid .hero-panorama{aspect-ratio:.85}
+ .film-section{grid-template-columns:240px minmax(0,1fr);gap:20px 32px}
+ .film-section .section-heading h2{font-size:44px}
+ .case-layout{grid-template-columns:200px minmax(0,1fr);gap:24px}
+ .case-layout .case-menu button{padding-inline:14px}
+ .case-layout .case-menu strong{font-size:16px}
+ .case-layout .case-menu button>span{font-size:10px}
+}
+@media(max-width:1000px){
+ .site-header{height:70px;padding-inline:28px}
+ .menu-toggle{display:flex;gap:12px;align-items:center;border:1px solid #c6d1ba;background:transparent;padding:8px 12px;min-height:38px;font-size:13px}
+ .site-header nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);padding:18px 28px 26px;border-bottom:1px solid #cbd5be;flex-direction:column;align-items:stretch;gap:4px}
+ .site-header nav.is-open{display:flex}.site-header nav a{padding:12px}.site-header .nav-film{margin-top:5px}
+ .opening-grid{gap:28px}.opening h1{font-size:68px}.opening .hero-heading>.eyebrow{font-size:11px}
+ .opening .contract-stage>span,.opening .contract-rule-label{font-size:15px}
+ .opening .contract-stage{gap:8px;padding:8px}.contract-heading h2{font-size:29px}
+ .contract-heading .eyebrow{display:none}
+ .opening-description{font-size:21px}
+ .opening-film-link{font-size:14px}
+ .opening-primary{font-size:15px;padding:13px 17px}
+ .journey-explorer{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr)}
+ .journey-heading{display:block}.journey-facts{max-width:none;justify-content:flex-start;margin-top:13px}
+ .journey-map-toolbar{flex-wrap:wrap}
+ .world-summary{grid-template-columns:repeat(2,1fr);gap:18px 28px}
+ .world-summary strong{font-size:34px}
+ .terrain-unified .section-heading{gap:32px}
+ .case-layout{display:block}
+ .case-layout .case-menu{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:26px}
+ .case-layout .case-menu button{border:1px solid #c8d2bd;padding:18px}
+ .metric-notes{gap:25px}
+}
+@media(max-width:760px){
+ .section{padding-block:64px}
+ .section-heading,.terrain-unified .section-heading{display:block;margin-bottom:29px}
+ .section-heading h2{font-size:39px}.section-heading>p{font-size:17px;line-height:1.7;margin-top:20px}
+ .opening{padding-top:36px}
+ .opening-grid{display:block}
+ .opening .hero-heading>.eyebrow{font-size:11px;letter-spacing:1.4px;margin-bottom:19px}
+ .opening h1{font-size:clamp(54px,13.9vw,82px);line-height:1.07;letter-spacing:-2.5px;margin:0 0 21px;white-space:nowrap}
+ .opening-description{font-size:21px;line-height:1.6;max-width:560px}
+ .opening-actions{margin-top:23px;gap:12px 20px}
+ .opening-primary{font-size:15px;min-height:48px;padding:13px 18px}
+ .opening-film-link{font-size:14px}
+ .opening-task{margin-top:34px}
+ .opening .journey-contract{padding:22px 20px 12px;box-shadow:none}
+ .opening .contract-stage{grid-template-columns:105px minmax(0,1fr);gap:14px;padding:8px 14px;min-height:76px}
+ .opening .contract-stage svg{height:59px}
+ .opening .contract-stage>span,.opening .contract-rule-label{font-size:17px}
+ .opening .contract-order{display:block;padding:10px 18px}
+ .opening .contract-order svg{height:64px;width:260px;max-width:100%;margin:auto}
+ .opening .contract-rule-label{margin:auto;text-align:center}
+ .opening-stats{margin-top:30px;padding:24px 0;gap:18px}
+ .opening-stats>div,.opening-stats>div+div{display:block;padding:0;border:0}
+ .opening-stats strong{display:block;font-size:38px;margin-bottom:9px}
+ .opening-stats span{font-size:12px;line-height:1.55;display:block;max-width:100px}
+ .task-first{padding-top:54px}
+ .task-first>.section-heading{display:block;margin-bottom:25px}
+ .task-first>.section-heading h2{font-size:39px}
+ .task-first>.section-heading>.eyebrow{display:block}
+ .task-first>.section-heading>p{font-size:18px;line-height:1.65;margin-top:18px}
+ .task-first .task-tabs{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:25px}
+ .task-first .task-tabs button{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:6px 15px;padding:16px 18px}
+ .task-first .task-tabs strong{font-size:25px;margin:0;min-height:0}
+ .task-first .task-tabs small{font-size:12px}
+ .task-first .journey-heading{padding:0 0 20px;margin-bottom:22px}
+ .task-first .journey-heading h3{font-size:31px}
+ .journey-explorer,.journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-columns:minmax(0,1fr);grid-template-areas:"feedback" "map" "instruction" "itinerary";gap:25px;padding:0}
+ .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map" "instruction" "itinerary"}
+ .journey-map-panel{position:static;padding:13px}
+ .journey-map-toolbar{gap:10px}.journey-map-toolbar button{font-size:13px}
+ .journey-map-toolbar .eyebrow{font-size:10px}
+ .task-first .task-instruction{padding:22px 20px;margin:0}
+ .task-first .task-instruction blockquote{font-size:18px}
+ .task-first .instruction-toolbar{display:block}
+ .task-selected h4{font-size:25px}
+ .task-selected small{font-size:12px}
+ .journey-itinerary{padding-top:0}
+ .overview-grid{display:flex;flex-direction:column;align-items:stretch;gap:30px}
+ .overview-grid .intro-copy>p.large-copy{font-size:23px}
+ .overview-grid .intro-copy>p{font-size:17px;line-height:1.8}
+ .overview-grid .hero-panorama{aspect-ratio:1.1;min-height:0}
+ .overview-grid .scene-selector{top:15px;left:13px;gap:4px}
+ .overview-grid .scene-selector button{font-size:10px;padding:6px 8px}
+ .overview-grid .scene-caption{padding:18px}
+ .overview-grid .scene-caption>span:nth-child(2){font-size:20px}
+ .film-section{display:block}
+ .film-section>.section-heading{margin-bottom:28px}
+ .film-section .section-heading h2{font-size:40px;max-width:none}
+ .film-section .section-heading>p{margin-top:18px;font-size:17px;max-width:460px}
+ .film-section .film-note{margin-top:17px;max-width:none;font-size:13px}
+ .world-summary{margin-top:25px;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+ .world-summary strong{font-size:31px}.world-summary span{font-size:12px}
+ .world-grid{gap:26px 16px}
+ .world-card{padding-bottom:15px}
+ .terrain-unified .terrain-scenes{gap:28px 16px;margin-bottom:34px}
+ .terrain-unified .terrain-card-copy strong{font-size:17px}
+ .terrain-unified .terrain-card-copy>span{font-size:13px}
+ .results-toolbar{align-items:flex-start;flex-direction:column;gap:18px}
+ .metric-notes{display:block}.metric-notes article{padding-top:19px;margin-top:23px}
+ .case-layout .case-menu{gap:8px;margin-bottom:25px}
+ .case-layout .case-menu button{padding:15px 12px;gap:7px}
+ .case-layout .case-menu strong{font-size:16px;line-height:1.4}
+ .case-layout .case-menu button>span{font-size:10px;letter-spacing:.4px}
+ .case-layout .case-context{font-size:16px}
+ .case-layout .recovery-case-heading h3{font-size:27px}
+ .case-layout .recovery-case-description{font-size:15px}
+}
+@media(max-height:850px){.journey-map-panel,.case-layout .case-menu{position:static}}
+.opening .contract-order svg{height:80px;width:280px}
+#recovery>.section-heading>p{font-size:18px;line-height:1.7}
+.case-layout .route-card header>span{font-size:11px;line-height:1.5}
+@media(max-width:760px){#recovery>.section-heading>p{font-size:17px}}
