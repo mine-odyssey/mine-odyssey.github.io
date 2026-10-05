@@ -7,7 +7,7 @@
   const pressed = (selector, attr, value) => $$(selector).forEach(b => b.setAttribute('aria-pressed', String(b.dataset[attr] === String(value))));
   const text = (selector, value) => { $(selector).textContent = value; };
   if (!data?.maps?.length) { text('#world-count', 'The world inventory could not be loaded. Keep the data folder alongside this page.'); return; }
-  const state = { filter:'all', query:'', expanded:false, cohort:'main', sort:'sr', direction:-1, clip:0, chartMode:'overall' };
+  const state = { filter:'all', query:'', expanded:false, cohort:'main', sort:'sr', direction:-1, clip:0 };
   const featured = ['cape-town','versailles','ueno-park','hagia-sophia','zurich','rms-titanic'];
   const worlds = [...data.maps].sort((a,b) => {
     const ai=featured.indexOf(a.id), bi=featured.indexOf(b.id);
@@ -164,43 +164,6 @@
   $('#playback-speed').addEventListener('change',e=>{video.playbackRate=Number(e.target.value);});
   $$('[data-clip]').forEach(b=>b.addEventListener('click',()=>setClip(Number(b.dataset.clip))));
   document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
-  function renderResultChart() {
-    const effortOrder=['low','medium','high','max'];
-    const rows=data.results.filter(r=>state.cohort==='main'?r.cohort==='main':r.model==='Claude Opus 5')
-      .sort((a,b)=>state.cohort==='main'?b.sr-a.sr:effortOrder.indexOf(a.effort)-effortOrder.indexOf(b.effort));
-    const series=state.chartMode==='overall'?
-      [{key:'sr',label:'Success rate',short:'SR',color:'#315b43'}, {key:'cc',label:'Checkpoint coverage',short:'CC',color:'#ba7740'}, {key:'spl',label:'Path efficiency',short:'SPL',color:'#5978a3'}]:
-      [{key:'sr',label:'All tasks',short:'All',color:'#315b43'}, {key:'outdoor_sr',label:'Outdoor',short:'Outdoor',color:'#ba7740'}, {key:'indoor_sr',label:'Indoor',short:'Indoor',color:'#5978a3'}];
-    const w=1100,h=460,left=58,right=65,top=36,bottom=335;
-    const x=i=>left+34+i*(w-left-right-68)/(rows.length-1),y=v=>bottom-v*(bottom-top)/100;
-    const labelLines=r=>state.cohort==='effort'?[r.effort[0].toUpperCase()+r.effort.slice(1),'Claude Opus 5']:
-      r.model.startsWith('Claude')?['Claude',r.model.slice(7)]:r.model.startsWith('DeepSeek')?['DeepSeek','V4.1 Flash']:
-      r.model.startsWith('Gemini')?['Gemini','3.8 Flash']:r.model.startsWith('GLM')?['GLM','5.3 Flash']:[r.model];
-    text('#results-chart-title',state.chartMode==='overall'?'Completion, coverage & efficiency':'Success across environments');
-    text('#results-chart-order',state.cohort==='main'?'Models ordered by success rate':'Claude Opus 5 · Low → medium → high → max effort');
-    $('#results-chart-legend').innerHTML=series.map(s=>`<span><i style="--series-color:${s.color}"></i>${s.label} <small>${state.chartMode==='overall'?s.short:''}</small></span>`).join('');
-    const grid=[0,20,40,60,80,100].map(v=>`<g><path d="M${left} ${y(v)}H${w-right}" stroke="#dce2d5" stroke-dasharray="${v?'3 6':'0'}"/><text x="${left-14}" y="${y(v)+5}" text-anchor="end" class="chart-tick">${v}</text></g>`).join('');
-    const curves=series.map((s,j)=>`<path class="result-line" data-series="${s.key}" d="${rows.map((r,i)=>`${i?'L':'M'}${x(i)} ${y(r[s.key])}`).join(' ')}" fill="none" stroke="${s.color}" stroke-width="3" ${j===2?'stroke-dasharray="7 5"':''}/>`).join('');
-    const columns=rows.map((r,i)=>`<g data-result-index="${i}" role="button" tabindex="${i===0?'0':'-1'}" aria-label="${escapeHTML(r.model)}, ${r.effort} effort: ${series.map(s=>`${s.short} ${r[s.key].toFixed(2)} percent`).join(', ')}" aria-pressed="${i===0}">
-      <rect class="chart-column" x="${x(i)-48}" y="${top-16}" width="96" height="${bottom-top+100}" rx="10" fill="transparent"/>
-      <path class="chart-guide" d="M${x(i)} ${top}V${bottom}" stroke="#849c77" stroke-dasharray="3 5"/>
-      ${series.map(s=>`<circle class="chart-point" data-series="${s.key}" data-value="${r[s.key]}" cx="${x(i)}" cy="${y(r[s.key])}" r="5" fill="${s.color}" stroke="#fcfcf6" stroke-width="2"><title>${s.short}: ${r[s.key].toFixed(2)}%</title></circle>`).join('')}
-      ${labelLines(r).map((l,j)=>`<text x="${x(i)}" y="${bottom+30+j*19}" text-anchor="middle" class="chart-model">${escapeHTML(l)}</text>`).join('')}
-      <text x="${x(i)}" y="${bottom+77}" text-anchor="middle" class="chart-effort">${state.cohort==='main'?escapeHTML(r.effort)+' effort':'180 tasks'}</text>
-    </g>`).join('');
-    $('#results-chart').innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="results-plot-title results-plot-desc"><title id="results-plot-title">${$('#results-chart-title').textContent}</title><desc id="results-plot-desc">Percentage scores on a zero to one hundred scale. ${$('#results-chart-order').textContent}. Select a model for exact values; use left and right arrow keys to move between models.</desc><text x="${left-14}" y="17" text-anchor="end" class="chart-tick">%</text>${grid}${curves}${columns}</svg>`;
-    function select(index){
-      const r=rows[index];
-      $$('#results-chart [data-result-index]').forEach(el=>{const active=Number(el.dataset.resultIndex)===index;el.setAttribute('aria-pressed',String(active));el.setAttribute('tabindex',active?'0':'-1');});
-      $('#results-chart-readout').innerHTML=`<div><strong>${escapeHTML(r.model)}</strong><span>${escapeHTML(r.effort)} effort · 180 tasks</span></div>${series.map(s=>`<div style="--series-color:${s.color}"><span>${s.label}</span><strong>${r[s.key].toFixed(2)}<small>%</small></strong></div>`).join('')}`;
-    }
-    $$('#results-chart [data-result-index]').forEach(el=>{
-      const index=Number(el.dataset.resultIndex);
-      el.addEventListener('pointerenter',()=>select(index));el.addEventListener('focus',()=>select(index));el.addEventListener('click',()=>select(index));
-      el.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?rows.length-1:(index+(e.key==='ArrowRight'?1:-1)+rows.length)%rows.length;$(`#results-chart [data-result-index="${next}"]`).focus();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();select(index);}});
-    });
-    select(0);pressed('[data-chart-mode]','chartMode',state.chartMode);
-  }
   function renderResults() {
     const rows=data.results.filter(r=>state.cohort==='main'?r.cohort==='main':r.model==='Claude Opus 5').sort((a,b)=>state.direction*(a[state.sort]-b[state.sort]));
     $('#results-body').innerHTML=rows.map(r=>`<tr class="${r.sr===Math.max(...rows.map(x=>x.sr))?'leading':''}"><th scope="row"><span class="model-name">${escapeHTML(r.model)}</span><span class="model-effort">${escapeHTML(r.effort)} effort · 180 tasks</span></th><td><div class="score-wrap"><span>${r.sr.toFixed(2)}%</span><span class="score-bar" aria-hidden="true"><i style="width:${r.sr}%"></i></span></div></td><td>${r.outdoor_sr.toFixed(2)}%</td><td>${r.indoor_sr.toFixed(2)}%</td><td>${r.cc.toFixed(2)}%</td><td>${r.spl.toFixed(2)}%</td><td>${r.mean_steps.toFixed(1)}</td><td>${r.mean_path_3d_blocks.toFixed(1)}</td></tr>`).join('');
@@ -208,14 +171,12 @@
     const label=$(`[data-sort="${state.sort}"]`).textContent.replace(/[↑↓]/g,'').trim();
     text('#results-status',`${rows.length} configurations · Sorted by ${label.toLowerCase()}, ${state.direction===-1?'highest':'lowest'} first`);
     pressed('[data-cohort]','cohort',state.cohort);
-    renderResultChart();
   }
   $$('[data-sort]').forEach(b=>b.addEventListener('click',()=>{
     const key=b.dataset.sort;
     state.direction=state.sort===key?-state.direction:(['mean_steps','mean_path_3d_blocks'].includes(key)?1:-1);state.sort=key;renderResults();
   }));
   $$('[data-cohort]').forEach(b=>b.addEventListener('click',()=>{state.cohort=b.dataset.cohort;renderResults();}));
-  $$('[data-chart-mode]').forEach(b=>b.addEventListener('click',()=>{state.chartMode=b.dataset.chartMode;renderResultChart();}));
   $('#terrain-scenes').innerHTML=data.scenes.map(s=>`<button class="terrain-card" data-scene-detail="${escapeHTML(s.id)}" type="button"><img src="${escapeHTML(s.image)}" alt="${escapeHTML(`${s.title} in ${s.place}`)}" width="800" height="600" loading="lazy"><span class="terrain-card-copy"><strong>${escapeHTML(s.title)}</strong><span>${escapeHTML(s.place)}</span><small>${escapeHTML(s.kind)}</small></span><span class="terrain-open" aria-hidden="true">↗</span></button>`).join('');
   $('#terrain-scenes').addEventListener('click',e=>{const b=e.target.closest('[data-scene-detail]');if(!b)return;const s=data.scenes.find(s=>s.id===b.dataset.sceneDetail);openImage(s.image,s.title,`${s.place} · ${s.description} · ${s.kind}`);});
   const menu=$('.menu-toggle'),nav=$('#navigation');

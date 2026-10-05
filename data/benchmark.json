@@ -633,7 +633,7 @@
   "resultsSource": {
     "label": "Latest arXiv manuscript · Table 1",
     "member": "paper-arxiv.tex",
-    "manuscript_sha256": "53dbc13d223449c98f910410c8bce98d1e1dfcb26531efb9cb9a84c07b5175a0",
+    "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170",
     "main_models": 8,
     "configurations": 11,
     "precision": "As published: percentages to 2 decimals; turns and path length to 1 decimal."
@@ -752,8 +752,8 @@
     }
   ],
   "film": {
-    "video": "assets/showcase-program-tight-20261005.mp4",
-    "poster": "assets/showcase-program-tight-poster-20261005.webp",
+    "video": "assets/showcase-diversity-first-20261005.mp4",
+    "poster": "assets/showcase-diversity-first-poster-20261005.webp",
     "duration_seconds": 123.008,
     "maps": 17,
     "chapters": [
@@ -778,45 +778,45 @@
         "description": "Six environments in motion."
       },
       {
-        "title": "Test. Compose. Verify.",
-        "start": 26.5,
-        "description": "Real model commands, execution, feedback and verified arrivals."
-      },
-      {
-        "title": "Find the way upstairs",
-        "start": 50.5,
-        "description": "Find the stairs, reach the gallery, and compare the recorded run outcomes."
-      },
-      {
         "title": "Terrain and interaction",
-        "start": 70.5,
+        "start": 26.5,
         "description": "Water, hills, stairs, ladders, passages and a button-controlled door."
       },
       {
         "title": "Ablation settings",
-        "start": 91.0,
+        "start": 47.0,
         "description": "HUD overlays and the rear third-person camera."
       },
       {
         "title": "Multi-view observations",
-        "start": 98.0,
+        "start": 54.0,
         "description": "An actual six-view observation beside later movement from the same run."
       },
       {
         "title": "Route guidance",
-        "start": 105.0,
+        "start": 61.0,
         "description": "A visible planned route; the agent controls movement."
       },
       {
         "title": "Lighting and weather",
-        "start": 112.0,
+        "start": 68.0,
         "description": "Clear noon, midnight and rain."
+      },
+      {
+        "title": "Test. Compose. Verify.",
+        "start": 74.0,
+        "description": "Real model commands, execution, feedback and verified arrivals."
+      },
+      {
+        "title": "Find the way upstairs",
+        "start": 98.0,
+        "description": "Find the stairs, reach the gallery, and compare the recorded run outcomes."
       }
     ],
-    "edition": "Program tight · 5 October 2026",
-    "source_sha256": "41b401f69e75620199dfda47b565489376b336a57b25fd5fdef77373df3960d1",
-    "delivery_sha256": "ad1758629b1b80ca061bc16b59afadbfebe1bc35c186228db0762a3023ed30f6",
-    "chapters_sha256": "75331bf881184ec53c937acaf68d76a1deae7ceabf1bf53b205b418a44b9b092"
+    "edition": "Diversity first · 5 October 2026",
+    "source_sha256": "365e002ad18b40ec24c3dfc623f8f0f6de3fa10a0d33812167a90628c7e71cd7",
+    "delivery_sha256": "367cf954998894494e2e3000e750150b524bb93642ae5646f9ec659d709067d4",
+    "chapters_sha256": "a3a01d0f4262c7a439001bf5436555a599c888a44afdf1f7099d824a0dbe12fc"
   },
   "journeys": {
     "examples": [
@@ -2410,11 +2410,11 @@
     },
     {
       "file": "arxiv-submission-20260929/mine-odyssey-arxiv-source.zip",
-      "sha256": "8ceee53fd470fad8dc4b5cdc95cf634621f64d44215edc863d29e735c77a9ac1"
+      "sha256": "dd8af200854783b8b174dc5fef5f56871f7a33b96603c33762a941e138841b25"
     },
     {
       "file": "arxiv-submission-20260929/audit.json",
-      "sha256": "be2af0fbea6657dc674f87cf9bcdc7731397ff2c86b079d0b4dfb691f8f3f683"
+      "sha256": "bf9eabaa202e95d3075584a2237b9e3638592d1198e06c779f99c50f7bc85196"
     },
     {
       "file": "paper/paper/results/opus55-20260928/audit.json",
@@ -2422,7 +2422,7 @@
     }
   ],
   "paperCopy": {
-    "manuscript_sha256": "53dbc13d223449c98f910410c8bce98d1e1dfcb26531efb9cb9a84c07b5175a0",
+    "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170",
     "member": "paper-arxiv.tex",
     "excerpts": {
       "title": {
