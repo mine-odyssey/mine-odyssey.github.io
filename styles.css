@@ -329,3 +329,153 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 
 .chart-scroll-hint{display:none}
 @media(max-width:1050px){.chart-scroll-hint{display:block;margin:0;padding:0 18px 16px;font-size:12px;color:#7b896f}}
+
+/* Larger editorial hierarchy, following the author's AutoDataBench reference. */
+.site-header nav{font-size:14px}
+.task-first-header{padding-top:52px}
+.task-first-header .hero-heading{align-items:flex-end;gap:40px;margin-bottom:22px}
+.task-first-header h1{font-size:clamp(76px,8vw,112px);line-height:1.02;letter-spacing:-4px;margin-top:18px}
+.task-first-header .eyebrow,.hero.task-first-header>.hero-heading .eyebrow{font-size:12px;line-height:1.6;letter-spacing:1.7px;margin-bottom:0}
+.task-first-header .hero-kicker{font-size:18px;line-height:1.65;min-width:244px;max-width:280px;padding-left:26px;margin-bottom:7px}
+.task-first{padding-top:36px;padding-bottom:88px}
+.task-first>.section-heading{align-items:flex-start;gap:50px;margin-bottom:32px}
+.task-first>.section-heading h2{font-size:48px;line-height:1.14;letter-spacing:-1.7px;white-space:nowrap}
+.task-first>.section-heading .eyebrow{font-size:12px;margin-bottom:12px}
+.task-first>.section-heading>p{font-size:23px;line-height:1.55;max-width:740px;margin-top:0}
+.journey-contract{padding:26px 30px 20px}
+.contract-stage svg{height:92px;max-width:280px}
+.contract-stage>span,.contract-rule-label{font-size:18px;line-height:1.5;margin-top:12px}
+.contract-stop text{font-size:15px;font-weight:500}
+.contract-details summary,.framework-details summary{font-size:15px;min-height:38px}
+.task-first .task-tabs button{padding:24px 28px}
+.task-first .task-tabs span{font-size:12px;letter-spacing:.9px}
+.task-first .task-tabs strong{font-size:32px;line-height:1.2;margin:12px 0 9px;min-height:0}
+.task-first .task-tabs small{font-size:14px;line-height:1.5}
+.task-first .journey-heading{padding:26px 30px 24px;gap:28px}
+.task-first .journey-heading h3{font-size:36px;line-height:1.2}
+.task-first .journey-heading .eyebrow{font-size:12px;line-height:1.5;margin-bottom:10px}
+.journey-facts{font-size:14px;line-height:1.6;gap:8px 18px}
+.task-first .task-instruction{padding:24px 26px;margin-bottom:28px}
+.task-first .instruction-toolbar{gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:15px}
+.task-first .instruction-toolbar .eyebrow{font-size:12px;line-height:1.7}
+.task-first .instruction-toolbar .eyebrow span{font-size:12px;line-height:1.7}
+.task-first .instruction-toolbar button{font-size:14px;min-height:32px;line-height:1.5}
+.task-first .task-instruction blockquote{font-size:20px;line-height:1.75}
+.journey-map-toolbar .eyebrow,.itinerary-heading .eyebrow{font-size:12px;line-height:1.5}
+.journey-map-toolbar button{font-size:14px;min-height:40px;padding:8px 13px}
+.itinerary-heading>p:last-child{font-size:15px;line-height:1.6}
+.task-stops button{padding:17px 12px;gap:14px}
+.task-stops strong{font-size:18px;line-height:1.4}
+.task-stops small{font-size:11px;line-height:1.5}
+.task-stops button>span:nth-child(2)>span{font-size:14px;line-height:1.5}
+.stop-number{flex-basis:34px;height:34px;font-size:14px}
+.task-stops .task-watch-leg{font-size:13px;min-height:40px}
+.task-selected h4{font-size:28px;line-height:1.3}
+.task-selected p,.task-selected small{font-size:14px;line-height:1.6}
+.task-selected>div>span{font-size:12px}
+.task-completion strong,.task-completion summary{font-size:15px}
+.task-completion p,.journey-map-panel figcaption{font-size:14px;line-height:1.7}
+.task-step-controls button{min-width:40px;min-height:40px}
+.section-heading h2{font-size:clamp(40px,4.2vw,60px)}
+.section-heading>p{font-size:19px;line-height:1.7}
+.intro-copy>p.large-copy{font-size:29px;line-height:1.55}
+.intro-copy>p{font-size:18px;line-height:1.8}
+.intro-copy .text-link,.hero-secondary,.button{font-size:15px}
+.world-card h3{font-size:23px}.world-card p{font-size:14px}.world-card-meta{font-size:12px}
+.world-toolbar .segmented button,.search input{font-size:14px}
+.world-count,.world-hover-note,.world-bottom>p{font-size:14px}
+.world-photo>span,.world-preview-hint{font-size:12px}
+.metric-notes h3{font-size:17px}.metric-notes article p{font-size:16px}
+.framework-caption p{font-size:17px}
+.framework-steps button,#framework-play{font-size:15px}
+.results-chart-heading h3{font-size:23px}.results-chart-heading p,.results-chart-legend{font-size:14px}
+.results-table-details>summary,.film-chapter-panel summary{font-size:16px;min-height:42px}
+.film-chapter-panel button{font-size:14px;min-height:52px}
+.small-note,.film-note{font-size:14px;line-height:1.75}
+@media(min-width:761px) and (max-width:1100px){
+ .task-first-header .hero-heading{gap:26px}
+ .task-first-header h1{font-size:76px;letter-spacing:-3px}
+ .task-first-header .hero-kicker{min-width:200px;font-size:16px;padding-left:20px}
+ .task-first>.section-heading{gap:30px}
+ .task-first>.section-heading>p{max-width:60%;font-size:21px}
+ .journey-heading{align-items:flex-start}.journey-facts{max-width:260px}
+ .task-first .task-tabs button{padding-inline:20px}
+}
+@media(max-width:760px){
+ .site-header nav{font-size:15px}.menu-toggle{font-size:13px;min-height:38px}
+ .task-first-header{padding-top:34px}
+ .task-first-header .hero-heading{display:block;margin-bottom:0}
+ .task-first-header h1{font-size:clamp(54px,14vw,82px);letter-spacing:-2.2px;line-height:1.06;margin-top:18px}
+ .hero.task-first-header>.hero-heading .eyebrow{font-size:11px;line-height:1.7;letter-spacing:1px;max-width:330px}
+ .task-first-header .hero-kicker{display:flex;gap:8px 14px;flex-wrap:wrap;max-width:none;min-width:0;border:0;padding:0;margin-top:22px;font-size:14px;line-height:1.6}
+ .task-first-header .hero-kicker br{display:none}
+ .task-first-header .hero-kicker span{display:block}
+ .task-first{padding-top:38px;padding-bottom:60px}
+ .task-first>.section-heading{display:block;margin-bottom:26px}
+ .task-first>.section-heading h2{font-size:38px;letter-spacing:-1px}
+ .task-first>.section-heading>p{font-size:19px;line-height:1.65;margin-top:18px;max-width:none}
+ .journey-contract{padding:20px 16px 16px}
+ .contract-stage{grid-template-columns:115px 1fr;gap:10px}
+ .contract-stage svg{height:68px}
+ .contract-stage>span,.contract-rule-label{font-size:16px;line-height:1.5;margin-top:0}
+ .contract-order svg{height:85px;max-width:280px}
+ .contract-rule-label{margin-top:0}
+ .contract-details summary{font-size:14px}
+ .task-first .task-tabs button{padding:18px 9px}
+ .task-first .task-tabs span{font-size:10px;letter-spacing:0;line-height:1.5}
+ .task-first .task-tabs strong{font-size:22px;line-height:1.15;margin:9px 0;min-height:50px;overflow-wrap:anywhere}
+ .task-first .task-tabs small{font-size:11px;line-height:1.6}
+ .task-first .journey-heading{padding:24px 18px 20px}
+ .task-first .journey-heading h3{font-size:30px}
+ .task-first .journey-heading .eyebrow{font-size:10px;overflow-wrap:anywhere}
+ .journey-facts{font-size:13px;gap:8px 12px;margin-top:12px}
+ .task-first .task-instruction{padding:20px 16px;margin-inline:16px;margin-bottom:24px}
+ .task-first .instruction-toolbar{gap:10px;display:block}
+ .task-first .instruction-toolbar .eyebrow,.task-first .instruction-toolbar .eyebrow span{font-size:11px}
+ .task-first .instruction-toolbar button{font-size:13px;margin-top:10px}
+ .task-first .task-instruction blockquote{font-size:18px;line-height:1.75}
+ .journey-map-toolbar{align-items:flex-start;flex-wrap:wrap;gap:12px}
+ .journey-map-toolbar .eyebrow{font-size:11px}
+ .journey-map-toolbar button{font-size:13px;padding:7px 10px}
+ .task-selected h4{font-size:25px}.task-selected p,.task-selected small{font-size:13px}
+ .task-stops strong{font-size:17px}.task-stops small{font-size:11px}
+ .task-stops button>span:nth-child(2)>span{font-size:13px}
+ .task-completion p,.journey-map-panel figcaption{font-size:13px}
+ .section-heading h2{font-size:40px}.section-heading>p{font-size:17px}
+ .intro-copy>p.large-copy{font-size:24px}.intro-copy>p{font-size:17px}
+ .world-card h3{font-size:20px;line-height:1.3}.world-card p{font-size:12px;line-height:1.6}
+ .world-card-meta{font-size:11px}.world-photo>span,.world-preview-hint{font-size:10px}
+ .world-toolbar .segmented button{font-size:12px;padding-inline:10px}
+ .framework-caption p{font-size:15px}.framework-steps button{font-size:12px}
+ .results-chart-heading h3{font-size:20px}.results-chart-legend{font-size:12px}
+ .film-chapter-panel button{font-size:12px}
+ .metric-notes h3{font-size:16px}.metric-notes article p{font-size:15px}
+}
+.chart-model{font-size:16px}.chart-tick{font-size:14px}.chart-effort{font-size:12px}
+.results-chart-readout>div:first-child strong{font-size:19px}
+.results-chart-readout strong{font-size:36px}.results-chart-readout span{font-size:14px}
+.table-scroll table{font-size:14px}.table-scroll th,.table-scroll th button{font-size:12px}
+.model-name{font-size:15px}.model-effort{font-size:12px;line-height:1.6}
+.case-context,.cases>div>p.case-context,.appendix-description,.recovery-case-description{font-size:18px;line-height:1.75}
+.case-menu strong{font-size:19px}.case-menu button>span,.case-menu small{font-size:13px;line-height:1.5}
+.case-source-details summary,.case-source-details p,.replay-explanation{font-size:15px}
+.route-card h4{font-size:19px}.route-span{font-size:13px}
+#recovery .appendix-timeline button{font-size:13px;min-height:52px}
+.terrain-unified .terrain-card-copy strong{font-size:20px}.terrain-unified .terrain-card-copy>span{font-size:16px}
+.action-copy>p:not(.eyebrow):not(.small-note),.terrain-unified .interaction-recordings>p{font-size:17px}
+@media(max-width:760px){
+ .task-first .task-tabs{grid-template-columns:1fr}
+ .task-first .task-tabs button{display:grid;grid-template-columns:minmax(0,1fr) 105px;gap:6px 16px;padding:16px 18px;text-align:left;border-bottom:1px solid var(--line)}
+ .task-first .task-tabs span{grid-column:1;grid-row:1}
+ .task-first .task-tabs strong{grid-column:1;grid-row:2;font-size:26px;min-height:0;margin:0;overflow-wrap:normal}
+ .task-first .task-tabs small{grid-column:2;grid-row:1/3;align-self:center;font-size:12px;line-height:1.6}
+ .results-chart-readout strong{font-size:30px}.results-chart-readout span{font-size:11px}
+ .results-chart-readout>div:first-child strong{font-size:18px}
+ .case-context,.cases>div>p.case-context,.appendix-description,.recovery-case-description{font-size:16px}
+ .case-menu strong{font-size:16px}.case-menu button>span,.case-menu small{font-size:11px}
+ .case-source-details summary,.case-source-details p,.replay-explanation{font-size:14px}
+ .terrain-unified .terrain-card-copy strong{font-size:18px}.terrain-unified .terrain-card-copy>span{font-size:14px}
+ #recovery .appendix-timeline button{font-size:12px}
+}
+
+.task-first-header .hero-kicker>span{display:block}
