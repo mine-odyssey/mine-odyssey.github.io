@@ -761,10 +761,13 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .terrain-loop-label{left:8px}.terrain-pair-phase{right:8px;background:#f1f4e9ed;color:#294e3a;min-width:46px;text-align:center}
 @media(max-width:760px){.terrain-motion-bar{gap:12px;align-items:center;margin-bottom:20px}.terrain-motion-bar p{font-size:12px;max-width:180px}.terrain-motion-bar button{font-size:12px;white-space:nowrap;padding:8px 10px}.terrain-loop-label,.terrain-pair-phase{font-size:9px;bottom:5px;padding:3px 5px}.terrain-loop-label{left:5px}.terrain-pair-phase{right:5px;min-width:36px}}
 
+/* Main results retains its original palette and table layout. */
+#results{--paper:#f5f4ee;--line:#d9ddd3}
+
 /* Research-page composition: centered introduction, wide evidence and case tabs. */
 .research-layout{--paper:#fff;--line:#dce3dc;background:var(--paper)}
 .research-layout .site-header{background:#fffffff2;border-color:var(--line)}
-.research-layout .section{padding-block:76px}
+.research-layout .section:not(.results-inner){padding-block:76px}
 .research-layout .opening{padding-top:46px}
 .research-layout .opening-grid{display:block}
 .research-layout .opening .hero-heading{text-align:center;max-width:960px;margin:0 auto 38px}
@@ -794,10 +797,10 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .research-layout .opening-stats strong{font-size:40px}
 .research-layout .opening-stats span{font-size:15px;max-width:130px}
 .research-layout .opening-stats>a{display:none}
-.research-layout .section-heading,.research-layout .task-first>.section-heading,.research-layout .terrain-unified .section-heading{display:block;text-align:center;max-width:880px;margin:0 auto 32px}
-.research-layout .section-heading h2,.research-layout .task-first>.section-heading h2{font-size:46px;line-height:1.18;letter-spacing:-1.2px;max-width:none}
-.research-layout .section-heading .eyebrow{margin-bottom:11px;font-size:12px}
-.research-layout .section-heading>p,.research-layout .task-first>.section-heading>p,.research-layout #recovery>.section-heading>p{max-width:780px;margin:16px auto 0;font-size:19px;line-height:1.65}
+.research-layout .section-heading:not(.results-heading),.research-layout .task-first>.section-heading,.research-layout .terrain-unified .section-heading{display:block;text-align:center;max-width:880px;margin:0 auto 32px}
+.research-layout .section-heading:not(.results-heading) h2,.research-layout .task-first>.section-heading h2{font-size:46px;line-height:1.18;letter-spacing:-1.2px;max-width:none}
+.research-layout .section-heading:not(.results-heading) .eyebrow{margin-bottom:11px;font-size:12px}
+.research-layout .section-heading:not(.results-heading)>p,.research-layout .task-first>.section-heading>p,.research-layout #recovery>.section-heading>p{max-width:780px;margin:16px auto 0;font-size:19px;line-height:1.65}
 .research-layout .task-first{padding-top:66px}
 .research-layout .task-first .task-tabs{max-width:1100px;margin-inline:auto;gap:12px}
 .research-layout .task-first .task-tabs button{background:#fff;border-color:#d4ded2;border-radius:9px;padding:17px 21px}
@@ -814,23 +817,9 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .research-layout .film-section .film-player{border-radius:10px}
 .research-layout .film-section .film-note{max-width:none;text-align:center;margin-top:16px;font-size:13px}
 .research-layout .film-section #film-chapters{grid-template-columns:repeat(3,minmax(0,1fr))}
-.research-layout .worlds-section,.research-layout .results-section{background:#f7f9f5;border-color:#e0e6dc}
+.research-layout .worlds-section{background:#f7f9f5;border-color:#e0e6dc}
 .research-layout .worlds-section .section-heading{max-width:1100px}
 .research-layout .world-summary{max-width:800px;margin:26px auto 0;text-align:center}
-.research-layout .results-toolbar{padding:16px 20px;margin:0;background:#fff;border:1px solid #d6dfd2;border-radius:10px 10px 0 0;border-bottom:0}
-.research-layout #results .table-scroll{background:#fff;border:1px solid #d6dfd2;border-radius:0 0 10px 10px}
-.research-layout #results th{background:#eef3e9}
-.research-layout #results td{background:transparent}
-.research-layout #results tbody tr:nth-child(even){background:#f8faf6}
-.research-layout #results tbody tr:hover{background:#edf3e8}
-.research-layout #results td:first-child{background:#fff}
-.research-layout #results table{font-size:16px}
-.research-layout #results td,.research-layout #results th{padding:18px 16px}
-.research-layout #results thead th,.research-layout #results thead button{font-size:14px}
-.research-layout #results tbody th{background:#fff}
-.research-layout #results .segmented button{font-size:14px;padding:10px 15px}
-.research-layout #results .text-link{font-size:14px}
-.research-layout .metric-notes{gap:22px 32px;margin-top:24px}
 .research-layout .case-layout{display:block}
 .research-layout .case-layout .case-menu{position:static;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 24px}
 .research-layout .case-layout .case-menu button{border:1px solid #d1dccc;border-radius:9px;padding:17px 18px;gap:7px;background:#fff;min-height:128px}
@@ -854,7 +843,7 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .research-layout .case-layout .case-menu button{min-height:110px}
 }
 @media(max-width:760px){
- .research-layout .section{padding-block:56px}
+ .research-layout .section:not(.results-inner){padding-block:56px}
  .research-layout .opening{padding-top:32px}
  .research-layout .opening .hero-heading{margin-bottom:26px}
  .research-layout .opening .hero-heading>.eyebrow{font-size:10px;letter-spacing:1.2px}
@@ -874,13 +863,12 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .research-layout .opening-stats>div{padding:0;text-align:center}
  .research-layout .opening-stats strong{font-size:34px}
  .research-layout .opening-stats span{font-size:12px;max-width:120px;margin:auto}
- .research-layout .section-heading,.research-layout .task-first>.section-heading,.research-layout .terrain-unified .section-heading{margin-bottom:26px}
- .research-layout .section-heading h2,.research-layout .task-first>.section-heading h2,.research-layout .film-section .section-heading h2{font-size:36px;letter-spacing:-.8px}
- .research-layout .section-heading>p,.research-layout .task-first>.section-heading>p,.research-layout .film-section .section-heading>p,.research-layout #recovery>.section-heading>p{font-size:17px;line-height:1.65;margin-top:14px}
+ .research-layout .section-heading:not(.results-heading),.research-layout .task-first>.section-heading,.research-layout .terrain-unified .section-heading{margin-bottom:26px}
+ .research-layout .section-heading:not(.results-heading) h2,.research-layout .task-first>.section-heading h2,.research-layout .film-section .section-heading h2{font-size:36px;letter-spacing:-.8px}
+ .research-layout .section-heading:not(.results-heading)>p,.research-layout .task-first>.section-heading>p,.research-layout .film-section .section-heading>p,.research-layout #recovery>.section-heading>p{font-size:17px;line-height:1.65;margin-top:14px}
  .research-layout .task-first .task-tabs button{padding:15px 17px}
  .research-layout .task-first .task-tabs strong{font-size:25px}
  .research-layout .film-section #film-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
- .research-layout .results-toolbar{padding:15px}
  .research-layout .case-layout .case-menu{gap:9px}
  .research-layout .case-layout .case-menu button{padding:14px 12px;min-height:128px}
  .research-layout .case-layout .case-menu strong{font-size:16px}
