@@ -384,7 +384,7 @@
   function mountGrounding(c){
     const calc=c.calculation,t=calc.targets.find(t=>t.target==='U20'),s=calc.arrow_center,g=t.input_pixel_tip,frames=c.tracks[0].frames;
     const dx=g[0]-s[0],dy=g[1]-s[1];
-    stage.innerHTML=`<div class="program-layout grounding-layout"><figure class="program-scene"><div class="program-card-heading"><strong>Ueno Park · U20</strong><span>Contextual map</span></div><div class="appendix-photo grounding-map"><img src="${data.images[frames[0].image]}" alt="Original contextual map of Ueno Park" width="800" height="600"><svg class="pixel-diagram" viewBox="0 0 800 600" role="img" aria-label="Logged pixel positions and offsets; not an executed route"><path id="pixel-offset-path" d="" fill="none" stroke="#ffe19a" stroke-width="4" stroke-dasharray="8 5"/><g class="pixel-marker" data-pixel-marker="start"><circle cx="${s[0]}" cy="${s[1]}" r="18" fill="none" stroke="#fff" stroke-width="2"/><circle cx="${s[0]}" cy="${s[1]}" r="11" fill="#187d65" stroke="white" stroke-width="2"/><text x="${s[0]}" y="${s[1]+5}" text-anchor="middle">S</text></g><g class="pixel-marker" data-pixel-marker="goal"><circle cx="${g[0]}" cy="${g[1]}" r="18" fill="none" stroke="#ffe19a" stroke-width="2"/><circle cx="${g[0]}" cy="${g[1]}" r="11" fill="#a06f1c" stroke="white" stroke-width="2"/><text x="${g[0]}" y="${g[1]+5}" text-anchor="middle">G</text></g><g id="pixel-x-label"><rect x="${s[0]-46}" y="${s[1]-49}" width="148" height="26" rx="4"/><text x="${s[0]+28}" y="${s[1]-31}" text-anchor="middle">Δu = ${number(dx)} px</text></g><g id="pixel-y-label"><rect x="${g[0]+25}" y="${s[1]+52}" width="151" height="26" rx="4"/><text x="${g[0]+100}" y="${s[1]+70}" text-anchor="middle">Δv = ${number(dy)} px</text></g></svg></div><figcaption><span>S · Player</span><span>G · Estimated U20 goal</span><small>The measured PNG is unavailable; this original map provides context.</small></figcaption></figure><div class="program-inspector grounding-inspector"><div class="grounding-phase"><span id="grounding-step">Step 176</span><h4 id="grounding-phase-title">Capture the map</h4></div><div class="grounding-observe" data-grounding-phase="0"><p>Logged pixel positions</p><dl class="coordinate-list"><div><dt>Player S</dt><dd>(${number(s[0])}, ${number(s[1])})</dd></div><div><dt>Goal G</dt><dd>(${number(g[0])}, ${number(g[1])})</dd></div></dl><p class="command-context">Map capture command · Step 176<br>Pixel values returned at Step 177</p><pre>${command(c.code.capture)}</pre></div><div data-grounding-phase="1" hidden><p>Subtract the player position</p><div class="equation-row"><span>Δu</span><strong>${number(g[0])} − ${number(s[0])}</strong><b>${number(dx)} px</b></div><div class="equation-row"><span>Δv</span><strong>${number(g[1])} − ${number(s[1])}</strong><b>${number(dy)} px</b></div><p class="command-context">Dashed guides show the logged pixel offsets.</p></div><div data-grounding-phase="2" hidden><p>Convert using the adopted scale</p><div class="scale-value"><strong>${calc.scale}</strong><span>pixels / block · uncalibrated</span></div><div class="equation-row"><span>Δx</span><strong>${number(dx)} ÷ ${calc.scale}</strong><b>${number(t.delta[0])}</b></div><div class="equation-row"><span>Δz</span><strong>${number(dy)} ÷ ${calc.scale}</strong><b>${number(t.delta[1])}</b></div><pre>${escapeHTML(c.code.formula)}</pre></div><div data-grounding-phase="3" hidden><figure class="execution-observation"><img src="${data.images[frames[2].image]}" alt="Original observation following Step 181" width="800" height="600"><figcaption>Original observation · Step 181</figcaption></figure><pre>${escapeHTML(c.code.orientation)}</pre><p class="command-context">Step 179 orients toward the estimate; Step 181 moves toward the rounded goal (${t.world[0].toFixed(1).replace('-', '−')}, ${t.world[1].toFixed(1)}).</p></div><div class="estimated-target" id="estimated-target"><span>Estimated world target · (x, z)</span><strong>(${number(t.world[0])}, ${number(t.world[1])})</strong><small>Origin (${number(calc.world_origin[0])}, ${number(calc.world_origin[1])}) + calculated offsets</small></div></div></div>`;
+    stage.innerHTML=`<div class="program-layout grounding-layout"><figure class="program-scene"><div class="program-card-heading"><strong>Ueno Park · U20</strong><span>Calculation illustration</span></div><div class="appendix-photo grounding-map"><img src="${data.images[frames[0].image]}" alt="Original contextual map of Ueno Park" width="800" height="600"><svg class="pixel-diagram" viewBox="0 0 800 600" role="img" aria-label="Logged pixel positions and offsets; not an executed route"><path id="pixel-offset-path" d="" fill="none" stroke="#ffe19a" stroke-width="4" stroke-dasharray="8 5"/><g class="pixel-marker" data-pixel-marker="start"><circle cx="${s[0]}" cy="${s[1]}" r="18" fill="none" stroke="#fff" stroke-width="2"/><circle cx="${s[0]}" cy="${s[1]}" r="11" fill="#187d65" stroke="white" stroke-width="2"/><text x="${s[0]}" y="${s[1]+5}" text-anchor="middle">S</text></g><g class="pixel-marker" data-pixel-marker="goal"><circle cx="${g[0]}" cy="${g[1]}" r="18" fill="none" stroke="#ffe19a" stroke-width="2"/><circle cx="${g[0]}" cy="${g[1]}" r="11" fill="#a06f1c" stroke="white" stroke-width="2"/><text x="${g[0]}" y="${g[1]+5}" text-anchor="middle">G</text></g><g id="pixel-x-label"><rect x="${s[0]-46}" y="${s[1]-49}" width="148" height="26" rx="4"/><text x="${s[0]+28}" y="${s[1]-31}" text-anchor="middle">Δu = ${number(dx)} px</text></g><g id="pixel-y-label"><rect x="${g[0]+25}" y="${s[1]+52}" width="151" height="26" rx="4"/><text x="${g[0]+100}" y="${s[1]+70}" text-anchor="middle">Δv = ${number(dy)} px</text></g></svg></div><figcaption><span>S · Player</span><span>G · Estimated U20 goal</span><small>Illustration of the recorded pixel calculation.</small></figcaption></figure><div class="program-inspector grounding-inspector"><div class="grounding-phase"><span id="grounding-step">Step 176</span><h4 id="grounding-phase-title">Capture the map</h4></div><div class="grounding-observe" data-grounding-phase="0"><p>Logged pixel positions</p><dl class="coordinate-list"><div><dt>Player S</dt><dd>(${number(s[0])}, ${number(s[1])})</dd></div><div><dt>Goal G</dt><dd>(${number(g[0])}, ${number(g[1])})</dd></div></dl><p class="command-context">Map capture command · Step 176<br>Pixel values returned at Step 177</p><pre>${command(c.code.capture)}</pre></div><div data-grounding-phase="1" hidden><p>Subtract the player position</p><div class="equation-row"><span>Δu</span><strong>${number(g[0])} − ${number(s[0])}</strong><b>${number(dx)} px</b></div><div class="equation-row"><span>Δv</span><strong>${number(g[1])} − ${number(s[1])}</strong><b>${number(dy)} px</b></div><p class="command-context">Dashed guides show the logged pixel offsets.</p></div><div data-grounding-phase="2" hidden><p>Convert using the adopted scale</p><div class="scale-value"><strong>${calc.scale}</strong><span>pixels / block · assumed scale</span></div><div class="equation-row"><span>Δx</span><strong>${number(dx)} ÷ ${calc.scale}</strong><b>${number(t.delta[0])}</b></div><div class="equation-row"><span>Δz</span><strong>${number(dy)} ÷ ${calc.scale}</strong><b>${number(t.delta[1])}</b></div><pre>${escapeHTML(c.code.formula)}</pre></div><div data-grounding-phase="3" hidden><figure class="execution-observation"><img src="${data.images[frames[2].image]}" alt="Original observation following Step 181" width="800" height="600"><figcaption>Original observation · Step 181</figcaption></figure><pre>${escapeHTML(c.code.orientation)}</pre><p class="command-context">Step 179 orients toward the estimate; Step 181 moves toward the rounded goal (${t.world[0].toFixed(1).replace('-', '−')}, ${t.world[1].toFixed(1)}).</p></div><div class="estimated-target" id="estimated-target"><span>Estimated world target · (x, z)</span><strong>(${number(t.world[0])}, ${number(t.world[1])})</strong><small>Origin (${number(calc.world_origin[0])}, ${number(calc.world_origin[1])}) + calculated offsets</small></div></div></div>`;
     state.stops=[0,.25,.5,.75];
   }
   function paint(){
@@ -435,7 +435,9 @@
   }
   function mount(id){
     const c=data.cases.find(x=>x.id===id);state.selected=c;state.index=-1;state.hold=0;state.progress=motion.matches?1:0;
-    $('#appendix-place').textContent=c.place;$('#appendix-title').textContent=c.title;$('#appendix-description').textContent=c.description;$('#appendix-note').textContent=c.note;
+    $('#appendix-place').textContent=c.place;$('#appendix-title').textContent=c.title;$('#appendix-description').textContent=c.description.split(/(?<=\.)\s/)[0];$('#appendix-note').textContent=c.note;
+    $('#appendix-source-description').textContent=c.description;$('#appendix-source').open=false;
+    $('#appendix-scope').textContent=c.kind==='route'?'Recorded path · Pauses omitted':'Coordinate estimate · Arrival not verified';
     $('#appendix-kind').textContent=c.kind==='route'?'Recorded route · Agent program':'Map observation · Agent calculation';stage.dataset.case=c.id;
     if(c.kind==='route')mountStairs(c);else mountGrounding(c);
     const labels=c.kind==='route'?['Step 35 · Y40 → Y48','Step 36 / Loop 1 · Y48 → Y56','Step 36 / Loop 2 · Y56 → Y64','Step 36 / Loop 3 · Y64 → Y72']:['01 / Map capture','02 / Pixel offsets','03 / World coordinates','04 / Execution'];
@@ -568,47 +570,77 @@
   const image=window.MINE_ODYSSEY.maps.find(m=>m.id==='versailles').image;
   const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
   const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
+  function avatar(){
+    return `<g class="framework-character" aria-hidden="true">
+      <ellipse cx="55" cy="149" rx="44" ry="8" fill="#243b2620"/>
+      <path d="M34 100h21v42H34z" fill="#405f78"/><path d="M59 100h21v42H59z" fill="#344c65"/>
+      <path d="M31 138h25v12H29v-8zM59 138h25l4 7v5H59z" fill="#283e3c"/>
+      <path d="M31 50h48v55H31z" fill="#4c8058"/><path d="m79 50 9-8v55l-9 8z" fill="#31553e"/>
+      <path d="m31 50 10-8h47l-9 8z" fill="#79a66e"/>
+      <path d="M14 54h17v36H14z" fill="#5b8b62"/><path d="M15 87h16v20H15z" fill="#d6a477"/>
+      <g class="avatar-arm"><path d="m79 53 15 1 5 25-17 4z" fill="#6b9a6e"/><path d="m82 80 17-3 16 13-8 13-24-10z" fill="#e4b488"/><path d="m107 89 11-5 5 8-8 10-8 1z" fill="#edc297"/></g>
+      <path d="M47 49h15v10H47z" fill="#cf996d"/><path d="m41 50 14 12 14-12" fill="none" stroke="#b5ce9c" stroke-width="4"/>
+      <rect x="46" y="70" width="22" height="14" rx="2" fill="#ecedd4"/><text x="57" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#355740">AI</text>
+      <path d="m35 11 10-9h36l-10 9z" fill="#715143"/><path d="m71 11 10-9v35l-10 9z" fill="#bd875d"/>
+      <path d="M35 11h36v35H35z" fill="#ecc49b"/><path d="M35 11h36v10H43v7h-8z" fill="#533e35"/><path d="m71 11 10-9v15l-10 10z" fill="#624638"/>
+      <g class="avatar-eyes"><path d="M45 27h6v6h-6zM61 27h6v6h-6z" fill="#fff9e7"/><path d="M48 28h3v5h-3zM64 28h3v5h-3z" fill="#294b3d"/></g>
+      <path d="M53 39h8" stroke="#956848" stroke-width="2"/>
+      <path d="M10 93h18v25H8V97z" fill="#f5edcf" stroke="#a3a777"/><path d="M13 99h10M13 104h10M13 109h7" stroke="#7e9568" stroke-width="1.5"/>
+    </g>`;
+  }
   function node(type,x,y,w,h){
     let content='';
-    if(type==='agent')content=box(0,0,w,h,'#294e3a','#294e3a')+
-      text(22,35,'Agent',25,'#f5f5ec')+
-      '<g transform="translate(24 62)" stroke="#c7db9f" stroke-width="1.8" fill="none"><rect width="28" height="34" rx="3"/><path d="M7 10h14M7 17h14M7 24h9"/></g>'+
-      text(65,78,'Instruction',15,'#f1f3e7')+text(65,100,'+ interaction history',12,'#c8d8bb')+
-      text(22,h-18,'exec · skip · stop_execute',12,'#d8e8c8');
+    if(type==='agent'){
+      const inset=w>240?32:8;
+      content=text(22,28,'Agent',25)+
+        `<circle cx="${inset+69}" cy="114" r="73" fill="#e0e9cf"/>`+
+        `<g transform="translate(${inset} 51)">${avatar()}</g>`+
+        `<g transform="translate(${w-78} 60)"><rect width="68" height="46" rx="5" fill="#fcfcf4" stroke="#c2ceb0"/><path d="M10 13h28M10 19h38" stroke="#9daf84" stroke-width="2"/>${text(10,36,'Task',11)}</g>`+
+        `<g transform="translate(${w-78} 129)"><rect x="4" y="-4" width="64" height="44" rx="5" fill="#d8e2c9"/><rect width="64" height="44" rx="5" fill="#fcfcf4" stroke="#c2ceb0"/><path d="M10 12h26M10 18h34" stroke="#9daf84" stroke-width="2"/>${text(10,34,'History',11)}</g>`;
+    }
     if(type==='bash')content=box(0,0,w,h,'#fcfcf6','#b8c6ac')+
-      text(22,34,'Bash',23)+text(w-65,34,'&gt;_',22,'#7b9168','font-family="monospace"')+
-      text(22,64,'mcapi look --yaw -90 &amp;&amp;',12,'#527345','font-family="monospace"')+
-      text(22,86,'mcapi press MOVE_FORWARD 2.0',12,'#527345','font-family="monospace"')+
-      `<path d="M22 ${h-55}H${w-22}" stroke="#dce4d3"/>`+
-      text(22,h-34,'mcapi → AgentBridge',13)+text(22,h-14,'xdo → keyboard &amp; mouse',13);
-    if(type==='world')content=box(0,0,w,h,'#fcfcf6','#b8c6ac')+text(19,33,'Minecraft client',23)+
-      `<image href="${image}" x="14" y="47" width="${w-28}" height="${h-60}" preserveAspectRatio="xMidYMid slice"/>`;
-    if(type==='verifier')content=box(0,0,w,h,'#f0ecd8','#b0a56c')+text(20,32,'Independent verifier',22)+
-      text(20,59,'Ordered arrivals + completion claim',w<300?12:14,'#756c40')+
-      text(20,82,'Accepted claim_done → success',w<300?12:14,'#527345');
+      text(20,30,'Bash',23)+
+      `<rect x="12" y="44" width="${w-24}" height="108" rx="7" fill="#243e34"/><path d="M12 68H${w-12}" stroke="#4d6858"/><circle cx="27" cy="56" r="3" fill="#d99c83"/><circle cx="38" cy="56" r="3" fill="#d8c586"/><circle cx="49" cy="56" r="3" fill="#a0bd86"/>`+
+      text(23,90,'$ mcapi look --yaw -90 &amp;&amp;',11.5,'#d4e8b7','font-family="monospace"')+
+      text(23,111,'  mcapi press MOVE_FORWARD 2.0',11.5,'#f1f4df','font-family="monospace"')+
+      '<rect class="terminal-cursor" x="24" y="126" width="7" height="11" fill="#c5dea5"/>'+
+      '<g transform="translate(20 173)" stroke="#7c9368" stroke-width="1.5" fill="none"><path d="m5 0-5 6 5 6M18 0l5 6-5 6M14-2l-5 16"/></g>'+
+      text(55,184,'mcapi → AgentBridge',13)+
+      '<g transform="translate(20 195)" stroke="#7c9368" fill="none"><rect width="23" height="12" rx="2"/><path d="M4 4h2m3 0h2m3 0h2m3 0h1M4 8h15"/></g>'+
+      text(55,206,'xdo → keyboard &amp; mouse',12);
+    if(type==='world')content=text(15,30,'Minecraft client',23)+
+      `<rect x="6" y="44" width="${w-12}" height="146" rx="8" fill="#34493b"/><rect x="13" y="51" width="${w-26}" height="125" rx="3" fill="#16291f"/><image href="${image}" x="16" y="54" width="${w-32}" height="119" preserveAspectRatio="xMidYMid slice"/><circle cx="${w/2}" cy="183" r="2.5" fill="#adbe91"/><path d="M${w/2-11} 190v14h-26v6h74v-6h-26v-14" fill="#6f8566"/>`;
+    if(type==='verifier'){
+      const compact=w<300;
+      content=box(0,0,w,h,'#f0ecd8','#b0a56c')+
+        '<g class="verifier-clipboard" transform="translate(20 21)"><rect width="43" height="65" rx="5" fill="#fdfcf1" stroke="#b3aa7c"/><rect x="11" y="-4" width="21" height="10" rx="3" fill="#9a905d"/><path d="m8 21 4 4 7-9m-11 25 4 4 7-9m-11 25 4 4 7-9" fill="none" stroke="#638357" stroke-width="2"/><path d="M24 21h11M24 41h11M24 60h11" stroke="#c0c6a5" stroke-width="2"/></g>'+
+        (compact?text(81,31,'Independent',20)+text(81,54,'verifier',20):text(84,34,'Independent verifier',22))+
+        text(compact?81:84,compact?77:62,'Ordered arrivals + claim',compact?11:14,'#756c40')+
+        text(compact?81:84,compact?96:86,'Accepted claim → success',compact?11:14,'#527345');
+    }
     return `<g class="framework-node" data-framework-node="${type}" transform="translate(${x} ${y})">${content}</g>`;
   }
   function render(mobile){
-    const id=mobile?'mobile':'desktop',w=mobile?360:1120,h=mobile?870:530;
+    const id=mobile?'mobile':'desktop',w=mobile?360:1120,h=mobile?1110:600;
     const arrow=(d,color='#789165',twoWay=false)=>`<path d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${twoWay?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
     const paths=mobile?
-      arrow('M180 190V260')+arrow('M180 450V510')+
-      arrow('M315 580H343V120H315')+arrow('M315 350H343')+
-      text(198,230,'exec',13)+text(198,486,'controls',13)+
-      text(351,443,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 443)"')+
-      arrow('M180 660V745','#a79758')+text(196,701,'Position',12,'#82723e')+text(196,719,'samples · 1 Hz',12,'#82723e')+
-      arrow('M45 148H18V795H45','#a79758',true)+text(11,477,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 477)"'):
-      arrow('M250 218H365')+arrow('M680 218H800')+
-      text(295,203,'exec',13)+text(708,203,'controls',13)+
-      arrow('M945 138V65H140V138')+arrow('M520 138V65')+
+      arrow('M180 264V320')+arrow('M180 540V600')+
+      arrow('M315 704H343V135H315')+arrow('M315 425H343')+
+      text(198,300,'exec',13)+text(198,576,'controls',13)+
+      text(351,518,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 518)"')+
+      arrow('M180 820V956','#a79758')+text(196,877,'Position',12,'#82723e')+text(196,895,'samples · 1 Hz',12,'#82723e')+
+      arrow('M45 173H18V1006H45','#a79758',true)+text(11,590,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 590)"'):
+      arrow('M250 238H365')+arrow('M680 238H800')+
+      text(295,223,'exec',13)+text(708,223,'controls',13)+
+      arrow('M945 130V65H140V130')+arrow('M520 130V65')+
       text(560,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
-      arrow('M945 298V446H875','#a79758')+
-      text(965,359,'Position samples',13,'#82723e')+text(965,382,'1 Hz',13,'#82723e')+
-      arrow('M140 298V446H475','#a79758',true)+text(280,430,'claim_done',15,'#82723e','font-family="monospace"')+
-      text(280,470,'Verifier feedback',13,'#82723e');
-    const nodes=mobile?node('agent',45,50,270,140)+node('bash',45,260,270,190)+node('world',45,510,270,150)+node('verifier',45,745,270,100):
-      node('agent',30,138,220,160)+node('bash',365,138,315,160)+node('world',800,138,290,160)+node('verifier',475,394,400,104);
-    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
+      arrow('M945 350V503H875','#a79758')+
+      text(965,413,'Position samples',13,'#82723e')+text(965,436,'1 Hz',13,'#82723e')+
+      arrow('M140 350V503H475','#a79758',true)+text(280,487,'claim_done',15,'#82723e','font-family="monospace"')+
+      text(280,527,'Verifier feedback',13,'#82723e');
+    const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,220)+node('verifier',45,956,270,116):
+      node('agent',30,130,220,220)+node('bash',365,130,315,220)+node('world',800,130,290,220)+node('verifier',475,450,400,112);
+    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">An illustrated agent receives the task instruction, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls on the Minecraft client. A separate verifier samples player positions at one hertz, checks ordered arrivals, and responds to the agent's completion claim.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}</svg>`;
   }
   host.innerHTML=render(false)+render(true);
 })();

@@ -633,7 +633,7 @@
   "resultsSource": {
     "label": "Latest arXiv manuscript · Table 1",
     "member": "paper-arxiv.tex",
-    "manuscript_sha256": "6c9c3e4f82e521abab2d99372f6791dcb4a74b49a188fb8ea3814c4b1914990d",
+    "manuscript_sha256": "53dbc13d223449c98f910410c8bce98d1e1dfcb26531efb9cb9a84c07b5175a0",
     "main_models": 8,
     "configurations": 11,
     "precision": "As published: percentages to 2 decimals; turns and path length to 1 decimal."
@@ -2283,7 +2283,7 @@
         "place": "Ueno Park 001 · Gemini 3.8 Flash",
         "figure": "experiment-analysis/programmatic-navigation-process-map-large.svg",
         "kind": "frames",
-        "note": "The map is contextual: the exact measured PNG is unavailable. Dashed offsets visualize the logged calculation, not a travelled route. The adopted scale is uncalibrated; this case does not establish arrival.",
+        "note": "The dashed lines show a calculation, not the agent’s path. A reference map is shown because the image used for measurement is unavailable. The agent’s chosen scale was not independently checked, and this excerpt does not confirm arrival.",
         "tracks": [
           {
             "model": "Gemini 3.8 Flash",
@@ -2410,11 +2410,11 @@
     },
     {
       "file": "arxiv-submission-20260929/mine-odyssey-arxiv-source.zip",
-      "sha256": "1fefc01a398293fc0d5aff3c172cd675a13f767523018c616c889f8cb786f092"
+      "sha256": "8ceee53fd470fad8dc4b5cdc95cf634621f64d44215edc863d29e735c77a9ac1"
     },
     {
       "file": "arxiv-submission-20260929/audit.json",
-      "sha256": "1cf8ba3d7dba560e9c2c7b5d87229de69bcd4b8db423a1742d6ed1bf16cca388"
+      "sha256": "be2af0fbea6657dc674f87cf9bcdc7731397ff2c86b079d0b4dfb691f8f3f683"
     },
     {
       "file": "paper/paper/results/opus55-20260928/audit.json",
@@ -2422,7 +2422,7 @@
     }
   ],
   "paperCopy": {
-    "manuscript_sha256": "6c9c3e4f82e521abab2d99372f6791dcb4a74b49a188fb8ea3814c4b1914990d",
+    "manuscript_sha256": "53dbc13d223449c98f910410c8bce98d1e1dfcb26531efb9cb9a84c07b5175a0",
     "member": "paper-arxiv.tex",
     "excerpts": {
       "title": {
