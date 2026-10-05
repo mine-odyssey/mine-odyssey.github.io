@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=client-view-20261005">
-  <script src="data/benchmark.js?v=client-view-20261005" defer></script>
-  <script src="app.js?v=client-view-20261005" defer></script>
+  <link rel="stylesheet" href="styles.css?v=linked-rules-20261005">
+  <script src="data/benchmark.js?v=linked-rules-20261005" defer></script>
+  <script src="app.js?v=linked-rules-20261005" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -28,12 +28,12 @@
       <div class="section-heading"><div><p class="eyebrow">01 / Tasks</p><h2 id="tasks-title">Task format</h2></div><p data-paper="task-definition">each task specifies a map, a starting waypoint and orientation, and an ordered sequence of destinations described in a natural-language instruction.</p></div>
       <div class="journey-browser">
         <div class="journey-contract">
-          <div class="task-contract-flow" role="img" aria-label="A named waypoint has a three-dimensional position. Visit destinations in order, then submit an accepted claim_done.">
-            <div class="contract-stage"><svg viewBox="0 0 160 85" aria-hidden="true"><path d="m48 48 32-18 32 18-32 18Z M48 48v17l32 18 32-18V48 M80 66v17" fill="#e4ecd9" stroke="#748d65" stroke-width="1.5"/><path d="M80 48s-15-16-15-26a15 15 0 1 1 30 0c0 10-15 26-15 26Z" fill="#294e3a"/><circle cx="80" cy="22" r="5" fill="#ecf2df"/><text x="118" y="65" font-size="11" fill="#67765d">x,y,z</text></svg><span>Named waypoint</span></div>
+          <div class="task-contract-flow" role="group" aria-label="Explore task rules on the map">
+            <button type="button" class="contract-stage" data-task-rule="waypoint" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback"><svg viewBox="0 0 160 85" aria-hidden="true"><path d="m48 48 32-18 32 18-32 18Z M48 48v17l32 18 32-18V48 M80 66v17" fill="#e4ecd9" stroke="#748d65" stroke-width="1.5"/><path d="M80 48s-15-16-15-26a15 15 0 1 1 30 0c0 10-15 26-15 26Z" fill="#294e3a"/><circle cx="80" cy="22" r="5" fill="#ecf2df"/><text x="118" y="65" font-size="11" fill="#67765d">x,y,z</text></svg><span>Named waypoint</span></button>
             <span class="contract-arrow" aria-hidden="true">→</span>
-            <div class="contract-stage"><svg viewBox="0 0 240 85" aria-hidden="true"><path d="M20 43H220" stroke="#8fa17a" stroke-width="2"/><g fill="#edf2e4" stroke="#6e875c"><circle cx="20" cy="43" r="16"/><circle cx="70" cy="43" r="16"/><circle cx="120" cy="43" r="16"/><circle cx="170" cy="43" r="16"/><circle cx="220" cy="43" r="16"/></g><g fill="#294e3a" text-anchor="middle" font-size="13"><text x="20" y="48">S</text><text x="70" y="48">1</text><text x="120" y="48">2</text><text x="170" y="48">3</text><text x="220" y="48">4</text></g></svg><span>Visit in order</span></div>
+            <div class="contract-stage contract-order"><svg viewBox="0 0 240 85" role="group" aria-label="Select a task waypoint"><path d="M20 43H220" stroke="#8fa17a" stroke-width="2"/><g class="contract-stop" data-contract-stop="0" role="button" tabindex="0" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight starting point"><circle cx="20" cy="43" r="19"/><text x="20" y="48" text-anchor="middle">S</text></g><g class="contract-stop" data-contract-stop="1" role="button" tabindex="0" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 1"><circle cx="70" cy="43" r="19"/><text x="70" y="48" text-anchor="middle">1</text></g><g class="contract-stop" data-contract-stop="2" role="button" tabindex="0" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 2"><circle cx="120" cy="43" r="19"/><text x="120" y="48" text-anchor="middle">2</text></g><g class="contract-stop" data-contract-stop="3" role="button" tabindex="0" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 3"><circle cx="170" cy="43" r="19"/><text x="170" y="48" text-anchor="middle">3</text></g><g class="contract-stop" data-contract-stop="4" role="button" tabindex="0" aria-pressed="false" aria-controls="task-map task-stops" aria-label="Highlight destination 4"><circle cx="220" cy="43" r="19"/><text x="220" y="48" text-anchor="middle">4</text></g></svg><button type="button" class="contract-rule-label" data-task-rule="order" aria-pressed="false" aria-controls="task-map task-stops task-rule-feedback">Visit in order</button></div>
             <span class="contract-arrow" aria-hidden="true">→</span>
-            <div class="contract-stage"><svg viewBox="0 0 180 85" aria-hidden="true"><rect x="12" y="19" width="135" height="50" rx="6" fill="#294e3a"/><path d="m25 38 7 6-7 6" fill="none" stroke="#cee49e" stroke-width="2"/><text x="39" y="49" font-family="monospace" font-size="12" fill="#f5f5ec">claim_done</text><circle cx="147" cy="59" r="16" fill="#e3ecd5" stroke="#6e875c"/><path d="m139 59 5 5 10-11" fill="none" stroke="#294e3a" stroke-width="2.5"/></svg><span>Claim completion</span></div>
+            <button type="button" class="contract-stage" data-task-rule="completion" aria-pressed="false" aria-controls="task-map task-completion task-rule-feedback"><svg viewBox="0 0 180 85" aria-hidden="true"><rect x="12" y="19" width="135" height="50" rx="6" fill="#294e3a"/><path d="m25 38 7 6-7 6" fill="none" stroke="#cee49e" stroke-width="2"/><text x="39" y="49" font-family="monospace" font-size="12" fill="#f5f5ec">claim_done</text><circle cx="147" cy="59" r="16" fill="#e3ecd5" stroke="#6e875c"/><path d="m139 59 5 5 10-11" fill="none" stroke="#294e3a" stroke-width="2.5"/></svg><span>Claim completion</span></button>
           </div>
           <details class="contract-details"><summary>Rules &amp; source</summary><div id="task-challenges"></div><p class="small-note" id="task-note">Instructions from the benchmark task records; English translations are provided alongside the Portuguese and Russian originals. Map markers show visit order, not an executed route.</p></details>
         </div>
@@ -44,7 +44,8 @@
         </div>
         <div class="journey-heading"><div><p class="eyebrow" id="task-meta"></p><h3 id="task-title"></h3></div><div class="journey-facts"><span>1 starting point</span><span><strong>4</strong> ordered destinations</span><span id="task-setting"></span></div></div>
         <div class="task-instruction"><div class="instruction-toolbar"><p class="eyebrow">The instruction <span id="task-language-label"></span></p><button type="button" id="task-language" aria-pressed="false">Read original</button></div><blockquote id="task-prompt"></blockquote></div>
-        <div class="journey-explorer">
+        <div class="journey-explorer" id="task-explorer">
+          <div class="task-rule-feedback" id="task-rule-feedback" hidden><p id="task-rule-caption" role="status"></p><button type="button" id="task-rule-clear" aria-label="Clear the rule highlight">Clear highlight <span aria-hidden="true">×</span></button></div>
           <figure class="journey-map-panel">
             <div class="journey-map-toolbar"><p class="eyebrow">Explore the task</p><div role="group" aria-label="Task view"><button type="button" data-task-view="map" aria-pressed="true">Map</button><button type="button" data-task-view="scene" aria-pressed="false">Recording <span aria-hidden="true">▶</span></button></div></div>
             <div id="task-map" class="task-map-stage" role="group" aria-label="Select a destination on the map"><img id="task-map-image" alt="" fetchpriority="high" width="1200" height="800"><svg id="task-map-lines" viewBox="0 0 1000 667" aria-hidden="true"></svg><div id="task-markers"></div><span class="map-north" aria-hidden="true">↑ N</span></div>
@@ -57,7 +58,7 @@
             <figcaption id="task-photo-caption"></figcaption>
             <div class="task-selected" aria-live="polite"><div><span id="task-stop-role"></span><h4 id="task-stop-title"></h4><p id="task-stop-purpose"></p><small id="task-stop-height"></small></div><div class="task-step-controls"><button type="button" id="task-prev" aria-label="Select previous destination">←</button><button type="button" id="task-next" aria-label="Select next destination">→</button></div></div>
           </figure>
-          <div class="journey-itinerary"><div class="itinerary-heading"><p class="eyebrow">The ordered journey</p><p>Locate each stop, or play the full recording between two stops.</p></div><ol class="task-stops" id="task-stops" aria-label="Starting point and required visit sequence"></ol><div class="task-completion"><strong>What counts as completion?</strong><p data-paper="task-completion">After visiting all required destinations, the agent must submit an accepted claim_done to complete the task successfully.</p><details><summary>Arrival criteria</summary><p id="task-arrival"></p></details></div></div>
+          <div class="journey-itinerary"><div class="itinerary-heading"><p class="eyebrow">The ordered journey</p><p>Locate each stop, or play the full recording between two stops.</p></div><ol class="task-stops" id="task-stops" aria-label="Starting point and required visit sequence"></ol><div class="task-completion" id="task-completion"><strong>What counts as completion?</strong><p data-paper="task-completion">After visiting all required destinations, the agent must submit an accepted claim_done to complete the task successfully.</p><details><summary>Arrival criteria</summary><p id="task-arrival"></p></details></div></div>
         </div>
 
       </div>

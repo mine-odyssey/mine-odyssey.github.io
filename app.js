@@ -60,8 +60,27 @@
     pressed('[data-scene]','scene',m.id);
   }));
   const tasks=data.journeys.examples;
-  let taskIndex=0,taskStop=0,originalInstruction=false,taskView='map';
+  let taskIndex=0,taskStop=0,originalInstruction=false,taskView='map',taskRule='';
   const stopLabel=(s,i)=>i===0?'Starting point':s.role==='finish'?'04 / Final destination':`${String(i).padStart(2,'0')} / Checkpoint`;
+  function renderTaskRule(){
+    const task=tasks[taskIndex],stop=task.stops[taskStop];
+    $('#task-explorer').dataset.rule=taskRule;
+    pressed('[data-task-rule]','taskRule',taskRule);
+    $$('[data-task-rule]').forEach(b=>b.closest('.contract-stage').classList.toggle('is-rule-active',b.dataset.taskRule===taskRule));
+    $('#task-rule-feedback').hidden=!taskRule;
+    text('#task-rule-caption',taskRule==='waypoint'?`${taskStop===0?'S':taskStop} · ${stop.name} · (x, y, z) = (${stop.position.join(', ')})`:
+      taskRule==='order'?'Required visit order: S → 1 → 2 → 3 → 4':
+      taskRule==='completion'?'Visit every required destination in order, then submit an accepted claim_done.':'');
+  }
+  function showTaskRule(rule,index=taskStop,scroll=true){
+    taskRule=rule;
+    setTaskStop(rule==='completion'?tasks[taskIndex].stops.length-1:rule==='order'?0:index);
+    setTaskView('map');
+    if(scroll){
+      const target=rule==='completion'?$('#task-completion'):$('#task-explorer');
+      target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:rule==='completion'?'center':'start'});
+    }
+  }
   function setInstruction() {
     const task=tasks[taskIndex],isEnglish=task.locale.startsWith('en');
     text('#task-prompt',originalInstruction?task.original_prompt:task.prompt);
@@ -73,6 +92,7 @@
   }
   function setTaskView(view,explicitPlay=false) {
     taskView=view;const task=tasks[taskIndex],m=data.maps.find(m=>m.id===task.map);
+    if(view==='scene'){taskRule='';renderTaskRule();}
     $('#task-map').hidden=view!=='map';$('#task-scene').hidden=view!=='scene';
     $('.task-selected').hidden=view==='scene';$('#task-photo-caption').hidden=view==='scene';
     pressed('[data-task-view]','taskView',view);
@@ -83,20 +103,24 @@
     taskStop=Math.max(0,Math.min(tasks[taskIndex].stops.length-1,index));
     const task=tasks[taskIndex],s=task.stops[taskStop],dy=s.position[1]-task.stops[0].position[1];
     pressed('[data-task-stop]','taskStop',taskStop);
+    pressed('[data-contract-stop]','contractStop',taskStop);
     text('#task-stop-role',stopLabel(s,taskStop));text('#task-stop-title',s.name);text('#task-stop-purpose',s.purpose);
     text('#task-stop-height',`${s.original_name} · ${dy===0?'Same target height as start':`${Math.abs(dy)} ${Math.abs(dy)===1?'block':'blocks'} ${dy>0?'above':'below'} the start`}`);
     $('#task-prev').disabled=taskStop===0;$('#task-next').disabled=taskStop===task.stops.length-1;
     $$('#task-map-lines [data-leg]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.leg)===taskStop));
+    $$('#task-map-lines [data-map-stop]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.mapStop)===taskStop));
+    renderTaskRule();
   }
   function setTask(index) {
-    taskIndex=index;originalInstruction=false;
+    taskIndex=index;originalInstruction=false;taskRule='';
     const task=tasks[index],m=data.maps.find(m=>m.id===task.map);
     text('#task-meta',task.id);text('#task-title',task.title);text('#task-setting',task.setting);
     setInstruction();
     $('#task-map-image').src=task.map_image;$('#task-map-image').alt=`Native top-down map of ${m.name}; numbered task destinations are listed alongside`;
     $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li>${i?`<button type="button" class="task-watch-leg" data-watch-leg="${i-1}" aria-label="Watch ${escapeHTML(task.stops[i-1].name)} to ${escapeHTML(s.name)}"><span aria-hidden="true">▶</span> Watch ${i===1?'S':i-1} → ${i}<span class="leg-watch-duration">Full leg</span></button>`:''}<button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
-    $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
-    $('#task-map-lines').innerHTML=task.stops.map((s,i)=>`${i?`<path class="task-leg" data-leg="${i}" d="M ${task.stops[i-1].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`:''}<path class="task-marker-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="task-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="4"/>`).join('');
+    $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%;--visit-index:${i}" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
+    $('#task-map-lines').innerHTML=task.stops.map((s,i)=>`${i?`<path class="task-leg" data-leg="${i}" style="--visit-index:${i}" d="M ${task.stops[i-1].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`:''}<path class="task-marker-leader" data-map-stop="${i}" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="task-anchor" data-map-stop="${i}" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="4"/>`).join('');
+    $$('[data-contract-stop]').forEach(b=>{const i=Number(b.dataset.contractStop);b.setAttribute('aria-label',`Highlight ${i===0?'S':i}: ${task.stops[i].name}`);});
     $('#task-challenges').innerHTML=task.challenges.map(([title,body],i)=>`<article><span>0${i+1}</span><h4>${escapeHTML(title)}</h4><p>${escapeHTML(body)}</p></article>`).join('');
     text('#task-arrival',`Position samples are checked every ${task.arrival.sample_interval_sec} second. Arrival requires both a 3D distance of less than ${task.arrival.radius_3d} blocks and a height difference of at most ${task.arrival.radius_y} blocks from the target.`);
     $('.task-completion details').open=false;
@@ -104,7 +128,11 @@
     pressed('[data-task]','task',index);
   }
   $$('[data-task]').forEach(b=>b.addEventListener('click',()=>setTask(Number(b.dataset.task))));
-  $('.journey-explorer').addEventListener('click',e=>{const b=e.target.closest('[data-task-stop]');if(b){setTaskView('map');setTaskStop(Number(b.dataset.taskStop));}});
+  $('.journey-explorer').addEventListener('click',e=>{const b=e.target.closest('[data-task-stop]');if(b)showTaskRule('waypoint',Number(b.dataset.taskStop),false);});
+  $$('[data-task-rule]').forEach(b=>b.addEventListener('click',()=>showTaskRule(b.dataset.taskRule,b.dataset.taskRule==='waypoint'?(taskStop||1):taskStop)));
+  $('.task-contract-flow').addEventListener('click',e=>{const b=e.target.closest('[data-contract-stop]');if(b)showTaskRule('waypoint',Number(b.dataset.contractStop));});
+  $('.task-contract-flow').addEventListener('keydown',e=>{const b=e.target.closest('[data-contract-stop]');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showTaskRule('waypoint',Number(b.dataset.contractStop));}});
+  $('#task-rule-clear').addEventListener('click',()=>{taskRule='';renderTaskRule();$('[data-task-view="map"]').focus({preventScroll:true});});
   $('#task-stops').addEventListener('click',e=>{const b=e.target.closest('[data-watch-leg]');if(b){setTaskStop(Number(b.dataset.watchLeg)+1);setTaskView('scene',true);}});
   document.addEventListener('task-scene-leg-selected',e=>setTaskStop(e.detail.index+1));
   $$('[data-task-view]').forEach(b=>b.addEventListener('click',()=>setTaskView(b.dataset.taskView)));
