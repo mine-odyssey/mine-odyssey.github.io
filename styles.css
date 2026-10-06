@@ -966,3 +966,75 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .research-layout .task-section .instruction-toolbar button{margin-top:8px}
  .research-layout .task-section .task-stops [data-task-stop]{gap:8px}
 }
+
+/* Compact introduction and paired, complete recorded trajectories. */
+.research-layout .section.overview-section{max-width:1200px;padding-block:44px}
+.overview-intro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;align-items:center;margin-bottom:24px}
+.research-layout .overview-section .section-heading{max-width:none;margin:0;text-align:left}
+.research-layout .overview-section .section-heading h2{font-size:44px;line-height:1.15;letter-spacing:-1px}
+.overview-intro .intro-copy>p.large-copy{font-size:23px;line-height:1.5;margin:0 0 10px}
+.overview-intro .intro-copy>p{font-size:17px;line-height:1.6;margin:0}
+.full-trajectories{border:1px solid #d5dfd2;border-radius:12px;padding:20px;background:#f7f9f4}
+.trajectory-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.trajectory-heading h3{font:400 28px/1.2 var(--serif);letter-spacing:-.4px}
+.trajectory-heading p{font-size:14px;margin:6px 0 0;color:var(--muted)}
+.trajectory-tabs{display:flex;gap:6px;flex-shrink:0}
+.trajectory-tabs button{padding:10px 16px;border:1px solid #cbd7c6;border-radius:6px;background:#fff;font-size:15px;min-height:44px}
+.trajectory-tabs button[aria-pressed=true]{background:#294f3b;border-color:#294f3b;color:#fff}
+.trajectory-stops{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;list-style:none;padding:0;margin:18px 0;font-size:13px;color:#4e644f}
+.trajectory-stops li{display:flex;gap:7px;align-items:center}
+.trajectory-stops li>span{font-size:11px;display:grid;place-items:center;flex:0 0 23px;height:23px;border-radius:50%;border:1px solid #b6c6ac;background:#fff}
+.trajectory-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.trajectory-run{min-width:0;--route:#247c71;background:#fff;border:1px solid #d5dfd2;border-radius:8px;overflow:hidden}
+.trajectory-run[data-model=deepseek]{--route:#b0523d}
+.trajectory-run header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 14px 12px}
+.trajectory-run h4{font-size:18px;font-weight:600;color:var(--route);margin:0}
+.trajectory-outcome{font-size:12px;color:var(--route);background:color-mix(in srgb,var(--route) 9%,white);border-radius:4px;padding:4px 7px;white-space:nowrap}
+.trajectory-map{position:relative;aspect-ratio:1.6;overflow:hidden;background:#e2e8dc}
+.trajectory-map>img,.trajectory-map>svg{position:absolute;inset:0;display:block;width:100%;height:100%}
+.trajectory-map>img{object-fit:contain}
+.trajectory-map>svg{overflow:visible}
+.trajectory-marker{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#fff7dd;color:#614c1b;border:1.5px solid #a27f2d;font:600 12px var(--sans);box-shadow:0 1px 3px #0003}
+.trajectory-marker.is-reached{background:var(--route);border-color:#fff;color:white}
+.trajectory-run figcaption{padding:10px 14px 12px}
+.trajectory-run-summary{font-size:13px;color:#687567;margin:0 0 8px}
+.trajectory-run-current{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#344d3e}
+.trajectory-run-current strong{font-weight:600;font-variant-numeric:tabular-nums}
+.trajectory-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px}
+.trajectory-controls>button,.trajectory-speed select{font-size:14px;min-height:42px;border:1px solid #bcccb4;border-radius:5px;padding:8px 12px;background:#fff;color:#294f3b}
+.trajectory-controls #trajectory-play{min-width:76px;background:#294f3b;color:white;border-color:#294f3b}
+.trajectory-speed{display:flex;align-items:center;gap:8px;font-size:13px;margin-left:2px}
+.trajectory-timeline{flex:1;min-width:180px;display:flex;align-items:center;gap:12px;margin-left:6px}
+.trajectory-timeline input{width:100%;min-width:50px;accent-color:#294f3b;cursor:pointer}
+.trajectory-timeline output{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.trajectory-source{margin-top:14px;padding-top:12px;border-top:1px solid #d9e2d4}
+.trajectory-source summary{font-size:13px;color:#526b47;cursor:pointer;min-height:24px}
+.trajectory-source summary>span{margin-left:8px;font-size:11px;color:#7b8874}
+.trajectory-source blockquote{margin:16px 0 10px;font-size:17px;line-height:1.65}
+.trajectory-source>p{font-size:13px;line-height:1.65;color:#718269;max-width:850px}
+@media(max-width:1000px) and (min-width:761px){
+ .overview-intro{gap:24px}
+ .research-layout .overview-section .section-heading h2{font-size:38px}
+ .overview-intro .intro-copy>p.large-copy{font-size:21px}
+ .trajectory-run header{align-items:flex-start;flex-direction:column;gap:6px}
+ .trajectory-run h4{font-size:17px}
+}
+@media(max-width:760px){
+ .research-layout .section.overview-section{padding-block:34px}
+ .overview-intro{grid-template-columns:1fr;gap:18px;margin-bottom:20px}
+ .research-layout .overview-section .section-heading h2{font-size:36px}
+ .overview-intro .intro-copy>p.large-copy{font-size:23px}
+ .full-trajectories{padding:14px}
+ .trajectory-heading{align-items:flex-start;flex-direction:column;gap:14px}
+ .trajectory-tabs{width:100%}.trajectory-tabs button{flex:1}
+ .trajectory-stops{gap:7px 12px;margin:14px 0;font-size:12px}
+ .trajectory-pair{grid-template-columns:1fr;gap:12px}
+ .trajectory-run h4{font-size:17px}
+ .trajectory-run header{padding:12px}
+ .trajectory-controls{gap:8px;margin-top:12px}
+ .trajectory-controls>button,.trajectory-speed select{padding-inline:9px}
+ .trajectory-speed{gap:6px}
+ .trajectory-timeline{flex-basis:100%;margin:6px 0 0;min-height:32px}
+ .trajectory-source summary>span{display:block;margin:5px 0 0}
+ .trajectory-marker{width:23px;height:23px;font-size:11px}
+}

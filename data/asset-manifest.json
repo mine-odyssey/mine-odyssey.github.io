@@ -1514,5 +1514,31 @@
     "sha256": "e674628800cbf228bfc875624e25c03f12809486b4a5961196f84ebd79016bb8",
     "source_sha256": "b9faeb46c212622c2ffb13214033c800cd6998e8d719ec2c926f98c2eef3c6c1",
     "kind": "film_poster"
+  },
+  {
+    "file": "assets/full-trajectory-zurich-001.webp",
+    "sha256": "c0a0b8ef5adb1601d4e411e7eba07ad0818de6283d624f6f91c91c32beafffa9",
+    "kind": "full_trajectory_map",
+    "source_sha256": "46068311fdcc0e1fdc3341c5ce8a486e44cbfeec1dcf37d1b028a0941df09f5c",
+    "crop": [
+      264,
+      309,
+      1261,
+      932
+    ],
+    "task_id": "zurich-001"
+  },
+  {
+    "file": "assets/full-trajectory-wurzburg-005.webp",
+    "sha256": "f3ef2eaa505472f90aa0434dd4c256516a679453724e76a1cb71218060d587f2",
+    "kind": "full_trajectory_map",
+    "source_sha256": "a27ae9be3281d2e379d474091f571618e6842b5ea6286f09ff107240fbd63ea9",
+    "crop": [
+      698,
+      396,
+      1100,
+      647
+    ],
+    "task_id": "wurzburg-005"
   }
 ]

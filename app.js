@@ -759,40 +759,82 @@
   setPhase(0);draw(0);sync();
 })();
 
-// A concrete introduction to spatial adaptation, reusing the audited case geometry.
+// Complete paired runs, replayed on one recorded-time clock without shortening pauses.
 (() => {
-  const replay=window.MINE_ODYSSEY.recoveryReplay,host=document.querySelector('#spatial-route');
-  const route=replay.cases.find(c=>c.id==='white-house').routes.find(r=>r.model==='GPT-6 Astra');
-  const button=document.querySelector('#spatial-play'),motion=matchMedia('(prefers-reduced-motion: reduce)');
-  // Prefix every local SVG reference so the full case study can coexist on the page.
-  host.innerHTML=route.svg.replaceAll(route.id,`overview-${route.id}`);
-  host.querySelectorAll('[data-background]').forEach(img=>img.setAttributeNS('http://www.w3.org/1999/xlink','href',replay.images[img.dataset.background]));
-  const segments=[...host.querySelectorAll('[data-replay-layer="line"]')].map(line=>({line,length:line.getTotalLength(),layers:[...host.querySelectorAll(`[data-replay-segment="${line.dataset.replaySegment}"]`)]}));
-  const total=segments.reduce((sum,s)=>sum+s.length,0),dot=host.querySelector('[data-replay-dot]');
-  let progress=1,wantsPlay=!motion.matches,frame=0,last=null,hold=0;
-  function paint(){
-    let consumed=0,active=segments[0],distance=0;
-    for(const segment of segments){
-      const part=Math.max(0,Math.min(segment.length,progress*total-consumed));
-      for(const path of segment.layers){path.style.strokeDasharray=`${segment.length} ${segment.length}`;path.style.strokeDashoffset=String(segment.length-part);path.style.visibility=part>0?'visible':'hidden';}
-      if(progress*total>=consumed){active=segment;distance=part;}consumed+=segment.length;
-    }
-    const point=active.line.getPointAtLength(distance);dot.setAttribute('cx',point.x);dot.setAttribute('cy',point.y);
-    host.dataset.progress=String(progress);
+  const data=window.MINE_ODYSSEY.fullTrajectories,host=document.querySelector('#full-trajectories');
+  if(!data||!host)return;
+  const $=s=>host.querySelector(s),motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const clock=t=>`${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`;
+  let current=0,elapsed=0,speed=data.default_speed,maximum=0,players=[],wantsPlay=!motion.matches,frame=0,last=null,lastPaint=0,hold=0;
+  const pair=$('#trajectory-pair'),slider=$('#trajectory-progress'),play=$('#trajectory-play');
+  function point(task,sample){
+    const [sx,bx,sz,bz]=task.projection,[l,t,r,b]=task.crop;
+    return [(sample[1]*sx+bx-l)/(r-l)*1000,(sample[3]*sz+bz-t)/(b-t)*task.map_viewbox[1]];
   }
-  function active(){const r=host.getBoundingClientRect();return wantsPlay&&!document.hidden&&r.top<innerHeight&&r.bottom>0;}
+  function paint(force=false){
+    const task=data.cases[current];
+    host.dataset.elapsed=String(elapsed);
+    for(const player of players){
+      const run=player.run,recorded=Math.min(elapsed,run.duration);
+      let low=0,high=run.samples.length;
+      while(low<high){const mid=(low+high)>>1;if(run.samples[mid][0]<=recorded)low=mid+1;else high=mid;}
+      const index=Math.max(0,low-1);
+      if(force||player.index!==index){
+        const d=player.commands.slice(0,index+1).join(' ');
+        player.paths.forEach(p=>p.setAttribute('d',d));
+        const [x,y]=player.points[index];player.dot.setAttribute('cx',x);player.dot.setAttribute('cy',y);
+        player.index=index;player.card.dataset.sampleIndex=String(index);
+      }
+      const reached=new Set(run.arrivals.filter(a=>a.time<=recorded).map(a=>a.id));
+      player.markers.forEach((m,i)=>m.classList.toggle('is-reached',i===0||reached.has(task.stops[i].id)));
+      player.visits.textContent=`${reached.size} / ${task.stops.length-1} destinations`;
+      player.time.textContent=clock(recorded);
+      const ended=elapsed>=run.duration;
+      player.outcome.textContent=ended?(run.success?'Completed':'Step limit'):'Running';
+      player.card.dataset.finished=String(ended);
+    }
+    slider.value=String(elapsed/maximum*1000);
+    slider.setAttribute('aria-valuetext',`${clock(elapsed)} of ${clock(maximum)} recorded time`);
+    $('#trajectory-clock').textContent=`${clock(elapsed)} / ${clock(maximum)}`;
+  }
+  function render(){
+    const task=data.cases[current];maximum=Math.max(...task.runs.map(r=>r.duration));elapsed=motion.matches?maximum:0;hold=0;
+    host.dataset.taskId=task.id;
+    $('#trajectory-task-id').textContent=task.id;
+    $('#trajectory-prompt').textContent=task.prompt;$('#trajectory-prompt').lang=task.locale;
+    $('#trajectory-stops').innerHTML=task.stops.map(s=>`<li><span>${s.label}</span>${escapeHTML(s.name)}</li>`).join('');
+    pair.innerHTML=task.runs.map(run=>`<figure class="trajectory-run" data-model="${run.id}"><header><h4>${escapeHTML(run.model)}</h4><span class="trajectory-outcome"></span></header><div class="trajectory-map" style="aspect-ratio:${task.map_viewbox[0]}/${task.map_viewbox[1]}"><img src="${task.map_image}" alt="Native map of ${escapeHTML(task.label)}" loading="lazy" width="1000" height="${Math.round(task.map_viewbox[1])}"><svg viewBox="0 0 ${task.map_viewbox.join(' ')}" role="img" aria-label="Complete recorded horizontal trajectory for ${escapeHTML(run.model)}"><path data-trace fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/><path data-trace fill="none" stroke="var(--route)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle data-player r="8" fill="var(--route)" stroke="#fff" stroke-width="3"/></svg>${task.stops.map(s=>{const p=point(task,[0,...s.position]);return `<span class="trajectory-marker" style="left:${p[0]/10}%;top:${p[1]/task.map_viewbox[1]*100}%" title="${escapeHTML(s.name)}">${s.label}</span>`;}).join('')}</div><figcaption><p class="trajectory-run-summary">Full run: ${clock(run.duration)} · ${run.steps} steps</p><div class="trajectory-run-current"><span data-visits></span><strong data-time></strong></div></figcaption></figure>`).join('');
+    players=task.runs.map((run,i)=>{
+      const card=pair.children[i],points=run.samples.map(s=>point(task,s));
+      return {run,card,points,index:-1,paths:[...card.querySelectorAll('[data-trace]')],dot:card.querySelector('[data-player]'),markers:[...card.querySelectorAll('.trajectory-marker')],visits:card.querySelector('[data-visits]'),time:card.querySelector('[data-time]'),outcome:card.querySelector('.trajectory-outcome'),commands:points.map((p,i)=>`${i===0||run.samples[i][0]-run.samples[i-1][0]>2.5?'M':'L'}${p.map(v=>v.toFixed(3)).join(' ')}`)};
+    });
+    host.querySelectorAll('[data-trajectory-case]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.trajectoryCase)===current)));
+    paint(true);sync();
+  }
+  function active(){const r=pair.getBoundingClientRect();return wantsPlay&&!document.hidden&&r.top<innerHeight&&r.bottom>0;}
   function tick(now){
     frame=0;if(!active()){sync();return;}
     const delta=last===null?0:Math.min(now-last,100);last=now;
-    if(progress>=1){hold+=delta;if(hold>=2200){progress=0;hold=0;}}else progress=Math.min(1,progress+delta/12000);
-    paint();frame=requestAnimationFrame(tick);
+    if(elapsed>=maximum){hold+=delta;if(hold>=3000){elapsed=0;hold=0;}}
+    else elapsed=Math.min(maximum,elapsed+delta/1000*speed);
+    if(now-lastPaint>=50){paint();lastPaint=now;}
+    frame=requestAnimationFrame(tick);
   }
-  function sync(){cancelAnimationFrame(frame);last=null;const playing=active();button.textContent=playing?'Pause route':'Play route';button.setAttribute('aria-pressed',String(playing));if(playing)frame=requestAnimationFrame(tick);}
-  button.addEventListener('click',()=>{wantsPlay=!active();if(wantsPlay&&progress>=1){progress=0;hold=0;paint();}sync();});
+  function sync(){
+    cancelAnimationFrame(frame);last=null;const playing=active();
+    play.textContent=playing?'Pause':'Play';play.setAttribute('aria-pressed',String(playing));
+    if(playing)frame=requestAnimationFrame(tick);
+  }
+  host.querySelectorAll('[data-trajectory-case]').forEach(b=>b.addEventListener('click',()=>{current=Number(b.dataset.trajectoryCase);render();}));
+  play.addEventListener('click',()=>{wantsPlay=!active();if(wantsPlay&&elapsed>=maximum){elapsed=0;hold=0;paint();}sync();});
+  $('#trajectory-restart').addEventListener('click',()=>{elapsed=0;hold=0;wantsPlay=true;paint();sync();});
+  $('#trajectory-speed').addEventListener('change',e=>{speed=Number(e.target.value);});
+  slider.addEventListener('input',()=>{wantsPlay=false;elapsed=Number(slider.value)/1000*maximum;hold=0;paint();sync();});
+  $('.trajectory-source').addEventListener('toggle',e=>{if(e.target.open){wantsPlay=false;sync();}});
+  motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;elapsed=maximum;paint();sync();}});
   document.addEventListener('visibilitychange',sync);
-  motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;progress=1;paint();sync();}});
-  document.querySelector('#spatial-case-link').addEventListener('click',()=>document.querySelector('[data-case="white-house"]').click());
-  paint();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(host);
+  render();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(pair);
 })();
 
 // An automatic task-order illustration, independent from the interactive explorer.
