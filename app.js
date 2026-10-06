@@ -105,15 +105,13 @@
     text('#contract-place',m.name);
     text('#contract-instruction',task.summary);
     $('#contract-instruction').lang=task.locale;
-    const heightGap=Math.abs(task.stops[0].position[1]-task.stops[2].position[1]);
-    text('#contract-height-note',`S and 2 are close on the map, but ${heightGap} blocks apart in height.`);
+    const [viewWidth,viewHeight]=task.map_viewbox;
+    $('.contract-native-map').style.aspectRatio=`${viewWidth} / ${viewHeight}`;
+    $('#contract-map-overlay').setAttribute('viewBox',`0 0 ${viewWidth} ${viewHeight}`);
+    $('.task-contract-flow').setAttribute('aria-label',`Animated task format: start, visit ${task.stops.length-1} destinations in order, then claim completion`);
     $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
     $('#contract-destinations').lang=task.locale;
-    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>{
-      const delta=i?s.position[1]-task.stops[i-1].position[1]:0;
-      const height=i?`${delta>0?'↑':delta<0?'↓':'–'} ${Math.abs(delta)} ${Math.abs(delta)===1?'block':'blocks'}`:'Start';
-      return `<li class="contract-stop" data-contract-stop="${i}"><span class="contract-number">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span><span class="contract-height">${height}</span></li>`;
-    }).join('');
+    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>`<li class="contract-stop" data-contract-stop="${i}"><span class="contract-number">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span></li>`).join('');
     $('#contract-map-overlay').innerHTML=task.stops.slice(1).map((s,i)=>`<path class="contract-map-leg" d="M ${task.stops[i].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`).join('')+task.stops.map((s,i)=>`<g data-contract-marker="${i}"><path class="contract-map-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="contract-map-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="5"/><circle class="contract-map-pin" cx="${s.marker[0]}" cy="${s.marker[1]}" r="26"/><text x="${s.marker[0]}" y="${s.marker[1]}" dy=".35em">${i===0?'S':i}</text></g>`).join('');
   }
   function setTask(index) {

@@ -793,15 +793,9 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .research-layout .opening .contract-stop{font-size:17px;min-height:48px}
 .research-layout .opening .contract-source-note{margin-top:12px;font-size:12px}
 .research-layout .opening .contract-instruction{font-size:19px;line-height:1.6;max-width:850px;margin:0 0 22px;color:#435843}
-.research-layout .opening .contract-height-note{font-size:14px;line-height:1.5;color:#5d7158;margin:12px 0 0;text-align:left}
-.research-layout .opening .contract-rule-label>span{font-size:12px;color:#6e7d62}
-.research-layout .opening .contract-stop{min-height:55px;gap:10px}
-.research-layout .opening .contract-height{flex:0 0 auto;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#63795b}
-.research-layout .opening .contract-stop.is-current .contract-height{color:#284c35}
+.research-layout .opening .contract-stop{min-height:48px;gap:10px}
 @media(max-width:760px){
  .research-layout .opening .contract-instruction{font-size:17px;line-height:1.6;margin-bottom:18px}
- .research-layout .opening .contract-height-note{font-size:13px}
- .research-layout .opening .contract-height{font-size:12px}
 }
 .research-layout .opening-stats{max-width:1100px;margin:24px auto 0;padding:21px 0;grid-template-columns:repeat(3,1fr);border-top:0;border-bottom:1px solid var(--line)}
 .research-layout .opening-stats>div{justify-content:center;padding-inline:24px}
@@ -925,4 +919,50 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .stair-layout .program-command-cards,.stair-layout .program-command-cards article{min-height:252px}
  .stair-layout .heading-sequence{gap:5px}
  .stair-layout .heading-sequence span{padding:7px}
+}
+
+/* Keep the task explorer compact, with one shared instruction beneath both columns. */
+.research-layout .task-section{max-width:1200px;padding-block:44px}
+.research-layout .task-section>.section-heading{margin-bottom:22px}
+.research-layout .task-section>.section-heading>p{margin-top:10px}
+.research-layout .task-section .task-tabs{gap:10px;margin-bottom:20px}
+.research-layout .task-section .task-tabs button{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;padding:12px 16px}
+.research-layout .task-section .task-tabs button>span{display:none}
+.research-layout .task-section .task-tabs strong{margin:0}
+.research-layout .task-section .task-tabs small{font-size:13px}
+.research-layout .task-section .journey-heading{padding-bottom:14px;margin-bottom:16px}
+.research-layout .task-section .journey-explorer{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"feedback feedback" "map itinerary" "instruction instruction";gap:18px 24px}
+.research-layout .task-section .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map itinerary" "instruction instruction"}
+.research-layout .task-section .journey-context{display:contents}
+.research-layout .task-section .journey-map-panel{grid-area:map;padding:14px}
+.research-layout .task-section .journey-map-toolbar{padding:0;margin-bottom:10px}
+.research-layout .task-section .journey-map-panel figcaption{padding:0;margin-top:8px}
+.research-layout .task-section .task-selected{padding-top:10px;gap:12px}
+.research-layout .task-section .task-instruction{grid-area:instruction;padding:18px 20px}
+.research-layout .task-section .task-instruction blockquote{max-width:none;min-height:0;font-size:18px;line-height:1.65}
+.research-layout .task-section .instruction-toolbar{margin-bottom:10px}
+.research-layout .task-section .instruction-toolbar .eyebrow span{display:inline;margin-left:10px}
+.research-layout .task-section .instruction-toolbar button{margin-top:0}
+.research-layout .task-section .task-stops li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px;border-bottom:1px solid #e4e9df}
+.research-layout .task-section .task-stops [data-task-stop]{grid-column:1;grid-row:1;padding:10px 6px;gap:10px}
+.research-layout .task-section .task-stops li:first-child [data-task-stop]{grid-column:1/-1}
+.research-layout .task-section .task-stops .task-watch-leg{grid-column:2;grid-row:1;width:auto;min-height:40px;margin:0;padding:6px;border:0;white-space:nowrap;font-size:13px;gap:5px}
+.research-layout .task-section .task-completion{margin-top:12px;padding-top:12px}
+@media(max-width:1000px) and (min-width:761px){
+ .research-layout .task-section .task-stops li{grid-template-columns:minmax(0,1fr)}
+ .research-layout .task-section .task-stops .task-watch-leg{grid-column:1;grid-row:2;justify-self:start;margin-left:45px;margin-top:-8px}
+}
+@media(max-width:760px){
+ .research-layout .task-section{padding-block:34px}
+ .research-layout .task-section>.section-heading{margin-bottom:20px}
+ .research-layout .task-section .task-tabs{gap:6px;margin-bottom:16px}
+ .research-layout .task-section .task-tabs button{padding:10px 12px;justify-content:space-between}
+ .research-layout .task-section .task-tabs strong{font-size:25px}
+ .research-layout .task-section .journey-explorer,.research-layout .task-section .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-columns:minmax(0,1fr);grid-template-areas:"feedback" "map" "instruction" "itinerary";gap:16px}
+ .research-layout .task-section .journey-explorer:has(>.task-rule-feedback[hidden]){grid-template-areas:"map" "instruction" "itinerary"}
+ .research-layout .task-section .journey-map-panel{padding:12px}
+ .research-layout .task-section .task-instruction{padding:16px}
+ .research-layout .task-section .instruction-toolbar .eyebrow span{display:block;margin:5px 0 0}
+ .research-layout .task-section .instruction-toolbar button{margin-top:8px}
+ .research-layout .task-section .task-stops [data-task-stop]{gap:8px}
 }
