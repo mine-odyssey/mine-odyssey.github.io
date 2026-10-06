@@ -767,14 +767,25 @@
 (() => {
   const data=window.MINE_ODYSSEY.fullTrajectories,host=document.querySelector('#full-trajectories');
   if(!data||!host)return;
-  const $=s=>host.querySelector(s),motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const additional=host.cloneNode(true);
+  additional.id='more-full-trajectories';
+  additional.querySelectorAll('[id]').forEach(e=>{e.id=`more-${e.id}`;});
+  additional.querySelectorAll('[for]').forEach(e=>{e.setAttribute('for',`more-${e.getAttribute('for')}`);});
+  additional.querySelectorAll('[data-trajectory-case]').forEach((button,i)=>{
+    button.dataset.trajectoryCase=String(i+2);button.firstChild.textContent=`${data.cases[i+2].label} `;
+    button.querySelector('small').textContent='Map only';
+  });
+  document.querySelector('#more-trajectories-slot').append(additional);
+  mount(host,0,'');mount(additional,2,'more-');
+  function mount(host,initial,prefix){
+  const $=s=>host.querySelector(s.startsWith('#')?`#${prefix}${s.slice(1)}`:s),motion=matchMedia('(prefers-reduced-motion: reduce)');
   const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clock=t=>`${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`;
-  let current=0,elapsed=0,speed=data.default_speed,maximum=0,players=[],wantsPlay=!motion.matches,frame=0,last=null,lastPaint=0,hold=0,generation=0,mediaError=false;
-  const pair=$('#trajectory-pair'),slider=$('#trajectory-progress'),play=$('#trajectory-play');
+  let current=initial,elapsed=0,speed=data.default_speed,maximum=0,players=[],wantsPlay=!motion.matches,frame=0,last=null,lastPaint=0,hold=0,generation=0,mediaError=false;
+  const pair=$('#trajectory-pair'),slider=$('#trajectory-progress'),play=$('#trajectory-play'),disclosure=host.closest('details');
   const outcome={claim_done_arrived:'Completed',step_limit:'Step limit',death:'Died',out_of_bounds:'Boundary termination'};
   function recordingEnd(run){return run.recording?run.recording.offset_seconds+run.recording.source_duration:0;}
-  function inView(){const r=pair.getBoundingClientRect();return !document.hidden&&r.top<innerHeight&&r.bottom>0;}
+  function inView(){const r=pair.getBoundingClientRect();return !document.hidden&&(!disclosure||disclosure.open)&&r.width>0&&r.height>0&&r.top<innerHeight&&r.bottom>0;}
   function videoTime(player){const r=player.run.recording;return Math.max(0,Math.min((elapsed-r.offset_seconds)/r.encoded_speed,r.duration-1/30));}
   function syncMedia(force=false){
     if(!players.some(p=>p.video))return;
@@ -876,7 +887,9 @@
   $('.trajectory-source').addEventListener('toggle',e=>{if(e.target.open){wantsPlay=false;sync();}});
   motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;elapsed=maximum;paint();syncMedia(true);sync();}});
   document.addEventListener('visibilitychange',sync);
+  disclosure?.addEventListener('toggle',sync);
   render();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(pair);
+  }
 })();
 
 // An automatic task-order illustration, independent from the interactive explorer.
