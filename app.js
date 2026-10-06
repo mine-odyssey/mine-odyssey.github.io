@@ -107,8 +107,11 @@
     text('#contract-instruction',task.summary);
     $('#contract-instruction').lang=task.locale;
     const [viewWidth,viewHeight]=task.map_viewbox;
-    $('.contract-native-map').style.aspectRatio=`${viewWidth} / ${viewHeight}`;
-    $('#contract-map-overlay').setAttribute('viewBox',`0 0 ${viewWidth} ${viewHeight}`);
+    const [left,top,right,bottom]=task.crop,[dl,dt,dr,db]=task.display_crop||task.crop;
+    const frame=[(dl-left)/(right-left)*viewWidth,(dt-top)/(bottom-top)*viewHeight,(dr-dl)/(right-left)*viewWidth,(db-dt)/(bottom-top)*viewHeight];
+    $('.contract-native-map').style.aspectRatio=`${frame[2]} / ${frame[3]}`;
+    $('#contract-map-overlay').setAttribute('viewBox',frame.join(' '));
+    Object.assign($('#contract-map-image').style,{left:`${-frame[0]/frame[2]*100}%`,top:`${-frame[1]/frame[3]*100}%`,width:`${viewWidth/frame[2]*100}%`,height:`${viewHeight/frame[3]*100}%`});
     $('.task-contract-flow').setAttribute('aria-label',`Animated task format: start, visit ${task.stops.length-1} destinations in order, then claim completion`);
     $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
     $('#contract-destinations').lang=task.locale;
@@ -827,7 +830,9 @@
     const task=data.cases[current],hasVideo=task.runs.every(r=>r.recording);
     maximum=Math.max(...task.runs.flatMap(r=>[r.duration,recordingEnd(r)]));elapsed=motion.matches?maximum:0;hold=0;mediaError=false;
     speed=hasVideo?32:128;$('#trajectory-speed').value=String(speed);pair.classList.toggle('has-recordings',hasVideo);
-    $('#trajectory-subtitle').textContent=hasVideo?`Recording + trajectory · ${task.setting_label} · Same task, same clock.`:'Full trajectories · Same task, same elapsed-time scale.';
+    $('#trajectory-title').textContent=task.label;
+    $('#trajectory-subtitle').textContent=hasVideo?'Recording and trajectory, synchronized.':'Complete trajectories on the same time scale.';
+    $('#trajectory-setting').textContent=task.setting_label||'';$('#trajectory-setting').hidden=!task.setting_label;
     $('#trajectory-media-status').hidden=true;
     host.dataset.taskId=task.id;
     $('#trajectory-task-id').textContent=task.id;

@@ -713,7 +713,7 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .opening .contract-map-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:0 0 12px;text-align:left;min-height:44px;background:transparent;border:0;color:#31583f}
 .contract-map-heading strong{font-size:17px;font-weight:600}.contract-map-heading>span{font-size:12px;color:#647660}
 .contract-native-map{position:relative;overflow:hidden;border:1px solid #d4ddd0;border-radius:7px;aspect-ratio:1000/667;background:#c6d4df}
-.contract-native-map>img{display:block;width:100%;height:100%;object-fit:contain}
+.contract-native-map>img{display:block;position:absolute;max-width:none;width:100%;height:100%;object-fit:contain}
 .opening .contract-native-map>svg{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0}
 .contract-map-leg{fill:none;stroke:#fcfff0;stroke-width:4;stroke-dasharray:9 11;filter:drop-shadow(0 1px 2px #183621)}
 .contract-map-leader{stroke:#fffde8;stroke-width:3}.contract-map-anchor{fill:#f8f2c6}
@@ -1055,3 +1055,11 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .trajectory-tabs button{padding:8px 10px;font-size:14px}
  .trajectory-video-rate{font-size:11px;bottom:7px;left:7px}
 }
+
+/* One concrete heading connects the run comparison to its media. */
+.research-layout .overview-section>.rollout-heading{display:flex;align-items:center;justify-content:space-between;gap:32px;text-align:left;max-width:none;margin:0 0 24px}
+.research-layout .overview-section>.rollout-heading>p{font-size:19px;line-height:1.5;max-width:490px;margin:0}
+.trajectory-case-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.trajectory-setting{font-size:12px;line-height:1.4;padding:4px 9px;border:1px solid #d5dfcf;border-radius:5px;color:#526b47;background:#fff}
+.trajectory-setting[hidden]{display:none}
+@media(max-width:760px){.research-layout .overview-section>.rollout-heading{align-items:flex-start;flex-direction:column;gap:12px}.research-layout .overview-section>.rollout-heading>p{font-size:18px}.trajectory-case-title{gap:9px}}
