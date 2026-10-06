@@ -1064,10 +1064,6 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .trajectory-setting[hidden]{display:none}
 @media(max-width:760px){.research-layout .overview-section>.rollout-heading{align-items:flex-start;flex-direction:column;gap:12px}.research-layout .overview-section>.rollout-heading>p{font-size:18px}.trajectory-case-title{gap:9px}}
 
-/* Full recordings share one layout; map-only runs have a separate player. */
+/* All four tasks retain the same model headers and paired comparison layout. */
 .trajectory-run header{flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;min-height:88px}
-.more-trajectories{margin-top:20px;border-top:1px solid #d5dfd2;padding-top:10px}
-.more-trajectories>summary{font-size:17px;color:var(--green);cursor:pointer;padding:10px 0}
-.more-trajectories>summary>span{font-size:13px;color:var(--muted);margin-left:10px}
-.more-trajectories>p{font-size:14px;color:var(--muted);margin:4px 0 16px}
-@media(max-width:760px){.more-trajectories>summary>span{display:block;margin:4px 0 0 18px}.trajectory-run header{min-height:84px}}
+@media(max-width:760px){.trajectory-run header{min-height:84px}}
