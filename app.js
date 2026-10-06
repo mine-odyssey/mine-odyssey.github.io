@@ -766,8 +766,31 @@
   const $=s=>host.querySelector(s),motion=matchMedia('(prefers-reduced-motion: reduce)');
   const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clock=t=>`${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`;
-  let current=0,elapsed=0,speed=data.default_speed,maximum=0,players=[],wantsPlay=!motion.matches,frame=0,last=null,lastPaint=0,hold=0;
+  let current=0,elapsed=0,speed=data.default_speed,maximum=0,players=[],wantsPlay=!motion.matches,frame=0,last=null,lastPaint=0,hold=0,generation=0,mediaError=false;
   const pair=$('#trajectory-pair'),slider=$('#trajectory-progress'),play=$('#trajectory-play');
+  const outcome={claim_done_arrived:'Completed',step_limit:'Step limit',death:'Died',out_of_bounds:'Boundary termination'};
+  function recordingEnd(run){return run.recording?run.recording.offset_seconds+run.recording.source_duration:0;}
+  function inView(){const r=pair.getBoundingClientRect();return !document.hidden&&r.top<innerHeight&&r.bottom>0;}
+  function videoTime(player){const r=player.run.recording;return Math.max(0,Math.min((elapsed-r.offset_seconds)/r.encoded_speed,r.duration-1/30));}
+  function syncMedia(force=false){
+    if(!players.some(p=>p.video))return;
+    const visible=inView(),playing=active();
+    for(const player of players){
+      const v=player.video,r=player.run.recording;if(!v)continue;
+      if(!visible){v.pause();continue;}
+      if(!v.getAttribute('src')){v.src=r.video;v.load();}
+      if(v.readyState<1)continue;
+      const target=videoTime(player);
+      v.playbackRate=speed/r.encoded_speed;
+      if(Math.abs(v.currentTime-target)>(force?.02:.2)&&!v.seeking)v.currentTime=target;
+      const canPlay=playing&&elapsed>=r.offset_seconds&&elapsed<recordingEnd(player.run);
+      if(canPlay&&v.paused&&!player.pendingPlay){
+        player.pendingPlay=true;
+        v.play().catch(e=>{if(e.name!=='AbortError'&&player.generation===generation){mediaError=true;wantsPlay=false;$('#trajectory-media-status').hidden=false;$('#trajectory-media-status').textContent='Press Play to start the recordings.';sync();}}).finally(()=>{player.pendingPlay=false;});
+      }else if(!canPlay)v.pause();
+      player.card.querySelector('.trajectory-video-rate').textContent=`Full recording · ${speed}×`;
+    }
+  }
   function point(task,sample){
     const [sx,bx,sz,bz]=task.projection,[l,t,r,b]=task.crop;
     return [(sample[1]*sx+bx-l)/(r-l)*1000,(sample[3]*sz+bz-t)/(b-t)*task.map_viewbox[1]];
@@ -791,7 +814,7 @@
       player.visits.textContent=`${reached.size} / ${task.stops.length-1} destinations`;
       player.time.textContent=clock(recorded);
       const ended=elapsed>=run.duration;
-      player.outcome.textContent=ended?(run.success?'Completed':'Step limit'):'Running';
+      player.outcome.textContent=ended?outcome[run.terminal_reason]:'Running';
       player.card.dataset.finished=String(ended);
     }
     slider.value=String(elapsed/maximum*1000);
@@ -799,40 +822,53 @@
     $('#trajectory-clock').textContent=`${clock(elapsed)} / ${clock(maximum)}`;
   }
   function render(){
-    const task=data.cases[current];maximum=Math.max(...task.runs.map(r=>r.duration));elapsed=motion.matches?maximum:0;hold=0;
+    generation++;players.forEach(p=>{if(p.video){p.video.pause();p.video.removeAttribute('src');p.video.load();}});
+    const task=data.cases[current],hasVideo=task.runs.every(r=>r.recording);
+    maximum=Math.max(...task.runs.flatMap(r=>[r.duration,recordingEnd(r)]));elapsed=motion.matches?maximum:0;hold=0;mediaError=false;
+    speed=hasVideo?32:128;$('#trajectory-speed').value=String(speed);pair.classList.toggle('has-recordings',hasVideo);
+    $('#trajectory-subtitle').textContent=hasVideo?`Recording + trajectory · ${task.setting_label} · Same task, same clock.`:'Full trajectories · Same task, same elapsed-time scale.';
+    $('#trajectory-media-status').hidden=true;
     host.dataset.taskId=task.id;
     $('#trajectory-task-id').textContent=task.id;
     $('#trajectory-prompt').textContent=task.prompt;$('#trajectory-prompt').lang=task.locale;
     $('#trajectory-stops').innerHTML=task.stops.map(s=>`<li><span>${s.label}</span>${escapeHTML(s.name)}</li>`).join('');
-    pair.innerHTML=task.runs.map(run=>`<figure class="trajectory-run" data-model="${run.id}"><header><h4>${escapeHTML(run.model)}</h4><span class="trajectory-outcome"></span></header><div class="trajectory-map" style="aspect-ratio:${task.map_viewbox[0]}/${task.map_viewbox[1]}"><img src="${task.map_image}" alt="Native map of ${escapeHTML(task.label)}" loading="lazy" width="1000" height="${Math.round(task.map_viewbox[1])}"><svg viewBox="0 0 ${task.map_viewbox.join(' ')}" role="img" aria-label="Complete recorded horizontal trajectory for ${escapeHTML(run.model)}"><path data-trace fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/><path data-trace fill="none" stroke="var(--route)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle data-player r="8" fill="var(--route)" stroke="#fff" stroke-width="3"/></svg>${task.stops.map(s=>{const p=point(task,[0,...s.position]);return `<span class="trajectory-marker" style="left:${p[0]/10}%;top:${p[1]/task.map_viewbox[1]*100}%" title="${escapeHTML(s.name)}">${s.label}</span>`;}).join('')}</div><figcaption><p class="trajectory-run-summary">Full run: ${clock(run.duration)} · ${run.steps} steps</p><div class="trajectory-run-current"><span data-visits></span><strong data-time></strong></div></figcaption></figure>`).join('');
+    pair.innerHTML=task.runs.map(run=>`<figure class="trajectory-run" data-model="${run.id}"><header><h4>${escapeHTML(run.model)}</h4><span class="trajectory-outcome"></span></header>${run.recording?`<div class="trajectory-video"><video muted playsinline preload="none" poster="${run.recording.poster}" aria-label="Full game recording for ${escapeHTML(run.model)} on ${escapeHTML(task.label)}"></video><span class="trajectory-video-rate">Full recording · ${speed}×</span><button type="button" data-video-expand aria-label="Expand ${escapeHTML(run.model)} recording">↗</button></div>`:''}<div class="trajectory-map" style="aspect-ratio:${task.map_viewbox[0]}/${task.map_viewbox[1]}"><img src="${task.map_image}" alt="Native map of ${escapeHTML(task.label)}" loading="lazy" width="1000" height="${Math.round(task.map_viewbox[1])}"><svg viewBox="0 0 ${task.map_viewbox.join(' ')}" role="img" aria-label="Complete recorded horizontal trajectory for ${escapeHTML(run.model)}"><path data-trace fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/><path data-trace fill="none" stroke="var(--route)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle data-player r="8" fill="var(--route)" stroke="#fff" stroke-width="3"/></svg>${task.stops.map(s=>{const p=point(task,[0,...s.position]);return `<span class="trajectory-marker" style="left:${p[0]/10}%;top:${p[1]/task.map_viewbox[1]*100}%" title="${escapeHTML(s.name)}">${s.label}</span>`;}).join('')}</div><figcaption><p class="trajectory-run-summary">Full run: ${clock(run.duration)} · ${run.steps} steps</p><div class="trajectory-run-current"><span data-visits></span><strong data-time></strong></div></figcaption></figure>`).join('');
     players=task.runs.map((run,i)=>{
       const card=pair.children[i],points=run.samples.map(s=>point(task,s));
-      return {run,card,points,index:-1,paths:[...card.querySelectorAll('[data-trace]')],dot:card.querySelector('[data-player]'),markers:[...card.querySelectorAll('.trajectory-marker')],visits:card.querySelector('[data-visits]'),time:card.querySelector('[data-time]'),outcome:card.querySelector('.trajectory-outcome'),commands:points.map((p,i)=>`${i===0||run.samples[i][0]-run.samples[i-1][0]>2.5?'M':'L'}${p.map(v=>v.toFixed(3)).join(' ')}`)};
+      return {run,card,points,index:-1,generation,video:card.querySelector('video'),pendingPlay:false,paths:[...card.querySelectorAll('[data-trace]')],dot:card.querySelector('[data-player]'),markers:[...card.querySelectorAll('.trajectory-marker')],visits:card.querySelector('[data-visits]'),time:card.querySelector('[data-time]'),outcome:card.querySelector('.trajectory-outcome'),commands:points.map((p,i)=>`${i===0||run.samples[i][0]-run.samples[i-1][0]>2.5?'M':'L'}${p.map(v=>v.toFixed(3)).join(' ')}`)};
     });
+    players.forEach(p=>{if(p.video){
+      const revision=generation;
+      p.video.addEventListener('loadedmetadata',()=>{if(revision===generation)syncMedia(true);});
+      p.video.addEventListener('seeked',()=>{if(revision===generation&&!active())syncMedia(true);});
+      p.video.addEventListener('error',()=>{if(revision===generation&&p.video.getAttribute('src')){mediaError=true;wantsPlay=false;$('#trajectory-media-status').hidden=false;$('#trajectory-media-status').textContent='The recording could not load. Press Play to retry.';sync();}});
+      p.card.querySelector('[data-video-expand]').addEventListener('click',()=>{if(p.video.requestFullscreen)p.video.requestFullscreen().catch(()=>{});else if(p.video.webkitEnterFullscreen)p.video.webkitEnterFullscreen();});
+    }});
     host.querySelectorAll('[data-trajectory-case]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.trajectoryCase)===current)));
     paint(true);sync();
   }
-  function active(){const r=pair.getBoundingClientRect();return wantsPlay&&!document.hidden&&r.top<innerHeight&&r.bottom>0;}
+  function active(){return wantsPlay&&!mediaError&&inView();}
   function tick(now){
     frame=0;if(!active()){sync();return;}
-    const delta=last===null?0:Math.min(now-last,100);last=now;
+    let delta=last===null?0:Math.min(now-last,100);last=now;
+    if(players.some(p=>p.video&&elapsed<recordingEnd(p.run)&&(p.video.readyState<3||p.video.seeking))){delta=0;players.forEach(p=>p.video?.pause());}
     if(elapsed>=maximum){hold+=delta;if(hold>=3000){elapsed=0;hold=0;}}
     else elapsed=Math.min(maximum,elapsed+delta/1000*speed);
-    if(now-lastPaint>=50){paint();lastPaint=now;}
+    if(now-lastPaint>=50){paint();syncMedia();lastPaint=now;}
     frame=requestAnimationFrame(tick);
   }
   function sync(){
     cancelAnimationFrame(frame);last=null;const playing=active();
     play.textContent=playing?'Pause':'Play';play.setAttribute('aria-pressed',String(playing));
-    if(playing)frame=requestAnimationFrame(tick);
+    syncMedia();if(playing)frame=requestAnimationFrame(tick);
   }
   host.querySelectorAll('[data-trajectory-case]').forEach(b=>b.addEventListener('click',()=>{current=Number(b.dataset.trajectoryCase);render();}));
-  play.addEventListener('click',()=>{wantsPlay=!active();if(wantsPlay&&elapsed>=maximum){elapsed=0;hold=0;paint();}sync();});
-  $('#trajectory-restart').addEventListener('click',()=>{elapsed=0;hold=0;wantsPlay=true;paint();sync();});
-  $('#trajectory-speed').addEventListener('change',e=>{speed=Number(e.target.value);});
-  slider.addEventListener('input',()=>{wantsPlay=false;elapsed=Number(slider.value)/1000*maximum;hold=0;paint();sync();});
+  play.addEventListener('click',()=>{if(mediaError){mediaError=false;$('#trajectory-media-status').hidden=true;players.forEach(p=>p.video?.load());}wantsPlay=!active();if(wantsPlay&&elapsed>=maximum){elapsed=0;hold=0;paint();}syncMedia(true);sync();});
+  $('#trajectory-restart').addEventListener('click',()=>{elapsed=0;hold=0;wantsPlay=true;paint();syncMedia(true);sync();});
+  $('#trajectory-speed').addEventListener('change',e=>{speed=Number(e.target.value);syncMedia(true);});
+  slider.addEventListener('input',()=>{wantsPlay=false;elapsed=Number(slider.value)/1000*maximum;hold=0;paint();syncMedia(true);sync();});
   $('.trajectory-source').addEventListener('toggle',e=>{if(e.target.open){wantsPlay=false;sync();}});
-  motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;elapsed=maximum;paint();sync();}});
+  motion.addEventListener('change',e=>{if(e.matches){wantsPlay=false;elapsed=maximum;paint();syncMedia(true);sync();}});
   document.addEventListener('visibilitychange',sync);
   render();new IntersectionObserver(sync,{threshold:[0,.15]}).observe(pair);
 })();

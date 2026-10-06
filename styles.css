@@ -1038,3 +1038,20 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .trajectory-source summary>span{display:block;margin:5px 0 0}
  .trajectory-marker{width:23px;height:23px;font-size:11px}
 }
+
+/* Recordings and their own position traces remain visible together. */
+.trajectory-tabs{flex-wrap:wrap;justify-content:flex-end}
+.trajectory-tabs button{padding:8px 12px;line-height:1.35}
+.trajectory-tabs small{display:block;font-size:10px;opacity:.75;margin-top:2px}
+.trajectory-video{position:relative;aspect-ratio:4/3;background:#142219}
+.trajectory-video video{display:block;width:100%;height:100%;object-fit:contain}
+.trajectory-video-rate{position:absolute;bottom:10px;left:10px;background:#12231bd9;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;pointer-events:none}
+.trajectory-video [data-video-expand]{position:absolute;right:10px;bottom:8px;border:1px solid #ffffff66;background:#12231bd9;color:#fff;border-radius:4px;padding:4px 8px;min-height:32px;font-size:21px}
+.has-recordings .trajectory-map{border-top:3px solid #fff}
+.trajectory-media-status{font-size:14px;margin:12px 0 0;color:#71551e}
+@media(max-width:1000px){.trajectory-heading{flex-wrap:wrap}.trajectory-tabs{justify-content:flex-start}}
+@media(max-width:760px){
+ .trajectory-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .trajectory-tabs button{padding:8px 10px;font-size:14px}
+ .trajectory-video-rate{font-size:11px;bottom:7px;left:7px}
+}
