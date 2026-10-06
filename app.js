@@ -103,6 +103,7 @@
   function renderTaskIntroduction() {
     const task=data.journeys.introduction,m=data.maps.find(m=>m.id===task.map);
     text('#contract-place',m.name);
+    text('#contract-setting',task.setting.split(' · ').at(-1));
     text('#contract-instruction',task.summary);
     $('#contract-instruction').lang=task.locale;
     const [viewWidth,viewHeight]=task.map_viewbox;
