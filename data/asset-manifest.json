@@ -1670,5 +1670,11 @@
       647
     ],
     "task_id": "wurzburg-005"
+  },
+  {
+    "file": "assets/mine-odyssey-paper-4230bdd6a58d.pdf",
+    "sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
+    "source_sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
+    "kind": "research_paper"
   }
 ]

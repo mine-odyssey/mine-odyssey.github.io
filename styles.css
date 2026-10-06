@@ -1067,3 +1067,5 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 /* All four tasks retain the same model headers and paired comparison layout. */
 .trajectory-run header{flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;min-height:88px}
 @media(max-width:760px){.trajectory-run header{min-height:84px}}
+
+.project-resource-link svg{width:19px;height:19px;flex:none}
