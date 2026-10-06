@@ -792,6 +792,17 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .research-layout .opening .contract-destinations{margin:0 0 14px}
 .research-layout .opening .contract-stop{font-size:17px;min-height:48px}
 .research-layout .opening .contract-source-note{margin-top:12px;font-size:12px}
+.research-layout .opening .contract-instruction{font-size:19px;line-height:1.6;max-width:850px;margin:0 0 22px;color:#435843}
+.research-layout .opening .contract-height-note{font-size:14px;line-height:1.5;color:#5d7158;margin:12px 0 0;text-align:left}
+.research-layout .opening .contract-rule-label>span{font-size:12px;color:#6e7d62}
+.research-layout .opening .contract-stop{min-height:55px;gap:10px}
+.research-layout .opening .contract-height{flex:0 0 auto;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#63795b}
+.research-layout .opening .contract-stop.is-current .contract-height{color:#284c35}
+@media(max-width:760px){
+ .research-layout .opening .contract-instruction{font-size:17px;line-height:1.6;margin-bottom:18px}
+ .research-layout .opening .contract-height-note{font-size:13px}
+ .research-layout .opening .contract-height{font-size:12px}
+}
 .research-layout .opening-stats{max-width:1100px;margin:24px auto 0;padding:21px 0;grid-template-columns:repeat(3,1fr);border-top:0;border-bottom:1px solid var(--line)}
 .research-layout .opening-stats>div{justify-content:center;padding-inline:24px}
 .research-layout .opening-stats strong{font-size:40px}

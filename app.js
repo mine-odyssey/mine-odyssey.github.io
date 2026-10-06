@@ -100,6 +100,22 @@
     $$('#task-map-lines [data-map-stop]').forEach(p=>p.classList.toggle('is-selected',Number(p.dataset.mapStop)===taskStop));
     renderTaskRule();
   }
+  function renderTaskIntroduction() {
+    const task=data.journeys.introduction,m=data.maps.find(m=>m.id===task.map);
+    text('#contract-place',m.name);
+    text('#contract-instruction',task.summary);
+    $('#contract-instruction').lang=task.locale;
+    const heightGap=Math.abs(task.stops[0].position[1]-task.stops[2].position[1]);
+    text('#contract-height-note',`S and 2 are close on the map, but ${heightGap} blocks apart in height.`);
+    $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
+    $('#contract-destinations').lang=task.locale;
+    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>{
+      const delta=i?s.position[1]-task.stops[i-1].position[1]:0;
+      const height=i?`${delta>0?'↑':delta<0?'↓':'–'} ${Math.abs(delta)} ${Math.abs(delta)===1?'block':'blocks'}`:'Start';
+      return `<li class="contract-stop" data-contract-stop="${i}"><span class="contract-number">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span><span class="contract-height">${height}</span></li>`;
+    }).join('');
+    $('#contract-map-overlay').innerHTML=task.stops.slice(1).map((s,i)=>`<path class="contract-map-leg" d="M ${task.stops[i].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`).join('')+task.stops.map((s,i)=>`<g data-contract-marker="${i}"><path class="contract-map-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="contract-map-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="5"/><circle class="contract-map-pin" cx="${s.marker[0]}" cy="${s.marker[1]}" r="26"/><text x="${s.marker[0]}" y="${s.marker[1]}" dy=".35em">${i===0?'S':i}</text></g>`).join('');
+  }
   function setTask(index) {
     taskIndex=index;originalInstruction=true;taskRule='';
     const task=tasks[index],m=data.maps.find(m=>m.id===task.map);
@@ -109,16 +125,10 @@
     $('#task-stops').innerHTML=task.stops.map((s,i)=>`<li>${i?`<button type="button" class="task-watch-leg" data-watch-leg="${i-1}" aria-label="Watch ${escapeHTML(task.stops[i-1].name)} to ${escapeHTML(s.name)}"><span aria-hidden="true">▶</span> Watch ${i===1?'S':i-1} → ${i}<span class="leg-watch-duration">Full leg</span></button>`:''}<button type="button" data-task-stop="${i}" aria-pressed="false"><span class="stop-number" aria-hidden="true">${i===0?'S':i}</span><span><small>${escapeHTML(stopLabel(s,i))}</small><strong>${escapeHTML(s.name)}</strong><span>${escapeHTML(s.purpose)}</span></span><span class="stop-arrow" aria-hidden="true">↗</span></button></li>`).join('');
     $('#task-markers').innerHTML=task.stops.map((s,i)=>`<button type="button" data-task-stop="${i}" aria-pressed="false" class="task-marker ${s.role}" style="left:${s.marker[0]/10}%;top:${s.marker[1]/6.67}%;--visit-index:${i}" aria-label="${escapeHTML(`${stopLabel(s,i)}: ${s.name}`)}" title="${escapeHTML(s.name)}">${i===0?'S':i}</button>`).join('');
     $('#task-map-lines').innerHTML=task.stops.map((s,i)=>`${i?`<path class="task-leg" data-leg="${i}" style="--visit-index:${i}" d="M ${task.stops[i-1].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`:''}<path class="task-marker-leader" data-map-stop="${i}" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="task-anchor" data-map-stop="${i}" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="4"/>`).join('');
-    text('#contract-place',m.name);
-    $('#contract-map-image').src=task.map_image;$('#contract-map-image').alt=`Native map of ${m.name} with the task's ordered destinations`;
-    $('#contract-destinations').lang=task.locale;
-    $('#contract-destinations').innerHTML=task.stops.map((s,i)=>`<li class="contract-stop" data-contract-stop="${i}"><span class="contract-number">${i===0?'S':i}</span><span>${escapeHTML(s.original_name)}</span></li>`).join('');
-    $('#contract-map-overlay').innerHTML=task.stops.slice(1).map((s,i)=>`<path class="contract-map-leg" d="M ${task.stops[i].anchor.join(' ')} L ${s.anchor.join(' ')}"/>`).join('')+task.stops.map((s,i)=>`<g data-contract-marker="${i}"><path class="contract-map-leader" d="M ${s.anchor.join(' ')} L ${s.marker.join(' ')}"/><circle class="contract-map-anchor" cx="${s.anchor[0]}" cy="${s.anchor[1]}" r="5"/><circle class="contract-map-pin" cx="${s.marker[0]}" cy="${s.marker[1]}" r="26"/><text x="${s.marker[0]}" y="${s.marker[1]}" dy=".35em">${i===0?'S':i}</text></g>`).join('');
     text('#task-arrival',`Position samples are checked every ${task.arrival.sample_interval_sec} second. Arrival requires both a 3D distance of less than ${task.arrival.radius_3d} blocks and a height difference of at most ${task.arrival.radius_y} blocks from the target.`);
     $('.task-completion details').open=false;
     setTaskStop(0);setTaskView('map');
     pressed('[data-task]','task',index);
-    document.dispatchEvent(new Event('contract-task-changed'));
   }
   $$('[data-task]').forEach(b=>b.addEventListener('click',()=>setTask(Number(b.dataset.task))));
   $('.journey-explorer').addEventListener('click',e=>{const b=e.target.closest('[data-task-stop]');if(b)showTaskRule('waypoint',Number(b.dataset.taskStop),false);});
@@ -174,7 +184,7 @@
   menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);});
   nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('is-open')){closeMenu();menu.focus();}});
-  renderWorlds();setTask(0);setClip(0);renderResults();
+  renderWorlds();renderTaskIntroduction();setTask(0);setClip(0);renderResults();
 })();
 
 // The complete project film loads on play or an explicit chapter selection.
@@ -790,13 +800,13 @@
 // An automatic task-order illustration, independent from the interactive explorer.
 (() => {
   const card=document.querySelector('.journey-contract'),motion=matchMedia('(prefers-reduced-motion: reduce)');
-  const phaseMs=1400,phaseCount=6;
+  const phaseMs=1400,stopCount=card.querySelectorAll('[data-contract-stop]').length,phaseCount=stopCount+1;
   let elapsed=0,last=null,frame=0,phase=-1,inView=false;
   function paint(next){
     if(next===phase)return;phase=next;card.dataset.phase=String(next);
     card.querySelectorAll('[data-contract-stop]').forEach(row=>row.classList.toggle('is-current',Number(row.dataset.contractStop)===next));
     card.querySelectorAll('[data-contract-marker]').forEach(pin=>pin.classList.toggle('is-selected',Number(pin.dataset.contractMarker)===next));
-    card.querySelector('.contract-claim').classList.toggle('is-complete',next===5);
+    card.querySelector('.contract-claim').classList.toggle('is-complete',next===stopCount);
   }
   function active(){return inView&&!document.hidden&&!motion.matches;}
   function tick(now){
@@ -811,7 +821,6 @@
     else if(active())frame=requestAnimationFrame(tick);
   }
   function reset(){elapsed=0;phase=-2;paint(motion.matches?-1:0);sync();}
-  document.addEventListener('contract-task-changed',reset);
   document.addEventListener('visibilitychange',sync);
   motion.addEventListener('change',reset);
   new IntersectionObserver(sync,{threshold:[0,.1]}).observe(card);
