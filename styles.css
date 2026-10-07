@@ -986,7 +986,7 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .trajectory-stops li>span{font-size:11px;display:grid;place-items:center;flex:0 0 23px;height:23px;border-radius:50%;border:1px solid #b6c6ac;background:#fff}
 .trajectory-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .trajectory-run{min-width:0;--route:#247c71;background:#fff;border:1px solid #d5dfd2;border-radius:8px;overflow:hidden}
-.trajectory-run[data-model=deepseek]{--route:#b0523d}
+.trajectory-run[data-model=deepseek],.trajectory-run[data-model=glm]{--route:#b0523d}
 .trajectory-run header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 14px 12px}
 .trajectory-run h4{font-size:18px;font-weight:600;color:var(--route);margin:0}
 .trajectory-outcome{font-size:12px;color:var(--route);background:color-mix(in srgb,var(--route) 9%,white);border-radius:4px;padding:4px 7px;white-space:nowrap}
@@ -1069,3 +1069,6 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 @media(max-width:760px){.trajectory-run header{min-height:84px}}
 
 .project-resource-link svg{width:19px;height:19px;flex:none}
+.research-layout .opening-actions{flex-direction:column}
+.opening-action-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
+@media(max-width:480px){.opening-action-row{gap:8px}.research-layout .opening-action-row>a{padding-inline:11px}}

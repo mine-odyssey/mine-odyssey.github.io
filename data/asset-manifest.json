@@ -1516,69 +1516,75 @@
     "kind": "film_poster"
   },
   {
-    "file": "assets/full-run-chain-bridge-001-astra-db6df16833a1-16x.mp4",
-    "sha256": "b318e43bf69c29da309f26508739d7c4876e4f530768637a40c62df1a92a777f",
+    "file": "assets/mine-odyssey-paper-4230bdd6a58d.pdf",
+    "sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
+    "source_sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
+    "kind": "research_paper"
+  },
+  {
+    "file": "assets/full-run-shun-lee-002-astra-cf45041739ee-16x.mp4",
+    "sha256": "6621e5e6136495ffdc811c71a1f603ea24d394181d06afef756575f5c9a8948e",
     "kind": "full_run_recording",
-    "source_sha256": "db6df16833a1f8d9afd6b5909d8a4cbbd50e15db6e4b981ce599749bc2cf9668",
-    "task_id": "chain-bridge-001",
+    "source_sha256": "cf45041739ee8e6b46c50df9298c3855e66430db45b25be82e19a9bc816e6b8b",
+    "task_id": "shun-lee-002",
     "model": "GPT-6 Astra",
-    "source_duration": 2293.6,
+    "source_duration": 1723.133333,
     "encoded_speed": 16,
     "start_seconds": 0,
-    "end_seconds": 2293.6,
+    "end_seconds": 1723.133333,
     "complete_recording": true
   },
   {
-    "file": "assets/full-run-chain-bridge-001-astra-db6df16833a1-16x.webp",
-    "sha256": "5448f08af56b446dc86774dc62f270d70d55b9556bb590301ed73f2ad19019ea",
+    "file": "assets/full-run-shun-lee-002-astra-cf45041739ee-16x.webp",
+    "sha256": "9f7094fb5df4d7811a27013a5b5998ab9fdca8dbb6d2dc2166371354852401db",
     "kind": "full_run_poster",
-    "source_sha256": "db6df16833a1f8d9afd6b5909d8a4cbbd50e15db6e4b981ce599749bc2cf9668",
-    "task_id": "chain-bridge-001",
+    "source_sha256": "cf45041739ee8e6b46c50df9298c3855e66430db45b25be82e19a9bc816e6b8b",
+    "task_id": "shun-lee-002",
     "model": "GPT-6 Astra",
-    "source_duration": 2293.6,
+    "source_duration": 1723.133333,
     "encoded_speed": 16,
     "start_seconds": 0,
-    "end_seconds": 2293.6,
+    "end_seconds": 1723.133333,
     "complete_recording": true
   },
   {
-    "file": "assets/full-run-chain-bridge-001-deepseek-3f5d5c819e9a-16x.mp4",
-    "sha256": "6f0ce92d1a1c8f9d8ce0e7ee910cb9dc2b1ab275d804667cdb1fef1b21fac9f9",
+    "file": "assets/full-run-shun-lee-002-glm-8322421e9352-16x.mp4",
+    "sha256": "4017ca487c1d971c54eb824de4cae75618ea0d2dee1172d9e79e006e2e6d8a1a",
     "kind": "full_run_recording",
-    "source_sha256": "3f5d5c819e9a0eabeaa0cdb8e7f1c7d38ba5cff10c9027f1a516a60db6aee9be",
-    "task_id": "chain-bridge-001",
-    "model": "DeepSeek V4.1 Flash",
-    "source_duration": 418.266667,
+    "source_sha256": "8322421e935217403c435cef58ef79fa504331406b7f10c03b95f246d735abe0",
+    "task_id": "shun-lee-002",
+    "model": "GLM 5.3 Flash",
+    "source_duration": 14446.333333,
     "encoded_speed": 16,
     "start_seconds": 0,
-    "end_seconds": 418.266667,
+    "end_seconds": 14446.333333,
     "complete_recording": true
   },
   {
-    "file": "assets/full-run-chain-bridge-001-deepseek-3f5d5c819e9a-16x.webp",
-    "sha256": "36a34ef2f77d8154e5cd9bf7442fb009ab1681ec58c2e80d7e6b3bfbd57f8be6",
+    "file": "assets/full-run-shun-lee-002-glm-8322421e9352-16x.webp",
+    "sha256": "67bc1a7818f386e3e5d2dbe8ba554108b4309fd4bdad89cd688d2b5f436417fc",
     "kind": "full_run_poster",
-    "source_sha256": "3f5d5c819e9a0eabeaa0cdb8e7f1c7d38ba5cff10c9027f1a516a60db6aee9be",
-    "task_id": "chain-bridge-001",
-    "model": "DeepSeek V4.1 Flash",
-    "source_duration": 418.266667,
+    "source_sha256": "8322421e935217403c435cef58ef79fa504331406b7f10c03b95f246d735abe0",
+    "task_id": "shun-lee-002",
+    "model": "GLM 5.3 Flash",
+    "source_duration": 14446.333333,
     "encoded_speed": 16,
     "start_seconds": 0,
-    "end_seconds": 418.266667,
+    "end_seconds": 14446.333333,
     "complete_recording": true
   },
   {
-    "file": "assets/full-trajectory-chain-bridge-001.webp",
-    "sha256": "3685d592b6ddb9db4baa57008e2ea890da197c125dbf7d9a482d2964269a6dd7",
+    "file": "assets/full-trajectory-shun-lee-002.webp",
+    "sha256": "fef1e7772f239cc1b7fa38101532123cc37d493d8a2a048844c06b401ddac76a",
     "kind": "full_trajectory_map",
-    "source_sha256": "f0aa5e8bcbde118bb1a88809a1fc1a5880bcf96ad4b0fe5978c0ce8703cdc47e",
+    "source_sha256": "4ae626c726fc5d651d3043bfe99f40f314a6b29e92b730b93b9ece22f80a2327",
     "crop": [
-      156,
-      67,
-      1334,
-      804
+      336,
+      418,
+      1311,
+      1028
     ],
-    "task_id": "chain-bridge-001"
+    "task_id": "shun-lee-002"
   },
   {
     "file": "assets/full-run-notre-dame-005-astra-72080a30ab2d-16x.mp4",
@@ -1670,11 +1676,5 @@
       647
     ],
     "task_id": "wurzburg-005"
-  },
-  {
-    "file": "assets/mine-odyssey-paper-4230bdd6a58d.pdf",
-    "sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
-    "source_sha256": "4230bdd6a58da19d7f76335f567ba2e5cd90a26a245c067bcd2afc06d23f8ac3",
-    "kind": "research_paper"
   }
 ]

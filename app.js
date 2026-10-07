@@ -829,7 +829,7 @@
     generation++;players.forEach(p=>{if(p.video){p.video.pause();p.video.removeAttribute('src');p.video.load();}});
     const task=data.cases[current],hasVideo=task.runs.every(r=>r.recording);
     maximum=Math.max(...task.runs.flatMap(r=>[r.duration,recordingEnd(r)]));elapsed=motion.matches?maximum:0;hold=0;mediaError=false;
-    speed=hasVideo?32:128;$('#trajectory-speed').value=String(speed);pair.classList.toggle('has-recordings',hasVideo);
+    speed=task.playback_speed||(hasVideo?32:128);$('#trajectory-speed').value=String(speed);pair.classList.toggle('has-recordings',hasVideo);
     $('#trajectory-title').textContent=task.label;
     $('#trajectory-subtitle').textContent=hasVideo?'Recording and trajectory, synchronized.':'Trajectory replay · No game recording for these runs.';
     $('#trajectory-setting').textContent=task.setting_label||'';$('#trajectory-setting').hidden=!task.setting_label;
