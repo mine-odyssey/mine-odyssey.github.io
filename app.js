@@ -618,23 +618,23 @@
   const example=window.MINE_ODYSSEY.journeys.examples.find(t=>t.id==='copacabana-waterfront-001');
   const views={game:window.MINE_ODYSSEY.maps.find(m=>m.id===example.map).image,map:example.map_image};
   const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
-  const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
+  const text=(x,y,value,size=14,color='var(--ink)',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
   function avatar(){
     return `<g class="framework-character" aria-hidden="true">
-      <ellipse cx="55" cy="149" rx="44" ry="8" fill="#243b2620"/>
+      <ellipse cx="55" cy="149" rx="44" ry="8" fill="#20212420"/>
       <path d="M34 100h21v42H34z" fill="#405f78"/><path d="M59 100h21v42H59z" fill="#344c65"/>
-      <path d="M31 138h25v12H29v-8zM59 138h25l4 7v5H59z" fill="#283e3c"/>
-      <path d="M31 50h48v55H31z" fill="#4c8058"/><path d="m79 50 9-8v55l-9 8z" fill="#31553e"/>
-      <path d="m31 50 10-8h47l-9 8z" fill="#79a66e"/>
-      <path d="M14 54h17v36H14z" fill="#5b8b62"/><path d="M15 87h16v20H15z" fill="#d6a477"/>
-      <g class="avatar-arm"><path d="m79 53 15 1 5 25-17 4z" fill="#6b9a6e"/><path d="m82 80 17-3 16 13-8 13-24-10z" fill="#e4b488"/><path d="m107 89 11-5 5 8-8 10-8 1z" fill="#edc297"/></g>
-      <path d="M47 49h15v10H47z" fill="#cf996d"/><path d="m41 50 14 12 14-12" fill="none" stroke="#b5ce9c" stroke-width="4"/>
-      <rect x="46" y="70" width="22" height="14" rx="2" fill="#ecedd4"/><text x="57" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#355740">AI</text>
+      <path d="M31 138h25v12H29v-8zM59 138h25l4 7v5H59z" fill="#202124"/>
+      <path d="M31 50h48v55H31z" fill="#3b82f6"/><path d="m79 50 9-8v55l-9 8z" fill="#1d4ed8"/>
+      <path d="m31 50 10-8h47l-9 8z" fill="#60a5fa"/>
+      <path d="M14 54h17v36H14z" fill="#2563eb"/><path d="M15 87h16v20H15z" fill="#d6a477"/>
+      <g class="avatar-arm"><path d="m79 53 15 1 5 25-17 4z" fill="#60a5fa"/><path d="m82 80 17-3 16 13-8 13-24-10z" fill="#e4b488"/><path d="m107 89 11-5 5 8-8 10-8 1z" fill="#edc297"/></g>
+      <path d="M47 49h15v10H47z" fill="#cf996d"/><path d="m41 50 14 12 14-12" fill="none" stroke="#93c5fd" stroke-width="4"/>
+      <rect x="46" y="70" width="22" height="14" rx="2" fill="var(--white)"/><text x="57" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="var(--ink)">AI</text>
       <path d="m35 11 10-9h36l-10 9z" fill="#715143"/><path d="m71 11 10-9v35l-10 9z" fill="#bd875d"/>
       <path d="M35 11h36v35H35z" fill="#ecc49b"/><path d="M35 11h36v10H43v7h-8z" fill="#533e35"/><path d="m71 11 10-9v15l-10 10z" fill="#624638"/>
-      <g class="avatar-eyes"><path d="M45 27h6v6h-6zM61 27h6v6h-6z" fill="#fff9e7"/><path d="M48 28h3v5h-3zM64 28h3v5h-3z" fill="#294b3d"/></g>
+      <g class="avatar-eyes"><path d="M45 27h6v6h-6zM61 27h6v6h-6z" fill="#fff9e7"/><path d="M48 28h3v5h-3zM64 28h3v5h-3z" fill="var(--ink)"/></g>
       <path d="M53 39h8" stroke="#956848" stroke-width="2"/>
-      <path d="M10 93h18v25H8V97z" fill="#f5edcf" stroke="#a3a777"/><path d="M13 99h10M13 104h10M13 109h7" stroke="#7e9568" stroke-width="1.5"/>
+      <path d="M10 93h18v25H8V97z" fill="var(--white)" stroke="var(--line)"/><path d="M13 99h10M13 104h10M13 109h7" stroke="var(--flow-line)" stroke-width="1.5"/>
     </g>`;
   }
   function node(type,x,y,w,h){
@@ -642,60 +642,60 @@
     if(type==='agent'){
       const inset=w>240?32:8;
       content=text(22,28,'Agent',25)+
-        `<circle cx="${inset+69}" cy="114" r="73" fill="#e0e9cf"/>`+
+        `<circle cx="${inset+69}" cy="114" r="73" fill="var(--primary-soft)"/>`+
         `<g transform="translate(${inset} 51)">${avatar()}</g>`+
-        `<g transform="translate(${w-78} 60)"><rect width="68" height="46" rx="5" fill="#fcfcf4" stroke="#c2ceb0"/><path d="M10 13h28M10 19h38" stroke="#9daf84" stroke-width="2"/>${text(10,36,'Task',11)}</g>`+
-        `<g transform="translate(${w-78} 129)"><rect x="4" y="-4" width="64" height="44" rx="5" fill="#d8e2c9"/><rect width="64" height="44" rx="5" fill="#fcfcf4" stroke="#c2ceb0"/><path d="M10 12h26M10 18h34" stroke="#9daf84" stroke-width="2"/>${text(10,34,'History',11)}</g>`;
+        `<g transform="translate(${w-78} 60)"><rect width="68" height="46" rx="5" fill="var(--white)" stroke="var(--line)"/><path d="M10 13h28M10 19h38" stroke="var(--flow-line)" stroke-width="2"/>${text(10,36,'Task',11)}</g>`+
+        `<g transform="translate(${w-78} 129)"><rect x="4" y="-4" width="64" height="44" rx="5" fill="var(--surface-deep)"/><rect width="64" height="44" rx="5" fill="var(--white)" stroke="var(--line)"/><path d="M10 12h26M10 18h34" stroke="var(--flow-line)" stroke-width="2"/>${text(10,34,'History',11)}</g>`;
     }
-    if(type==='bash')content=box(0,0,w,h,'#fcfcf6','#b8c6ac')+
+    if(type==='bash')content=box(0,0,w,h,'var(--white)','var(--line)')+
       text(20,30,'Bash',23)+
-      `<rect x="12" y="44" width="${w-24}" height="108" rx="7" fill="#243e34"/><path d="M12 68H${w-12}" stroke="#4d6858"/><circle cx="27" cy="56" r="3" fill="#d99c83"/><circle cx="38" cy="56" r="3" fill="#d8c586"/><circle cx="49" cy="56" r="3" fill="#a0bd86"/>`+
-      text(23,90,'$ mcapi look --yaw -90 &amp;&amp;',11.5,'#d4e8b7','font-family="monospace"')+
-      text(23,111,'  mcapi press MOVE_FORWARD 2.0',11.5,'#f1f4df','font-family="monospace"')+
-      '<rect class="terminal-cursor" x="24" y="126" width="7" height="11" fill="#c5dea5"/>'+
-      '<g transform="translate(20 173)" stroke="#7c9368" stroke-width="1.5" fill="none"><path d="m5 0-5 6 5 6M18 0l5 6-5 6M14-2l-5 16"/></g>'+
+      `<rect x="12" y="44" width="${w-24}" height="108" rx="7" fill="#202124"/><path d="M12 68H${w-12}" stroke="#4b5563"/><circle cx="27" cy="56" r="3" fill="#d99c83"/><circle cx="38" cy="56" r="3" fill="#d8c586"/><circle cx="49" cy="56" r="3" fill="#a0bd86"/>`+
+      text(23,90,'$ mcapi look --yaw -90 &amp;&amp;',11.5,'#93c5fd','font-family="monospace"')+
+      text(23,111,'  mcapi press MOVE_FORWARD 2.0',11.5,'#f8fafc','font-family="monospace"')+
+      '<rect class="terminal-cursor" x="24" y="126" width="7" height="11" fill="#93c5fd"/>'+
+      '<g transform="translate(20 173)" stroke="var(--flow-line)" stroke-width="1.5" fill="none"><path d="m5 0-5 6 5 6M18 0l5 6-5 6M14-2l-5 16"/></g>'+
       text(55,184,'mcapi → AgentBridge',13)+
-      '<g transform="translate(20 195)" stroke="#7c9368" fill="none"><rect width="23" height="12" rx="2"/><path d="M4 4h2m3 0h2m3 0h2m3 0h1M4 8h15"/></g>'+
+      '<g transform="translate(20 195)" stroke="var(--flow-line)" fill="none"><rect width="23" height="12" rx="2"/><path d="M4 4h2m3 0h2m3 0h2m3 0h1M4 8h15"/></g>'+
       text(55,206,'xdo → keyboard &amp; mouse',12);
     if(type==='world'){
       const imageHeight=(w-16)*.625,tabWidth=(w-16)/2;
       const tab=(view,label,i)=>`<g class="client-view-tab" data-client-view="${view}" role="button" tabindex="0" aria-pressed="${i===0}" aria-label="Show ${label.toLowerCase()}" transform="translate(${8+i*tabWidth} 48)"><rect width="${tabWidth}" height="30" rx="4"/>${text(tabWidth/2,20,label,13,'currentColor','text-anchor="middle"')}</g>`;
       content=text(0,28,'Minecraft client',25)+
-        `<rect class="client-window" x="0" y="42" width="${w}" height="${imageHeight+46}" rx="8" fill="#fcfcf6" stroke="#aaba9b" stroke-width="1.5"/>`+
+        `<rect class="client-window" x="0" y="42" width="${w}" height="${imageHeight+46}" rx="8" fill="var(--white)" stroke="var(--line)" stroke-width="1.5"/>`+
         tab('game','Game view',0)+tab('map','World map',1)+
-        `<rect x="8" y="82" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="82" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="In-game presentation view of Copacabana"/><rect class="client-capture-outline" x="8" y="82" width="${w-16}" height="${imageHeight}" fill="none" stroke="#e3bd6a" stroke-width="4" pointer-events="none"/>${text(8,imageHeight+112,'Copacabana Waterfront',13,'#687b5b')}`;
+        `<rect x="8" y="82" width="${w-16}" height="${imageHeight}" fill="var(--surface-deep)"/><image class="client-observation" href="${views.game}" x="8" y="82" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="In-game presentation view of Copacabana"/><rect class="client-capture-outline" x="8" y="82" width="${w-16}" height="${imageHeight}" fill="none" stroke="var(--primary)" stroke-width="4" pointer-events="none"/>${text(8,imageHeight+112,'Copacabana Waterfront',13,'var(--muted)')}`;
     }
     if(type==='verifier'){
       const compact=w<300;
-      content=box(0,0,w,h,'#f0ecd8','#b0a56c')+
-        '<g class="verifier-clipboard" transform="translate(20 21)"><rect width="43" height="65" rx="5" fill="#fdfcf1" stroke="#b3aa7c"/><rect x="11" y="-4" width="21" height="10" rx="3" fill="#9a905d"/><path d="m8 21 4 4 7-9m-11 25 4 4 7-9m-11 25 4 4 7-9" fill="none" stroke="#638357" stroke-width="2"/><path d="M24 21h11M24 41h11M24 60h11" stroke="#c0c6a5" stroke-width="2"/></g>'+
+      content=box(0,0,w,h,'var(--primary-soft)','var(--line)')+
+        '<g class="verifier-clipboard" transform="translate(20 21)"><rect width="43" height="65" rx="5" fill="var(--white)" stroke="var(--line)"/><rect x="11" y="-4" width="21" height="10" rx="3" fill="var(--primary)"/><path d="m8 21 4 4 7-9m-11 25 4 4 7-9m-11 25 4 4 7-9" fill="none" stroke="var(--primary)" stroke-width="2"/><path d="M24 21h11M24 41h11M24 60h11" stroke="var(--line)" stroke-width="2"/></g>'+
         (compact?text(81,31,'Independent',20)+text(81,54,'verifier',20):text(84,34,'Independent verifier',22))+
-        text(compact?81:84,compact?77:62,'Ordered arrivals + claim',compact?11:14,'#756c40')+
-        text(compact?81:84,compact?96:86,'Accepted claim → success',compact?11:14,'#527345');
+        text(compact?81:84,compact?77:62,'Ordered arrivals + claim',compact?11:14,'var(--muted)')+
+        text(compact?81:84,compact?96:86,'Accepted claim → success',compact?11:14,'var(--muted)');
     }
     return `<g class="framework-node" data-framework-node="${type}" transform="translate(${x} ${y})">${content}</g>`;
   }
   function render(mobile){
     const id=mobile?'mobile':'desktop',w=mobile?360:1180,h=mobile?1115:650;
-    const arrow=(d,channel,color='#789165',reverse=false)=>`<path class="flow-edge" data-flow="${channel}" d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${reverse?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
+    const arrow=(d,channel,color='var(--flow-line)',reverse=false)=>`<path class="flow-edge" data-flow="${channel}" d="${d}" stroke="${color}" stroke-width="1.8" fill="none" marker-end="url(#fw-${id}-arrow)" ${reverse?`marker-start="url(#fw-${id}-arrow)"`:''}/>`;
     const paths=mobile?
       arrow('M180 264V320','exec')+arrow('M180 540V600','controls')+
       arrow('M315 745H343V135H315','observe')+arrow('M315 425H343','feedback')+
       text(198,300,'exec',13)+text(198,576,'controls',13)+
-      text(351,518,'Screenshots + execution feedback',11,'#687b5b','text-anchor="middle" transform="rotate(-90 351 518)"')+
-      arrow('M180 890V975','position','#a79758')+text(196,930,'Position · 1 Hz',12,'#82723e')+
-      arrow('M45 173H18V1030H45','claim','#a79758',true)+text(11,610,'claim_done / verifier feedback',11,'#82723e','text-anchor="middle" transform="rotate(-90 11 610)"'):
+      text(351,518,'Screenshots + execution feedback',11,'var(--muted)','text-anchor="middle" transform="rotate(-90 351 518)"')+
+      arrow('M180 890V975','position','var(--flow-line)')+text(196,930,'Position · 1 Hz',12,'var(--muted)')+
+      arrow('M45 173H18V1030H45','claim','var(--flow-line)',true)+text(11,610,'claim_done / verifier feedback',11,'var(--muted)','text-anchor="middle" transform="rotate(-90 11 610)"'):
       arrow('M245 255H320','exec')+arrow('M635 255H720','controls')+
       text(264,240,'exec',13)+text(648,240,'controls',13)+
       arrow('M935 100V65H135V145','observe')+arrow('M477 145V65','feedback')+
-      text(535,48,'Screenshots + execution feedback',15,'#687b5b','text-anchor="middle"')+
-      arrow('M935 480V566H900','position','#a79758')+
-      text(957,509,'Position samples',13,'#82723e')+text(957,532,'1 Hz',13,'#82723e')+
-      arrow('M135 365V566H450','claim','#a79758',true)+text(245,545,'claim_done',15,'#82723e','font-family="monospace"')+
-      text(245,592,'Verifier feedback',13,'#82723e');
+      text(535,48,'Screenshots + execution feedback',15,'var(--muted)','text-anchor="middle"')+
+      arrow('M935 480V566H900','position','var(--flow-line)')+
+      text(957,509,'Position samples',13,'var(--muted)')+text(957,532,'1 Hz',13,'var(--muted)')+
+      arrow('M135 365V566H450','claim','var(--flow-line)',true)+text(245,545,'claim_done',15,'var(--muted)','font-family="monospace"')+
+      text(245,592,'Verifier feedback',13,'var(--muted)');
     const nodes=mobile?node('agent',45,44,270,220)+node('bash',45,320,270,220)+node('world',45,600,270,290)+node('verifier',45,975,270,116):
       node('agent',25,145,220,220)+node('bash',320,145,315,220)+node('world',720,100,430,380)+node('verifier',450,510,450,112);
-    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Copacabana. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="#496d42" stroke="#fcfcf4" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="#ae9148" pointer-events="none"/></svg>`;
+    return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Copacabana. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="var(--flow-line)" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="var(--primary)" pointer-events="none"/></svg>`;
   }
   host.innerHTML=render(false)+render(true);
   function selectView(view){
