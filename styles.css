@@ -1074,7 +1074,7 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 @media(max-width:480px){.opening-action-row{gap:8px}.research-layout .opening-action-row>a{padding-inline:11px}}
 
 /* One complete-run explorer replaces the separate waypoint-leg browser. */
-.trajectory-run[data-model=grok],.trajectory-run[data-model=opus]{--route:#b0523d}
+.trajectory-run[data-model=grok],.trajectory-run[data-model=opus],.trajectory-run[data-model=gemini]{--route:#b0523d}
 .trajectory-pair.is-single{grid-template-columns:1fr}
 .trajectory-pair.is-single .trajectory-run{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}
 .trajectory-pair.is-single .trajectory-run>header,.trajectory-pair.is-single .trajectory-run>figcaption{grid-column:1/-1}

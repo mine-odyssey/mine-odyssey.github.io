@@ -8,10 +8,10 @@
   <link rel="canonical" href="https://mine-odyssey.github.io/">
   <meta name="theme-color" content="#f5f4ee">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
-  <link rel="icon" href="favicon.svg?v=harbor-original-prompt-20261007" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=harbor-original-prompt-20261007">
-  <script src="data/benchmark.js?v=harbor-original-prompt-20261007" defer></script>
-  <script src="app.js?v=harbor-original-prompt-20261007" defer></script>
+  <link rel="icon" href="favicon.svg?v=ueno-paired-recordings-20261007" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=ueno-paired-recordings-20261007">
+  <script src="data/benchmark.js?v=ueno-paired-recordings-20261007" defer></script>
+  <script src="app.js?v=ueno-paired-recordings-20261007" defer></script>
 </head>
 <body class="research-layout">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -50,7 +50,7 @@
     <section class="section shell overview-section" id="tasks" aria-labelledby="tasks-title">
       <div class="section-heading rollout-heading"><div><p class="eyebrow">01 / Tasks</p><h2 id="tasks-title">Explore a task</h2></div><p>Watch complete standard-setting runs and their recorded trajectories.</p></div>
       <div class="full-trajectories" id="full-trajectories" aria-label="Complete recorded trajectories on the same task">
-        <div class="trajectory-heading"><div><div class="trajectory-case-title"><h3 id="trajectory-title">Entrup</h3><span id="trajectory-setting" class="trajectory-setting">Outdoor</span></div><p id="trajectory-subtitle">Recording and trajectory, synchronized.</p></div><div class="trajectory-tabs" role="group" aria-label="Choose a complete recorded task"><button type="button" data-trajectory-case="0" aria-pressed="true">Entrup <small>Outdoor · Astra</small></button><button type="button" data-trajectory-case="1" aria-pressed="false">Plaza Hotel <small>Indoor · Astra / Grok</small></button><button type="button" data-trajectory-case="2" aria-pressed="false">Ueno Park <small>Outdoor · Gemini</small></button><button type="button" data-trajectory-case="3" aria-pressed="false">Hagia Sophia <small>Indoor · Astra / Opus</small></button></div></div>
+        <div class="trajectory-heading"><div><div class="trajectory-case-title"><h3 id="trajectory-title">Entrup</h3><span id="trajectory-setting" class="trajectory-setting">Outdoor</span></div><p id="trajectory-subtitle">Recording and trajectory, synchronized.</p></div><div class="trajectory-tabs" role="group" aria-label="Choose a complete recorded task"><button type="button" data-trajectory-case="0" aria-pressed="true">Entrup <small>Outdoor · Astra</small></button><button type="button" data-trajectory-case="1" aria-pressed="false">Plaza Hotel <small>Indoor · Astra / Grok</small></button><button type="button" data-trajectory-case="2" aria-pressed="false">Ueno Park <small>Outdoor · Astra / Gemini</small></button><button type="button" data-trajectory-case="3" aria-pressed="false">Hagia Sophia <small>Indoor · Astra / Opus</small></button></div></div>
         <ol id="trajectory-stops" class="trajectory-stops" aria-label="Required visit order"></ol>
         <div class="trajectory-pair" id="trajectory-pair"></div>
         <div class="trajectory-controls"><button type="button" id="trajectory-play" aria-pressed="false">Play</button><button type="button" id="trajectory-restart" aria-label="Replay both complete trajectories">↺ Replay</button><label class="trajectory-speed">Speed <select id="trajectory-speed"><option value="8">8×</option><option value="16">16×</option><option value="32" selected>32×</option><option value="64">64×</option><option value="128">128×</option><option value="256">256×</option></select></label><label class="trajectory-timeline"><span class="sr-only">Recorded elapsed time</span><input type="range" id="trajectory-progress" min="0" max="1000" value="0" aria-label="Recorded elapsed time"><output id="trajectory-clock" for="trajectory-progress">00:00 / 00:00</output></label></div>
