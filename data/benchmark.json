@@ -1819,7 +1819,7 @@
         1060,
         940
       ],
-      "summary": "Release the shipment at “Supply Storehouse,” consolidate it at “General Storehouse,” and assign the rail wagon at “Locomotive Shed.”"
+      "summary": "Start at Supply Storehouse. Visit the 4 destinations in order, ending at Pier K."
     }
   },
   "recoveryReplay": {
