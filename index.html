@@ -8,10 +8,10 @@
   <link rel="canonical" href="https://mine-odyssey.github.io/">
   <meta name="theme-color" content="#ffffff">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
-  <link rel="icon" href="favicon.svg?v=neutral-blue-20261007" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=neutral-blue-20261007">
-  <script src="data/benchmark.js?v=neutral-blue-20261007" defer></script>
-  <script src="app.js?v=neutral-blue-20261007" defer></script>
+  <link rel="icon" href="favicon.svg?v=standard-observations-20261007" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=standard-observations-20261007">
+  <script src="data/benchmark.js?v=standard-observations-20261007" defer></script>
+  <script src="app.js?v=standard-observations-20261007" defer></script>
 </head>
 <body class="research-layout">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -81,11 +81,11 @@
     <section class="section shell overview-section" id="overview" aria-labelledby="overview-title">
       <div class="section-heading rollout-heading"><div><p class="eyebrow">02 / Recorded runs</p><h2 id="overview-title">Full task rollouts</h2></div><p>Compare two agents on the same task, from start to finish.</p></div>
       <div class="full-trajectories" id="full-trajectories" aria-label="Complete recorded trajectories on the same task">
-        <div class="trajectory-heading"><div><div class="trajectory-case-title"><h3 id="trajectory-title">Shun Lee</h3><span id="trajectory-setting" class="trajectory-setting">Outdoor · With guideline</span></div><p id="trajectory-subtitle">Recording and trajectory, synchronized.</p></div><div class="trajectory-tabs" role="group" aria-label="Choose a recorded task"><button type="button" data-trajectory-case="0" aria-pressed="true">Shun Lee <small>Outdoor · Video + map</small></button><button type="button" data-trajectory-case="1" aria-pressed="false">Notre Dame <small>Indoor · Video + map</small></button><button type="button" data-trajectory-case="2" aria-pressed="false">Zürich <small>Trajectory only</small></button><button type="button" data-trajectory-case="3" aria-pressed="false">Würzburg <small>Trajectory only</small></button></div></div>
+        <div class="trajectory-heading"><div><div class="trajectory-case-title"><h3 id="trajectory-title">Shun Lee</h3><span id="trajectory-setting" class="trajectory-setting">Standard setting</span></div><p id="trajectory-subtitle">Original observations and trajectory, synchronized.</p></div><div class="trajectory-tabs" role="group" aria-label="Choose a recorded task"><button type="button" data-trajectory-case="0" aria-pressed="true">Shun Lee <small>Outdoor · Replay + map</small></button><button type="button" data-trajectory-case="1" aria-pressed="false">Notre Dame <small>Indoor · Replay + map</small></button><button type="button" data-trajectory-case="2" aria-pressed="false">Zürich <small>Replay + map</small></button><button type="button" data-trajectory-case="3" aria-pressed="false">Würzburg <small>Replay + map</small></button></div></div>
         <ol id="trajectory-stops" class="trajectory-stops" aria-label="Required visit order"></ol>
         <div class="trajectory-pair" id="trajectory-pair"></div>
         <div class="trajectory-controls"><button type="button" id="trajectory-play" aria-pressed="false">Play</button><button type="button" id="trajectory-restart" aria-label="Replay both complete trajectories">↺ Replay</button><label class="trajectory-speed">Speed <select id="trajectory-speed"><option value="8">8×</option><option value="16">16×</option><option value="32" selected>32×</option><option value="64">64×</option><option value="128">128×</option><option value="256">256×</option></select></label><label class="trajectory-timeline"><span class="sr-only">Recorded elapsed time</span><input type="range" id="trajectory-progress" min="0" max="1000" value="0" aria-label="Recorded elapsed time"><output id="trajectory-clock" for="trajectory-progress">00:00 / 00:00</output></label></div>
-        <p id="trajectory-media-status" class="trajectory-media-status" role="status" hidden></p><details class="trajectory-source"><summary>Task instruction &amp; replay details <span id="trajectory-task-id"></span></summary><blockquote id="trajectory-prompt"></blockquote><p>Complete recorded positions from start to termination, including pauses. When available, the full game recording is uniformly accelerated and aligned to the position clock with an approximate capture-time offset. Both models share the same map and time scale. The map shows horizontal movement; the video shows the game view and changes in height. Selected task examples, not aggregate results.</p></details>
+        <p id="trajectory-media-status" class="trajectory-media-status" role="status" hidden></p><details class="trajectory-source"><summary>Task instruction &amp; replay details <span id="trajectory-task-id"></span></summary><blockquote id="trajectory-prompt"></blockquote><p>Original agent observations replay on the same clock as the complete trajectory. Each screenshot holds until the next capture; these are observation replays, not continuous game recordings. Both models use the standard setting on the same task and map. Pauses are retained. The map shows horizontal movement; observations show the captured game views. Selected examples, not aggregate results.</p></details>
       </div>
     </section>
     <section class="section shell film-section" id="film" aria-labelledby="film-title">
