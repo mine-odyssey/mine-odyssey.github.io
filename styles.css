@@ -1227,7 +1227,16 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
 .refined-layout .case-layout .case-menu{gap:12px;margin-bottom:24px}
 .refined-layout .case-layout .case-menu button{background:#fff;border-color:var(--line);border-radius:6px;min-height:110px;padding:16px 18px}
 .refined-layout .case-layout .case-menu button[aria-selected=true]{background:#edf3e9;border-color:#879b7d}
-.refined-layout .case-layout .case-context{text-align:left;margin:0 0 22px;color:var(--muted)}
+.refined-layout .case-layout .case-context{max-width:none;text-align:left;text-wrap:pretty;margin:0 0 22px;color:var(--muted)}
+.refined-layout .framework-details{max-width:none;margin:24px 0 0}
+.refined-layout .framework-details summary{font-size:17px;color:var(--ink)}
+.refined-layout .framework-details .framework-details-intro{max-width:none;margin:18px 0 20px;font-size:19px;line-height:1.5;color:var(--ink)}
+.refined-layout .framework-explanation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.refined-layout .framework-explanation article{border-top:1px solid var(--line);padding-top:16px}
+.refined-layout .framework-explanation h3{display:flex;align-items:center;gap:12px;margin:0 0 12px;font:600 20px/1.4 var(--sans)}
+.refined-layout .framework-explanation h3 span{font:500 12px/1.4 var(--sans);color:var(--muted)}
+.refined-layout .framework-details .framework-explanation p{max-width:none;margin:0;font-size:17px;line-height:1.65;color:var(--muted)}
+@media(max-width:760px){.refined-layout .framework-explanation{grid-template-columns:1fr;gap:20px}}
 .refined-layout .case-layout .recovery-player,.refined-layout .case-layout .appendix-player{border-color:var(--line);background:#fff;border-radius:8px}
 .refined-layout>footer{border-top:1px solid var(--line);color:var(--muted)}
 .refined-layout>footer p{font-size:13px}
@@ -1321,4 +1330,108 @@ button.contract-stage{width:100%;cursor:pointer;text-align:center}
  .refined-layout .opening-film>.section-heading{margin-bottom:20px;gap:12px}
  .refined-layout .opening-film>.section-heading h2{font-size:32px}
  .refined-layout .opening-film>.section-heading>p{font-size:16px}
+}
+
+/* A shared reading scale for prose, controls and supporting labels. */
+body.refined-layout{--copy-size:20px;--support-size:16px;--label-size:14px;font-size:18px}
+.refined-layout .site-header nav{font-size:16px}
+.refined-layout .opening-description{font-size:26px;line-height:1.55;max-width:860px}
+.refined-layout .opening-actions .opening-action-row>a{font-size:17px;min-height:44px}
+.refined-layout .opening .contract-instruction{font-size:var(--copy-size);line-height:1.65}
+.refined-layout .opening .contract-stop{font-size:18px;min-height:46px}
+.refined-layout .opening .contract-map-heading strong{font-size:18px}
+.refined-layout .opening .contract-map-heading>span,
+.refined-layout .opening .contract-rule-label,
+.refined-layout .opening .contract-source-note{font-size:var(--label-size)}
+.refined-layout .opening-stats span,.refined-layout .opening-stats>a{font-size:var(--support-size)}
+.refined-layout .section-heading:not(.results-heading)>p,
+.refined-layout .overview-section>.rollout-heading>p,
+.refined-layout #recovery>.section-heading>p{font-size:var(--copy-size);line-height:1.6}
+.refined-layout .section-heading:not(.results-heading) .eyebrow,
+.refined-layout .section-heading.results-heading .eyebrow{font-size:var(--label-size);letter-spacing:1.5px}
+.refined-layout .trajectory-heading p,.refined-layout .trajectory-tabs button,
+.refined-layout .trajectory-controls,.refined-layout .trajectory-source summary,
+.refined-layout .trajectory-run figcaption{font-size:var(--support-size)}
+.refined-layout .trajectory-tabs small,.refined-layout .trajectory-run header>span,
+.refined-layout .trajectory-video-rate{font-size:var(--label-size)}
+.refined-layout .trajectory-stops{font-size:var(--support-size);line-height:1.7;gap:10px 20px}
+.refined-layout .trajectory-run h4{font-size:21px}
+.refined-layout .trajectory-run figcaption>p{font-size:var(--label-size)}
+.refined-layout .trajectory-source blockquote{font-size:var(--copy-size);line-height:1.7}
+.refined-layout .trajectory-source>p{font-size:var(--support-size);max-width:none}
+.refined-layout .film-chapter-panel summary,.refined-layout #film-chapters button{font-size:var(--support-size)}
+.refined-layout #film-chapters button span{font-size:var(--label-size)}
+.refined-layout .opening-film .film-note{font-size:var(--support-size)}
+.refined-layout .world-card h3{font-size:23px;line-height:1.35}
+.refined-layout .world-card p,.refined-layout .world-count,.refined-layout .search input,
+.refined-layout .world-summary span,.refined-layout .segmented button{font-size:var(--support-size)}
+.refined-layout .world-card-meta{font-size:var(--label-size)}
+.refined-layout .world-photo>span,.refined-layout .world-preview-hint{font-size:var(--label-size)}
+.refined-layout .terrain-unified .terrain-card-copy strong{font-size:21px;line-height:1.4}
+.refined-layout .terrain-unified .terrain-card-copy>span,
+.refined-layout .terrain-motion-bar p,.refined-layout .terrain-motion-bar button,
+.refined-layout .interaction-heading>span,.refined-layout .video-footer,
+.refined-layout .video-footer select{font-size:var(--support-size)}
+.refined-layout .terrain-motion-bar p{max-width:none}
+.refined-layout .terrain-loop-label,.refined-layout .clip-phases li{font-size:var(--label-size)}
+.refined-layout .terrain-pair-phase{font-size:var(--label-size)}
+.refined-layout .terrain-unified .interaction-recordings>p,
+.refined-layout .action-copy>p:not(.eyebrow):not(.small-note){font-size:var(--copy-size);line-height:1.65;max-width:none}
+.refined-layout .clip-tabs button{font-size:20px}
+.refined-layout .action-note{font-size:var(--support-size)}
+.refined-layout .framework-steps button,.refined-layout #framework-play,
+.refined-layout .framework-details summary{font-size:var(--support-size)}
+.refined-layout .framework-caption p,.refined-layout .framework-details .framework-details-intro,
+.refined-layout .framework-details .framework-explanation p{font-size:var(--copy-size);line-height:1.65}
+.refined-layout .framework-explanation h3{font-size:22px}
+.refined-layout .framework-explanation h3 span{font-size:var(--label-size)}
+.refined-layout #results th{font-size:var(--label-size);padding-block:18px}
+.refined-layout #results th button{font-size:var(--label-size)}
+.refined-layout #results td{font-size:17px;padding-block:21px}
+.refined-layout #results .model-name{font-size:18px}
+.refined-layout #results .model-effort{font-size:var(--label-size);margin-top:4px}
+.refined-layout #results .text-link,.refined-layout #results .small-note{font-size:var(--support-size)}
+.refined-layout .metric-notes h3{font-size:20px;line-height:1.4}
+.refined-layout .metric-notes p{font-size:18px;line-height:1.7}
+.refined-layout .case-layout .case-menu strong{font-size:20px;line-height:1.4}
+.refined-layout .case-layout .case-menu small,
+.refined-layout .case-layout .case-menu button>span{font-size:var(--label-size)}
+.refined-layout .case-layout .case-context,
+.refined-layout .case-layout .recovery-case-description,
+.refined-layout #recovery .appendix-description{font-size:var(--copy-size);line-height:1.7;text-wrap:pretty}
+.refined-layout .case-layout .recovery-case-description{max-width:none}
+.refined-layout .case-layout .route-card h4{font-size:21px}
+.refined-layout .case-layout .route-card header>span,
+.refined-layout .case-layout .route-span{font-size:var(--label-size)}
+.refined-layout .case-layout .replay-explanation,
+.refined-layout .case-scope,.refined-layout .case-source-details summary,
+.refined-layout .case-source-details p,.refined-layout #recovery .appendix-timeline button,
+.refined-layout .recovery-controls{font-size:var(--support-size)}
+.refined-layout .recovery-controls button,.refined-layout .recovery-speed{font-size:var(--support-size)}
+.refined-layout .recovery-progress output{font-size:var(--label-size)}
+.refined-layout .recovery-restart span{font-size:var(--support-size)}
+.refined-layout .action-copy>.eyebrow,.refined-layout .framework-loop-label,
+.refined-layout .framework-steps button>span{font-size:var(--label-size)}
+.refined-layout .opening .hero-heading>.eyebrow{font-size:var(--label-size)}
+.refined-layout .appendix-heading .eyebrow,.refined-layout .appendix-heading .replay-tag{font-size:var(--label-size);line-height:1.5}
+.refined-layout #appendix-stage p,.refined-layout #appendix-stage header{font-size:var(--support-size);line-height:1.65}
+.refined-layout #appendix-stage small,.refined-layout #appendix-stage figcaption,
+.refined-layout #appendix-stage summary,.refined-layout #appendix-stage header>span{font-size:var(--label-size);line-height:1.6}
+.refined-layout .program-command-cards pre,.refined-layout .grounding-inspector pre{font-size:14px;line-height:1.7}
+.refined-layout>footer p{font-size:var(--support-size)}
+@media(max-width:760px){
+ body.refined-layout{--copy-size:18px;--label-size:13px;font-size:17px}
+ .refined-layout .opening-description{font-size:22px}
+ .refined-layout .opening-actions .opening-action-row>a{font-size:16px}
+ .refined-layout .opening .contract-stop{font-size:17px}
+ .refined-layout .opening-stats span{font-size:14px;max-width:125px}
+ .refined-layout .world-card h3{font-size:21px}
+ .refined-layout .terrain-unified .terrain-card-copy strong{font-size:19px}
+ .refined-layout .case-layout .case-menu strong{font-size:18px}
+ .refined-layout .framework-steps{flex-wrap:wrap}
+ .refined-layout .framework-steps button{font-size:15px}
+ .refined-layout .video-footer{flex-wrap:wrap;gap:10px}
+ .refined-layout .trajectory-tabs small{line-height:1.5}
+ .refined-layout .metric-notes h3{font-size:19px}
+ .refined-layout .metric-notes p{font-size:17px}
 }

@@ -648,8 +648,7 @@
     "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170",
     "main_models": 9,
     "configurations": 12,
-    "summary": "GPT-6.1 Sol (max) leads at 87.78% SR, followed by GPT-6 Astra at 85.56%.",
-    "caption": "Manuscript results with the October 2026 GPT-6.1 Sol (max) evaluation. 180 tasks per model: 125 outdoor and 55 indoor. SR, CC, and SPL are percentages; PL is the mean full-episode 3D distance.",
+    "caption": "180 tasks per model: 125 outdoor and 55 indoor. SR, CC, and SPL are percentages; PL is the mean full-episode 3D distance.",
     "supplemental": [
       {
         "model": "GPT-6.1 Sol",
@@ -2719,20 +2718,28 @@
         "section": "Verifier"
       },
       "system-intro": {
-        "text": "we develop a programmable control interface that combines API-based player control with keyboard and mouse input.",
-        "section": "Agent Framework / Action Space"
+        "text": "Control the player through APIs, keyboard and mouse input.",
+        "section": "Agent Framework / Action Space",
+        "source_text": "we develop a programmable control interface that combines API-based player control with keyboard and mouse input.",
+        "adaptation": "Author-requested concise framework description; preserves the manuscript controls, map operations and independent 1 Hz verification."
       },
       "system-observation": {
-        "text": "The in-game map provides a top-down view of the explored environment and supports panning, zooming or searching to inspect different areas.",
-        "section": "Agent Framework / Observation Space"
+        "text": "Use the in-game map to inspect explored areas by panning, zooming or searching.",
+        "section": "Agent Framework / Observation Space",
+        "source_text": "The in-game map provides a top-down view of the explored environment and supports panning, zooming or searching to inspect different areas.",
+        "adaptation": "Author-requested concise framework description; preserves the manuscript controls, map operations and independent 1 Hz verification."
       },
       "system-action": {
-        "text": "The agent uses these tools through Bash, either executing individual operations or composing multiple operations within a single Bash tool call with shell commands or Python scripts.",
-        "section": "Agent Framework / Action Space"
+        "text": "Run tools through Bash, one operation at a time or combined in shell commands or Python scripts.",
+        "section": "Agent Framework / Action Space",
+        "source_text": "The agent uses these tools through Bash, either executing individual operations or composing multiple operations within a single Bash tool call with shell commands or Python scripts.",
+        "adaptation": "Author-requested concise framework description; preserves the manuscript controls, map operations and independent 1 Hz verification."
       },
       "system-verifier": {
-        "text": "An independent evaluator is used to verify arrivals by comparing the player's position with the annotated waypoint coordinates. It samples the client player position at 1 Hz throughout execution, including during model inference.",
-        "section": "Verifier"
+        "text": "An independent evaluator checks position against waypoint coordinates once per second, including during model inference.",
+        "section": "Verifier",
+        "source_text": "An independent evaluator is used to verify arrivals by comparing the player's position with the annotated waypoint coordinates. It samples the client player position at 1 Hz throughout execution, including during model inference.",
+        "adaptation": "Author-requested concise framework description; preserves the manuscript controls, map operations and independent 1 Hz verification."
       },
       "metric-sr": {
         "text": "Fraction of tasks completed by visiting all required stops in order and submitting an accepted claim_done.",
