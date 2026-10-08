@@ -2814,6 +2814,15 @@
       "grounding-detail": {
         "text": "Step 176 captures the map; Step 177 computes the estimated U20 coordinates; Steps 179 and 181 use the estimate for orientation and movement. S marks the player position and G the estimated goal; dashed lines indicate pixel offsets, not an executed route. The displayed map provides context because the measured PNG is unavailable. The adopted scale is uncalibrated, and execution does not establish arrival.",
         "section": "Appendix / Case Studies / Figure caption"
+      },
+      "task-intro": {
+        "text": "Each task asks an agent to follow a natural-language instruction and visit destinations in order. The agent chooses its own route and submits a completion claim after the final stop.",
+        "section": "Environments / Tasks; Verifier",
+        "source_text": "each task specifies a map, a starting waypoint and orientation, and an ordered sequence of destinations described in a natural-language instruction. The agent must identify and visit these destinations in order, choosing its own route using the permitted controls and ending at the final waypoint.",
+        "supporting_source_keys": [
+          "task-completion"
+        ],
+        "adaptation": "Concise task introduction combining the manuscript task definition, route choice and completion claim; supporting excerpts are separately source-verified."
       }
     }
   },
