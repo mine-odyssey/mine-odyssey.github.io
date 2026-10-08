@@ -1522,45 +1522,6 @@
     "kind": "research_paper"
   },
   {
-    "file": "assets/full-run-entrup-006-astra-6bbce21e4ca6-16x.mp4",
-    "sha256": "59ba0185efeeb27f1843caaf1ee60b581c5e1a295031e7a7b973192a31b6b6a8",
-    "kind": "full_run_recording",
-    "source_sha256": "6bbce21e4ca61828366b7fb6cd38541e2237be41f1e8f8b16d4e018c283390cb",
-    "task_id": "entrup-006",
-    "model": "GPT-6 Astra",
-    "source_duration": 1019.666667,
-    "encoded_speed": 16,
-    "start_seconds": 0,
-    "end_seconds": 1019.666667,
-    "complete_recording": true
-  },
-  {
-    "file": "assets/full-run-entrup-006-astra-6bbce21e4ca6-16x.webp",
-    "sha256": "3660d170235939b3ed4c13368083d46d8454096e06acbbbac22ad5165827b624",
-    "kind": "full_run_poster",
-    "source_sha256": "6bbce21e4ca61828366b7fb6cd38541e2237be41f1e8f8b16d4e018c283390cb",
-    "task_id": "entrup-006",
-    "model": "GPT-6 Astra",
-    "source_duration": 1019.666667,
-    "encoded_speed": 16,
-    "start_seconds": 0,
-    "end_seconds": 1019.666667,
-    "complete_recording": true
-  },
-  {
-    "file": "assets/full-trajectory-entrup-006.webp",
-    "sha256": "09c1704558fc40c4fec5b8af5aa7c2a04f4143bc6ebdf0451ad313c442013852",
-    "kind": "full_trajectory_map",
-    "source_sha256": "8a48479bf11c20f82c06811bab0d6d42bee6040d79b3c83842702a991cf9dfc8",
-    "crop": [
-      547,
-      307,
-      1323,
-      792
-    ],
-    "task_id": "entrup-006"
-  },
-  {
     "file": "assets/full-run-plaza-hotel-003-astra-8d4882d6b2e7-16x.mp4",
     "sha256": "d471a7c93333891ba1dcb267a8d7b281e1fd6a767494ef1afb3d3b5c988d65d5",
     "kind": "full_run_recording",
@@ -1624,6 +1585,71 @@
       695
     ],
     "task_id": "plaza-hotel-003"
+  },
+  {
+    "file": "assets/full-run-entrup-006-astra-6bbce21e4ca6-16x.mp4",
+    "sha256": "59ba0185efeeb27f1843caaf1ee60b581c5e1a295031e7a7b973192a31b6b6a8",
+    "kind": "full_run_recording",
+    "source_sha256": "6bbce21e4ca61828366b7fb6cd38541e2237be41f1e8f8b16d4e018c283390cb",
+    "task_id": "entrup-006",
+    "model": "GPT-6 Astra",
+    "source_duration": 1019.666667,
+    "encoded_speed": 16,
+    "start_seconds": 0,
+    "end_seconds": 1019.666667,
+    "complete_recording": true
+  },
+  {
+    "file": "assets/full-run-entrup-006-astra-6bbce21e4ca6-16x.webp",
+    "sha256": "3660d170235939b3ed4c13368083d46d8454096e06acbbbac22ad5165827b624",
+    "kind": "full_run_poster",
+    "source_sha256": "6bbce21e4ca61828366b7fb6cd38541e2237be41f1e8f8b16d4e018c283390cb",
+    "task_id": "entrup-006",
+    "model": "GPT-6 Astra",
+    "source_duration": 1019.666667,
+    "encoded_speed": 16,
+    "start_seconds": 0,
+    "end_seconds": 1019.666667,
+    "complete_recording": true
+  },
+  {
+    "file": "assets/full-run-entrup-006-glm-ac05ae39a865-16x.mp4",
+    "sha256": "b2c315f31b03eb33f672dc7e7e651bdc5cc11a3a12bc862a32c366729f1c4935",
+    "kind": "full_run_recording",
+    "source_sha256": "ac05ae39a865934afff32d4537c358b5e57710fa6bb3c65d1b285e1c72299f34",
+    "task_id": "entrup-006",
+    "model": "GLM-5.3-Flash",
+    "source_duration": 5838.4,
+    "encoded_speed": 16,
+    "start_seconds": 0,
+    "end_seconds": 5838.4,
+    "complete_recording": true
+  },
+  {
+    "file": "assets/full-run-entrup-006-glm-ac05ae39a865-16x.webp",
+    "sha256": "306b0efebb0a69b03d51db1c1f0417e9af4e3dafc30cad43b0fbc9104ce09f1f",
+    "kind": "full_run_poster",
+    "source_sha256": "ac05ae39a865934afff32d4537c358b5e57710fa6bb3c65d1b285e1c72299f34",
+    "task_id": "entrup-006",
+    "model": "GLM-5.3-Flash",
+    "source_duration": 5838.4,
+    "encoded_speed": 16,
+    "start_seconds": 0,
+    "end_seconds": 5838.4,
+    "complete_recording": true
+  },
+  {
+    "file": "assets/full-trajectory-entrup-006.webp",
+    "sha256": "6d768cfe78c77de35f573c874e454752212533460d349a985bca712a72d492ac",
+    "kind": "full_trajectory_map",
+    "source_sha256": "8a48479bf11c20f82c06811bab0d6d42bee6040d79b3c83842702a991cf9dfc8",
+    "crop": [
+      531,
+      181,
+      1392,
+      719
+    ],
+    "task_id": "entrup-006"
   },
   {
     "file": "assets/full-run-ueno-park-005-astra-a49c988af483-16x.mp4",
