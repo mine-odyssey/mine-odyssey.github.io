@@ -1596,12 +1596,18 @@ body.paper-layout{--serif:var(--sans);--paper:#fbfcfa;--ink:#202923;--muted:#5e6
 .paper-layout .paper-overview-image{display:block;cursor:zoom-in;background:#fff;border-radius:8px;overflow:hidden}
 .paper-layout .paper-overview-image img{display:block;width:100%;height:auto}
 .paper-layout .paper-overview-image .paper-overview-mobile{display:none}
-.paper-layout .paper-overview figcaption{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;padding-top:18px;color:var(--muted);font-size:16px;line-height:1.6}
-.paper-layout .paper-overview figcaption p{margin:0;max-width:76ch}
-.paper-layout .paper-overview figcaption strong{color:var(--ink);font-weight:600}
-.paper-layout .paper-overview figcaption a{color:var(--green);white-space:nowrap;text-decoration:underline;text-underline-offset:4px}
+.paper-layout .paper-overview figcaption{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title link" "description description";align-items:baseline;gap:6px 24px;padding-top:18px;color:var(--muted);font-size:16px;line-height:1.6}
+.paper-layout .paper-overview figcaption p{grid-area:description;margin:0;max-width:none;text-wrap:pretty}
+.paper-layout .paper-overview figcaption strong{grid-area:title;color:var(--ink);font-weight:600}
+.paper-layout .paper-overview figcaption a{grid-area:link;color:var(--green);white-space:nowrap;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:760px){
  .paper-layout .paper-overview{margin-bottom:34px}
  .paper-layout .paper-overview-image .paper-overview-mobile{display:block;margin-top:18px}
- .paper-layout .paper-overview figcaption{flex-direction:column;gap:10px;font-size:15px}
+ .paper-layout .paper-overview figcaption{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "description" "link";gap:8px;font-size:15px}
 }
+
+/* Keep metric definitions available beneath the always-visible leaderboard. */
+.paper-layout .results-definitions{margin-top:20px;border-top:1px solid var(--line)}
+.paper-layout .results-definitions>summary{padding:16px 0;color:var(--green);font-size:16px;font-weight:500;cursor:pointer}
+.paper-layout .results-definitions>.metric-notes{margin-top:8px}
+.paper-layout .results-definitions[open]{padding-bottom:8px}
