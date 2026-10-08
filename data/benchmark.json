@@ -498,6 +498,18 @@
   ],
   "results": [
     {
+      "model": "GPT-6.1 Sol",
+      "effort": "max",
+      "cohort": "main",
+      "sr": 87.78,
+      "outdoor_sr": 88.8,
+      "indoor_sr": 85.45,
+      "cc": 91.53,
+      "spl": 57.87,
+      "mean_steps": 124.5,
+      "mean_path_3d_blocks": 988.8
+    },
+    {
       "model": "GPT-6 Astra",
       "effort": "medium",
       "cohort": "main",
@@ -631,12 +643,23 @@
     }
   ],
   "resultsSource": {
-    "label": "Latest arXiv manuscript · Table 1",
+    "label": "Manuscript Table 1 + October 2026 evaluation",
     "member": "paper-arxiv.tex",
     "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170",
-    "main_models": 8,
-    "configurations": 11,
-    "precision": "As published: percentages to 2 decimals; turns and path length to 1 decimal."
+    "main_models": 9,
+    "configurations": 12,
+    "summary": "GPT-6.1 Sol (max) leads at 87.78% SR, followed by GPT-6 Astra at 85.56%.",
+    "caption": "Manuscript results with the October 2026 GPT-6.1 Sol (max) evaluation. 180 tasks per model: 125 outdoor and 55 indoor. SR, CC, and SPL are percentages; PL is the mean full-episode 3D distance.",
+    "supplemental": [
+      {
+        "model": "GPT-6.1 Sol",
+        "effort": "max",
+        "tasks": 180,
+        "audit": "site/mine-odyssey/preview-assets/sol61-max-results-audit.json",
+        "audit_sha256": "bcc8ca37fdb52f94ad0c5679f6407dfbd6092b44ebc03316d3e4438414657558"
+      }
+    ],
+    "precision": "Percentages to 2 decimals; turns and path length to 1 decimal."
   },
   "clips": [
     {
@@ -2627,6 +2650,10 @@
     {
       "file": "paper/paper/results/opus55-20260928/audit.json",
       "sha256": "c175391eafbdb680c7eb2da7640f9290b1875b5e9c6e280b3a2569199c91b98a"
+    },
+    {
+      "file": "site/mine-odyssey/preview-assets/sol61-max-results-audit.json",
+      "sha256": "bcc8ca37fdb52f94ad0c5679f6407dfbd6092b44ebc03316d3e4438414657558"
     }
   ],
   "paperCopy": {
@@ -2706,10 +2733,6 @@
       "system-verifier": {
         "text": "An independent evaluator is used to verify arrivals by comparing the player's position with the annotated waypoint coordinates. It samples the client player position at 1 Hz throughout execution, including during model inference.",
         "section": "Verifier"
-      },
-      "results-intro": {
-        "text": "GPT-6 Astra leads at 85.6% SR, followed by Claude Opus 5.5 at 73.9%.",
-        "section": "Main results"
       },
       "metric-sr": {
         "text": "Fraction of tasks completed by visiting all required stops in order and submitting an accepted claim_done.",
