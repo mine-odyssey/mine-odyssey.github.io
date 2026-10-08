@@ -1783,7 +1783,7 @@
   },
   {
     "file": "assets/overview-figure-1-full.webp",
-    "sha256": "4f58f9f86073c7ea25d8bcccedde312d0de63e7a0a40431a0b29f087bb5a510a",
+    "sha256": "f724098fd43988c5436593fafe2d04c7a163b053480e946742d0e2859ab14f2c",
     "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
     "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
     "kind": "manuscript_overview",
@@ -1797,11 +1797,11 @@
     ],
     "width": 3868,
     "height": 2711,
-    "adaptation": "Dark vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
+    "adaptation": "White/green vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
   },
   {
     "file": "assets/overview-figure-1-environments.webp",
-    "sha256": "6351cf45fd3140ffdf40d2bc49790e005d98a459ea70788a95bb1a4d7670ed94",
+    "sha256": "160f22f30904b1252a812607c90c41b0f435734f6393eadef6138a0fad086d9b",
     "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
     "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
     "kind": "manuscript_overview",
@@ -1815,11 +1815,11 @@
     ],
     "width": 1784,
     "height": 2711,
-    "adaptation": "Dark vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
+    "adaptation": "White/green vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
   },
   {
     "file": "assets/overview-figure-1-tasks.webp",
-    "sha256": "8fcfbcff3cfee04562e8a46fe320dd1061bb94306ac31a16c2037b987dd754d3",
+    "sha256": "151165543f593c16a5c187d6fcd97d45b5473567456636890e88767cc1543933",
     "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
     "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
     "kind": "manuscript_overview",
@@ -1833,6 +1833,6 @@
     ],
     "width": 2052,
     "height": 2711,
-    "adaptation": "Dark vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
+    "adaptation": "White/green vector presentation; original embedded scenes, instructions and waypoint geometry preserved; remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
   }
 ]
