@@ -246844,5 +246844,16 @@
     "atlas_sha256": "99d274d0002fb5fd542f89bd91243c57c39359390be9fde4bf15d72a75a2779d",
     "mode": "complete_recorded_elapsed_time",
     "default_speed": 32
+  },
+  "citation": {
+    "bibtex": "@misc{cao2026mineodyssey,\n  title = {Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild},\n  author = {Cao, Yuxuan and Li, Junlong and Li, Hao and He, Junxian},\n  year = {2026},\n  url = {https://mine-odyssey.github.io/}\n}",
+    "authors": [
+      "Yuxuan Cao",
+      "Junlong Li",
+      "Hao Li",
+      "Junxian He"
+    ],
+    "year": 2026,
+    "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170"
   }
 }

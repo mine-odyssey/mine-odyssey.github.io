@@ -550,6 +550,13 @@
     return `<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Copacabana. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="#496d42" stroke="#fcfcf4" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="#ae9148" pointer-events="none"/></svg>`;
   }
   host.innerHTML=render(false)+render(true);
+  const visuals=[
+    `<span class="framework-observe-scene"><img src="${views.map}" alt="" loading="lazy"><span class="framework-scan-line"></span><span class="framework-image-corner"></span></span><span class="framework-feedback-lines"><i></i><i></i><i></i></span>`,
+    '<span class="framework-mini-terminal"><span class="framework-terminal-dots">● ● ●</span><span class="framework-code-line">$ mcapi look</span><span class="framework-code-line">  --yaw -90 &amp;&amp;</span><span class="framework-code-line">  mcapi press</span><span class="framework-code-line">  MOVE_FORWARD 2.0</span><span class="framework-code-cursor"></span></span>',
+    `<span class="framework-action-scene"><img src="${views.game}" alt="" loading="lazy"><svg class="framework-mini-avatar" viewBox="0 0 132 166">${avatar()}</svg></span><span class="framework-key-row"><i>W</i><i>A</i><i>S</i><i>D</i><i>↵</i></span>`,
+    '<span class="framework-check-list"><span><i>✓</i>Position</span><span><i>✓</i>Visit order</span><span><i>✓</i><code>claim_done</code></span></span>'
+  ];
+  document.querySelectorAll('.framework-step-visual').forEach((element,i)=>{element.innerHTML=visuals[i];});
   function selectView(view){
     host.querySelectorAll('[data-client-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.clientView===view)));
     host.querySelectorAll('.client-observation').forEach(img=>{
@@ -570,7 +577,7 @@
     {channel:'claim',nodes:['verifier'],copy:'The verifier checks ordered arrivals and the agent’s completion claim.'}
   ];
   let phase=0,elapsed=0,last=0,raf=0,visible=false,wantsPlay=!motion.matches;
-  const duration=2600;
+  const duration=4000;
   function setPhase(next){
     phase=next;figure.dataset.phase=String(next);
     steps.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===next)));
@@ -578,11 +585,14 @@
     host.querySelectorAll('[data-flow]').forEach(p=>p.classList.toggle('is-active',p.dataset.flow===phases[next].channel));
     document.querySelector('#framework-phase-number').textContent=String(next+1).padStart(2,'0');
     document.querySelector('#framework-phase-copy').textContent=phases[next].copy;
+    if(next===0)selectView('map');
+    if(next===2)selectView('game');
   }
   const tracks=[...host.querySelectorAll('svg.framework-desktop,svg.framework-mobile')].map(svg=>({svg,
     packet:svg.querySelector('.flow-packet'),position:svg.querySelector('.position-packet'),
     paths:Object.fromEntries([...svg.querySelectorAll('[data-flow]')].map(p=>[p.dataset.flow,{path:p,length:p.getTotalLength()}]))}));
   function draw(progress){
+    figure.style.setProperty('--phase-progress',`${progress*100}%`);
     for(const track of tracks){
       const flow=track.paths[phases[phase].channel];
       const p=flow.path.getPointAtLength(flow.length*progress);
@@ -607,6 +617,13 @@
     if(running)raf=requestAnimationFrame(frame);
   }
   steps.forEach((button,i)=>button.addEventListener('click',()=>{wantsPlay=false;elapsed=i*duration;setPhase(i);draw(.5);sync();}));
+  document.querySelector('#framework-next').addEventListener('click',()=>steps[(phase+1)%phases.length].click());
+  document.querySelector('.framework-steps').addEventListener('keydown',e=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+    const index=steps.indexOf(e.target);if(index<0)return;e.preventDefault();
+    const next=e.key==='Home'?0:e.key==='End'?3:(index+(e.key==='ArrowRight'?1:-1)+4)%4;
+    steps[next].focus();steps[next].click();
+  });
   play.addEventListener('click',()=>{wantsPlay=!wantsPlay;sync();});
   document.addEventListener('visibilitychange',sync);
   motion.addEventListener('change',()=>{wantsPlay=!motion.matches;sync();});
@@ -797,4 +814,43 @@
   document.addEventListener('visibilitychange',sync);document.addEventListener('preview-dialog-open',sync);dialog.addEventListener('close',sync);
   motion.addEventListener('change',()=>{if(motion.matches)enabled=false;sync();});
   sync();
+})();
+
+// Keep the page contents aligned with the currently visible section.
+(() => {
+  const links=[...document.querySelectorAll('#navigation a[href^="#"]')];
+  const sections=links.map(link=>({link,section:document.querySelector(link.getAttribute('href'))})).filter(item=>item.section);
+  let pending=false;
+  const update=()=>{
+    pending=false;
+    const line=Math.min(220,innerHeight*.25);
+    const atBottom=scrollY+innerHeight>=document.documentElement.scrollHeight-2;
+    const current=atBottom?sections.at(-1):sections.filter(item=>item.section.getBoundingClientRect().top<=line).at(-1);
+    for(const item of sections){
+      if(item===current)item.link.setAttribute('aria-current','location');
+      else item.link.removeAttribute('aria-current');
+    }
+  };
+  const schedule=()=>{if(!pending){pending=true;requestAnimationFrame(update);}};
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  if('ResizeObserver' in window)new ResizeObserver(schedule).observe(document.querySelector('main'));
+  update();
+})();
+
+(() => {
+  const button=document.querySelector('#copy-citation'),code=document.querySelector('#citation-bibtex'),status=document.querySelector('#citation-status');
+  if(!button||!code||!status)return;
+  let reset;
+  button.addEventListener('click',async()=>{
+    clearTimeout(reset);
+    try{
+      await navigator.clipboard.writeText(code.textContent);
+      button.textContent='Copied';status.textContent='BibTeX copied to clipboard.';
+    }catch{
+      const selection=getSelection(),range=document.createRange();range.selectNodeContents(code);selection.removeAllRanges();selection.addRange(range);
+      button.textContent='Text selected';status.textContent='Citation selected. Press Control+C or Command+C to copy.';
+    }
+    reset=setTimeout(()=>{button.textContent='Copy BibTeX';},2500);
+  });
 })();

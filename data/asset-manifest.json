@@ -1780,5 +1780,59 @@
       570
     ],
     "task_id": "hagia-sophia-003"
+  },
+  {
+    "file": "assets/overview-figure-1-full.webp",
+    "sha256": "51b79161f70158c4372e5cd7a094e09e21412f7be18045c512864a0ef13fce73",
+    "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
+    "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
+    "kind": "manuscript_overview",
+    "figure": 1,
+    "view": "full",
+    "viewbox": [
+      16,
+      16,
+      3868,
+      2711
+    ],
+    "width": 3868,
+    "height": 2711,
+    "adaptation": "Remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
+  },
+  {
+    "file": "assets/overview-figure-1-environments.webp",
+    "sha256": "e8120592af20b512b3ad100ca99eabaca9dcbbd93c76c08f521db34950593963",
+    "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
+    "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
+    "kind": "manuscript_overview",
+    "figure": 1,
+    "view": "environments",
+    "viewbox": [
+      16,
+      16,
+      1784,
+      2711
+    ],
+    "width": 1784,
+    "height": 2711,
+    "adaptation": "Remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
+  },
+  {
+    "file": "assets/overview-figure-1-tasks.webp",
+    "sha256": "9aa3e7bb09631ee1d6ae7f204e6731e56f2815e124caa042bc664d9f4725ab60",
+    "source_sha256": "b954b43d04591b8ced75b8410b1653d19aa489ed5e2b78d8f30c0e2315aa1e63",
+    "vector_source_sha256": "d0a4c4f23eeeb0caa4e64f542c8729d931040e95201b28d7c23d63b6c4069186",
+    "kind": "manuscript_overview",
+    "figure": 1,
+    "view": "tasks",
+    "viewbox": [
+      1832,
+      16,
+      2052,
+      2711
+    ],
+    "width": 2052,
+    "height": 2711,
+    "adaptation": "Remove panel-letter prefixes; trim outer canvas; stack complete panels on narrow screens."
   }
 ]
