@@ -121,8 +121,6 @@
 (() => {
   const film=window.MINE_ODYSSEY.film,$=s=>document.querySelector(s),video=$('#showcase-video');
   const stamp=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-  const seconds=Math.round(film.duration_seconds);
-  $('#film-summary').textContent=`${Math.floor(seconds/60)} min ${String(seconds%60).padStart(2,'0')} sec · ${film.maps} worlds. Tasks, terrain, ablation settings, agent programs and model comparisons.`;
   const indices=film.chapters.map((_,i)=>i);let pendingSeek=null;
   video.poster=film.poster;
   $('#film-chapters').innerHTML=indices.map(i=>`<button type="button" data-film-chapter="${i}" aria-pressed="${i===0}"><span>${stamp(film.chapters[i].start)}</span><strong>${film.chapters[i].title}</strong><span aria-hidden="true">↗</span></button>`).join('');
