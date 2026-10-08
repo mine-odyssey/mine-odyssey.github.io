@@ -6,14 +6,14 @@
   <meta name="description" content="Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild. 180 tasks in Minecraft reconstructions of real-world locations.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://mine-odyssey.github.io/">
-  <meta name="theme-color" content="#fcfcf9">
+  <meta name="theme-color" content="#060e12">
   <title data-paper="title">Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild</title>
-  <link rel="icon" href="favicon.svg?v=balanced-title-20261008" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=balanced-title-20261008">
-  <script src="data/benchmark.js?v=balanced-title-20261008" defer></script>
-  <script src="app.js?v=balanced-title-20261008" defer></script>
+  <link rel="icon" href="favicon.svg?v=dark-framework-20261008" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=dark-framework-20261008">
+  <script src="data/benchmark.js?v=dark-framework-20261008" defer></script>
+  <script src="app.js?v=dark-framework-20261008" defer></script>
 </head>
-<body class="research-layout refined-layout paper-layout">
+<body class="research-layout refined-layout paper-layout dark-layout">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Mine Odyssey home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z"/><path d="m3 9.5 13 7.5 13-7.5M16 17v13M9.5 5.8l13 7.5v13"/></svg><span>Mine Odyssey<span class="brand-dot">.</span></span></a>
@@ -84,7 +84,7 @@
       <div class="section-heading"><div><p class="eyebrow section-number" aria-hidden="true">05</p><h2 id="demo-title">Terrain and interactions</h2></div><p data-paper="terrain">These environments present diverse terrain and spatial constraints, including uneven ground, water boundaries, narrow corridors, and multilevel spaces.</p></div>
       <div class="terrain-motion-bar"><p>Short clips &amp; before–after observations</p><button type="button" id="terrain-motion" aria-pressed="true">Pause previews</button></div><div class="terrain-scenes" id="terrain-scenes"></div>
       <div class="interaction-recordings" id="interaction-recordings"><div class="interaction-heading"><h3>Interaction examples</h3><span>Door · Ladder · Stairs</span></div><p data-paper="interactions">Ascending stairs, climbing ladders, opening fence gates, or activating buttons to pass through doors.</p><div class="action-layout"><div class="video-panel"><video id="demo-video" controls playsinline preload="none" poster="assets/behavior-door-755-800.webp" aria-label="Recorded agent interaction"></video><button class="video-start" id="video-start" type="button"><span aria-hidden="true">▶</span> Play recorded clip</button><p id="video-status" role="status"></p><div class="video-footer"><span>GLM 5.3 Flash · HUD enabled</span><label>Playback <select id="playback-speed" aria-label="Playback speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></label></div></div><div class="action-copy"><div class="clip-tabs" role="group" aria-label="Choose a recorded interaction"><button data-clip="0" type="button" aria-pressed="true"><span>01</span> Open a door <span aria-hidden="true">↗</span></button><button data-clip="1" type="button" aria-pressed="false"><span>02</span> Descend a ladder <span aria-hidden="true">↗</span></button><button data-clip="2" type="button" aria-pressed="false"><span>03</span> Change floors <span aria-hidden="true">↗</span></button></div><p class="eyebrow" id="clip-place"></p><h3 id="clip-title"></h3><p id="clip-description"></p><ol class="clip-phases" id="clip-phases"></ol><p class="small-note" id="clip-source"></p></div></div>
-      <p class="action-note">Original-speed excerpts from HUD-enabled runs. These clips show local interactions, not full-task success or the default observation setting. Sequence labels summarize each clip.</p></div>
+      </div>
     </div></section>
     <section class="section shell" id="system" aria-labelledby="system-title"><div class="section-heading"><div><p class="eyebrow section-number" aria-hidden="true">06</p><h2 id="system-title">Agent framework</h2></div></div>
       <figure class="framework-figure" aria-label="Agent interaction and independent verification"><div class="framework-playbar"><div class="framework-steps" role="group" aria-label="Agent loop stages"><button type="button" data-framework-step="0" aria-pressed="true"><span>01</span> Observe</button><button type="button" data-framework-step="1" aria-pressed="false"><span>02</span> Compose</button><button type="button" data-framework-step="2" aria-pressed="false"><span>03</span> Act</button><button type="button" data-framework-step="3" aria-pressed="false"><span>04</span> Claim &amp; verify</button></div><button type="button" id="framework-play" aria-pressed="true" aria-label="Pause framework animation">Ⅱ <span>Pause</span></button></div><div id="framework-diagram"></div><figcaption class="framework-caption"><span class="framework-phase-number" id="framework-phase-number">01</span><p id="framework-phase-copy">The agent receives screenshots and execution feedback.</p><span class="framework-loop-label">Agent loop</span></figcaption></figure>
