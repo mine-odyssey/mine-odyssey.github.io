@@ -1755,3 +1755,4 @@ body.paper-layout.dark-layout{color-scheme:dark;--paper:#060e12;--ink:#f3f1e9;--
 .paper-layout.dark-layout .heading-sequence .repeat-count{color:#d6c18e}
 .paper-layout.dark-layout .loop-iterations .current,.paper-layout.dark-layout .loop-iterations .current.complete{background:#d6c18e;color:#07191b;border-color:#d6c18e}
 .paper-layout.dark-layout .loop-iterations .complete{color:#d6c18e;border-color:#827650}
+.paper-layout.dark-layout .paper-overview-image{background:var(--paper)}

@@ -467,8 +467,8 @@
 
 (() => {
   const host=document.querySelector('#framework-diagram');
-  const example=window.MINE_ODYSSEY.journeys.examples.find(t=>t.id==='copacabana-waterfront-001');
-  const views={game:window.MINE_ODYSSEY.maps.find(m=>m.id===example.map).image,map:example.map_image};
+  const example=window.MINE_ODYSSEY.fullTrajectories.cases.find(t=>t.id==='entrup-006');
+  const views={game:window.MINE_ODYSSEY.maps.find(m=>m.id===example.map_id).image,map:example.map_image};
   const box=(x,y,w,h,fill,stroke)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
   const text=(x,y,value,size=14,color='#294e3a',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
   function avatar(){
@@ -513,7 +513,7 @@
       content=text(0,30,'Minecraft client',30)+
         `<rect class="client-window" x="0" y="42" width="${w}" height="${imageHeight+57}" rx="8" fill="#fcfcf6" stroke="#aaba9b" stroke-width="1.5"/>`+
         tab('game','Game view',0)+tab('map','World map',1)+
-        `<rect x="8" y="91" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="91" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="In-game presentation view of Copacabana"/><rect class="client-capture-outline" x="8" y="91" width="${w-16}" height="${imageHeight}" fill="none" stroke="#e3bd6a" stroke-width="4" pointer-events="none"/>${text(8,imageHeight+125,'Copacabana Waterfront',18,'#687b5b')}`;
+        `<rect x="8" y="91" width="${w-16}" height="${imageHeight}" fill="#e2e8da"/><image class="client-observation" href="${views.game}" x="8" y="91" width="${w-16}" height="${imageHeight}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="In-game presentation view of Entrup"/><rect class="client-capture-outline" x="8" y="91" width="${w-16}" height="${imageHeight}" fill="none" stroke="#e3bd6a" stroke-width="4" pointer-events="none"/>${text(8,imageHeight+125,'Entrup',18,'#687b5b')}`;
     }
     if(type==='verifier'){
       content=box(0,0,w,h,'#f0ecd8','#b0a56c')+
@@ -545,7 +545,7 @@
     const nodes=mobile?node('agent',45,44,270,230,true)+node('bash',45,330,270,285,true)+node('world',45,675,270,299,true)+node('verifier',45,1085,270,157,true):
       node('agent',20,150,250,230)+node('bash',345,150,315,255)+node('world',750,105,400,382)+node('verifier',445,535,465,125);
     const palette={'#294e3a':'#f3f1e9','#687b5b':'#b5c5c4','#789165':'#79b9b5','#fcfcf6':'#14242a','#fcfcf4':'#172c31','#c2ceb0':'#426166','#9daf84':'#8aabaa','#d8e2c9':'#203a3d','#b8c6ac':'#426166','#e0e9cf':'#153337','#243e34':'#081217','#4d6858':'#324f54','#f0ecd8':'#232b29','#b0a56c':'#6e7053','#fdfcf1':'#243938','#b3aa7c':'#85916e','#9a905d':'#bdba83','#638357':'#a4d3b0','#c0c6a5':'#8fa794','#756c40':'#d6c18e','#527345':'#a0c9ab','#82723e':'#d6c18e','#a79758':'#b4a86e','#aaba9b':'#426166','#e2e8da':'#14242a'};
-    const svg=`<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Copacabana. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="#9ed9d6" stroke="#060e12" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="#d6c18e" pointer-events="none"/></svg>`;
+    const svg=`<svg class="framework-${id}" viewBox="0 0 ${w} ${h}" role="group" aria-labelledby="fw-${id}-title fw-${id}-desc"><title id="fw-${id}-title">Agent interaction and independent verification</title><desc id="fw-${id}-desc">The agent receives the task, screenshots and execution feedback. Bash runs mcapi through AgentBridge or xdo keyboard and mouse controls. The client shows an in-game presentation view or native map of Entrup. A separate verifier samples player positions at one hertz throughout execution and checks ordered arrivals and the completion claim. Moving dots illustrate information flow.</desc><defs><marker id="fw-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 9 5 0 9" fill="none" stroke="#789165" stroke-width="1.6"/></marker></defs>${paths}${nodes}<circle class="flow-packet" r="6" fill="#9ed9d6" stroke="#060e12" stroke-width="2" pointer-events="none"/><circle class="position-packet" r="4" fill="#d6c18e" pointer-events="none"/></svg>`;
     return svg.replace(/#[0-9a-f]{6}\b/g,color=>palette[color]||color);
   }
   host.innerHTML=render(false)+render(true);
@@ -553,7 +553,7 @@
     host.querySelectorAll('[data-client-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.clientView===view)));
     host.querySelectorAll('.client-observation').forEach(img=>{
       img.setAttribute('href',views[view]);
-      img.setAttribute('aria-label',view==='game'?'In-game presentation view of Copacabana':'Native map of Copacabana');
+      img.setAttribute('aria-label',view==='game'?'In-game presentation view of Entrup':'Native map of Entrup');
     });
   }
   host.addEventListener('click',e=>{const b=e.target.closest('[data-client-view]');if(b)selectView(b.dataset.clientView);});
