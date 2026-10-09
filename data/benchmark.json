@@ -246855,7 +246855,7 @@
     "default_speed": 32
   },
   "citation": {
-    "bibtex": "@misc{cao2026mineodyssey,\n  title = {Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild},\n  author = {Cao, Yuxuan and Li, Junlong and Li, Hao and He, Junxian},\n  year = {2026},\n  url = {https://mine-odyssey.github.io/}\n}",
+    "bibtex": "@misc{cao2026mineodyssey,\n  title = {Mine Odyssey: Benchmarking Spatial Agentic Intelligence in the Wild},\n  author = {Cao, Yuxuan and Li, Junlong and Li, Hao and He, Junxian},\n  year = {2026},\n  eprint = {2610.11328},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.AI},\n  url = {https://arxiv.org/abs/2610.11328}\n}",
     "authors": [
       "Yuxuan Cao",
       "Junlong Li",
@@ -246863,6 +246863,10 @@
       "Junxian He"
     ],
     "year": 2026,
+    "arxiv_id": "2610.11328",
+    "primary_class": "cs.AI",
+    "url": "https://arxiv.org/abs/2610.11328",
+    "pdf_url": "https://arxiv.org/pdf/2610.11328",
     "manuscript_sha256": "4567c1a38e0ac0da7d49f77fed63fa5ad7b33ab704adeae2dda0199aee875170"
   }
 }

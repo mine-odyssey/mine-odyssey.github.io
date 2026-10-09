@@ -1451,6 +1451,8 @@ body.paper-layout{--serif:var(--sans);--paper:#fbfcfa;--ink:#202923;--muted:#5e6
 .paper-layout .opening h1{font-family:var(--sans);font-size:clamp(58px,6.7vw,94px);font-weight:650;line-height:1.05;letter-spacing:-5px;margin-bottom:20px}
 .paper-layout .opening-description{text-wrap:balance;font-size:clamp(27px,3vw,38px);font-weight:450;line-height:1.25;letter-spacing:-1.1px;color:var(--ink);max-width:860px}
 .paper-layout .opening-actions{margin-top:28px;gap:10px}
+.paper-layout .opening-authors{margin:20px 0 5px;font-size:clamp(17px,2vw,20px);line-height:1.6;font-weight:500;color:var(--ink)}
+.paper-layout .opening-affiliation{margin:0;font-size:16px;line-height:1.6;color:var(--muted)}
 .paper-layout .opening-action-row:first-child>a{border-radius:999px;min-height:46px;padding:10px 24px;font-size:16px}
 .paper-layout .opening-action-row:last-child{gap:28px}
 .paper-layout .opening-action-row:last-child>a{font-size:16px;font-weight:450}
