@@ -51,7 +51,7 @@
  }
  async function login(code){const result=await call('/api/login',{code},'');remember(result.access_token);el('support-code').value='';notice('反馈区已连接。');await refresh();}
  el('support-login').onsubmit=async event=>{event.preventDefault();try{await login(el('support-code').value);}catch(error){notice(error.message,true);}};
- el('login-form').addEventListener('submit',()=>{const code=el('code').value;if(code&&!session)login(code).catch(()=>{});},true);
+ el('login-form')?.addEventListener('submit',()=>{const code=el('code').value;if(code&&!session)login(code).catch(()=>{});},true);
  el('support-form').onsubmit=async event=>{
   event.preventDefault();el('support-submit').disabled=true;
   if(!requestId)requestId=crypto.randomUUID();
