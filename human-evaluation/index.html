@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><link rel="icon" href="../favicon.svg"><title>Mine Odyssey · Human Evaluation</title><link rel="stylesheet" href="./style.css"><script src="./connection.js" defer></script><script src="./app.js" defer></script></head>
-<body><header><a class="brand" href="../">MINE ODYSSEY</a><span>人类评测</span><span id="identity"></span></header>
+<body><header><a class="brand" href="../">MINE ODYSSEY</a><span>人类评测</span><a href="./native/">使用本机 Minecraft</a><span id="identity"></span></header>
 <main><section id="login" class="card"><h1>进入评测</h1><p>使用分配给你的访问码。请在电脑上使用键盘和鼠标。</p><form id="login-form"><label>访问码<input id="code" type="password" autocomplete="off" required maxlength="128"></label><button>进入</button></form></section>
 <section id="workspace" hidden><div class="topline"><span id="status">准备中</span><span id="timer"></span></div>
 <div class="layout"><section class="game-panel"><div id="screen-wrap"><img id="screen" alt="Minecraft 第一人称画面" draggable="false"><div id="cover">环境就绪后，点击开始任务。</div></div><p class="hint">点击画面控制视角 · Esc 释放鼠标 · WASD 移动 · 空格跳跃 · Shift 潜行 · Ctrl 疾跑 · 右键交互 · M 地图</p><div id="map-controls" hidden><button data-pan="0,80">地图 ↑</button><button data-pan="80,0">←</button><button data-pan="-80,0">→</button><button data-pan="0,-80">↓</button><button data-zoom="zoom_in">放大</button><button data-zoom="zoom_out">缩小</button></div></section>
