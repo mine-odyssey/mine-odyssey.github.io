@@ -13,7 +13,12 @@ function render(s){current=s;$('login').hidden=true;$('workspace').hidden=false;
  $('timer').textContent=s.started_at?Math.max(0,Math.floor(Date.now()/1000-s.started_at))+' 秒':'';
  if(s.client_problem)$('error').textContent=s.client_problem;
  if(s.last_claim_response){const r=s.last_claim_response;$('feedback').textContent=r.accepted?'提交已通过。':r.terminal?'本次任务结束。':r.feedback?'仍需到达：'+r.feedback.remaining_locations.join(' → ')+'；剩余提交次数：'+r.feedback.remaining_attempts:'尚未完成全部要求。';}}
-async function refresh(){try{render(await api('/api/status'));}catch(e){if(e.status===401){$('workspace').hidden=true;$('login').hidden=false;}else error(e);}}
+async function refresh(){
+ const requestToken=token;
+ if(!requestToken)return;
+ try{const state=await api('/api/status');if(token===requestToken)render(state);}
+ catch(e){if(token!==requestToken)return;if(e.status===401){token='';lease=null;sessionStorage.removeItem(tokenKey);$('workspace').hidden=true;$('login').hidden=false;}else error(e);}
+}
 $('login-form').onsubmit=async e=>{e.preventDefault();try{render(await api('/api/login',{code:$('code').value}));$('code').value='';$('error').textContent='';}catch(e){error(e);}};
 $('bind-form').onsubmit=async e=>{e.preventDefault();try{render(await api('/api/bind',{username:$('username').value.trim()}));}catch(e){error(e);}};
 $('prepare').onclick=async()=>{try{lease=null;$('feedback').textContent='';$('self-state').hidden=true;render(await api('/api/prepare',{}));}catch(e){error(e);}};
